@@ -21,7 +21,10 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
     public TextView title;
     public View rightView;
     public Boolean isSelected = false;
-    public RelativeLayout relativeLayout;
+
+
+    public ChooseRecipientAdapter.SettingsItem settingsItem;
+
 
     public ChooseRecipientViewHolder(final Context context, View view, int viewType) {
         super(view);
@@ -29,7 +32,33 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
         this.leftImageView = (ImageView) view.findViewById(R.id.leftIcon);
         this.title = (TextView) view.findViewById(R.id.title);
         this.rightView = view.findViewById(R.id.rightIconCheck);
-        this.relativeLayout = (RelativeLayout)view.findViewById(R.id.rootLayout);
+
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // View parent = (View)v.getParent();
+                if (!isSelected) {
+
+                    isSelected = true;
+                    RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.rootLayout);
+                    relativeLayout.setBackgroundColor(context.getResources()
+                            .getColor(R.color.color_seleted_item));
+                    rightView.setVisibility(View.VISIBLE);
+                } else {
+                    isSelected = false;
+                    RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.rootLayout);
+                    relativeLayout.setBackgroundColor(context.getResources()
+                            .getColor(R.color.color_background));
+                    rightView.setVisibility(View.INVISIBLE);
+                }
+
+
+            }
+        });
+
+
     }
+
 
 }
