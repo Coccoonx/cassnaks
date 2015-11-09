@@ -1,13 +1,24 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f2f5f7"
+    android:weightSum="100"
     android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="center_horizontal" />
+
 
     <ScrollView
         android:id="@+id/scrollvieweditprofile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="95"
         android:orientation="vertical">
 
 
@@ -18,10 +29,10 @@
             android:background="@color/color_background"
             android:gravity="center_horizontal"
             android:orientation="vertical"
+            android:layout_marginTop="16dp"
             android:paddingBottom="12dp"
             android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:paddingTop="?attr/actionBarSize">
+            android:paddingRight="12dp">
 
 
             <android.support.design.widget.TextInputLayout
@@ -166,7 +177,7 @@
         android:gravity="bottom|center_horizontal"
         android:orientation="horizontal"
         android:paddingBottom="15dp"
-
+        android:layout_weight="5"
         android:weightSum="100">
 
         <Button
@@ -180,10 +191,5 @@
             android:textColor="#f2f5f7" />
     </LinearLayout>
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/custom_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="center_horizontal" />
-</FrameLayout>
+
+</LinearLayout>

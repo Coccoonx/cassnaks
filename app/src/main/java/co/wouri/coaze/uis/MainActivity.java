@@ -32,21 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         initUI();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu);
-        if (toolbar.getNavigationIcon() != null)
-            toolbar.getNavigationIcon().setColorFilter(Color.parseColor("#31b4e4"), PorterDuff.Mode.SRC_ATOP);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDrawerLayout.openDrawer(Gravity.LEFT);
-                //mDrawerLayout = (DrawerLayout) getView().findViewById(R.id.drawer_layout);
-// 				mDrawerLayout.openDrawer(mDrawerLayout.getRootView());
-            }
-        });
     }
 
     @Override
@@ -79,15 +65,19 @@ public class MainActivity extends AppCompatActivity {
         TextView title = (TextView) toolbar.findViewById(R.id.title);
         ImageView option = (ImageView) toolbar.findViewById(R.id.rightIcon);
 
-        title.setText("ABOUT");
-        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, title);
+        close.setImageResource(R.drawable.ic_menu);
+        //NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                mDrawerLayout.openDrawer(Gravity.LEFT);
             }
         });
+
+        title.setText("");
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, title);
+
 
         option.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     void initUI() {
 
-//        buildToolBar();
+        buildToolBar();
         buildDrawer();
 
     }
@@ -112,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
     void buildDrawer() {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
 

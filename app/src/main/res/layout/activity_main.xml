@@ -13,11 +13,12 @@
         android:focusable="false"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
+        <include
             android:id="@+id/toolbar"
+            layout="@layout/custom_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center_horizontal" />
 
         <!-- main screen image-->
         <LinearLayout
@@ -86,7 +87,7 @@
                 android:text="@string/how_text"
                 android:textColor="@color/coazeblue"
                 android:textSize="@dimen/text_size"
-                />
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/getStartedId"
@@ -100,7 +101,7 @@
                 android:text="@string/started_text"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"
-                />
+                android:textStyle="bold" />
 
         </LinearLayout>
 

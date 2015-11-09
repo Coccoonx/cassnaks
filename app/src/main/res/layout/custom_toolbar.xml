@@ -6,12 +6,12 @@
 
     <ImageView
         android:id="@+id/leftIcon"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="8dp"
-        android:src="@drawable/close_2" />
+        android:src="@drawable/ic_close" />
 
     <TextView
         android:id="@+id/title"
@@ -25,8 +25,8 @@
 
     <ImageView
         android:id="@+id/rightIcon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
