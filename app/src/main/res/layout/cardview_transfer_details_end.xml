@@ -28,9 +28,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:id="@+id/details_amount_recieved"
+            android:textSize="@dimen/margin_standard"
             android:textColor="#4DBA38"/>
 
     </RelativeLayout>

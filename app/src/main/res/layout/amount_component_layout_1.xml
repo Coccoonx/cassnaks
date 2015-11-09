@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:background="@drawable/corner_border_component"
+
     android:orientation="horizontal">
 
     <LinearLayout
@@ -20,26 +20,24 @@
             android:textColor="@color/coazeblue"
             android:textSize="16dp" />
 
-        <EditText
+        <TextView
             android:id="@+id/amount"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#00000000"
-            android:hint="@string/texthint"
-            android:inputType="numberDecimal"
+            android:text="@string/texthint"
             android:paddingBottom="10dp"
             android:paddingLeft="10dp"
             android:paddingTop="0dp"
             android:singleLine="true"
             android:textColor="@color/colorPrimarylight"
-            android:textColorHint="@color/primary"
-            android:textCursorDrawable="@color/primary"
             android:textSize="25dp" />
     </LinearLayout>
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="wrap_content"
+        android:background="@drawable/corner_border_component"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:drawSelectorOnTop="true"
         android:gravity="right"

@@ -31,6 +31,9 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/person_photo"
             android:textColor="#223049"
+            android:maxLines="1"
+            android:lines="1"
+            android:layout_toLeftOf="@+id/person_transfert_type"
             android:textSize="@dimen/margin_standard" />
 
         <TextView
@@ -59,9 +62,8 @@
             android:id="@+id/person_transfert_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="false"
-            android:layout_below="@+id/person_name"
             android:textColor="#719ece" />
 
     </RelativeLayout>

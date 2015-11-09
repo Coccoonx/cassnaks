@@ -53,23 +53,23 @@ public class TransferDetailsActivity extends AppCompatActivity {
         TextView titleView1 = (TextView) bodyCardView1.findViewById(R.id.details_title);
         TextView dateView1 = (TextView) bodyCardView1.findViewById(R.id.details_date);
         titleView1.setText("Send:");
-        dateView1.setText("01.10.2015 / 12:32 PM ");
+        dateView1.setText("01.10.2015 / 12:32PM ");
         CardView bodyCardView2 = (CardView) findViewById(R.id.cardview_transfer_details_body2);
         TextView titleView2 = (TextView) bodyCardView2.findViewById(R.id.details_title);
         TextView dateView2 = (TextView) bodyCardView2.findViewById(R.id.details_date);
         titleView2.setText("Notified:");
-        dateView2.setText("01.10.2015 / 12:35 PM ");
+        dateView2.setText("01.10.2015 / 12:35PM ");
         CardView bodyCardView3 = (CardView) findViewById(R.id.cardview_transfer_details_body3);
         TextView titleView3 = (TextView) bodyCardView3.findViewById(R.id.details_title);
         TextView dateView3 = (TextView) bodyCardView3.findViewById(R.id.details_date);
         titleView3.setText("Recieved:");
-        dateView3.setText("01.10.2015 / 12:59 PM ");
+        dateView3.setText("01.10.2015 / 12:59PM ");
         //set End
         CardView endCardView = (CardView) findViewById(R.id.cardview_transfer_details_end);
         TextView endTitleView = (TextView) endCardView.findViewById(R.id.details_title);
         TextView endAmountView = (TextView) endCardView.findViewById(R.id.details_amount_recieved);
         endTitleView.setText("Amount Recieved:");
-        endAmountView.setText("£75.00");
+        endAmountView.setText("€75.00");
         // set Font
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, endAmountView, endTitleView, titleView3,
                 dateView3, dateView2, titleView2, dateView1, titleView1, personAmountView, personNameView);

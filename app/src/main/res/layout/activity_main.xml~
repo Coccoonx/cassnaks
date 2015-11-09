@@ -86,7 +86,7 @@
                 android:text="@string/how_text"
                 android:textColor="@color/coazeblue"
                 android:textSize="@dimen/text_size"
-                />
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/getStartedId"
@@ -100,7 +100,7 @@
                 android:text="@string/started_text"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"
-                />
+                android:textStyle="bold" />
 
         </LinearLayout>
 

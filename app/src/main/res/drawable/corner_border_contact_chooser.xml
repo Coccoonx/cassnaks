@@ -8,7 +8,7 @@ android:shape="rectangle" >
         <!-- set the shadow color here -->
         <stroke
             android:width="2dp"
-            android:color="@color/coazedarkwhite" />
+            android:color="@color/white" />
           <!--   #7000 -->
         <!-- setting the thickness of shadow (positive value will give shadow on that side) -->
         <corners android:radius="4dp" />

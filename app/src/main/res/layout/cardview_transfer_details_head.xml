@@ -28,10 +28,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/details_person_name"
-            android:layout_toRightOf="@+id/person_photo"
-            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/details_person_photo"
+            android:layout_toLeftOf="@+id/details_person_amount"
+            android:layout_marginLeft="@dimen/margin_short"
+            android:layout_marginRight="@dimen/margin_short"
             android:textSize="@dimen/margin_standard"
+            android:maxLines="3"
+            android:lines="3"
             android:textColor="#223049"
+            
 
             />
         <TextView
@@ -39,9 +45,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/details_person_amount"
             android:layout_below="@+id/person_name"
-            android:layout_centerInParent="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:textColor="#4DBA38"
+
             />
 
     </RelativeLayout>
