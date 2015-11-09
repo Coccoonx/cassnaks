@@ -34,7 +34,7 @@
             android:layout_marginTop="5dp"
             android:text="@string/balance"
             android:textColor="#4dba38"
-            android:textSize="60sp" />
+            android:textSize="50sp" />
 
 
     </LinearLayout>

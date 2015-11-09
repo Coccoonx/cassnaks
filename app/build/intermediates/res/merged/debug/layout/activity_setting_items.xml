@@ -70,4 +70,4 @@
         android:layout_marginRight="5dp"
         android:src="@drawable/edit"
         android:visibility="gone" />
-</RelativeLayout><!-- From: file:/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/src/main/res/layout/activity_setting_items.xml -->
+</RelativeLayout><!-- From: file:/home/wouri/AndroidStudioProjects/coaze_to_commit/coaze/app/src/main/res/layout/activity_setting_items.xml -->

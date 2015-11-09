@@ -31,4 +31,4 @@
             android:textColor="@color/text_color_black_light" />
 
     </RelativeLayout>
-</android.support.v7.widget.CardView><!-- From: file:/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/src/main/res/layout/cardview_transfer_details_body.xml -->
+</android.support.v7.widget.CardView><!-- From: file:/home/wouri/AndroidStudioProjects/coaze_to_commit/coaze/app/src/main/res/layout/cardview_transfer_details_body.xml -->

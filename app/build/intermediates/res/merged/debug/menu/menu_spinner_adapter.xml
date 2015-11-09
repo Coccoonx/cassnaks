@@ -5,4 +5,4 @@
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
-<!-- From: file:/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/src/main/res/menu/menu_spinner_adapter.xml -->
+<!-- From: file:/home/wouri/AndroidStudioProjects/coaze_to_commit/coaze/app/src/main/res/menu/menu_spinner_adapter.xml -->

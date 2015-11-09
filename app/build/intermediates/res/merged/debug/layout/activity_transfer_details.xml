@@ -84,4 +84,4 @@
         android:layout_marginTop="@dimen/margin_short"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur metus ut elementum ullamcorper. Vestibulum mi libero, condimentum at ex et, facilisis tempor orci. " />
 </RelativeLayout>
-<!-- From: file:/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/src/main/res/layout/activity_transfer_details.xml -->
+<!-- From: file:/home/wouri/AndroidStudioProjects/coaze_to_commit/coaze/app/src/main/res/layout/activity_transfer_details.xml -->
