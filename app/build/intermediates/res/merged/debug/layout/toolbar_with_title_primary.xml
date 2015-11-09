@@ -25,4 +25,4 @@
         android:text="Settings"
         android:textSize="@dimen/coaze_toolbar_text" />
 
-</android.support.v7.widget.Toolbar><!-- From: file:/home/borelkoumo/coaze_imported/app/src/main/res/layout/toolbar_with_title_primary.xml -->
+</android.support.v7.widget.Toolbar><!-- From: file:/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/src/main/res/layout/toolbar_with_title_primary.xml -->

@@ -2,102 +2,74 @@
 <items version="2" >
 
     <item
-        jar="/home/lyonnel/AndroidStudioProjects/coaze_imported/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/home/lyonnel/AndroidStudioProjects/coaze_imported/app/build/intermediates/pre-dexed/debug/classes-4496bf77cec21493e7ea397c6c2279f284e1eba9.jar" />
-    </item>
-    <item
-        jar="/home/borelkoumo/coaze_imported/app/build/intermediates/exploded-aar/com.android.support/multidex/1.0.0/jars/classes.jar"
+        jar="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/exploded-aar/com.android.support/multidex/1.0.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="6666dd525c3da197e7d07f4f23ef5fc7881a697b">
-        <dex dex="/home/borelkoumo/coaze_imported/app/build/intermediates/pre-dexed/debug/classes-45e2deefecf5ed5957bfe79554b609c8f9b72294.jar" />
+        <dex dex="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/pre-dexed/debug/classes-fdea8402462652983a2283ac1b515f16032e233f.jar" />
     </item>
     <item
-        jar="/home/borelkoumo/coaze_imported/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
-        <dex dex="/home/borelkoumo/coaze_imported/app/build/intermediates/pre-dexed/debug/classes-d98ae254837bebd3058522dbfbfb69fdfb8c9aaf.jar" />
-    </item>
-    <item
-        jar="/home/lyonnel/AndroidStudioProjects/coaze_imported/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/home/lyonnel/AndroidStudioProjects/coaze_imported/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-27cbda4b83a7111675ebffd8729a2b9920c3c0a3.jar" />
-    </item>
-    <item
-        jar="/home/borelkoumo/coaze_imported/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/jars/classes.jar"
+        jar="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
-        <dex dex="/home/borelkoumo/coaze_imported/app/build/intermediates/pre-dexed/debug/classes-5f41edbc5839c7f64d21de5d7fc5b5a69c3a0b73.jar" />
+        <dex dex="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/pre-dexed/debug/classes-e54328b7b269b93fda0bbea9e2fac7e6309b3ea3.jar" />
     </item>
     <item
-        jar="/home/lyonnel/AndroidStudioProjects/coaze_imported/app/libs/gson-2.2.4.jar"
+        jar="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="973e832af433b44c3ed11c426f2f390b29f3f3f8">
-        <dex dex="/home/lyonnel/AndroidStudioProjects/coaze_imported/app/build/intermediates/pre-dexed/debug/gson-2.2.4-c095f791e1825dc16543353ac0ec9b8a55cac2ca.jar" />
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/pre-dexed/debug/classes-341113686317a798a2bbe03c4d7597070d5fdb0a.jar" />
     </item>
     <item
-        jar="/home/borelkoumo/coaze_imported/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="39ae02ce40c3ac828abbf780ce0ff5d7a28b7d6a">
-        <dex dex="/home/borelkoumo/coaze_imported/app/build/intermediates/pre-dexed/debug/classes-2d8e6b59824347c24a947e0f2742bfb2c5ae557e.jar" />
-    </item>
-    <item
-        jar="/home/borelkoumo/coaze_imported/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="/home/borelkoumo/coaze_imported/app/build/intermediates/pre-dexed/debug/classes-af6ca5665dd97b26d7c6df00cda53a91452fc5b9.jar" />
-    </item>
-    <item
-        jar="/home/borelkoumo/coaze_imported/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
+        jar="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="/home/borelkoumo/coaze_imported/app/build/intermediates/pre-dexed/debug/classes-72e048a936c6b26c9ae2e31e53a617e33559f307.jar" />
+        <dex dex="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/pre-dexed/debug/classes-60885d22dc51dd2d97d5c54ce3c341ed9894f5f7.jar" />
     </item>
     <item
-        jar="/home/borelkoumo/coaze_imported/app/build/intermediates/exploded-aar/com.pkmmte.view/circularimageview/1.1/jars/classes.jar"
+        jar="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/exploded-aar/com.pkmmte.view/circularimageview/1.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="c341a7ad32bc2eef9dcfab239262b77ac60788cc">
-        <dex dex="/home/borelkoumo/coaze_imported/app/build/intermediates/pre-dexed/debug/classes-f8bb89de5ed6a970813879113763f45dec70c25f.jar" />
+        <dex dex="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/pre-dexed/debug/classes-378b0edb0263e5b6ef1588a590723d53f6a5c9f5.jar" />
     </item>
     <item
-        jar="/opt/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="/home/lyonnel/AndroidStudioProjects/coaze_imported/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-cfadd2d00992f445c24a2740af1f818d70a64eeb.jar" />
-    </item>
-    <item
-        jar="/home/borelkoumo/coaze_imported/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
+        jar="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="/home/borelkoumo/coaze_imported/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-317871e76b772727505f80d04e5cb456adb3e7f5.jar" />
+        <dex dex="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-9f36fb6433452c400fe8780c403467f6434d923e.jar" />
+    </item>
+    <item
+        jar="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
+        <dex dex="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/pre-dexed/debug/classes-9760f0966912f0fc895cf9f6e6b41891da58b730.jar" />
+    </item>
+    <item
+        jar="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="39ae02ce40c3ac828abbf780ce0ff5d7a28b7d6a">
+        <dex dex="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/pre-dexed/debug/classes-302db393a631031184ab80589c878d7d16aef255.jar" />
     </item>
     <item
         jar="/opt/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="/home/borelkoumo/coaze_imported/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-149131c491be35e3d124446278d503abb54ec58a.jar" />
+        <dex dex="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-149131c491be35e3d124446278d503abb54ec58a.jar" />
     </item>
     <item
-        jar="/home/borelkoumo/coaze_imported/app/libs/gson-2.2.4.jar"
+        jar="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/libs/gson-2.2.4.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="973e832af433b44c3ed11c426f2f390b29f3f3f8">
-        <dex dex="/home/borelkoumo/coaze_imported/app/build/intermediates/pre-dexed/debug/gson-2.2.4-1407f4e9d5bceae61f2871651c87e86583250dcd.jar" />
+        <dex dex="/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/build/intermediates/pre-dexed/debug/gson-2.2.4-3c82d918aa282883e4acd5b79b22037cb97c03c9.jar" />
     </item>
 
 </items>

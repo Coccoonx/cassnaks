@@ -32,4 +32,4 @@
         android:layout_marginRight="8dp"
         android:src="@drawable/ic_add_user"
         android:visibility="gone" />
-</RelativeLayout><!-- From: file:/home/borelkoumo/coaze_imported/app/src/main/res/layout/custom_toolbar.xml -->
+</RelativeLayout><!-- From: file:/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/src/main/res/layout/custom_toolbar.xml -->

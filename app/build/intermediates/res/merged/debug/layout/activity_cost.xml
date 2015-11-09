@@ -17,60 +17,67 @@
         android:layout_height="match_parent"
         android:paddingTop="?attr/actionBarSize">
 
-        <TextView
-            android:id="@+id/cost_1_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_extra_big"
-            android:text="@string/coaze_text1"
-            android:textColor="#ffffff"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-
-        <TextView
-            android:id="@+id/cost_2_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cost_1_line"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_short"
-            android:text="@string/coaze_text22"
-            android:textColor="@color/text_color_grey_dark"
-            android:textSize="15sp" />
-
-
-        <LinearLayout
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cost_2_line"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_standard">
 
             <TextView
-                android:id="@+id/cost_3_line"
+                android:id="@+id/cost_1_line"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_short"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:text="@string/coaze_text1"
+                android:textColor="#ffffff"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/cost_2_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cost_1_line"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_short"
-                android:text="@string/coaze_text3"
+                android:text="@string/coaze_text22"
                 android:textColor="@color/text_color_grey_dark"
-                android:textSize="18sp"
-                android:visibility="gone" />
+                android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/cost_3_line2"
+
+            <LinearLayout
+                android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="@dimen/margin_short"
-                android:text="@string/coaze_text4"
-                android:textColor="@color/button_color_green"
-                android:textSize="18sp" />
+                android:layout_below="@+id/cost_2_line"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/cost_3_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_short"
+                    android:layout_marginTop="@dimen/margin_short"
+                    android:text="@string/coaze_text3"
+                    android:textColor="@color/text_color_grey_dark"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/cost_3_line2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="@dimen/margin_short"
+                    android:text="@string/coaze_text4"
+                    android:textColor="@color/button_color_green"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
 
         <RelativeLayout
@@ -132,66 +139,74 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/cost_5_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_below="@+id/cost_relativeLayout"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_very_big"
-            android:text="@string/coaze_text7"
-            android:textColor="#ffffff"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/cost_6_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cost_5_line"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_short"
-            android:text="@string/coaze_text88"
-            android:textColor="@color/text_color_grey_dark"
-            android:textSize="15sp" />
+            android:layout_marginTop="@dimen/margin_slim">
 
 
-        <LinearLayout
-            android:id="@+id/text5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cost_6_line"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/cost_7_line"
+                android:id="@+id/cost_5_line"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/cost_6_line"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="0dp"
+                android:text="@string/coaze_text7"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/cost_6_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cost_5_line"
                 android:layout_marginTop="@dimen/margin_short"
-                android:text="@string/coaze_text100"
+                android:layout_centerHorizontal="true"
+                android:text="@string/coaze_text88"
                 android:textColor="@color/text_color_grey_dark"
-                android:textSize="18sp"
-                android:visibility="gone" />
+                android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/cost_7_line2"
+
+            <LinearLayout
+                android:id="@+id/text5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cost_6_line"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="@dimen/margin_short"
-                android:text="@string/coaze_text10"
-                android:textColor="@color/text_color_red"
-                android:textSize="18sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/cost_7_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cost_6_line"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="@dimen/margin_short"
+                    android:text="@string/coaze_text100"
+                    android:textColor="@color/text_color_grey_dark"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/cost_7_line2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cost_6_line"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="@dimen/margin_short"
+                    android:text="@string/coaze_text10"
+                    android:textColor="@color/text_color_red"
+                    android:textSize="18sp" />
 
 
-        </LinearLayout>
+            </LinearLayout>
 
+        </RelativeLayout>
 
         <Button
             android:id="@+id/costbutton"
@@ -207,8 +222,9 @@
             android:textColor="#ffffff" />
 
 
+
+
+
     </RelativeLayout>
 
-
-</RelativeLayout>
-<!-- From: file:/home/borelkoumo/coaze_imported/app/src/main/res/layout/activity_cost.xml -->
+</RelativeLayout><!-- From: file:/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/src/main/res/layout/activity_cost.xml -->

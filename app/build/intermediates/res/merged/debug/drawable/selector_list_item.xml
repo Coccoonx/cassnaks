@@ -5,4 +5,4 @@
     <item android:drawable="@color/colorPrimaryLight" android:state_checked="true" />
     <item android:drawable="@color/colorPrimaryLight" android:state_focused="true" />
     <item android:drawable="@color/color_background" />
-</selector><!-- From: file:/home/borelkoumo/coaze_imported/app/src/main/res/drawable/selector_list_item.xml -->
+</selector><!-- From: file:/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/src/main/res/drawable/selector_list_item.xml -->

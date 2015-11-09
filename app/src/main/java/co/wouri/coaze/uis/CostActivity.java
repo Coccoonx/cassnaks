@@ -93,10 +93,15 @@ public class CostActivity extends AppCompatActivity {
     public void onBackPressed() {
 //        super.onBackPressed();
         if (state == 1) {
+
             updateUI(0);
+            three1.setVisibility(View.GONE);
+            seven1.setVisibility(View.GONE);
             state = 0;
         } else if (state == 0) {
             initUI();
+            three1.setVisibility(View.GONE);
+            seven1.setVisibility(View.GONE);
         }
     }
 
@@ -121,6 +126,8 @@ public class CostActivity extends AppCompatActivity {
                 break;
 
             case 1:
+
+
                 two.setText(R.string.coaze_text2);
 
                 three1.setText(R.string.coaze_text3);

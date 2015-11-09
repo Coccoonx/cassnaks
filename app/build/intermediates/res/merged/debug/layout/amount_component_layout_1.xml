@@ -44,4 +44,4 @@
         android:drawSelectorOnTop="true"
         android:gravity="right"
         android:popupBackground="@color/primary_dark" />
-</LinearLayout><!-- From: file:/home/borelkoumo/coaze_imported/app/src/main/res/layout/amount_component_layout_1.xml -->
+</LinearLayout><!-- From: file:/home/prisca/AndroidStudioProjects/coazeGitNet/coaze/app/src/main/res/layout/amount_component_layout_1.xml -->
