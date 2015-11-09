@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@drawable/corner_border_component"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="185dp"
+        android:layout_height="fill_parent"
+        android:background="@drawable/corner_border_amount"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_weight="80"
+            android:paddingLeft="10dp"
+            android:text="You send"
+            android:textColor="@color/coazeblue"
+            android:textSize="16dp" />
+
+        <EditText
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#00000000"
+            android:hint="@string/texthint"
+            android:inputType="numberDecimal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="0dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimarylight"
+            android:textColorHint="@color/primary"
+            android:textCursorDrawable="@color/primary"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:drawSelectorOnTop="true"
+        android:gravity="right"
+        android:popupBackground="@color/primary_dark" />
+</LinearLayout><!-- From: file:/home/borelkoumo/coaze_imported/app/src/main/res/layout/amount_component_layout_1.xml -->

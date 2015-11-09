@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/card_view_item"
+    android:layout_marginBottom="@dimen/margin_extra_extra_short"
+
+    android:layout_marginLeft="@dimen/margin_extra_short"
+    android:layout_marginRight="@dimen/margin_extra_short"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_standard"
+        android:background="@drawable/layout_background" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/details_title"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="@dimen/margin_standard"
+            android:textColor="@android:color/black"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/details_amount_recieved"
+            android:textColor="#4DBA38"/>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView><!-- From: file:/home/borelkoumo/coaze_imported/app/src/main/res/layout/cardview_transfer_details_end.xml -->

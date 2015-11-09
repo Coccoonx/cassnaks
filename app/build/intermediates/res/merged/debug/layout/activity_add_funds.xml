@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.wouri.coaze.uis.AddFundActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/add_fund_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginBottom="@dimen/margin_standard"
+        android:layout_marginLeft="@dimen/margin_standard"
+        android:layout_marginRight="@dimen/margin_standard"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:gravity="center_horizontal"
+
+        android:text="Please go to your bank account and send an interact to:"
+        android:textSize="@dimen/margin_standard" />
+
+    <include
+        android:id="@+id/cardview_add_funds_body1"
+        layout="@layout/cardview_transfer_details_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_fund_text"
+        android:layout_marginBottom="@dimen/margin_extra_extra_short"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" />
+
+    <include
+        android:id="@+id/cardview_add_funds_body2"
+        layout="@layout/cardview_transfer_details_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardview_add_funds_body1"
+        android:layout_marginBottom="@dimen/margin_extra_extra_short"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" />
+
+    <include
+        android:id="@+id/cardview_add_funds_body3"
+        layout="@layout/cardview_transfer_details_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardview_add_funds_body2"
+        android:layout_marginBottom="@dimen/margin_extra_extra_short"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" />
+
+
+    <Button
+        android:id="@+id/got_it"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/margin_standard"
+        android:background="@drawable/corner_border_green"
+        android:gravity="center"
+        android:padding="@dimen/margin_standard"
+        android:textColor="#fff" />
+
+
+</RelativeLayout>
+<!-- From: file:/home/borelkoumo/coaze_imported/app/src/main/res/layout/activity_add_funds.xml -->

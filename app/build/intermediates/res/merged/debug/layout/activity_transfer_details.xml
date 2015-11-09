@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="co.wouri.coaze.uis.TransferDetailsActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="center_horizontal" />
+
+    <include
+        android:id="@+id/cardview_transfer_details_head"
+        layout="@layout/cardview_transfer_details_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginBottom="@dimen/margin_extra_extra_short"
+        android:layout_marginLeft="@dimen/margin_short"
+        android:layout_marginRight="@dimen/margin_short" />
+
+    <include
+        android:id="@+id/cardview_transfer_details_body1"
+        layout="@layout/cardview_transfer_details_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardview_transfer_details_head"
+        android:layout_marginBottom="@dimen/margin_extra_extra_short"
+        android:layout_marginLeft="@dimen/margin_short"
+        android:layout_marginRight="@dimen/margin_short" />
+
+    <include
+        android:id="@+id/cardview_transfer_details_body2"
+        layout="@layout/cardview_transfer_details_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardview_transfer_details_body1"
+        android:layout_marginBottom="@dimen/margin_extra_extra_short"
+        android:layout_marginLeft="@dimen/margin_short"
+        android:layout_marginRight="@dimen/margin_short" />
+
+    <include
+        android:id="@+id/cardview_transfer_details_body3"
+        layout="@layout/cardview_transfer_details_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardview_transfer_details_body2"
+        android:layout_marginBottom="@dimen/margin_extra_extra_short"
+        android:layout_marginLeft="@dimen/margin_short"
+        android:layout_marginRight="@dimen/margin_short" />
+
+    <include
+        android:id="@+id/cardview_transfer_details_end"
+        layout="@layout/cardview_transfer_details_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardview_transfer_details_body3"
+        android:layout_marginBottom="@dimen/margin_extra_extra_short"
+        android:layout_marginLeft="@dimen/margin_short"
+        android:layout_marginRight="@dimen/margin_short" />
+
+    <TextView
+        android:id="@+id/transfer_details_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardview_transfer_details_end"
+        android:layout_marginLeft="@dimen/margin_short"
+        android:layout_marginRight="@dimen/margin_short"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:text="Notes:"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/transfer_details_notes_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/transfer_details_notes"
+        android:layout_marginLeft="@dimen/margin_short"
+        android:layout_marginRight="@dimen/margin_short"
+        android:layout_marginTop="@dimen/margin_short"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur metus ut elementum ullamcorper. Vestibulum mi libero, condimentum at ex et, facilisis tempor orci. " />
+</RelativeLayout>
+<!-- From: file:/home/borelkoumo/coaze_imported/app/src/main/res/layout/activity_transfer_details.xml -->

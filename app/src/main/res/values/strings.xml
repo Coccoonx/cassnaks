@@ -1,0 +1,122 @@
+<resources>
+    <!--<string name="app_name">coarze-app</string>-->
+    <!--<string name="action_settings">Settings</string>-->
+    <string name="hello_world">Hello world!</string>
+    <!--String value of Main Screen activity-->
+    <!--<string name="texta">Receiver gets with competition:</string>-->
+    <!--<string name="textb">MoneyGram....</string>-->
+    <!--<string name="textc">WesternUnion....</string>-->
+    <!--<string name="yousave">You Save:</string>-->
+    <!--<string name="how_text">HOW?</string>-->
+    <!--<string name="started_text">GET STARTED</string>-->
+    <!--<string name="send_text">SEND</string>-->
+    <!--<string name="chooseamount">CHOOSE AMOUNT</string>-->
+    <!--<string name="texthint">$100.00</string>-->
+    <!--<string name="texthinteuro">€75.00</string>-->
+
+    <!--Material draw-->
+    <string name="nav_item_attachment">Choose Amount</string>
+    <string name="nav_item_images">Images</string>
+    <string name="nav_item_location">My Location</string>
+    <string name="nav_sub_menu">Sub Menu</string>
+    <string name="nav_sub_menu_item01">Sub Menu Item 1</string>
+    <string name="nav_sub_menu_item02">Sub Menu Item 2</string>
+    <string name="drawer_header_text">Steevensson</string>
+    <!--<string name="second_activity_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur diam id aliquam scelerisque. Donec ultrices lacus vel dignissim pharetra. Vivamus pharetra augue quis rhoncus placerat. Sed ultricies at risus non cursus. Nam rutrum leo nec placerat consectetur. Vestibulum feugiat eleifend diam, nec interdum augue tincidunt sit amet. Praesent feugiat est auctor lacus consectetur, vitae pellentesque dolor laoreet.</string>-->
+    <string name="title_activity_second">SecondActivity</string>
+    <string name="title_activity_choose_amount">ChooseAmountActivity</string>
+    <string name="title_activity_uiwidget">UIWidget</string>
+    <string name="title_activity_spinner_adapter">SpinnerAdapter</string>
+
+
+
+    <!-- integtration-->
+    <string name="app_name">Coaze</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="second_activity_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur diam id aliquam scelerisque. Donec ultrices lacus vel dignissim pharetra. Vivamus pharetra augue quis rhoncus placerat. Sed ultricies at risus non cursus. Nam rutrum leo nec placerat consectetur. Vestibulum feugiat eleifend diam, nec interdum augue tincidunt sit amet. Praesent feugiat est auctor lacus consectetur, vitae pellentesque dolor laoreet.</string>
+
+    <!-- Drawer items -->
+    <string name="nav_item_transfer">Transfer</string>
+    <string name="nav_item_recipient">Recipient</string>
+    <string name="nav_item_balance">Balance</string>
+    <string name="nav_item_amount">Choose amount</string>
+
+    <!-- Splash screen texts-->
+    <string name="activity_splash_title_line_one">Coaze</string>
+    <string name="activity_splash_title_line_two">simple money transfer</string>
+
+    <!-- About screen texts-->
+    <string name="about_name">ABOUT</string>
+
+    <!-- Cost, Rate display screens-->
+
+    <string name="coaze_text1"> Coaze </string>
+    <string name="coaze_text2"> Coaze used the real exchange rate </string>
+    <string name="coaze_text3"> 1GBP = </string>
+    <string name="coaze_text4"> 1.4121 EUR</string>
+    <string name="coaze_text5"> THE RATE  </string>
+    <string name="coaze_text6">  .......................</string>
+    <string name="coaze_done">  GOT IT, I SAVE 44.49 GBP </string>
+    <string name="coaze_text7">  Average Bank </string>
+    <string name="coaze_text8">  Banks set their own exchange rate </string>
+    <string name="coaze_text9"> 1GBP = </string>
+    <string name="coaze_text10"> 1.3626 EUR</string>
+    <string name="title_activity_cost"></string>
+
+    <string name="coaze_text22"> Coaze changes as little as possible </string>
+    <string name="coaze_text44"> 4.98 GBP</string>
+    <string name="coaze_text55"> THE COST  </string>
+    <string name="coaze_text66">  ....................... </string>
+    <string name="coaze_text88">  Banks hide their cost in the exchange rate </string>
+    <string name="coaze_text100"> 49.47 GBP </string>
+
+    <string name="title_activity_globe"></string>
+
+    <string name="coaze_text222"> Save up to 90% with coaze and receive </string>
+    <string name="coaze_text444"> 1405.02 EUR </string>
+    <string name="coaze_text888">  Banks could leave you 63.83 EUR out of pocket </string>
+    <string name="coaze_text1000"> 1342.19 EUR </string>
+
+    <!-- Recipients screens-->
+    <string-array name="countries">
+        <item></item>
+        <item>Cameroon</item>
+        <item>Canada</item>
+        <item>China</item>
+        <item>France</item>
+        <item>USA</item>
+    </string-array>
+    <string name="add_recipient">Add Recipient</string>
+    <string name="edit_recipient">Edit Recipient</string>
+
+    <!-- Balance and Success screens-->
+    <string name="success">Success!</string>
+    <string name="amount">$100</string>
+    <string name="msg">was sent to</string>
+    <string name="name">Ali Connors</string>
+    <string name="a_text">You can see the details in</string>
+    <string name="transfers">transfers</string>
+    <string name="history">history.</string>
+    <string name="transfer">TRANSFERS</string>
+    <string name="done">DONE</string>
+    <string name="add">ADD FUNDS</string>
+    <string name="balance">$530.00</string>
+    <string name="a_text2">Your Balance is:</string>
+
+    <!-- Main screen-->
+    <string name="texta">Receiver gets with competition:</string>
+    <string name="textb">MoneyGram....</string>
+    <string name="textc">WesternUnion....</string>
+    <string name="yousave">You Save:</string>
+    <string name="how_text">HOW?</string>
+    <string name="started_text">GET STARTED</string>
+    <string name="send_text">SEND</string>
+    <string name="chooseamount">CHOOSE AMOUNT</string>
+    <string name="texthint">$100.00</string>
+    <string name="texthinteuro">€75.00</string>
+
+
+
+</resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/coazebackground"
+    android:focusable="false"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <!--<include layout="@layout/gap_layout" />-->
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="center_horizontal" />
+
+
+    <include layout="@layout/gap_layout" />
+
+    <include layout="@layout/gap_layout" />
+
+    <include layout="@layout/gap_layout" />
+    <!--<include layout="@layout/gap_layout" />-->
+    <!-- main screen image chooser-->
+    <include layout="@layout/contact_chooser_component" />
+
+    <include layout="@layout/gap_layout" />
+
+    <!-- main screen amount-->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <include layout="@layout/amount_component_layout_1" />
+
+        <include layout="@layout/amount_component_layout_2" />
+
+    </LinearLayout>
+
+    <!--component:get started and how button-->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="0dp">
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="159dp"
+            android:layout_height="wrap_content"
+            android:width="200dp"
+            android:background="@drawable/corner_border_green"
+            android:gravity="center"
+            android:onClick="performSend"
+            android:padding="15dp"
+            android:text="@string/send_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>
