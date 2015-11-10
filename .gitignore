@@ -35,5 +35,10 @@ local.properties
 .gitignore~
 .Spotlight-V100
 .Trashes
+
+app/libs/*
+app/libs
+app/*.iml
+
 ehthumbs.db
 Thumbs.db
