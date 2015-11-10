@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:id="@+id/rootLayout"
     android:layout_width="wrap_content"
@@ -11,14 +12,26 @@
 
 
     <ImageView
-        android:id="@+id/leftIcon"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:padding="4dp"
+        android:visibility="gone"
         android:scaleType="fitCenter"
         android:src="@drawable/friend5" />
+
+    <com.pkmmte.view.CircularImageView
+        android:id="@+id/leftIcon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:scaleType="fitCenter"
+        android:layout_alignParentTop="true"
+        android:padding="4dp"
+        android:src="@drawable/friend5"
+
+        app:shadow="false" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/layout1"

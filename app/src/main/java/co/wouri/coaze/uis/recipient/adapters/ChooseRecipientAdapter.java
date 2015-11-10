@@ -18,10 +18,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import co.wouri.coaze.R;
+import co.wouri.coaze.core.models.Account;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.uis.recipient.viewholders.ChooseRecipientViewHolder;
 import co.wouri.coaze.utils.BitmapUtils;
@@ -42,7 +44,8 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
     public static final int USER_8 = 7;
 
     Context context;
-    public  List <Recipient> recipient;
+    List<Recipient> recipient;
+
 
     public ChooseRecipientAdapter(Context context,List<Recipient> recipients) {
         this.context = context;
@@ -58,28 +61,30 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
 
     @Override
     public void onBindViewHolder(ChooseRecipientViewHolder holder, int position) {
-        Recipient recipientItem = recipient.get(position);
-        holder.id = recipientItem.getRecipientId();
-        //Log.d("Coaze", "onBindViewHolder before " +holder.leftImageView);
-        // holder.leftImageView.setImageResource(settingsItem.leftIcon);
-        try{
-            holder.leftImageView.setImageBitmap(BitmapUtils.getRoundedCornerBitmap(BitmapUtils.ByteArrayToBitmap(recipientItem.getUserPicture()), 320));
-        }catch (Exception e){
+        Recipient settingsRecipients = recipient.get(position);
+        holder.id = settingsRecipients.getRecipientId();
+        try {
+            holder.leftImageView.setImageResource(settingsRecipients.getImage());
+        } catch (ClassCastException e) {
             e.printStackTrace();
         }
-        //holder.leftImageView.setImageBitmap(getRoundedCornerBitmap(Bitmap, 320));
-        // Log.d("Coaze", "onBindViewHolder after " +holder.leftImageView.setImageBitmap(settingsItem.leftIcon););
-        holder.title.setText(recipientItem.getFirstName()+" "+ recipientItem.getLastName());
-        //holder.leftImageView.setImageBitmap(settingsItem.bitmap);
+        holder.title.setText(settingsRecipients.getFirstName() +" "+ settingsRecipients.getLastName());
         ((ImageView) holder.rightView).setImageResource(R.drawable.ic_check);
         ((ImageView) holder.rightView).setColorFilter(Color.argb(255, 111, 209, 78));
-        //((ImageView) holder.rightView).setColorFilter(Color.argb(255, 35, 154, 252));
     }
+
 
     @Override
     public int getItemCount() {
         return recipient.size();
     }
+
+
+   /* private List<RecipientItem> initRecipientList() {
+        ArrayList<RecipientItem> recipientItemList =new ArrayList<>();
+        return null;
+    }
+
 
     private List<SettingsItem> initSettingsList() {
 
@@ -130,15 +135,11 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
 
         // Construct the list data
         for (int i = 0; i < titles.length; i++) {
-            Log.d("COAZE", "initSettingsList LeftIcons " + leftIcons[i]);
-            Log.d("COAZE", "initSettingsList " + bitmaps[i]);
             settingsItemsArrayList.add(new SettingsItem(ids[i], bitmaps[i], titles[i]));
         }
         // return the list
         return settingsItemsArrayList;
     }
-
-
 
     private Bitmap[] converterDrawableToBitmap(int[] leftIcons) {
         Bitmap[] bitmaps = new Bitmap[leftIcons.length];
@@ -147,6 +148,21 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
             bitmaps[i] = output;
         }
         return bitmaps;
+    }
+
+
+
+    public static class  RecipientItem{
+        public int id;
+        public Bitmap leftIcon;
+        public String title;
+        public RecipientItem(int id, Bitmap leftIcon, String title) {
+            this.id = id;
+            this.leftIcon = leftIcon;
+            this.title = title;
+
+
+        }
     }
 
     public static class SettingsItem {
@@ -164,6 +180,6 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
 
         }
     }
-
+*/
 
 }

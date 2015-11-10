@@ -18,7 +18,8 @@ import co.wouri.coaze.uis.recipient.adapters.RecipientAdapter;
  */
 public class RecipientViewHolder extends RecyclerView.ViewHolder {
 
-    public int id;
+    //public int id;
+    public String id;
     public Context context;
     public ImageView leftImageView;
     public TextView title;
@@ -27,7 +28,6 @@ public class RecipientViewHolder extends RecyclerView.ViewHolder {
     public View rightViewEdite;
     public Boolean isSelected = false;
 
-    public RecipientAdapter.SettingsItem settingsItem;
 
 
     public RecipientViewHolder(final Context context, View view, int viewType) {
@@ -38,15 +38,6 @@ public class RecipientViewHolder extends RecyclerView.ViewHolder {
         this.rightViewEdite = view.findViewById(R.id.rightIconEdit);
         this.rightViewDelete = view.findViewById(R.id.rightIconDelete);
 
-        rightViewDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Toast.makeText(context, "delete button activated", Toast.LENGTH_SHORT).show();
-                // View parent = (View)v.getParent();
-
-
-            }
-        });
         rightViewEdite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +46,8 @@ public class RecipientViewHolder extends RecyclerView.ViewHolder {
                 // View parent = (View)v.getParent();
             }
         });
+
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
