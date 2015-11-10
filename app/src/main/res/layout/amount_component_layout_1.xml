@@ -16,42 +16,54 @@
             android:layout_height="150dp"
             android:layout_weight="80"
             android:paddingLeft="10dp"
+            android:layout_marginTop="@dimen/margin_short"
             android:text="You send"
             android:textColor="@color/coazeblue"
             android:textSize="16dp" />
 
-        <TextView
-            android:id="@+id/amount"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="#00000000"
-            android:text="@string/texthint"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="0dp"
-            android:singleLine="true"
-            android:textColor="@color/colorPrimarylight"
-            android:textSize="25dp" />
-        <TextView
-            android:id="@+id/amount"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="#00000000"
-            android:text="@string/texthint"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="0dp"
-            android:singleLine="true"
-            android:textColor="@color/colorPrimarylight"
-            android:textSize="25dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_extra_extra_short">
+            <TextView
+                android:id="@+id/currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/currency"
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/margin_short"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimarylight"
+                android:textSize="@dimen/text_size" />
+
+            <EditText
+                android:layout_toRightOf="@+id/currency"
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/texthint"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:paddingBottom="@dimen/margin_short"
+                android:textColor="@color/text_color_black_light"
+                android:textSize="25dp" />
+
+        </RelativeLayout>
+
     </LinearLayout>
+
+    <!--android:background="@drawable/corner_border_component"-->
 
     <Spinner
         android:id="@+id/spinner"
-        android:background="@drawable/corner_border_component"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:drawSelectorOnTop="true"
         android:gravity="right"
-        android:popupBackground="@color/primary_dark" />
+        android:popupBackground="@color/primary_dark"
+        android:scrollIndicators="right"
+        android:background="@drawable/corner_border_component"
+
+    />
+
+
 </LinearLayout>

@@ -5,13 +5,14 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/margin_extra_extra_short"
     android:layout_marginLeft="@dimen/margin_extra_short"
-    android:layout_marginRight="@dimen/margin_extra_short">
+    android:layout_marginRight="@dimen/margin_extra_short"
+    android:background="@drawable/layout_background_normal">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/layout_background_normal"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="@drawable/layout_background_normal">
 
         <TextView
             android:id="@+id/details_title"

@@ -1,47 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="80dp"-->
-    <!--android:onClick="performChoose"-->
-    <!--android:background="@drawable/corner_border_contact_chooser">-->
-
-    <!--<com.pkmmte.view.CircularImageView-->
-        <!--android:id="@+id/user_picture"-->
-        <!--android:layout_width="52dp"-->
-        <!--android:layout_height="52dp"-->
-        <!--android:src="@drawable/barackobama"-->
-        <!--/>-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/user_name"-->
-        <!--android:layout_toRightOf="@+id/user_picture"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="30dp"-->
-        <!--android:paddingLeft="10dp"-->
-        <!--android:text="Ali Conors"-->
-        <!--android:textColor="@color/primary"-->
-        <!--android:textSize="18dp"-->
-        <!--android:layout_weight="80"-->
-        <!--android:layout_marginTop="30dp"-->
-        <!--android:layout_marginBottom="25dp"-->
-        <!--android:layout_gravity="center_vertical" />-->
-
-    <!--<ImageView-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:id="@+id/edit_picture"-->
-        <!--android:layout_width="25dp"-->
-        <!--android:layout_height="25dp"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:src="@drawable/edit"-->
-        <!--android:layout_marginTop="25dp"-->
-        <!--android:layout_marginBottom="25dp"-->
-        <!--android:layout_marginRight="10dp" />-->
-
-
-
-<!--</RelativeLayout>-->
 
 <android.support.v7.widget.CardView
 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -51,8 +8,10 @@ android:id="@+id/card_view_item"
 android:layout_marginBottom="@dimen/margin_extra_extra_short"
 android:layout_marginLeft="@dimen/margin_short"
 android:layout_marginRight="@dimen/margin_short"
-    >
+    android:background="@drawable/corner_border_contact_chooser"
 
+    >
+    <!--android:background="@drawable/corner_border_contact_chooser"-->
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -68,36 +27,20 @@ android:layout_marginRight="@dimen/margin_short"
         android:layout_alignParentTop="true"
         android:src="@drawable/barackobama"
     />
-    <!--<ImageView-->
-        <!--android:layout_width="@dimen/margin_image"-->
-        <!--android:layout_height="@dimen/margin_image"-->
-        <!--android:id="@+id/details_person_photo"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_marginRight="@dimen/margin_standard"-->
-        <!--/>-->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/details_person_name"
         android:layout_toRightOf="@+id/details_person_photo"
-        android:layout_marginLeft="@dimen/margin_standard"
+        android:layout_marginLeft="@dimen/margin_short"
         android:layout_centerVertical="true"
         android:textSize="@dimen/margin_standard"
         android:textColor="#223049"
         android:text="Ali Connors"
 
         />
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/details_person_amount"-->
-        <!--android:layout_below="@+id/person_name"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:textColor="#4DBA38"-->
-        <!--/>-->
+
     <ImageView
     android:layout_width="20dp"
     android:layout_height="20dp"

@@ -7,15 +7,16 @@
     android:layout_marginBottom="@dimen/margin_extra_extra_short"
     android:layout_marginLeft="@dimen/margin_extra_short"
     android:layout_marginRight="@dimen/margin_extra_short"
+    android:background="@drawable/selector_transfer_history"
     >
 
     <RelativeLayout
         android:id="@+id/relative_layout_transfer_history_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/selector_transfer_history"
         android:clickable="true"
-        android:padding="@dimen/margin_standard">
+        android:padding="@dimen/margin_standard"
+        android:background="@drawable/selector_transfer_history">
 
         <ImageView
             android:id="@+id/person_photo"

@@ -8,20 +8,21 @@
 
     android:layout_marginLeft="@dimen/margin_extra_short"
     android:layout_marginRight="@dimen/margin_extra_short"
+    android:background="@drawable/layout_background_normal"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_standard"
-        android:background="@drawable/layout_background_normal" >
+        android:background="@drawable/layout_background_normal"
+         >
         <ImageView
             android:layout_width="@dimen/margin_image"
             android:layout_height="@dimen/margin_image"
             android:id="@+id/details_person_photo"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="@dimen/margin_standard"
             />
 
         <TextView

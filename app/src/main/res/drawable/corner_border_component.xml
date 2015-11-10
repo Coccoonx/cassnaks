@@ -15,6 +15,10 @@ android:shape="rectangle" >
             android:topRightRadius="4dp"/>
     </shape>
 </item>
-
+    <!--<item>-->
+        <!--<bitmap-->
+            <!--android:gravity="right|end"-->
+            <!--android:src="@drawable/arrow_test" />-->
+    <!--</item>-->
 </layer-list>
 

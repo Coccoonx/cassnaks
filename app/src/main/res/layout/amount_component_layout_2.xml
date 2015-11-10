@@ -18,17 +18,33 @@
             android:textColor="@color/text_color_gray_dark_2"
             android:textSize="16dp" />
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
         <TextView
+            android:id="@+id/currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="€"
+            android:paddingLeft="@dimen/margin_short"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimarylight"
+            android:textSize="@dimen/text_size" />
+
+        <TextView
+            android:layout_toRightOf="@+id/currency"
             android:id="@+id/amount"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="wrap_content"
             android:text="@string/texthinteuro"
             android:singleLine="true"
             android:textColor="@color/colorPrimarylight"
             android:textSize="25dp"
             android:background="#00000000"
             android:paddingLeft="10dp"
-            android:paddingBottom="10dp" />
+            />
+        </RelativeLayout>
 
     </LinearLayout>
 

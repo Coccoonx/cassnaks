@@ -89,6 +89,7 @@
         <item>USA</item>
     </string-array>
     <string name="add_recipient">Add Recipient</string>
+    <string name="spinner_countries">Choose Country</string>
     <string name="edit_recipient">Edit Recipient</string>
 
     <!-- Balance and Success screens-->
@@ -116,7 +117,7 @@
     <string name="chooseamount">CHOOSE AMOUNT</string>
     <string name="texthint">100.00</string>
     <string name="currency">$</string>
-    <string name="texthinteuro">€75.00</string>
+    <string name="texthinteuro">75.00</string>
 
 
 
