@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/colorPrimaryLight" android:state_activated="true" />
-    <item android:drawable="@color/colorPrimaryLight" android:state_pressed="true" />
-    <item android:drawable="@color/colorPrimaryLight" android:state_checked="true" />
-    <item android:drawable="@color/colorPrimaryLight" android:state_focused="true" />
-    <item android:drawable="@color/color_background" />
-</selector><!-- From: file:/home/wouri/AndroidStudioProjects/coaze_to_commit/coaze/app/src/main/res/drawable/selector_list_item.xml -->
