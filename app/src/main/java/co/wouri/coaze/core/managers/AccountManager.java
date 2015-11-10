@@ -1,13 +1,9 @@
 package co.wouri.coaze.core.managers;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import co.wouri.coaze.core.models.Account;
 import co.wouri.coaze.core.models.Recipient;
@@ -67,27 +63,11 @@ public class AccountManager {
     // Managing Account
 
     public static List<Recipient> getRecipients() {
-        List list = new ArrayList();
-        list.add(new Recipient(firstName,lastName,address));
-        list.add(new Recipient(firstName,lastName,address));
-        list.add(new Recipient(firstName,lastName,address));
-        list.add(new Recipient(firstName,lastName,address));
-        list.add(new Recipient(firstName,lastName,address));
-        list.add(new Recipient(firstName,lastName,address));
-        account.setRecipients(list);
         return account.getRecipients();
-
     }
 
     public static List<Transfer> getTransferts() {
         List list = new ArrayList();
-        list.add(new Recipient(firstName,lastName,address));
-        list.add(new Recipient(firstName,lastName,address));
-        list.add(new Recipient(firstName,lastName,address));
-        list.add(new Recipient(firstName,lastName,address));
-        list.add(new Recipient(firstName,lastName,address));
-        list.add(new Recipient(firstName,lastName,address));
-        account.setTransfers(list);
         return account.getTransfers();
     }
 

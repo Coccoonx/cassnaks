@@ -1,45 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:background="@color/coazebackground"
-    android:fillViewport="true"
-    android:padding="10dp">
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-
-        >
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
 
         <include
             android:id="@+id/toolbar"
             layout="@layout/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="center_horizontal"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal" />
 
 
-        <include layout="@layout/contact_chooser_component"
-            android:layout_below="@+id/toolbar"
+        <include
             android:id="@+id/contact_chooser_component"
-            android:layout_marginTop="@dimen/margin_big"
+            layout="@layout/contact_chooser_component"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@+id/toolbar"
             android:layout_marginBottom="@dimen/margin_standard"
-            android:layout_height="80dp"
-            android:layout_width="match_parent" />
+            android:layout_marginTop="@dimen/margin_big" />
 
-        <include layout="@layout/amount_component_layout_1"
+        <include
             android:id="@+id/amount_component_layout_1"
-            android:layout_below="@+id/contact_chooser_component"
+            layout="@layout/amount_component_layout_1"
+            android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_width="match_parent"/>
+            android:layout_below="@+id/contact_chooser_component" />
 
-        <include layout="@layout/amount_component_layout_2"
+        <include
             android:id="@+id/amount_component_layout_2"
-            android:layout_below="@+id/amount_component_layout_1"
+            layout="@layout/amount_component_layout_2"
+            android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_width="match_parent"/>
+            android:layout_below="@+id/amount_component_layout_1" />
 
 
         <Button
@@ -51,12 +54,12 @@
             android:layout_marginBottom="@dimen/margin_standard"
             android:background="@drawable/corner_border_green"
             android:gravity="center"
+            android:onClick="performSend"
             android:padding="@dimen/margin_standard"
-            android:textColor="#fff"
             android:text="@string/send_text"
-            android:onClick="performSend"/>
+            android:textColor="#fff" />
 
 
     </RelativeLayout>
 
-</ScrollView>
+</LinearLayout>

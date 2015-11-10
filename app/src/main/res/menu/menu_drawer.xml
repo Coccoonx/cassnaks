@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_item_transfer"
+            android:checked="true"
+            android:icon="@drawable/ic_money_stack"
+            android:title="@string/nav_item_transfer" />
+        <item
+            android:id="@+id/nav_item_balance"
+            android:icon="@drawable/ic_wallet"
+            android:title="@string/nav_item_balance" />
+        <item
+            android:id="@+id/nav_item_recipient"
+            android:icon="@drawable/ic_user"
+            android:title="@string/nav_item_recipient" />
+    </group>
+    <item android:title=" ">
+        <menu>
+            <item
+                android:id="@+id/help_item"
+                android:title="Help" />
+            <item
+                android:id="@+id/about_item"
+                android:title="About" />
+            <item
+                android:id="@+id/feedback_item"
+                android:title="Feedback" />
+        </menu>
+    </item>
+</menu>
