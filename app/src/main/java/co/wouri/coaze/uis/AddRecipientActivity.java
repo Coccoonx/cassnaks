@@ -15,15 +15,24 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import co.wouri.coaze.R;
+import co.wouri.coaze.core.managers.AccountManager;
+import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.utils.UIUtils;
 
 public class AddRecipientActivity extends AppCompatActivity {
     Spinner countries;
     Toolbar toolbar;
     Button addButton;
-    EditText name, email, phone, city, address;
+    EditText firstName;
+    EditText lastName;
+    EditText email;
+    EditText phoneNumber;
+    EditText city;
+    EditText address;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +42,16 @@ public class AddRecipientActivity extends AppCompatActivity {
         buildToolBar();
 
 
-        name = (EditText) findViewById(R.id.name_add_recipient);
+        firstName = (EditText) findViewById(R.id.name_add_recipient);
 
         city = (EditText) findViewById(R.id.city_add_recipient);
         address = (EditText) findViewById(R.id.address_add_recipient);
 
         email = (EditText) findViewById(R.id.email_add_recipient);
 
-        phone = (EditText) findViewById(R.id.phone_add_recipient);
+        phoneNumber = (EditText) findViewById(R.id.phone_add_recipient);
 
-        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, name, city, address, email, phone);
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, firstName, city, address, email, phoneNumber);
 
 
         countries = (Spinner) findViewById(R.id.countries);
@@ -51,7 +60,7 @@ public class AddRecipientActivity extends AppCompatActivity {
 //        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),
 //                R.array.countries, R.layout.custom_spinner_countries);
 
-        String[] countrie = {"", "Canada", "Cameroon", "China", "USA"};
+        final String[] countrie = {"", "Canada", "Cameroon", "China", "USA"};
 
         MyArrayAdapter
                 mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, countrie);
@@ -65,9 +74,26 @@ public class AddRecipientActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Recipient recipient = new Recipient("yolande","Tchagwouo","30610Dla");
+                recipient.setFirstName(firstName.getText().toString());
+                recipient.setEmail(email.getText().toString());
+                recipient.setPhoneNumber(phoneNumber.getText().toString());
+                recipient.setCountry(countrie.toString());
+                recipient.setCity(city.getText().toString());
+                recipient.setAddress(address.getText().toString());
+
+                String response = AccountManager.addRecipient(recipient);
+                if (response != null) {
+                    Toast.makeText(AddRecipientActivity.this, "Done", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    Toast.makeText(AddRecipientActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                }
+
+
 
                 Intent intent = new Intent(AddRecipientActivity.this, EditRecipientActivity.class);
-                intent.putExtra("name", name.getText().toString());
+               // intent.putExtra("name", name.getText().toString());
 
                 startActivityForResult(intent, 1);
             }

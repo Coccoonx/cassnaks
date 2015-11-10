@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import co.wouri.coaze.R;
+import co.wouri.coaze.core.managers.AccountManager;
+import co.wouri.coaze.core.models.Account;
 import co.wouri.coaze.uis.recipient.adapters.ChooseRecipientAdapter;
 import co.wouri.coaze.utils.UIUtils;
 
@@ -24,6 +26,7 @@ public class ChooseRecipientActivity extends AppCompatActivity {
     private ChooseRecipientAdapter mAdapter;
     private Menu menu;
     private Button nextButton;
+    Account account = AccountManager.getCurrentUserAccount();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class ChooseRecipientActivity extends AppCompatActivity {
         nextButton = (Button) findViewById(R.id.Button_next);
         nextButton.setVisibility(View.VISIBLE);
         // Set an adapter to this recycler view
-        mRecyclerView.setAdapter(new ChooseRecipientAdapter(this));
+        mRecyclerView.setAdapter(new ChooseRecipientAdapter(this,AccountManager.getRecipients()));
 
         // Set the behaviour of this recycler view
         mRecyclerView.setHasFixedSize(true);

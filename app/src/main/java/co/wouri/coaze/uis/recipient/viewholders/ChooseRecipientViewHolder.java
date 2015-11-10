@@ -15,7 +15,8 @@ import co.wouri.coaze.uis.recipient.adapters.ChooseRecipientAdapter;
  */
 public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
 
-    public int id;
+    //public int id;
+    public String id;
     public Context context;
     public ImageView leftImageView;
     public TextView title;
