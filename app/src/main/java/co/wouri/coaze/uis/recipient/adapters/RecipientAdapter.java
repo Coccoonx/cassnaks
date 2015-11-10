@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.wouri.coaze.R;
+import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.uis.recipient.viewholders.RecipientViewHolder;
 
 /**
@@ -39,12 +40,12 @@ public class RecipientAdapter extends RecyclerView.Adapter<RecipientViewHolder> 
     public static final int USER_8 = 7;
 
     Context context;
-    List<SettingsItem> settingsItems;
+    List<Recipient> recipients;
 
 
-    public RecipientAdapter(Context context) {
+    public RecipientAdapter(Context context,List<Recipient> recipients) {
         this.context = context;
-        settingsItems = initSettingsList();
+        this.recipients = recipients;
     }
 
     @Override
@@ -55,33 +56,43 @@ public class RecipientAdapter extends RecyclerView.Adapter<RecipientViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(RecipientViewHolder holder, int position) {
-        SettingsItem settingsItem = settingsItems.get(position);
-        holder.id = settingsItem.id;
-        //Log.d("Coaze", "onBindViewHolder before " +holder.leftImageView);
-        // holder.leftImageView.setImageResource(settingsItem.leftIcon);
+    public void onBindViewHolder(RecipientViewHolder holder, final  int position) {
+        Recipient recipientsItem = recipients.get(position);
+        holder.id = recipientsItem.getRecipientId();
         try{
-            holder.leftImageView.setImageBitmap(getRoundedCornerBitmap(settingsItem.leftIcon, 320));
+           // holder.leftImageView.setImageBitmap(getRoundedCornerBitmap(settingsItem.leftIcon, 320));
+            holder.leftImageView.setImageResource(recipientsItem.getImage());
         }catch (Exception e){
             e.printStackTrace();
-        } //holder.leftImageView.setImageBitmap(getRoundedCornerBitmap(Bitmap, 320));
-        // Log.d("Coaze", "onBindViewHolder after " +holder.leftImageView.setImageBitmap(settingsItem.leftIcon););
-        holder.title.setText(settingsItem.title);
-        holder.settingsItem = settingsItem;
-        //holder.leftImageView.setImageBitmap(settingsItem.bitmap);
+        }
+        holder.title.setText(recipientsItem.getFirstName()+ "  " + recipientsItem.getLastName());
         ((ImageView) holder.rightViewDelete).setImageResource(R.drawable.ic_trashbin);
         ((ImageView) holder.rightViewEdite).setImageResource(R.drawable.ic_edit);
         ((ImageView) holder.rightViewDelete).setColorFilter(Color.argb(255, 29, 181, 245));
         ((ImageView) holder.rightViewEdite).setColorFilter(Color.argb(255, 29, 181, 245));
-        //((ImageView) holder.rightView).setColorFilter(Color.argb(255, 35, 154, 252));
+
+        holder.rightViewDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemDismiss(position);
+            }
+        });
+    }
+
+    public  void onItemDismiss(int position){
+        if(position!=-1 && position<recipients.size()){
+            recipients.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position,getItemCount());
+        }
     }
 
     @Override
     public int getItemCount() {
-        return settingsItems.size();
+        return recipients.size();
     }
 
-    private List<SettingsItem> initSettingsList() {
+  /*  private List<SettingsItem> initSettingsList() {
 
         ArrayList<SettingsItem> settingsItemsArrayList = new ArrayList<>();
 
@@ -138,29 +149,7 @@ public class RecipientAdapter extends RecyclerView.Adapter<RecipientViewHolder> 
         return settingsItemsArrayList;
     }
 
-    public Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixel) {
 
-        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(),
-                Bitmap.Config.ARGB_8888);
-        final Canvas canvas = new Canvas(output);
-        final int color = 0xffffffff;
-        final Paint paint = new Paint();
-
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-        final RectF rectF = new RectF(rect);
-        final float roundPx = pixel;
-        paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
-        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
-        bitmap.recycle();
-
-        return output;
-
-    }
 
     private Bitmap[] converterDrawableToBitmap(int[] leftIcons) {
         Bitmap[] bitmaps = new Bitmap[leftIcons.length];
@@ -185,6 +174,6 @@ public class RecipientAdapter extends RecyclerView.Adapter<RecipientViewHolder> 
 
 
         }
-    }
+    }*/
 
 }

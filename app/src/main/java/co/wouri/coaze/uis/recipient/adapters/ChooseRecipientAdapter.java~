@@ -17,12 +17,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import co.wouri.coaze.R;
+import co.wouri.coaze.core.models.Account;
+import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.uis.recipient.viewholders.ChooseRecipientViewHolder;
 import co.wouri.coaze.utils.BitmapUtils;
 
@@ -42,66 +44,47 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
     public static final int USER_8 = 7;
 
     Context context;
-    List<SettingsItem> settingsItems;
-    Boolean isSelected =false;
+    List<Recipient> recipient;
 
-    public ChooseRecipientAdapter(Context context) {
+
+    public ChooseRecipientAdapter(Context context,List<Recipient> recipients) {
         this.context = context;
-        settingsItems = initSettingsList();
+        this.recipient = recipients;
     }
 
     @Override
     public ChooseRecipientViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_setting_items, null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_setting_items, null);
         ChooseRecipientViewHolder cv = new ChooseRecipientViewHolder(this.context, v, viewType);
         return cv;
     }
 
     @Override
-    public void onBindViewHolder(final ChooseRecipientViewHolder holder, int position) {
-        SettingsItem settingsItem = settingsItems.get(position);
-        holder.id = settingsItem.id;
-        //Log.d("Coaze", "onBindViewHolder before " +holder.leftImageView);
-        // holder.leftImageView.setImageResource(settingsItem.leftIcon);
-        try{
-            holder.leftImageView.setImageBitmap(BitmapUtils
-                    .getRoundedCornerBitmap(settingsItem.leftIcon, 320));
-        }catch (Exception e){
+    public void onBindViewHolder(ChooseRecipientViewHolder holder, int position) {
+        Recipient settingsRecipients = recipient.get(position);
+        holder.id = settingsRecipients.getRecipientId();
+        try {
+            holder.leftImageView.setImageResource(settingsRecipients.getImage());
+        } catch (ClassCastException e) {
             e.printStackTrace();
         }
-        holder.title.setText(settingsItem.title);
+        holder.title.setText(settingsRecipients.getFirstName() +" "+ settingsRecipients.getLastName());
+        ((ImageView) holder.rightView).setImageResource(R.drawable.ic_check);
         ((ImageView) holder.rightView).setColorFilter(Color.argb(255, 111, 209, 78));
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!isSelected) {
-                    isSelected = true;
-                    RelativeLayout relativeLayout = (RelativeLayout)
-                            v.findViewById(R.id.rootLayout);
-                    relativeLayout.setBackgroundColor(context.getResources()
-                            .getColor(R.color.color_seleted_item));
-                    holder.rightView.setVisibility(View.VISIBLE);
-                } else {
-                    isSelected = false;
-                    RelativeLayout relativeLayout = (RelativeLayout)
-                            v.findViewById(R.id.rootLayout);
-                    relativeLayout.setBackgroundColor(context.getResources()
-                            .getColor(R.color.color_background));
-                    holder.rightView.setVisibility(View.INVISIBLE);
-                }
-
-
-            }
-        });
-
-
     }
+
 
     @Override
     public int getItemCount() {
-        return (null != settingsItems? settingsItems.size():0);
+        return recipient.size();
     }
+
+
+   /* private List<RecipientItem> initRecipientList() {
+        ArrayList<RecipientItem> recipientItemList =new ArrayList<>();
+        return null;
+    }
+
 
     private List<SettingsItem> initSettingsList() {
 
@@ -123,12 +106,11 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
                 R.drawable.friend2,
                 R.drawable.friend4,
                 R.drawable.thumb1,
-                R.drawable.user_profile,
+                R.drawable.friend4,
                 R.drawable.thumb3,
-                R.drawable.user_profile,
                 R.drawable.friend2,
                 R.drawable.thumb3,
-
+                R.drawable.friend2,
 
         };
         String[] titles = {
@@ -143,9 +125,13 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
 
         };
 
-        //convert int into Bitmap
         Bitmap[] bitmaps = converterDrawableToBitmap(leftIcons);
 
+        boolean[] isSwitchItem = {
+                false,
+                false,
+                false,
+        };
 
         // Construct the list data
         for (int i = 0; i < titles.length; i++) {
@@ -154,8 +140,6 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         // return the list
         return settingsItemsArrayList;
     }
-
-
 
     private Bitmap[] converterDrawableToBitmap(int[] leftIcons) {
         Bitmap[] bitmaps = new Bitmap[leftIcons.length];
@@ -166,18 +150,36 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         return bitmaps;
     }
 
-    public static class SettingsItem {
 
+
+    public static class  RecipientItem{
         public int id;
         public Bitmap leftIcon;
         public String title;
+        public RecipientItem(int id, Bitmap leftIcon, String title) {
+            this.id = id;
+            this.leftIcon = leftIcon;
+            this.title = title;
+
+
+        }
+    }
+
+    public static class SettingsItem {
+        public int id;
+        //public int leftIcon;
+        public Bitmap leftIcon;
+        public String title;
+        // public  Bitmap bitmap;
 
         public SettingsItem(int id, Bitmap leftIcon, String title) {
             this.id = id;
             this.leftIcon = leftIcon;
             this.title = title;
+
+
         }
     }
-
+*/
 
 }
