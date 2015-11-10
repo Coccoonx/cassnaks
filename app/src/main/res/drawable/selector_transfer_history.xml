@@ -4,5 +4,4 @@
         android:drawable="@drawable/layout_background_pressed" />
     <item  android:state_focused="false"
         android:drawable="@drawable/layout_background_normal" />
-
 </selector>
