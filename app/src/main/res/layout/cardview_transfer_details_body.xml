@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/layout_background"
+        android:background="@drawable/layout_background_normal"
         android:padding="16dp">
 
         <TextView

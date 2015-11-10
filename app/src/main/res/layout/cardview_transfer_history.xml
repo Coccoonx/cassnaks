@@ -13,7 +13,8 @@
         android:id="@+id/relative_layout_transfer_history_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/layout_background"
+        android:background="@drawable/selector_transfer_history"
+        android:clickable="true"
         android:padding="@dimen/margin_standard">
 
         <ImageView

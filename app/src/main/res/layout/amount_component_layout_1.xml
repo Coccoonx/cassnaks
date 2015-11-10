@@ -32,6 +32,18 @@
             android:singleLine="true"
             android:textColor="@color/colorPrimarylight"
             android:textSize="25dp" />
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#00000000"
+            android:text="@string/texthint"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="0dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimarylight"
+            android:textSize="25dp" />
     </LinearLayout>
 
     <Spinner
