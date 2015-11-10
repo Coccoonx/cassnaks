@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import co.wouri.coaze.R;
-import co.wouri.coaze.model.Person;
+import co.wouri.coaze.core.models.Person;
 import co.wouri.coaze.utils.UIUtils;
 
 public class TransferDetailsActivity extends AppCompatActivity {

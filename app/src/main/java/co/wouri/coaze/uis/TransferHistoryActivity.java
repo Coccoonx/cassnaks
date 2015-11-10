@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.wouri.coaze.R;
-import co.wouri.coaze.model.Person;
+import co.wouri.coaze.core.models.Person;
 import co.wouri.coaze.uis.transferhistory.TransferHistoryAdapter;
 import co.wouri.coaze.utils.BitmapUtils;
 import co.wouri.coaze.utils.UIUtils;

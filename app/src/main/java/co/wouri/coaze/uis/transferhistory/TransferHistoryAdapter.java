@@ -14,7 +14,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import co.wouri.coaze.R;
-import co.wouri.coaze.model.Person;
+import co.wouri.coaze.core.models.Person;
 import co.wouri.coaze.uis.TransferDetailsActivity;
 import co.wouri.coaze.utils.UIUtils;
 
