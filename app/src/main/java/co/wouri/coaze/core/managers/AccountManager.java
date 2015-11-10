@@ -1,6 +1,7 @@
 package co.wouri.coaze.core.managers;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +20,10 @@ public class AccountManager {
     private static FileManager fileManager = FileManager.getInstance();
 
     private static Account account = null;
+
+    public static String firstName = "Prisca";
+    public static String lastName = "Nzouckio";
+    public static String address = "30610Yde";
 
     private static synchronized Account retrieveAccount() {
 
@@ -46,7 +51,7 @@ public class AccountManager {
             account = AccountManager.retrieveAccount();
             if (account == null) {
                 //KeeperApplication.initUserAccount();
-                account = AccountManager.retrieveAccount();
+                account = new Account();
             }
             return account;
         } else {
@@ -61,21 +66,29 @@ public class AccountManager {
 
     // Managing Account
 
-    public static Set<Recipient> getRecipients() {
+    public static List<Recipient> getRecipients() {
+        List list = new ArrayList();
+        list.add(new Recipient(firstName,lastName,address));
+        list.add(new Recipient(firstName,lastName,address));
+        list.add(new Recipient(firstName,lastName,address));
+        list.add(new Recipient(firstName,lastName,address));
+        list.add(new Recipient(firstName,lastName,address));
+        list.add(new Recipient(firstName,lastName,address));
+        account.setRecipients(list);
+        return account.getRecipients();
 
-        TreeSet<Recipient> setIR = new TreeSet<>();
-        for (Recipient report : account.getRecipients()) {
-            setIR.add(report);
-        }
-        return setIR;
     }
 
-    public static Set<Transfer> getTransferts() {
-        TreeSet<Transfer> setCFA = new TreeSet<>();
-        for (Transfer report : account.getTransfers()) {
-            setCFA.add(report);
-        }
-        return setCFA;
+    public static List<Transfer> getTransferts() {
+        List list = new ArrayList();
+        list.add(new Recipient(firstName,lastName,address));
+        list.add(new Recipient(firstName,lastName,address));
+        list.add(new Recipient(firstName,lastName,address));
+        list.add(new Recipient(firstName,lastName,address));
+        list.add(new Recipient(firstName,lastName,address));
+        list.add(new Recipient(firstName,lastName,address));
+        account.setTransfers(list);
+        return account.getTransfers();
     }
 
     public static String addRecipient(Recipient recipient) {

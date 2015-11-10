@@ -22,7 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.wouri.coaze.R;
+import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.uis.recipient.viewholders.ChooseRecipientViewHolder;
+import co.wouri.coaze.utils.BitmapUtils;
 
 /**
  * Created by lyonnel on 05/11/15.
@@ -40,13 +42,11 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
     public static final int USER_8 = 7;
 
     Context context;
-    List<SettingsItem> settingsItems;
-    private Bitmap profilePictureRounded;
-    private Notification.Builder notBuilder;
+    public  List <Recipient> recipient;
 
-    public ChooseRecipientAdapter(Context context) {
+    public ChooseRecipientAdapter(Context context,List<Recipient> recipients) {
         this.context = context;
-        settingsItems = initSettingsList();
+        this.recipient = recipients;
     }
 
     @Override
@@ -58,19 +58,18 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
 
     @Override
     public void onBindViewHolder(ChooseRecipientViewHolder holder, int position) {
-        SettingsItem settingsItem = settingsItems.get(position);
-        holder.id = settingsItem.id;
+        Recipient recipientItem = recipient.get(position);
+        holder.id = recipientItem.getRecipientId();
         //Log.d("Coaze", "onBindViewHolder before " +holder.leftImageView);
         // holder.leftImageView.setImageResource(settingsItem.leftIcon);
         try{
-            holder.leftImageView.setImageBitmap(getRoundedCornerBitmap(settingsItem.leftIcon, 320));
+            holder.leftImageView.setImageBitmap(BitmapUtils.getRoundedCornerBitmap(BitmapUtils.ByteArrayToBitmap(recipientItem.getUserPicture()), 320));
         }catch (Exception e){
             e.printStackTrace();
         }
         //holder.leftImageView.setImageBitmap(getRoundedCornerBitmap(Bitmap, 320));
         // Log.d("Coaze", "onBindViewHolder after " +holder.leftImageView.setImageBitmap(settingsItem.leftIcon););
-        holder.title.setText(settingsItem.title);
-        holder.settingsItem = settingsItem;
+        holder.title.setText(recipientItem.getFirstName()+" "+ recipientItem.getLastName());
         //holder.leftImageView.setImageBitmap(settingsItem.bitmap);
         ((ImageView) holder.rightView).setImageResource(R.drawable.ic_check);
         ((ImageView) holder.rightView).setColorFilter(Color.argb(255, 111, 209, 78));
@@ -79,7 +78,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
 
     @Override
     public int getItemCount() {
-        return settingsItems.size();
+        return recipient.size();
     }
 
     private List<SettingsItem> initSettingsList() {
@@ -139,29 +138,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         return settingsItemsArrayList;
     }
 
-    public Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixel) {
 
-        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(),
-                Bitmap.Config.ARGB_8888);
-        final Canvas canvas = new Canvas(output);
-        final int color = 0xffffffff;
-        final Paint paint = new Paint();
-
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-        final RectF rectF = new RectF(rect);
-        final float roundPx = pixel;
-        paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
-        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
-        bitmap.recycle();
-
-        return output;
-
-    }
 
     private Bitmap[] converterDrawableToBitmap(int[] leftIcons) {
         Bitmap[] bitmaps = new Bitmap[leftIcons.length];
