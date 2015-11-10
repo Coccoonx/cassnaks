@@ -18,7 +18,7 @@
 
     </group>
 
-    <group android:title=" ">
+    <item android:title=" ">
         <menu>
             <item
                 android:id="@+id/help_item"
@@ -34,7 +34,7 @@
 
 
         </menu>
-    </group>
+    </item>
 
 
 </menu>
