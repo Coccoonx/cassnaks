@@ -29,8 +29,6 @@ public class ChooseAmountActivity extends AppCompatActivity {
         ArrayList<ItemData> list = new ArrayList<>();
         list.add(new ItemData("USD", R.drawable.usa));
         list.add(new ItemData("EUR", R.drawable.eur));
-        list.add(new ItemData("USD", R.drawable.usa));
-        list.add(new ItemData("EUR", R.drawable.eur));
 
         Spinner sp = (Spinner) findViewById(R.id.spinner);
         SpinnerAdapter adapter = new SpinnerAdapter(this, R.layout.spinner_layout, R.id.txt, list);
@@ -39,6 +37,7 @@ public class ChooseAmountActivity extends AppCompatActivity {
         Spinner sp2 = (Spinner) findViewById(R.id.spinner2);
         //SpinnerAdapter adapter2=new SpinnerAdapter(this,R.layout.spinner_layout,R.id.txt,list);
         sp2.setAdapter(adapter);
+        sp2.setSelection(sp.getSelectedItemPosition()+1);
     }
 
     @Override
