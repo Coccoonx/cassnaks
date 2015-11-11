@@ -79,64 +79,7 @@ public class AddRecipientActivity extends AppCompatActivity {
         addButton = (Button) findViewById(R.id.button_add_recipient);
         toolbarSpecial = (RelativeLayout) findViewById(R.id.toolbar);
 
-        // Set Button height
-//        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-//        Display display = wm.getDefaultDisplay();
-//        int screenHeight = display.getHeight();
-//        DisplayMetrics metrics = getResources().getDisplayMetrics();
-//
-//        Display display = getWindowManager().getDefaultDisplay();
-//        Point size = new Point();
-//        display.getSize(size);
-//        int width = size.x;
-//        int height = size.y;
          gapLayout = (LinearLayout) findViewById(R.id.gap_layout);
-//        DisplayMetrics metrics = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-//        switch(metrics.densityDpi){
-//            case DisplayMetrics.DENSITY_LOW:
-//                Log.d("densityDpi", "Low");
-//                gapLayout.setMinimumHeight(5);
-//                break;
-//            case DisplayMetrics.DENSITY_MEDIUM:
-//                Log.d("densityDpi", "Medium");
-//                gapLayout.setMinimumHeight(10);
-//                break;
-//            case DisplayMetrics.DENSITY_HIGH:
-//                Log.d("densityDpi", "High");
-//                gapLayout.setMinimumHeight(25);
-//                break;
-//        }
-//        addButton.setHeight(20);
-//        frameContainer = (LinearLayout) findViewById(R.id.frame_container);
-//        gapLayout.setMinimumHeight(height-(toolbarSpecial.getHeight()+20+frameContainer.getHeight()));
-
-        switch (getDensityName(this)){
-            case "xxxhdpi":
-                Log.d("densityDpi", "Very Big");
-                gapLayout.setMinimumHeight(75);
-                break;
-            case "xxhdpi":
-                Log.d("densityDpi", "Big");
-                gapLayout.setMinimumHeight(50);
-                break;
-            case "xhdpi":
-                Log.d("densityDpi", "Medium");
-                gapLayout.setMinimumHeight(30);
-                break;
-            case "hdpi":
-                Log.d("densityDpi", "Normal");
-                gapLayout.setMinimumHeight(25);
-                break;
-            case "mdpi":
-                Log.d("densityDpi", "Small");
-                gapLayout.setMinimumHeight(15);
-                break;
-            case "ldpi":
-                Log.d("densityDpi", "Very Small");
-                gapLayout.setMinimumHeight(5);
-                break;
-        }
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
