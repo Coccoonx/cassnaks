@@ -90,6 +90,13 @@ public class AccountManager {
         } else
             return null;
     }
+
+    public static void deleteRecipient(Recipient recipient) {
+        List<Recipient> recipients = getRecipients();
+        recipients.remove(recipient);
+        account.setRecipients(recipients);
+        saveAccount();
+    }
 }
 
 

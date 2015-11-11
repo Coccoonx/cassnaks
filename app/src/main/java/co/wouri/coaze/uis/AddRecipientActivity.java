@@ -1,25 +1,17 @@
 package co.wouri.coaze.uis;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,8 +37,6 @@ public class AddRecipientActivity extends AppCompatActivity {
     EditText phone;
     EditText city;
     EditText address;
-    LinearLayout gapLayout, frameContainer;
-    RelativeLayout toolbarSpecial;
 
 
     @Override
@@ -69,17 +59,16 @@ public class AddRecipientActivity extends AppCompatActivity {
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, name, city, address, email, phone);
 
 
-        String[] country = {"Choose Country","Canada", "Cameroon", "China", "USA"};
+        String[] countrie = {"", "Canada", "Cameroon", "China", "USA"};
 
         MyArrayAdapter
-                mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, country);
+                mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, countrie);
         mySpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
 
         countries.setAdapter(mySpinnerArrayAdapter);
         addButton = (Button) findViewById(R.id.button_add_recipient);
-        toolbarSpecial = (RelativeLayout) findViewById(R.id.toolbar);
 
-         gapLayout = (LinearLayout) findViewById(R.id.gap_layout);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,58 +85,39 @@ public class AddRecipientActivity extends AppCompatActivity {
                         || !checkAddress(AddRecipientActivity.this, addressValue)
                         || !checkCountry(AddRecipientActivity.this, countryValue)
                         ) {
-                    Intent intent = new Intent(AddRecipientActivity.this, AddRecipientActivity.class);
-                    intent.putExtra("name", nameValue);
-                    intent.putExtra("email", emailValue);
-                    intent.putExtra("phone", phoneValue);
-                    intent.putExtra("city", cityValue);
-                    intent.putExtra("address", addressValue);
-                    startActivityForResult(intent, 1);
+
 
                 } else {
+
+                    Recipient recipient = new Recipient();
+                    recipient.setName(nameValue);
+                    recipient.setEmail(emailValue);
+                    recipient.setPhoneNumber(phoneValue);
+                    recipient.setCountry(countryValue);
+                    recipient.setCity(cityValue);
+                    recipient.setAddress(addressValue);
+                    AccountManager.addRecipient(recipient);
 
                     //We must call a backend method here
                     Toast.makeText(AddRecipientActivity.this, "Recipient added Successfully", Toast.LENGTH_SHORT).show();
                     finish();
-                    Intent intent = new Intent(AddRecipientActivity.this, MainActivity.class);
-                    startActivityForResult(intent, 1);
                 }
             }
         });
-        Intent intent1 = getIntent();
-        name = (EditText) findViewById(R.id.name_add_recipient);
-        city = (EditText) findViewById(R.id.city_add_recipient);
-        address = (EditText) findViewById(R.id.address_add_recipient);
-        email = (EditText) findViewById(R.id.email_add_recipient);
-        phone = (EditText) findViewById(R.id.phone_add_recipient);
-
-        if (intent1 != null) {
-            name.setText(intent1.getStringExtra("name"));
-            city.setText(intent1.getStringExtra("city"));
-            address.setText(intent1.getStringExtra("address"));
-            email.setText(intent1.getStringExtra("email"));
-            phone.setText(intent1.getStringExtra("phone"));
-        }
-    }
-
-    private static String getDensityName(Context context) {
-        float density = context.getResources().getDisplayMetrics().density;
-        if (density >= 4.0) {
-            return "xxxhdpi";
-        }
-        if (density >= 3.0) {
-            return "xxhdpi";
-        }
-        if (density >= 2.0) {
-            return "xhdpi";
-        }
-        if (density >= 1.5) {
-            return "hdpi";
-        }
-        if (density >= 1.0) {
-            return "mdpi";
-        }
-        return "ldpi";
+//        Intent intent1 = getIntent();
+//        name = (EditText) findViewById(R.id.name_add_recipient);
+//        city = (EditText) findViewById(R.id.city_add_recipient);
+//        address = (EditText) findViewById(R.id.address_add_recipient);
+//        email = (EditText) findViewById(R.id.email_add_recipient);
+//        phone = (EditText) findViewById(R.id.phone_add_recipient);
+//
+//        if (intent1 != null) {
+//            name.setText(intent1.getStringExtra("name"));
+//            city.setText(intent1.getStringExtra("city"));
+//            address.setText(intent1.getStringExtra("address"));
+//            email.setText(intent1.getStringExtra("email"));
+//            phone.setText(intent1.getStringExtra("phone"));
+//        }
     }
 
     @Override

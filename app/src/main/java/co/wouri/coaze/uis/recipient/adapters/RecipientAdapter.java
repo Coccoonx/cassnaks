@@ -1,26 +1,17 @@
 package co.wouri.coaze.uis.recipient.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import co.wouri.coaze.R;
+import co.wouri.coaze.core.managers.AccountManager;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.uis.recipient.viewholders.RecipientViewHolder;
 
@@ -43,7 +34,7 @@ public class RecipientAdapter extends RecyclerView.Adapter<RecipientViewHolder> 
     List<Recipient> recipients;
 
 
-    public RecipientAdapter(Context context,List<Recipient> recipients) {
+    public RecipientAdapter(Context context, List<Recipient> recipients) {
         this.context = context;
         this.recipients = recipients;
     }
@@ -56,16 +47,16 @@ public class RecipientAdapter extends RecyclerView.Adapter<RecipientViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(RecipientViewHolder holder, final  int position) {
+    public void onBindViewHolder(RecipientViewHolder holder, final int position) {
         Recipient recipientsItem = recipients.get(position);
         holder.id = recipientsItem.getRecipientId();
-        try{
-           // holder.leftImageView.setImageBitmap(getRoundedCornerBitmap(settingsItem.leftIcon, 320));
+        try {
+            // holder.leftImageView.setImageBitmap(getRoundedCornerBitmap(settingsItem.leftIcon, 320));
             holder.leftImageView.setImageResource(recipientsItem.getImage());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        holder.title.setText(recipientsItem.getFirstName()+ "  " + recipientsItem.getLastName());
+        holder.title.setText(recipientsItem.getName());
         ((ImageView) holder.rightViewDelete).setImageResource(R.drawable.ic_trashbin);
         ((ImageView) holder.rightViewEdite).setImageResource(R.drawable.ic_edit);
         ((ImageView) holder.rightViewDelete).setColorFilter(Color.argb(255, 29, 181, 245));
@@ -79,11 +70,12 @@ public class RecipientAdapter extends RecyclerView.Adapter<RecipientViewHolder> 
         });
     }
 
-    public  void onItemDismiss(int position){
-        if(position!=-1 && position<recipients.size()){
-            recipients.remove(position);
+    public void onItemDismiss(int position) {
+        if (position != -1 && position < recipients.size()) {
+
+            AccountManager.deleteRecipient(recipients.remove(position));
             notifyItemRemoved(position);
-            notifyItemRangeChanged(position,getItemCount());
+            notifyItemRangeChanged(position, getItemCount());
         }
     }
 

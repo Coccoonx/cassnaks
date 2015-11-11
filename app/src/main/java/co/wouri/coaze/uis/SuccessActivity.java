@@ -3,14 +3,17 @@ package co.wouri.coaze.uis;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import co.wouri.coaze.R;
+import co.wouri.coaze.core.models.Transfer;
 import co.wouri.coaze.utils.UIUtils;
 
 public class SuccessActivity extends AppCompatActivity {
@@ -21,16 +24,20 @@ public class SuccessActivity extends AppCompatActivity {
     TextView details3;
     TextView recipientName;
     TextView amount;
+    EditText amount2;
     TextView was_sent;
     Button done;
     Button transfer;
+    public static String TAG = "SuccessActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success);
-
-        buildToolBar();
+        Bundle bundle = getIntent().getExtras();
+        Log.d(TAG, "bundle "+ bundle);
 
         successTV = (TextView) findViewById(R.id.successLabel);
         details1 = (TextView) findViewById(R.id.details_text1);
@@ -38,8 +45,21 @@ public class SuccessActivity extends AppCompatActivity {
         details3 = (TextView) findViewById(R.id.details_text3);
         recipientName = (TextView) findViewById(R.id.recipient_name);
         amount = (TextView) findViewById(R.id.amountValue);
+        amount2 = (EditText)findViewById(R.id.amount);
         was_sent = (TextView) findViewById(R.id.was_sent);
 
+        if (bundle != null){
+            Transfer transfer =(Transfer) bundle.getParcelable("transfer");
+            //amount2.getText().toString();
+
+            if (transfer != null) {
+                amount.setText(transfer.getSenderCurrency());
+                recipientName.setText(transfer.getRecipient().getName());
+            }
+
+
+        }
+        buildToolBar();
         done = (Button) findViewById(R.id.done);
         transfer = (Button) findViewById(R.id.transfers);
 

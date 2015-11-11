@@ -2,6 +2,7 @@ package co.wouri.coaze.uis;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -50,7 +50,9 @@ public class ChooseRecipientActivity extends AppCompatActivity {
         Log.d(TAG, "User account id" + AccountManager.getCurrentUserAccount().getUser().getUserId());
         Log.d(TAG, "Recipient list: " + AccountManager.getRecipients());
 
-        mRecyclerView.setAdapter(new ChooseRecipientAdapter(this, AccountManager.getRecipients()));
+        mAdapter = new ChooseRecipientAdapter(this, AccountManager.getRecipients());
+
+        mRecyclerView.setAdapter(mAdapter);
 
         // Set the behaviour of this recycler view
         mRecyclerView.setHasFixedSize(true);
@@ -59,12 +61,21 @@ public class ChooseRecipientActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), " next button clicked", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(ChooseRecipientActivity.this, ChooseAmountActivity.class));
+                Intent intent = new Intent(ChooseRecipientActivity.this, ChooseAmountActivity.class);
+                Recipient recipient = new Recipient(R.drawable.beyonce, "Beyonce Knowles");
+                intent.putExtra("recipient", (Parcelable) recipient);
+                startActivity(intent);
             }
         });
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,9 +1,10 @@
 package co.wouri.coaze.uis;
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -15,27 +16,45 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.pkmmte.view.CircularImageView;
 
 import java.util.ArrayList;
 
 import co.wouri.coaze.R;
 import co.wouri.coaze.adapters.ItemData;
 import co.wouri.coaze.adapters.SpinnerAdapter;
+import co.wouri.coaze.core.models.Recipient;
+import co.wouri.coaze.core.models.Transfer;
 import co.wouri.coaze.utils.UIUtils;
 
 public class ChooseAmountActivity extends AppCompatActivity {
 
-    LinearLayout amountComponentLayout1,amountComponentLayout2;
+    LinearLayout amountComponentLayout1, amountComponentLayout2;
+    CardView cardView;
     TextView currency1, currency2, amount2;
+    ImageView edit_picture;
     EditText amount1;
     Spinner sp1, sp2;
+
     int USD = 0;
     int EUR = 1;
+    private Recipient recipient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_amount);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            recipient = extras.getParcelable("recipient");
+            CircularImageView imageView = (CircularImageView) findViewById(R.id.details_person_photo);
+            TextView textView = (TextView) findViewById(R.id.details_person_name);
+            imageView.setImageResource(recipient.getImage());
+            textView.setText(recipient.getName());
+        }
 
         buildToolBar();
 
@@ -58,6 +77,10 @@ public class ChooseAmountActivity extends AppCompatActivity {
         currency2 = (TextView) amountComponentLayout2.findViewById(R.id.currency);
         amount1 = (EditText) amountComponentLayout1.findViewById(R.id.amount);
         amount2 = (TextView) amountComponentLayout2.findViewById(R.id.amount);
+        cardView = (CardView) findViewById(R.id.contact_chooser_component);
+        edit_picture = (ImageView) cardView.findViewById(R.id.edit_picture);
+
+
         setAllCurencies();
         setAmount();
 
@@ -81,7 +104,7 @@ public class ChooseAmountActivity extends AppCompatActivity {
         sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                setOneCurrency(position,currency1);
+                setOneCurrency(position, currency1);
                 setAmount();
             }
 
@@ -105,50 +128,61 @@ public class ChooseAmountActivity extends AppCompatActivity {
             }
         });
 
+        edit_picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChooseAmountActivity.this, EditRecipientActivity.class);
+                //Recipient recipient = new Recipient();
+                intent.putExtra("recipient", (Parcelable) recipient);
+                startActivity(intent);
+
+            }
+        });
+
     }
 
-    private void setAmount(){
+    private void setAmount() {
         Double dollars, euros;
-        if (sp1.getSelectedItemPosition() == sp2.getSelectedItemPosition()){
+        if (sp1.getSelectedItemPosition() == sp2.getSelectedItemPosition()) {
             amount2.setText(amount1.getText());
-        }else if (sp1.getSelectedItemPosition() == USD) { // ie sp2.getSelectedItemPosition() == EUR
-            try{
+        } else if (sp1.getSelectedItemPosition() == USD) { // ie sp2.getSelectedItemPosition() == EUR
+            try {
                 dollars = new Double(amount1.getText().toString());
-            }catch (Exception e){
+            } catch (Exception e) {
                 dollars = new Double(0);
             }
-            euros = 0.93*dollars;
-            amount2.setText(euros+"");
-        }else {
-            try{
+            euros = 0.93 * dollars;
+            amount2.setText(euros + "");
+        } else {
+            try {
                 euros = new Double(amount1.getText().toString());
-            }catch (Exception e){
+            } catch (Exception e) {
                 euros = new Double(0);
             }
-            dollars = 1.07*euros;
-            amount2.setText(dollars+"");
+            dollars = 1.07 * euros;
+            amount2.setText(dollars + "");
         }
     }
 
-    private  void setOneCurrency(int position, TextView currency){
-        if (position == USD){
-           currency.setText("$");
-        }else if (position == EUR){
+    private void setOneCurrency(int position, TextView currency) {
+        if (position == USD) {
+            currency.setText("$");
+        } else if (position == EUR) {
             currency.setText("€");
         }
     }
 
-    private void setAllCurencies(){
+    private void setAllCurencies() {
 
-        if (sp1.getSelectedItemPosition() == USD){
+        if (sp1.getSelectedItemPosition() == USD) {
             currency1.setText("$");
-        }else{
+        } else {
             currency1.setText("€");
         }
 
-        if (sp2.getSelectedItemPosition() == USD){
+        if (sp2.getSelectedItemPosition() == USD) {
             currency2.setText("$");
-        }else{
+        } else {
             currency2.setText("€");
         }
     }
@@ -175,9 +209,31 @@ public class ChooseAmountActivity extends AppCompatActivity {
     }
 
     public void performSend(View view) {
-        startActivity(new Intent(ChooseAmountActivity.this, SuccessActivity.class));
+        Transfer transfer = new Transfer();
+        if (recipient != null) {
+            transfer.setRecipient(recipient);
+            String amount = amount1.getText().toString();
+            String currency = currency2.getText().toString();
+            String amountCurrency = amount + " " + currency;
+            if (amount != null) {
+                double valAmount = Double.parseDouble(amount);
+                if (valAmount > 0) {
+                    transfer.setAmount(valAmount);
+                    transfer.setSenderCurrency(amount);
+                    // transfer.setSenderCurrency(currency);
+                    Intent intent = new Intent(ChooseAmountActivity.this, SuccessActivity.class);
+                    intent.putExtra("transfer", (Parcelable) transfer);
+                    startActivity(intent);
+                } else
+                    Toast.makeText(ChooseAmountActivity.this, "Amount value is null", Toast.LENGTH_SHORT).show();
 
-//        Toast.makeText(ChooseAmountActivity.this, "Not yet implement", Toast.LENGTH_LONG).show();
+            } else
+                Toast.makeText(ChooseAmountActivity.this, "Amount is null", Toast.LENGTH_SHORT).show();
+
+
+        } else
+            Toast.makeText(ChooseAmountActivity.this, "Recipient is null", Toast.LENGTH_SHORT).show();
+
     }
 
     public void performChoose(View v) {

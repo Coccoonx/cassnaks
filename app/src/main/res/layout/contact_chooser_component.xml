@@ -16,8 +16,7 @@ android:layout_marginRight="@dimen/margin_short"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/margin_standard"
-    android:background="@drawable/corner_border_contact_chooser"
-    android:onClick="performChoose">
+    android:background="@drawable/corner_border_contact_chooser">
 
     <com.pkmmte.view.CircularImageView
         android:id="@+id/details_person_photo"

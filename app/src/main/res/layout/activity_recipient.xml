@@ -52,7 +52,7 @@
         android:layout_marginBottom="@dimen/margin_standard"
         android:layout_marginTop="200dp"
         android:background="@drawable/corner_border_green"
-        android:text="Next"
+        android:text="NEXT"
         android:textColor="@color/color_background"
         android:visibility="gone" />
 </FrameLayout>

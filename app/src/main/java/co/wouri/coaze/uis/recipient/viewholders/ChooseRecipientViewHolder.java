@@ -2,12 +2,14 @@ package co.wouri.coaze.uis.recipient.viewholders;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import co.wouri.coaze.R;
+import co.wouri.coaze.uis.recipient.adapters.ChooseRecipientAdapter;
 
 
 public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
@@ -20,6 +22,9 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
     public TextView title;
     public View rightView;
     public Boolean isSelected = false;
+    ChooseRecipientAdapter mAdapter;
+    private static int focusedItem =0;
+    public RelativeLayout mRelativeLayout;
 
 
     // public ChooseRecipientAdapter.SettingsItem settingsItem;
@@ -31,14 +36,15 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
         this.leftImageView = (ImageView) view.findViewById(R.id.leftIcon);
         this.title = (TextView) view.findViewById(R.id.title);
         this.rightView = view.findViewById(R.id.rightIconCheck);
+        this.mRelativeLayout = (RelativeLayout) view.findViewById(R.id.rootLayout);
 
-
-        view.setOnClickListener(new View.OnClickListener() {
+        view.setClickable(true);
+       /* view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // View parent = (View)v.getParent();
+                //rightView.setVisibility(View.VISIBLE);
+                  // View parent = (View)v.getParent();
                 if (!isSelected) {
-
                     isSelected = true;
                     RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.rootLayout);
                     relativeLayout.setBackgroundColor(context.getResources()
@@ -54,7 +60,7 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
 
 
             }
-        });
+        });*/
 
 
     }
