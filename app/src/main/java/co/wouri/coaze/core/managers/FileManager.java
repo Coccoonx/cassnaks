@@ -16,7 +16,7 @@ public class FileManager {
 
     private static final String USER_FILE = "CoazeAccount.store";
     private static final File root = Environment.getExternalStorageDirectory();
-    private static final File outDir = new File(root.getAbsolutePath() + File.separator + "coaze Loan");
+    private static final File outDir = new File(root.getAbsolutePath() + File.separator + "Coaze");
 
     private static final FileManager fileManager = new FileManager();
 

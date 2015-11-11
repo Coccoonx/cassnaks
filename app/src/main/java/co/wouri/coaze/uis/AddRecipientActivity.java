@@ -95,7 +95,7 @@ public class AddRecipientActivity extends AppCompatActivity {
                 Intent intent = new Intent(AddRecipientActivity.this, EditRecipientActivity.class);
                // intent.putExtra("name", name.getText().toString());
 
-                startActivityForResult(intent, 1);
+//                startActivityForResult(intent, 1);
             }
         });
     }
