@@ -2,17 +2,24 @@ package co.wouri.coaze.uis;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +45,8 @@ public class AddRecipientActivity extends AppCompatActivity {
     EditText phone;
     EditText city;
     EditText address;
+    LinearLayout gapLayout, frameContainer;
+    RelativeLayout toolbarSpecial;
 
 
     @Override
@@ -60,16 +69,74 @@ public class AddRecipientActivity extends AppCompatActivity {
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, name, city, address, email, phone);
 
 
-        String[] countrie = {"", "Canada", "Cameroon", "China", "USA"};
+        String[] country = {"Choose Country","Canada", "Cameroon", "China", "USA"};
 
         MyArrayAdapter
-                mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, countrie);
+                mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, country);
         mySpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
 
         countries.setAdapter(mySpinnerArrayAdapter);
         addButton = (Button) findViewById(R.id.button_add_recipient);
+        toolbarSpecial = (RelativeLayout) findViewById(R.id.toolbar);
 
+        // Set Button height
+//        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+//        Display display = wm.getDefaultDisplay();
+//        int screenHeight = display.getHeight();
+//        DisplayMetrics metrics = getResources().getDisplayMetrics();
+//
+//        Display display = getWindowManager().getDefaultDisplay();
+//        Point size = new Point();
+//        display.getSize(size);
+//        int width = size.x;
+//        int height = size.y;
+         gapLayout = (LinearLayout) findViewById(R.id.gap_layout);
+//        DisplayMetrics metrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+//        switch(metrics.densityDpi){
+//            case DisplayMetrics.DENSITY_LOW:
+//                Log.d("densityDpi", "Low");
+//                gapLayout.setMinimumHeight(5);
+//                break;
+//            case DisplayMetrics.DENSITY_MEDIUM:
+//                Log.d("densityDpi", "Medium");
+//                gapLayout.setMinimumHeight(10);
+//                break;
+//            case DisplayMetrics.DENSITY_HIGH:
+//                Log.d("densityDpi", "High");
+//                gapLayout.setMinimumHeight(25);
+//                break;
+//        }
+//        addButton.setHeight(20);
+//        frameContainer = (LinearLayout) findViewById(R.id.frame_container);
+//        gapLayout.setMinimumHeight(height-(toolbarSpecial.getHeight()+20+frameContainer.getHeight()));
+
+        switch (getDensityName(this)){
+            case "xxxhdpi":
+                Log.d("densityDpi", "Very Big");
+                gapLayout.setMinimumHeight(75);
+                break;
+            case "xxhdpi":
+                Log.d("densityDpi", "Big");
+                gapLayout.setMinimumHeight(50);
+                break;
+            case "xhdpi":
+                Log.d("densityDpi", "Medium");
+                gapLayout.setMinimumHeight(30);
+                break;
+            case "hdpi":
+                Log.d("densityDpi", "Normal");
+                gapLayout.setMinimumHeight(25);
+                break;
+            case "mdpi":
+                Log.d("densityDpi", "Small");
+                gapLayout.setMinimumHeight(15);
+                break;
+            case "ldpi":
+                Log.d("densityDpi", "Very Small");
+                gapLayout.setMinimumHeight(5);
+                break;
+        }
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,6 +185,26 @@ public class AddRecipientActivity extends AppCompatActivity {
             email.setText(intent1.getStringExtra("email"));
             phone.setText(intent1.getStringExtra("phone"));
         }
+    }
+
+    private static String getDensityName(Context context) {
+        float density = context.getResources().getDisplayMetrics().density;
+        if (density >= 4.0) {
+            return "xxxhdpi";
+        }
+        if (density >= 3.0) {
+            return "xxhdpi";
+        }
+        if (density >= 2.0) {
+            return "xhdpi";
+        }
+        if (density >= 1.5) {
+            return "hdpi";
+        }
+        if (density >= 1.0) {
+            return "mdpi";
+        }
+        return "ldpi";
     }
 
     @Override
