@@ -3,7 +3,9 @@ package co.wouri.coaze.uis;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -16,26 +18,42 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.pkmmte.view.CircularImageView;
+
 import java.util.ArrayList;
 
 import co.wouri.coaze.R;
 import co.wouri.coaze.adapters.ItemData;
 import co.wouri.coaze.adapters.SpinnerAdapter;
+import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.utils.UIUtils;
 
 public class ChooseAmountActivity extends AppCompatActivity {
 
     LinearLayout amountComponentLayout1,amountComponentLayout2;
+    CardView  cardView;
     TextView currency1, currency2, amount2;
+    ImageView edit_picture;
     EditText amount1;
     Spinner sp1, sp2;
+
     int USD = 0;
     int EUR = 1;
+    private Recipient recipient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_amount);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            recipient =extras.getParcelable("recipient");
+            CircularImageView imageView =(CircularImageView) findViewById(R.id.details_person_photo);
+            TextView textView = (TextView) findViewById(R.id.details_person_name);
+            imageView.setImageResource( recipient.getImage());
+            textView.setText(recipient.getFirstName() + "  " + recipient.getLastName());
+        }
 
         buildToolBar();
 
@@ -58,6 +76,10 @@ public class ChooseAmountActivity extends AppCompatActivity {
         currency2 = (TextView) amountComponentLayout2.findViewById(R.id.currency);
         amount1 = (EditText) amountComponentLayout1.findViewById(R.id.amount);
         amount2 = (TextView) amountComponentLayout2.findViewById(R.id.amount);
+        cardView = (CardView) findViewById(R.id.contact_chooser_component);
+        edit_picture = (ImageView) cardView.findViewById(R.id.edit_picture);
+
+
         setAllCurencies();
         setAmount();
 
@@ -81,7 +103,7 @@ public class ChooseAmountActivity extends AppCompatActivity {
         sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                setOneCurrency(position,currency1);
+                setOneCurrency(position, currency1);
                 setAmount();
             }
 
@@ -102,6 +124,17 @@ public class ChooseAmountActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parentView) {
                 setAllCurencies();
                 setAmount();
+            }
+        });
+
+        edit_picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChooseAmountActivity.this, EditRecipientActivity.class);
+                //Recipient recipient = new Recipient();
+                intent.putExtra("recipient",(Parcelable)recipient);
+                startActivity(intent);
+
             }
         });
 

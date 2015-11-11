@@ -2,6 +2,8 @@ package co.wouri.coaze.uis;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -59,8 +61,10 @@ public class ChooseRecipientActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), " next button clicked", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(ChooseRecipientActivity.this, ChooseAmountActivity.class));
+                Intent intent = new Intent(ChooseRecipientActivity.this, ChooseAmountActivity.class);
+                Recipient recipient = new Recipient(R.drawable.beyonce, "Beyonce", "Knowles");
+                intent.putExtra("recipient", (Parcelable)recipient);
+                startActivity(intent);
             }
         });
     }

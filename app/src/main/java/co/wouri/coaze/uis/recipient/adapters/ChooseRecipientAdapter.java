@@ -13,10 +13,12 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ import co.wouri.coaze.utils.BitmapUtils;
 /**
  * Created by lyonnel on 05/11/15.
  */
-public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipientViewHolder> {
+public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipientViewHolder>{
 
 
     public static final int USER_1 = 0;
@@ -44,12 +46,14 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
     public static final int USER_8 = 7;
 
     Context context;
-    List<Recipient> recipient;
+    List<RecipientItem> recipient;
+    public int focusedItem = 0;
+    private boolean isSelected = false;
 
 
     public ChooseRecipientAdapter(Context context,List<Recipient> recipients) {
         this.context = context;
-        this.recipient = recipients;
+        this.recipient = initList(recipients);
     }
 
     @Override
@@ -59,18 +63,104 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         return cv;
     }
 
+
     @Override
-    public void onBindViewHolder(ChooseRecipientViewHolder holder, int position) {
-        Recipient settingsRecipients = recipient.get(position);
-        holder.id = settingsRecipients.getRecipientId();
+    public void onAttachedToRecyclerView(final RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+
+        // Handle key up and key down and attempt to move selection
+        recyclerView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                RecyclerView.LayoutManager lm = recyclerView.getLayoutManager();
+
+                // Return false if scrolled to the bounds and allow focus to move off the list
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                       // return tryMoveSelection(lm, 1);
+                    } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+                        //return tryMoveSelection(lm, -3);
+                    }
+                }
+
+                return false;
+            }
+        });
+    }
+
+    private boolean tryMoveSelection(RecyclerView.LayoutManager lm, int direction) {
+        int tryFocusItem = focusedItem + direction;
+
+        // If still within valid bounds, move the selection, notify to redraw, and scroll
+        if (tryFocusItem >= 0 && tryFocusItem < getItemCount()) {
+            notifyItemChanged(focusedItem);
+            focusedItem = tryFocusItem;
+            notifyItemChanged(focusedItem);
+            lm.scrollToPosition(focusedItem);
+            return true;
+        }
+
+        return false;
+    }
+
+
+
+
+
+    @Override
+    public void onBindViewHolder(final ChooseRecipientViewHolder holder, int position) {
+
+        final int itemPosition =position;
+        RecipientItem settingsRecipients = recipient.get(position);
+        //holder.id = settingsRecipients.getRecipientId();
         try {
-            holder.leftImageView.setImageResource(settingsRecipients.getImage());
+            holder.leftImageView.setImageResource(settingsRecipients.leftIcon);
         } catch (ClassCastException e) {
             e.printStackTrace();
         }
-        holder.title.setText(settingsRecipients.getFirstName() +" "+ settingsRecipients.getLastName());
+        holder.title.setText(settingsRecipients.title);
         ((ImageView) holder.rightView).setImageResource(R.drawable.ic_check);
         ((ImageView) holder.rightView).setColorFilter(Color.argb(255, 111, 209, 78));
+
+
+
+
+
+       /* holder.mRelativeLayout.setSelected(focusedItem == position);
+
+        holder.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*notifyItemChanged(focusedItem);
+                focusedItem = holder.getLayoutPosition();
+                notifyItemChanged(focusedItem);
+            }
+        });*/
+
+        holder.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //rightView.setVisibility(View.VISIBLE);
+                // View parent = (View)v.getParent();
+                if (!isSelected) {
+                    isSelected = true;
+                    //notifyItemChanged(focusedItem);
+                    RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.rootLayout);
+                    relativeLayout.setBackgroundColor(context.getResources()
+                            .getColor(R.color.color_seleted_item));
+                    holder.rightView.setVisibility(View.VISIBLE);
+                    focusedItem = holder.getLayoutPosition();
+                    notifyItemChanged(focusedItem);
+                } else {
+                    isSelected = false;
+                    RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.rootLayout);
+                    relativeLayout.setBackgroundColor(context.getResources()
+                            .getColor(R.color.color_background));
+                    holder.rightView.setVisibility(View.INVISIBLE);
+                    notifyItemChanged(focusedItem);
+                }
+            }
+        });
     }
 
 
@@ -79,6 +169,32 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         return recipient.size();
     }
 
+
+    public static class  RecipientItem{
+        public int leftIcon;
+        public String title;
+        boolean isSelected;
+
+        public RecipientItem(int leftIcon, String title) {
+
+            this.leftIcon = leftIcon;
+            this.title = title;
+
+        }
+    }
+
+    private  List<RecipientItem>  initList(List<Recipient> recipients){
+
+        List<RecipientItem> list = new ArrayList<>();
+
+        for (Recipient recipient : recipients){
+            RecipientItem recipientItem = new RecipientItem(recipient.getImage(),recipient.getFirstName());
+            list.add(recipientItem);
+        }
+        return list;
+
+
+    }
 
    /* private List<RecipientItem> initRecipientList() {
         ArrayList<RecipientItem> recipientItemList =new ArrayList<>();
