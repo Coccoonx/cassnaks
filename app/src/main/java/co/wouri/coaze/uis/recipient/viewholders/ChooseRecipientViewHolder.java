@@ -8,16 +8,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import co.wouri.coaze.R;
-import co.wouri.coaze.uis.recipient.adapters.ChooseRecipientAdapter;
 
-/**
- * Created by lyonnel on 05/11/15.
- */
+
 public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
 
 
     //public int id;
-    public String  id;
+    public String id;
     public Context context;
     public ImageView leftImageView;
     public TextView title;
@@ -25,7 +22,7 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
     public Boolean isSelected = false;
 
 
-   // public ChooseRecipientAdapter.SettingsItem settingsItem;
+    // public ChooseRecipientAdapter.SettingsItem settingsItem;
 
 
     public ChooseRecipientViewHolder(final Context context, View view, int viewType) {
@@ -61,5 +58,6 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
 
 
     }
+}
 
 
