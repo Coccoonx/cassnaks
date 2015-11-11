@@ -59,10 +59,9 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="right"
-        android:popupBackground="@color/primary_dark"
+        android:popupBackground="@drawable/corner_border_component"
         android:scrollIndicators="right"
         android:background="@drawable/corner_border_component"
-
     />
 
 
