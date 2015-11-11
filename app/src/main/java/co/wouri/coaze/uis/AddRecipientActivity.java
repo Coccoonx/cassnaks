@@ -22,14 +22,20 @@ import co.wouri.coaze.core.managers.AccountManager;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.utils.UIUtils;
 
+import static co.wouri.coaze.utils.FormValidationUtils.checkAddress;
+import static co.wouri.coaze.utils.FormValidationUtils.checkCity;
+import static co.wouri.coaze.utils.FormValidationUtils.checkCountry;
+import static co.wouri.coaze.utils.FormValidationUtils.checkEmail;
+import static co.wouri.coaze.utils.FormValidationUtils.checkName;
+import static co.wouri.coaze.utils.FormValidationUtils.checkPhone;
+
 public class AddRecipientActivity extends AppCompatActivity {
     Spinner countries;
     Toolbar toolbar;
     Button addButton;
-    EditText firstName;
-    EditText lastName;
+    EditText name;
     EditText email;
-    EditText phoneNumber;
+    EditText phone;
     EditText city;
     EditText address;
 
@@ -42,25 +48,19 @@ public class AddRecipientActivity extends AppCompatActivity {
         buildToolBar();
 
 
-        firstName = (EditText) findViewById(R.id.name_add_recipient);
+        name = (EditText) findViewById(R.id.name_add_recipient);
 
         city = (EditText) findViewById(R.id.city_add_recipient);
         address = (EditText) findViewById(R.id.address_add_recipient);
 
         email = (EditText) findViewById(R.id.email_add_recipient);
 
-        phoneNumber = (EditText) findViewById(R.id.phone_add_recipient);
-
-        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, firstName, city, address, email, phoneNumber);
-
-
+        phone = (EditText) findViewById(R.id.phone_add_recipient);
         countries = (Spinner) findViewById(R.id.countries);
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, name, city, address, email, phone);
 
-//
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),
-//                R.array.countries, R.layout.custom_spinner_countries);
 
-        final String[] countrie = {"", "Canada", "Cameroon", "China", "USA"};
+        String[] countrie = {"", "Canada", "Cameroon", "China", "USA"};
 
         MyArrayAdapter
                 mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, countrie);
@@ -73,31 +73,51 @@ public class AddRecipientActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String nameValue = name.getText().toString();
+                String emailValue = email.getText().toString();
+                String phoneValue = phone.getText().toString();
+                String countryValue = countries.getSelectedItem().toString();
+                String cityValue = city.getText().toString();
+                String addressValue = address.getText().toString();
+                if (!checkName(AddRecipientActivity.this, nameValue)
+                        || !checkEmail(AddRecipientActivity.this, emailValue)
+                        || !checkPhone(AddRecipientActivity.this, phoneValue)
+                        || !checkCity(AddRecipientActivity.this, cityValue)
+                        || !checkAddress(AddRecipientActivity.this, addressValue)
+                        || !checkCountry(AddRecipientActivity.this, countryValue)
+                        ) {
+                    Intent intent = new Intent(AddRecipientActivity.this, AddRecipientActivity.class);
+                    intent.putExtra("name", nameValue);
+                    intent.putExtra("email", emailValue);
+                    intent.putExtra("phone", phoneValue);
+                    intent.putExtra("city", cityValue);
+                    intent.putExtra("address", addressValue);
+                    startActivityForResult(intent, 1);
 
-                Recipient recipient = new Recipient("yolande","Tchagwouo","30610Dla");
-                recipient.setFirstName(firstName.getText().toString());
-                recipient.setEmail(email.getText().toString());
-                recipient.setPhoneNumber(phoneNumber.getText().toString());
-                recipient.setCountry(countrie.toString());
-                recipient.setCity(city.getText().toString());
-                recipient.setAddress(address.getText().toString());
+                } else {
 
-                String response = AccountManager.addRecipient(recipient);
-                if (response != null) {
-                    Toast.makeText(AddRecipientActivity.this, "Done", Toast.LENGTH_SHORT).show();
-
-                }else {
-                    Toast.makeText(AddRecipientActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                    //We must call a backend method here
+                    Toast.makeText(AddRecipientActivity.this, "Recipient added Successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                    Intent intent = new Intent(AddRecipientActivity.this, MainActivity.class);
+                    startActivityForResult(intent, 1);
                 }
-
-
-
-                Intent intent = new Intent(AddRecipientActivity.this, EditRecipientActivity.class);
-               // intent.putExtra("name", name.getText().toString());
-
-//                startActivityForResult(intent, 1);
             }
         });
+        Intent intent1 = getIntent();
+        name = (EditText) findViewById(R.id.name_add_recipient);
+        city = (EditText) findViewById(R.id.city_add_recipient);
+        address = (EditText) findViewById(R.id.address_add_recipient);
+        email = (EditText) findViewById(R.id.email_add_recipient);
+        phone = (EditText) findViewById(R.id.phone_add_recipient);
+
+        if (intent1 != null) {
+            name.setText(intent1.getStringExtra("name"));
+            city.setText(intent1.getStringExtra("city"));
+            address.setText(intent1.getStringExtra("address"));
+            email.setText(intent1.getStringExtra("email"));
+            phone.setText(intent1.getStringExtra("phone"));
+        }
     }
 
     @Override

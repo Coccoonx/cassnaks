@@ -15,15 +15,30 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import co.wouri.coaze.R;
 import co.wouri.coaze.utils.UIUtils;
+
+import static co.wouri.coaze.utils.FormValidationUtils.checkAddress;
+import static co.wouri.coaze.utils.FormValidationUtils.checkCity;
+import static co.wouri.coaze.utils.FormValidationUtils.checkCountry;
+import static co.wouri.coaze.utils.FormValidationUtils.checkEmail;
+import static co.wouri.coaze.utils.FormValidationUtils.checkName;
+import static co.wouri.coaze.utils.FormValidationUtils.checkPhone;
 
 public class ProfileActivity extends AppCompatActivity {
     Spinner countries;
     Toolbar toolbar;
     Button addButton;
-    EditText name, email, phone, city, address;
+    EditText name;
+    EditText email;
+    EditText phone;
+    EditText city;
+    EditText address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,33 +73,51 @@ public class ProfileActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                Intent intent = new Intent(ProfileActivity.this, AddRecipientActivity.class);
-                intent.putExtra("name", name.getText().toString());
-
-                startActivityForResult(intent, 1);
+                String nameValue = name.getText().toString();
+                String emailValue = email.getText().toString();
+                String phoneValue = phone.getText().toString();
+                String countryValue = countries.getSelectedItem().toString();
+                String cityValue = city.getText().toString();
+                String addressValue = address.getText().toString();
+                if (!checkName(ProfileActivity.this, nameValue)
+                        || !checkEmail(ProfileActivity.this, emailValue)
+                        || !checkPhone(ProfileActivity.this, phoneValue)
+                        || !checkCity(ProfileActivity.this, cityValue)
+                        || !checkAddress(ProfileActivity.this, addressValue)
+                        || !checkCountry(ProfileActivity.this, countryValue)
+                        ) {
+                    Intent intent = new Intent(ProfileActivity.this, ProfileActivity.class);
+                    intent.putExtra("name", nameValue);
+                    intent.putExtra("email", emailValue);
+                    intent.putExtra("phone", phoneValue);
+                    intent.putExtra("city", cityValue);
+                    intent.putExtra("address", addressValue);
+                    startActivityForResult(intent, 1);
+                } else {
+//                    Intent intent = new Intent(ProfileActivity.this, AddRecipientActivity.class);
+//                    intent.putExtra("name", nameValue);
+//                    startActivityForResult(intent, 1);
+                    //We should call the backend functions here
+                    Toast.makeText(ProfileActivity.this, "Profile saved Successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                    Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                    startActivityForResult(intent, 1);
+                }
             }
         });
-
-        Intent intent = getIntent();
-
+        Intent intent1 = getIntent();
         name = (EditText) findViewById(R.id.name_edit_recipient);
         city = (EditText) findViewById(R.id.city_edit_recipient);
         address = (EditText) findViewById(R.id.address_edit_recipient);
         email = (EditText) findViewById(R.id.email_edit_recipient);
         phone = (EditText) findViewById(R.id.phone_edit_recipient);
-//        country=(EditText) findViewById(R.id.country_add_recipient);
-
-        if (intent != null) {
-            name.setText(intent.getStringExtra("name"));
-            city.setText(intent.getStringExtra("city"));
-            address.setText(intent.getStringExtra("address"));
-            email.setText(intent.getStringExtra("email"));
-            phone.setText(intent.getStringExtra("phone"));
-//            country.setText(intent.getStringExtra("country"));
+        if (intent1 != null) {
+            name.setText(intent1.getStringExtra("name"));
+            city.setText(intent1.getStringExtra("city"));
+            address.setText(intent1.getStringExtra("address"));
+            email.setText(intent1.getStringExtra("email"));
+            phone.setText(intent1.getStringExtra("phone"));
         }
-
 
     }
 
