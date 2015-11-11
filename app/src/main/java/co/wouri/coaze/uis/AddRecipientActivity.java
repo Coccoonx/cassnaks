@@ -91,7 +91,7 @@ public class AddRecipientActivity extends AppCompatActivity {
                 String cityValue = city.getText().toString();
                 String addressValue = address.getText().toString();
                 if(countries.getSelectedItemPosition() == 0){
-                    Toast.makeText(AddRecipientActivity.this, "The password must at least have 3 characters", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddRecipientActivity.this, "Choose a country !", Toast.LENGTH_SHORT).show();
                 }else if (!checkName(AddRecipientActivity.this, nameValue)
                         || !checkEmail(AddRecipientActivity.this, emailValue)
                         || !checkPhone(AddRecipientActivity.this, phoneValue)
