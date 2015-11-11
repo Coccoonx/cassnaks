@@ -56,7 +56,7 @@ public class TransferHistoryAdapter extends RecyclerView.Adapter<PersonViewHolde
         personViewHolder.personName.setText(persons.get(i).getName());
         personViewHolder.personAmount.setText("$" + persons.get(i).getAmount());
         personViewHolder.personPhoto.setImageBitmap(persons.get(i).getPhotoId());
-        personViewHolder.personTransferDate.setText(" \\" + persons.get(i).getTransfertDate());
+        personViewHolder.personTransferDate.setText(" \\ " + persons.get(i).getTransfertDate());
         personViewHolder.personTransferType.setText(persons.get(i).getTransfertType());
         final Person person = new Person(persons.get(i).getName(), persons.get(i).getPhotoId(),
                 persons.get(i).getAmount(), persons.get(i).getTransfertType(), " \\" + persons.get(i).getTransfertDate());

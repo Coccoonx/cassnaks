@@ -50,13 +50,24 @@
         android:paddingBottom="15dp"
         android:weightSum="100">
 
+        <!--<Button-->
+            <!--android:id="@+id/addFund"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="#4dba38"-->
+            <!--android:text="@string/add"-->
+            <!--android:textColor="#f2f5f7" />-->
+
         <Button
             android:id="@+id/addFund"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:background="#4dba38"
+            android:layout_marginBottom="@dimen/margin_standard"
+            android:background="@drawable/corner_border_green"
             android:text="@string/add"
-            android:textColor="#f2f5f7" />
+            android:gravity="center"
+            android:padding="@dimen/margin_standard"
+            android:textColor="#fff" />
 
     </LinearLayout>
 

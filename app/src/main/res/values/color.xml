@@ -68,6 +68,7 @@
     <color name="text_color_red">#ff0000</color>
     <color name="text_color_grey_dark">#808faa</color>
     <color name="text_color_black_light">#192439</color>
+    <color name="text_color_black_extra_light">#939393</color>
 
 
 </resources>
