@@ -1,5 +1,6 @@
 package co.wouri.coaze.uis;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import co.wouri.coaze.R;
 import co.wouri.coaze.core.managers.AccountManager;
@@ -39,7 +39,7 @@ public class RecipientActivity extends AppCompatActivity {
         addButton = (Button) findViewById(R.id.Button_add);
         addButton.setVisibility(View.VISIBLE);
         // Set an adapter to this recycler view
-        mRecyclerView.setAdapter(new RecipientAdapter(this,account.getRecipients()));
+        mRecyclerView.setAdapter(new RecipientAdapter(this, account.getRecipients()));
 
         // Set the behaviour of this recycler view
         mRecyclerView.setHasFixedSize(true);
@@ -47,7 +47,9 @@ public class RecipientActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), " add button clicked", Toast.LENGTH_SHORT).show();
+
+                startActivity(new Intent(RecipientActivity.this, AddRecipientActivity.class));
+//       Toast.makeText(getApplicationContext(), " add button clicked", Toast.LENGTH_SHORT).show();
             }
         });
     }

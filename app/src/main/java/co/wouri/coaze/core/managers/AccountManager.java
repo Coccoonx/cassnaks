@@ -5,7 +5,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.wouri.coaze.R;
 import co.wouri.coaze.core.models.Account;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.core.models.Transfer;
@@ -66,22 +65,6 @@ public class AccountManager {
     // Managing Account
 
     public static List<Recipient> getRecipients() {
-        /*List list  =  new ArrayList();
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        list.add(new Recipient(R.drawable.barack,"barack", "Obama"));
-        account.setRecipients(list);*/
         return account.getRecipients();
     }
 

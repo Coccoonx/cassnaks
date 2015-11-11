@@ -86,13 +86,6 @@ public class AddRecipientActivity extends AppCompatActivity {
                         || !checkAddress(AddRecipientActivity.this, addressValue)
                         || !checkCountry(AddRecipientActivity.this, countryValue)
                         ) {
-//                    Intent intent = new Intent(AddRecipientActivity.this, AddRecipientActivity.class);
-//                    intent.putExtra("name", nameValue);
-//                    intent.putExtra("email", emailValue);
-//                    intent.putExtra("phone", phoneValue);
-//                    intent.putExtra("city", cityValue);
-//                    intent.putExtra("address", addressValue);
-//                    startActivityForResult(intent, 1);
                     Recipient recipient = new Recipient();
                     recipient.setFirstName(nameValue);
                     recipient.setEmail(emailValue);
