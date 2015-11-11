@@ -69,18 +69,18 @@ public class AddRecipientActivity extends AppCompatActivity {
 
         countries.setAdapter(mySpinnerArrayAdapter);
         addButton = (Button) findViewById(R.id.button_add_recipient);
-        countries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 0)
-                    Toast.makeText(AddRecipientActivity.this,"Choose a country !",Toast.LENGTH_SHORT);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(AddRecipientActivity.this,"Choose a country !",Toast.LENGTH_SHORT);
-            }
-        });
+//        countries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if(position == 0)
+//                    Toast.makeText(AddRecipientActivity.this,"Choose a country !",Toast.LENGTH_SHORT);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                Toast.makeText(AddRecipientActivity.this,"Choose a country !",Toast.LENGTH_SHORT);
+//            }
+//        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,17 +90,19 @@ public class AddRecipientActivity extends AppCompatActivity {
                 String countryValue = countries.getSelectedItem().toString();
                 String cityValue = city.getText().toString();
                 String addressValue = address.getText().toString();
-                if (!checkName(AddRecipientActivity.this, nameValue)
+                if(countries.getSelectedItemPosition() == 0){
+                    Toast.makeText(AddRecipientActivity.this, "The password must at least have 3 characters", Toast.LENGTH_SHORT).show();
+                }else if (!checkName(AddRecipientActivity.this, nameValue)
                         || !checkEmail(AddRecipientActivity.this, emailValue)
                         || !checkPhone(AddRecipientActivity.this, phoneValue)
                         || !checkCity(AddRecipientActivity.this, cityValue)
                         || !checkAddress(AddRecipientActivity.this, addressValue)
                         || !checkCountry(AddRecipientActivity.this, countryValue)
+
                         ) {
 
 
-                } else {
-
+                }else{
                     Recipient recipient = new Recipient();
                     recipient.setName(nameValue);
                     recipient.setEmail(emailValue);

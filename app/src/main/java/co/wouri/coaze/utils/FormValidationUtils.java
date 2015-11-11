@@ -51,7 +51,7 @@ public class FormValidationUtils {
         return true;
     }
     public static boolean checkCountry(Context context,String country){
-       if(country.equals("")){
+       if(country.equals("Choose a country")){
             Toast.makeText(context, "You must choose a country", Toast.LENGTH_SHORT).show();
             return false;
         }
