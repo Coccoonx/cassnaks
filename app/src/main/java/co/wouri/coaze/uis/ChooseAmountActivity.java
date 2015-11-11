@@ -1,7 +1,6 @@
 package co.wouri.coaze.uis;
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
@@ -54,7 +53,7 @@ public class ChooseAmountActivity extends AppCompatActivity {
             CircularImageView imageView = (CircularImageView) findViewById(R.id.details_person_photo);
             TextView textView = (TextView) findViewById(R.id.details_person_name);
             imageView.setImageResource(recipient.getImage());
-            textView.setText(recipient.getFirstName() + "  " + recipient.getLastName());
+            textView.setText(recipient.getName());
         }
 
         buildToolBar();
@@ -215,24 +214,24 @@ public class ChooseAmountActivity extends AppCompatActivity {
             transfer.setRecipient(recipient);
             String amount = amount1.getText().toString();
             String currency = currency2.getText().toString();
-            String amountCurrency = amount +" " + currency;
+            String amountCurrency = amount + " " + currency;
             if (amount != null) {
                 double valAmount = Double.parseDouble(amount);
                 if (valAmount > 0) {
                     transfer.setAmount(valAmount);
                     transfer.setSenderCurrency(amount);
-                   // transfer.setSenderCurrency(currency);
-                    Intent intent = new Intent(ChooseAmountActivity.this,SuccessActivity.class);
-                    intent.putExtra("transfer", (Parcelable)transfer);
+                    // transfer.setSenderCurrency(currency);
+                    Intent intent = new Intent(ChooseAmountActivity.this, SuccessActivity.class);
+                    intent.putExtra("transfer", (Parcelable) transfer);
                     startActivity(intent);
-                }else
+                } else
                     Toast.makeText(ChooseAmountActivity.this, "Amount value is null", Toast.LENGTH_SHORT).show();
 
-            }else
+            } else
                 Toast.makeText(ChooseAmountActivity.this, "Amount is null", Toast.LENGTH_SHORT).show();
 
 
-        }else
+        } else
             Toast.makeText(ChooseAmountActivity.this, "Recipient is null", Toast.LENGTH_SHORT).show();
 
     }

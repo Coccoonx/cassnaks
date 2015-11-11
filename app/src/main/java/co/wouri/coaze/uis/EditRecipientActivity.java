@@ -88,9 +88,9 @@ public class EditRecipientActivity extends AppCompatActivity {
         }
 
         Bundle bundle = getIntent().getExtras();
-        if(bundle!=null){
-             recipient = bundle.getParcelable("recipient");
-            name.setText(recipient.getFirstName()+"  " +recipient.getLastName());
+        if (bundle != null) {
+            recipient = bundle.getParcelable("recipient");
+            name.setText(recipient.getName());
             city.setText(recipient.getCity());
             address.setText(recipient.getAddress());
             email.setText(recipient.getEmail());

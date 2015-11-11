@@ -1,7 +1,6 @@
 package co.wouri.coaze.uis;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -86,8 +85,12 @@ public class AddRecipientActivity extends AppCompatActivity {
                         || !checkAddress(AddRecipientActivity.this, addressValue)
                         || !checkCountry(AddRecipientActivity.this, countryValue)
                         ) {
+
+
+                } else {
+
                     Recipient recipient = new Recipient();
-                    recipient.setFirstName(nameValue);
+                    recipient.setName(nameValue);
                     recipient.setEmail(emailValue);
                     recipient.setPhoneNumber(phoneValue);
                     recipient.setCountry(countryValue);
@@ -95,13 +98,9 @@ public class AddRecipientActivity extends AppCompatActivity {
                     recipient.setAddress(addressValue);
                     AccountManager.addRecipient(recipient);
 
-                } else {
-
                     //We must call a backend method here
                     Toast.makeText(AddRecipientActivity.this, "Recipient added Successfully", Toast.LENGTH_SHORT).show();
                     finish();
-                    Intent intent = new Intent(AddRecipientActivity.this, MainActivity.class);
-                    startActivityForResult(intent, 1);
                 }
             }
         });

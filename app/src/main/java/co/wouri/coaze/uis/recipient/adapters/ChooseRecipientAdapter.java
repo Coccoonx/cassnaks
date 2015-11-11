@@ -1,18 +1,8 @@
 package co.wouri.coaze.uis.recipient.adapters;
 
-import android.app.Notification;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,15 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import co.wouri.coaze.R;
-import co.wouri.coaze.core.models.Account;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.uis.recipient.viewholders.ChooseRecipientViewHolder;
-import co.wouri.coaze.utils.BitmapUtils;
 
 /**
  * Created by lyonnel on 05/11/15.
@@ -188,7 +175,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         List<RecipientItem> list = new ArrayList<>();
 
         for (Recipient recipient : recipients){
-            RecipientItem recipientItem = new RecipientItem(recipient.getImage(),recipient.getFirstName());
+            RecipientItem recipientItem = new RecipientItem(recipient.getImage(), recipient.getName());
             list.add(recipientItem);
         }
         return list;

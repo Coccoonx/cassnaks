@@ -2,7 +2,6 @@ package co.wouri.coaze.uis;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -62,8 +60,8 @@ public class ChooseRecipientActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChooseRecipientActivity.this, ChooseAmountActivity.class);
-                Recipient recipient = new Recipient(R.drawable.beyonce, "Beyonce", "Knowles");
-                intent.putExtra("recipient", (Parcelable)recipient);
+                Recipient recipient = new Recipient(R.drawable.beyonce, "Beyonce Knowles");
+                intent.putExtra("recipient", (Parcelable) recipient);
                 startActivity(intent);
             }
         });

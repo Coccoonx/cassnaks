@@ -17,18 +17,15 @@ public class Recipient implements Serializable, Parcelable {
     private String country;
     private String address;
     private String phoneNumber;
-    private String firstName;
-    private String lastName;
+    private String name;
     private String accountId;
     private byte[] userPicture;
     private String currency;
     private int image;
 
 
-
-    public Recipient(String fName, String lName, String adress) {
-        firstName = fName;
-        lastName = lName;
+    public Recipient(String fName, String adress) {
+        name = fName;
         address = adress;
         recipientId = UUID.randomUUID().toString();
 
@@ -42,10 +39,9 @@ public class Recipient implements Serializable, Parcelable {
 
     }*/
 
-    public Recipient(int image, String fName, String lName) {
+    public Recipient(int image, String fName) {
         this.image = image;
-        firstName = fName;
-        lastName = lName;
+        name = fName;
         recipientId = UUID.randomUUID().toString();
 
     }
@@ -69,8 +65,7 @@ public class Recipient implements Serializable, Parcelable {
         dest.writeString(this.country);
         dest.writeString(this.address);
         dest.writeString(this.phoneNumber);
-        dest.writeString(this.firstName);
-        dest.writeString(this.lastName);
+        dest.writeString(this.name);
         dest.writeString(this.accountId);
         dest.writeByteArray(this.userPicture);
         dest.writeString(this.currency);
@@ -85,8 +80,7 @@ public class Recipient implements Serializable, Parcelable {
         this.country = in.readString();
         this.address = in.readString();
         this.phoneNumber = in.readString();
-        this.firstName = in.readString();
-        this.lastName = in.readString();
+        this.name = in.readString();
         this.accountId = in.readString();
         this.userPicture = in.createByteArray();
         this.currency = in.readString();
