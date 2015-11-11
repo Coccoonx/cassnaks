@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ import co.wouri.coaze.uis.recipient.viewholders.ChooseRecipientViewHolder;
 /**
  * Created by lyonnel on 05/11/15.
  */
-public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipientViewHolder>{
+public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipientViewHolder> {
 
 
     public static final int USER_1 = 0;
@@ -33,14 +32,14 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
     public static final int USER_8 = 7;
 
     Context context;
-    List<RecipientItem> recipient;
-    public int focusedItem = 0;
-    private boolean isSelected = false;
+    List<RecipientItem> recipientItems;
+    List<Recipient> recipients;
 
 
-    public ChooseRecipientAdapter(Context context,List<Recipient> recipients) {
+    public ChooseRecipientAdapter(Context context, List<Recipient> recipients) {
         this.context = context;
-        this.recipient = initList(recipients);
+        this.recipientItems = initList(recipients);
+        this.recipients = recipients;
     }
 
     @Override
@@ -64,7 +63,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
                 // Return false if scrolled to the bounds and allow focus to move off the list
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-                       // return tryMoveSelection(lm, 1);
+                        // return tryMoveSelection(lm, 1);
                     } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
                         //return tryMoveSelection(lm, -3);
                     }
@@ -75,30 +74,11 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         });
     }
 
-    private boolean tryMoveSelection(RecyclerView.LayoutManager lm, int direction) {
-        int tryFocusItem = focusedItem + direction;
-
-        // If still within valid bounds, move the selection, notify to redraw, and scroll
-        if (tryFocusItem >= 0 && tryFocusItem < getItemCount()) {
-            notifyItemChanged(focusedItem);
-            focusedItem = tryFocusItem;
-            notifyItemChanged(focusedItem);
-            lm.scrollToPosition(focusedItem);
-            return true;
-        }
-
-        return false;
-    }
-
-
-
-
-
     @Override
     public void onBindViewHolder(final ChooseRecipientViewHolder holder, int position) {
 
-        final int itemPosition =position;
-        RecipientItem settingsRecipients = recipient.get(position);
+        final int itemPosition = position;
+        RecipientItem settingsRecipients = recipientItems.get(position);
         //holder.id = settingsRecipients.getRecipientId();
         try {
             holder.leftImageView.setImageResource(settingsRecipients.leftIcon);
@@ -109,55 +89,19 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         ((ImageView) holder.rightView).setImageResource(R.drawable.ic_check);
         ((ImageView) holder.rightView).setColorFilter(Color.argb(255, 111, 209, 78));
 
+        holder.recipient = recipients.get(position);
 
 
-
-
-       /* holder.mRelativeLayout.setSelected(focusedItem == position);
-
-        holder.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*notifyItemChanged(focusedItem);
-                focusedItem = holder.getLayoutPosition();
-                notifyItemChanged(focusedItem);
-            }
-        });*/
-
-        holder.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //rightView.setVisibility(View.VISIBLE);
-                // View parent = (View)v.getParent();
-                if (!isSelected) {
-                    isSelected = true;
-                    //notifyItemChanged(focusedItem);
-                    RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.rootLayout);
-                    relativeLayout.setBackgroundColor(context.getResources()
-                            .getColor(R.color.color_seleted_item));
-                    holder.rightView.setVisibility(View.VISIBLE);
-                    focusedItem = holder.getLayoutPosition();
-                    notifyItemChanged(focusedItem);
-                } else {
-                    isSelected = false;
-                    RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.rootLayout);
-                    relativeLayout.setBackgroundColor(context.getResources()
-                            .getColor(R.color.color_background));
-                    holder.rightView.setVisibility(View.INVISIBLE);
-                    notifyItemChanged(focusedItem);
-                }
-            }
-        });
     }
 
 
     @Override
     public int getItemCount() {
-        return recipient.size();
+        return recipientItems.size();
     }
 
 
-    public static class  RecipientItem{
+    public static class RecipientItem {
         public int leftIcon;
         public String title;
         boolean isSelected;
@@ -170,11 +114,11 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         }
     }
 
-    private  List<RecipientItem>  initList(List<Recipient> recipients){
+    private List<RecipientItem> initList(List<Recipient> recipients) {
 
         List<RecipientItem> list = new ArrayList<>();
 
-        for (Recipient recipient : recipients){
+        for (Recipient recipient : recipients) {
             RecipientItem recipientItem = new RecipientItem(recipient.getImage(), recipient.getName());
             list.add(recipientItem);
         }

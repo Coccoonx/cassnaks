@@ -20,11 +20,14 @@ import android.widget.Toast;
 
 import com.pkmmte.view.CircularImageView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import co.wouri.coaze.R;
 import co.wouri.coaze.adapters.ItemData;
 import co.wouri.coaze.adapters.SpinnerAdapter;
+import co.wouri.coaze.core.managers.AccountManager;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.core.models.Transfer;
 import co.wouri.coaze.utils.UIUtils;
@@ -213,15 +216,30 @@ public class ChooseAmountActivity extends AppCompatActivity {
         if (recipient != null) {
             transfer.setRecipient(recipient);
             String amount = amount1.getText().toString();
-            String currency = currency2.getText().toString();
+            String currency = currency1.getText().toString();
+            String currenc2 = currency2.getText().toString();
             String amountCurrency = amount + " " + currency;
             if (amount != null) {
                 double valAmount = Double.parseDouble(amount);
+                double valReceiver = Double.parseDouble(amount2.getText().toString());
                 if (valAmount > 0) {
                     transfer.setAmount(valAmount);
-                    transfer.setSenderCurrency(amount);
+                    transfer.setSenderCurrency(currency);
+                    transfer.setReceiverAmount(valReceiver);
+                    transfer.setReceiverCurrency(currenc2);
+
+                    Date now = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy / hh:mmaa");
+
+
+                    transfer.setSendDate(sdf.format(now));
+                    transfer.setNotifiedDate("pending");
+                    transfer.setReceivedDate("pending");
+                    transfer.setTransferType("SENT");
+                    transfer.setReceiverCurrency(currency);
                     // transfer.setSenderCurrency(currency);
                     Intent intent = new Intent(ChooseAmountActivity.this, SuccessActivity.class);
+                    AccountManager.addTransfer(transfer);
                     intent.putExtra("transfer", (Parcelable) transfer);
                     startActivity(intent);
                 } else

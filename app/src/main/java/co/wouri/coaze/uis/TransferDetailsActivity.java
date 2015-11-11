@@ -1,8 +1,6 @@
 package co.wouri.coaze.uis;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -15,6 +13,7 @@ import android.widget.TextView;
 
 import co.wouri.coaze.R;
 import co.wouri.coaze.core.models.Person;
+import co.wouri.coaze.core.models.Transfer;
 import co.wouri.coaze.utils.UIUtils;
 
 public class TransferDetailsActivity extends AppCompatActivity {
@@ -30,46 +29,60 @@ public class TransferDetailsActivity extends AppCompatActivity {
 
 //       Person person= (Person) getIntent().getParcelableExtra("person");
         Intent intent = getIntent();
+
+        Transfer transfer = intent.getParcelableExtra("transfer");
+
+
         Person person = new Person();
         person.setName(intent.getStringExtra("personName"));
         person.setAmount(intent.getIntExtra("personAmount", 0));
 //        person.setPhotoId((Bitmap) intent.getParcelableExtra("personPhotoId"));
         person.setTransfertDate(intent.getStringExtra("personTransferDate"));
         person.setTransfertType(intent.getStringExtra("personTransferType"));
-        byte[] byteArray = getIntent().getByteArrayExtra("personByteArray");
-        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-        person.setPhotoId(bmp);
+//        byte[] byteArray = getIntent().getByteArrayExtra("personByteArray");
+//        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+//        person.setPhotoId(bmp);
         Log.d("Coaze", "person= " + person);
+
+
         // set header
         CardView headCardView = (CardView) findViewById(R.id.cardview_transfer_details_head);
         ImageView personPhotoView = (ImageView) headCardView.findViewById(R.id.details_person_photo);
         TextView personNameView = (TextView) headCardView.findViewById(R.id.details_person_name);
         TextView personAmountView = (TextView) headCardView.findViewById(R.id.details_person_amount);
-        personPhotoView.setImageBitmap(person.getPhotoId());
-        personNameView.setText(person.getName());
-        personAmountView.setText("$" + person.getAmount() + ".00");
+
+        // Image of the recipient
+//        personPhotoView.setImageBitmap(person.getPhotoId());
+        personPhotoView.setImageResource(transfer.getRecipient().getImage());
+        personNameView.setText(transfer.getRecipient().getName());
+        personAmountView.setText(transfer.getSenderCurrency() + " " + transfer.getAmount());
+
         //set Body
         CardView bodyCardView1 = (CardView) findViewById(R.id.cardview_transfer_details_body1);
         TextView titleView1 = (TextView) bodyCardView1.findViewById(R.id.details_title);
         TextView dateView1 = (TextView) bodyCardView1.findViewById(R.id.details_date);
         titleView1.setText("Send:");
-        dateView1.setText("01.10.2015 / 12:32PM ");
+        dateView1.setText(transfer.getSendDate());
+
         CardView bodyCardView2 = (CardView) findViewById(R.id.cardview_transfer_details_body2);
         TextView titleView2 = (TextView) bodyCardView2.findViewById(R.id.details_title);
         TextView dateView2 = (TextView) bodyCardView2.findViewById(R.id.details_date);
         titleView2.setText("Notified:");
-        dateView2.setText("01.10.2015 / 12:35PM ");
+        dateView2.setText(transfer.getNotifiedDate());
+
         CardView bodyCardView3 = (CardView) findViewById(R.id.cardview_transfer_details_body3);
         TextView titleView3 = (TextView) bodyCardView3.findViewById(R.id.details_title);
         TextView dateView3 = (TextView) bodyCardView3.findViewById(R.id.details_date);
         titleView3.setText("Recieved:");
-        dateView3.setText("01.10.2015 / 12:59PM ");
+        dateView3.setText(transfer.getReceivedDate());
+
         //set End
         CardView endCardView = (CardView) findViewById(R.id.cardview_transfer_details_end);
         TextView endTitleView = (TextView) endCardView.findViewById(R.id.details_title);
         TextView endAmountView = (TextView) endCardView.findViewById(R.id.details_amount_recieved);
-        endTitleView.setText("Amount Recieved:");
-        endAmountView.setText("€75.00");
+        endTitleView.setText("Amount Received:");
+        endAmountView.setText(transfer.getReceiverAmount() + " " + transfer.getReceiverCurrency());
+
         // set Font
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, endAmountView, endTitleView, titleView3,
                 dateView3, dateView2, titleView2, dateView1, titleView1, personAmountView, personNameView);

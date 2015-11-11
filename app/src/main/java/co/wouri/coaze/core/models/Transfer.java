@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.UUID;
 
 import lombok.Data;
@@ -16,10 +15,13 @@ public class Transfer implements Serializable, Parcelable {
     private double amount;
     private String senderCurrency;
     private String receiverCurrency;
-    private Date sendDate = new Date();
-    private Date notifyDate = new Date();
+    private Double receiverAmount;
+    private String sendDate;
+    private String notifiedDate;
+    private String receivedDate;
     private Recipient recipient;
     private String notes;
+    private String transferType;
 
 
     public Transfer() {
@@ -27,10 +29,10 @@ public class Transfer implements Serializable, Parcelable {
 
     }
 
-    public Transfer(Recipient recipient, String senderCurrency, String receiverCurrency){
+    public Transfer(Recipient recipient, String senderCurrency, String receiverCurrency) {
         this.recipient = recipient;
         this.senderCurrency = senderCurrency;
-        this.receiverCurrency= receiverCurrency;
+        this.receiverCurrency = receiverCurrency;
         this.transferId = UUID.randomUUID().toString();
 
     }
@@ -47,10 +49,13 @@ public class Transfer implements Serializable, Parcelable {
         dest.writeDouble(this.amount);
         dest.writeString(this.senderCurrency);
         dest.writeString(this.receiverCurrency);
-        dest.writeLong(sendDate != null ? sendDate.getTime() : -1);
-        dest.writeLong(notifyDate != null ? notifyDate.getTime() : -1);
+        dest.writeValue(this.receiverAmount);
+        dest.writeString(this.sendDate);
+        dest.writeString(this.notifiedDate);
+        dest.writeString(this.receivedDate);
         dest.writeParcelable(this.recipient, 0);
         dest.writeString(this.notes);
+        dest.writeString(this.transferType);
     }
 
     protected Transfer(Parcel in) {
@@ -58,12 +63,13 @@ public class Transfer implements Serializable, Parcelable {
         this.amount = in.readDouble();
         this.senderCurrency = in.readString();
         this.receiverCurrency = in.readString();
-        long tmpSendDate = in.readLong();
-        this.sendDate = tmpSendDate == -1 ? null : new Date(tmpSendDate);
-        long tmpNotifyDate = in.readLong();
-        this.notifyDate = tmpNotifyDate == -1 ? null : new Date(tmpNotifyDate);
+        this.receiverAmount = (Double) in.readValue(Double.class.getClassLoader());
+        this.sendDate = in.readString();
+        this.notifiedDate = in.readString();
+        this.receivedDate = in.readString();
         this.recipient = in.readParcelable(Recipient.class.getClassLoader());
         this.notes = in.readString();
+        this.transferType = in.readString();
     }
 
     public static final Creator<Transfer> CREATOR = new Creator<Transfer>() {

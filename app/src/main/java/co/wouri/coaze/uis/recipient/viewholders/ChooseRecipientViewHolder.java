@@ -2,14 +2,14 @@ package co.wouri.coaze.uis.recipient.viewholders;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import co.wouri.coaze.R;
-import co.wouri.coaze.uis.recipient.adapters.ChooseRecipientAdapter;
+import co.wouri.coaze.core.models.Recipient;
+import co.wouri.coaze.uis.ChooseRecipientActivity;
 
 
 public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
@@ -21,10 +21,9 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
     public ImageView leftImageView;
     public TextView title;
     public View rightView;
-    public Boolean isSelected = false;
-    ChooseRecipientAdapter mAdapter;
-    private static int focusedItem =0;
+    public boolean isSelected = false;
     public RelativeLayout mRelativeLayout;
+    public Recipient recipient;
 
 
     // public ChooseRecipientAdapter.SettingsItem settingsItem;
@@ -39,16 +38,18 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
         this.mRelativeLayout = (RelativeLayout) view.findViewById(R.id.rootLayout);
 
         view.setClickable(true);
-       /* view.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //rightView.setVisibility(View.VISIBLE);
-                  // View parent = (View)v.getParent();
+                // View parent = (View)v.getParent();
                 if (!isSelected) {
                     isSelected = true;
                     RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.rootLayout);
                     relativeLayout.setBackgroundColor(context.getResources()
                             .getColor(R.color.color_seleted_item));
+
+                    ChooseRecipientActivity.recipient = recipient;
                     rightView.setVisibility(View.VISIBLE);
                 } else {
                     isSelected = false;
@@ -60,7 +61,7 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
 
 
             }
-        });*/
+        });
 
 
     }

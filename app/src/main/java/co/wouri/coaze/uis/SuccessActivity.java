@@ -37,7 +37,7 @@ public class SuccessActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success);
         Bundle bundle = getIntent().getExtras();
-        Log.d(TAG, "bundle "+ bundle);
+        Log.d(TAG, "bundle " + bundle);
 
         successTV = (TextView) findViewById(R.id.successLabel);
         details1 = (TextView) findViewById(R.id.details_text1);
@@ -45,15 +45,15 @@ public class SuccessActivity extends AppCompatActivity {
         details3 = (TextView) findViewById(R.id.details_text3);
         recipientName = (TextView) findViewById(R.id.recipient_name);
         amount = (TextView) findViewById(R.id.amountValue);
-        amount2 = (EditText)findViewById(R.id.amount);
+        amount2 = (EditText) findViewById(R.id.amount);
         was_sent = (TextView) findViewById(R.id.was_sent);
 
-        if (bundle != null){
-            Transfer transfer =(Transfer) bundle.getParcelable("transfer");
+        if (bundle != null) {
+            Transfer transfer = (Transfer) bundle.getParcelable("transfer");
             //amount2.getText().toString();
 
             if (transfer != null) {
-                amount.setText(transfer.getSenderCurrency());
+                amount.setText(transfer.getSenderCurrency() + transfer.getAmount());
                 recipientName.setText(transfer.getRecipient().getName());
             }
 
@@ -70,6 +70,8 @@ public class SuccessActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SuccessActivity.this, TransferHistoryActivity.class));
+                finish();
+
             }
         });
 
@@ -77,6 +79,7 @@ public class SuccessActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SuccessActivity.this, MainActivity.class));
+                finish();
             }
         });
     }
