@@ -15,7 +15,6 @@ import android.widget.TextView;
 import co.wouri.coaze.R;
 import co.wouri.coaze.core.managers.AccountManager;
 import co.wouri.coaze.core.models.Account;
-import co.wouri.coaze.uis.recipient.adapters.ChooseRecipientAdapter;
 import co.wouri.coaze.uis.recipient.adapters.RecipientAdapter;
 import co.wouri.coaze.utils.UIUtils;
 
@@ -23,9 +22,9 @@ public class RecipientActivity extends AppCompatActivity {
 
 
     private RecyclerView mRecyclerView;
-    private ChooseRecipientAdapter mAdapter;
     private Button addButton;
     Account account = AccountManager.getCurrentUserAccount();
+    private RecipientAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,8 @@ public class RecipientActivity extends AppCompatActivity {
         addButton = (Button) findViewById(R.id.Button_add);
         addButton.setVisibility(View.VISIBLE);
         // Set an adapter to this recycler view
-        mRecyclerView.setAdapter(new RecipientAdapter(this, account.getRecipients()));
+        mAdapter = new RecipientAdapter(this, account.getRecipients());
+        mRecyclerView.setAdapter(mAdapter);
 
         // Set the behaviour of this recycler view
         mRecyclerView.setHasFixedSize(true);
@@ -60,6 +60,13 @@ public class RecipientActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
+
     }
 
     @Override

@@ -31,7 +31,23 @@ public class Recipient implements Serializable, Parcelable {
 
     }
 
-   /* public Recipient(int image, String lName, String adress) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Recipient recipient = (Recipient) o;
+
+        return !(recipientId != null ? !recipientId.equals(recipient.recipientId) : recipient.recipientId != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return recipientId != null ? recipientId.hashCode() : 0;
+    }
+
+    /* public Recipient(int image, String lName, String adress) {
         this.image = image;
         lastName = lName;
         address = adress;

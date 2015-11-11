@@ -50,7 +50,9 @@ public class ChooseRecipientActivity extends AppCompatActivity {
         Log.d(TAG, "User account id" + AccountManager.getCurrentUserAccount().getUser().getUserId());
         Log.d(TAG, "Recipient list: " + AccountManager.getRecipients());
 
-        mRecyclerView.setAdapter(new ChooseRecipientAdapter(this, AccountManager.getRecipients()));
+        mAdapter = new ChooseRecipientAdapter(this, AccountManager.getRecipients());
+
+        mRecyclerView.setAdapter(mAdapter);
 
         // Set the behaviour of this recycler view
         mRecyclerView.setHasFixedSize(true);
@@ -67,6 +69,13 @@ public class ChooseRecipientActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
