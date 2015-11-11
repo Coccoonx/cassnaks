@@ -1,11 +1,12 @@
 package co.wouri.coaze.core.models;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import lombok.Data;
 
 @Data
-public class Recipient {
+public class Recipient implements Serializable {
     private String recipientId;
     private String email;
     private String city;

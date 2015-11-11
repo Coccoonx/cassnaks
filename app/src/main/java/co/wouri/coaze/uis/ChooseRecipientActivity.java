@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +18,6 @@ import java.util.List;
 
 import co.wouri.coaze.R;
 import co.wouri.coaze.core.managers.AccountManager;
-import co.wouri.coaze.core.models.Account;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.uis.recipient.adapters.ChooseRecipientAdapter;
 import co.wouri.coaze.utils.UIUtils;
@@ -30,7 +30,7 @@ public class ChooseRecipientActivity extends AppCompatActivity {
     private Menu menu;
     private Button nextButton;
     List<Recipient> recipients;
-    Account account = AccountManager.getCurrentUserAccount();
+    public static final String TAG = "ChooseRecipientActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,11 @@ public class ChooseRecipientActivity extends AppCompatActivity {
         nextButton = (Button) findViewById(R.id.Button_next);
         nextButton.setVisibility(View.VISIBLE);
         // Set an adapter to this recycler view
+
+        AccountManager.getCurrentUserAccount();
+        Log.d(TAG, "User account id" + AccountManager.getCurrentUserAccount().getUser().getUserId());
+        Log.d(TAG, "Recipient list: " + AccountManager.getRecipients());
+
         mRecyclerView.setAdapter(new ChooseRecipientAdapter(this, AccountManager.getRecipients()));
 
         // Set the behaviour of this recycler view
