@@ -46,7 +46,6 @@ public class ChooseAmountActivity extends AppCompatActivity {
         sp1 = (Spinner) findViewById(R.id.spinner);
         SpinnerAdapter adapter = new SpinnerAdapter(this, R.layout.spinner_layout, R.id.txt, list);
         sp1.setAdapter(adapter);
-        sp1.setBackgroundResource(R.drawable.corner_border_component);
 
         sp2 = (Spinner) findViewById(R.id.spinner2);
         //SpinnerAdapter adapter2=new SpinnerAdapter(this,R.layout.spinner_layout,R.id.txt,list);

@@ -11,8 +11,7 @@ android:shape="rectangle" >
             android:color="@color/colorPrimarylight" />
           <!--   #7000 -->
         <!-- setting the thickness of shadow (positive value will give shadow on that side) -->
-        <corners android:bottomLeftRadius="0dp"
-            android:bottomRightRadius="4dp"/>
+        <corners android:bottomRightRadius="4dp"/>
     </shape>
 </item>
 
