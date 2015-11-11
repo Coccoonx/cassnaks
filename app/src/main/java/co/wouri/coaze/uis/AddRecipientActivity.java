@@ -86,13 +86,21 @@ public class AddRecipientActivity extends AppCompatActivity {
                         || !checkAddress(AddRecipientActivity.this, addressValue)
                         || !checkCountry(AddRecipientActivity.this, countryValue)
                         ) {
-                    Intent intent = new Intent(AddRecipientActivity.this, AddRecipientActivity.class);
-                    intent.putExtra("name", nameValue);
-                    intent.putExtra("email", emailValue);
-                    intent.putExtra("phone", phoneValue);
-                    intent.putExtra("city", cityValue);
-                    intent.putExtra("address", addressValue);
-                    startActivityForResult(intent, 1);
+//                    Intent intent = new Intent(AddRecipientActivity.this, AddRecipientActivity.class);
+//                    intent.putExtra("name", nameValue);
+//                    intent.putExtra("email", emailValue);
+//                    intent.putExtra("phone", phoneValue);
+//                    intent.putExtra("city", cityValue);
+//                    intent.putExtra("address", addressValue);
+//                    startActivityForResult(intent, 1);
+                    Recipient recipient = new Recipient();
+                    recipient.setFirstName(nameValue);
+                    recipient.setEmail(emailValue);
+                    recipient.setPhoneNumber(phoneValue);
+                    recipient.setCountry(countryValue);
+                    recipient.setCity(cityValue);
+                    recipient.setAddress(addressValue);
+                    AccountManager.addRecipient(recipient);
 
                 } else {
 
@@ -104,20 +112,20 @@ public class AddRecipientActivity extends AppCompatActivity {
                 }
             }
         });
-        Intent intent1 = getIntent();
-        name = (EditText) findViewById(R.id.name_add_recipient);
-        city = (EditText) findViewById(R.id.city_add_recipient);
-        address = (EditText) findViewById(R.id.address_add_recipient);
-        email = (EditText) findViewById(R.id.email_add_recipient);
-        phone = (EditText) findViewById(R.id.phone_add_recipient);
-
-        if (intent1 != null) {
-            name.setText(intent1.getStringExtra("name"));
-            city.setText(intent1.getStringExtra("city"));
-            address.setText(intent1.getStringExtra("address"));
-            email.setText(intent1.getStringExtra("email"));
-            phone.setText(intent1.getStringExtra("phone"));
-        }
+//        Intent intent1 = getIntent();
+//        name = (EditText) findViewById(R.id.name_add_recipient);
+//        city = (EditText) findViewById(R.id.city_add_recipient);
+//        address = (EditText) findViewById(R.id.address_add_recipient);
+//        email = (EditText) findViewById(R.id.email_add_recipient);
+//        phone = (EditText) findViewById(R.id.phone_add_recipient);
+//
+//        if (intent1 != null) {
+//            name.setText(intent1.getStringExtra("name"));
+//            city.setText(intent1.getStringExtra("city"));
+//            address.setText(intent1.getStringExtra("address"));
+//            email.setText(intent1.getStringExtra("email"));
+//            phone.setText(intent1.getStringExtra("phone"));
+//        }
     }
 
     @Override
