@@ -25,6 +25,7 @@ import static co.wouri.coaze.utils.FormValidationUtils.checkCity;
 import static co.wouri.coaze.utils.FormValidationUtils.checkCountry;
 import static co.wouri.coaze.utils.FormValidationUtils.checkEmail;
 import static co.wouri.coaze.utils.FormValidationUtils.checkName;
+import static co.wouri.coaze.utils.FormValidationUtils.checkPassword;
 import static co.wouri.coaze.utils.FormValidationUtils.checkPhone;
 
 public class EditRecipientActivity extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class EditRecipientActivity extends AppCompatActivity {
     EditText phone;
     EditText city;
     EditText address;
+    EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class EditRecipientActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.email_edit_recipient);
 
         phone = (EditText) findViewById(R.id.phone_edit_recipient);
+        password = (EditText) findViewById(R.id.password_edit_recipient);
         countries = (Spinner) findViewById(R.id.countries);
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, name, city, address, email, phone);
@@ -73,6 +76,7 @@ public class EditRecipientActivity extends AppCompatActivity {
                 String nameValue = name.getText().toString();
                 String emailValue = email.getText().toString();
                 String phoneValue = phone.getText().toString();
+                String passwordValue = password.getText().toString();
                 String countryValue = countries.getSelectedItem().toString();
                 String cityValue = city.getText().toString();
                 String addressValue = address.getText().toString();
@@ -82,6 +86,7 @@ public class EditRecipientActivity extends AppCompatActivity {
                         || !checkCity(EditRecipientActivity.this, cityValue)
                         || !checkAddress(EditRecipientActivity.this, addressValue)
                         || !checkCountry(EditRecipientActivity.this, countryValue)
+                        || !checkPassword(EditRecipientActivity.this, passwordValue)
                         ) {
                     Intent intent = new Intent(EditRecipientActivity.this, EditRecipientActivity.class);
                     intent.putExtra("name", nameValue);
@@ -89,6 +94,7 @@ public class EditRecipientActivity extends AppCompatActivity {
                     intent.putExtra("phone", phoneValue);
                     intent.putExtra("city", cityValue);
                     intent.putExtra("address", addressValue);
+                    intent.putExtra("password", passwordValue);
                     startActivityForResult(intent, 1);
 
                 } else {
@@ -100,6 +106,8 @@ public class EditRecipientActivity extends AppCompatActivity {
                     //We must call a backend method here
                     Toast.makeText(EditRecipientActivity.this, "Recipient eddited Successfully", Toast.LENGTH_SHORT).show();
                     finish();
+                    Intent intent = new Intent(EditRecipientActivity.this, MainActivity.class);
+                    startActivityForResult(intent, 1);
                 }
             }
         });
@@ -110,6 +118,7 @@ public class EditRecipientActivity extends AppCompatActivity {
         address = (EditText) findViewById(R.id.address_edit_recipient);
         email = (EditText) findViewById(R.id.email_edit_recipient);
         phone = (EditText) findViewById(R.id.phone_edit_recipient);
+        password = (EditText) findViewById(R.id.password_edit_recipient);
 
         if (intent1 != null) {
             name.setText(intent1.getStringExtra("name"));

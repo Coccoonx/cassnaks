@@ -95,14 +95,12 @@ public class AddRecipientActivity extends AppCompatActivity {
                     startActivityForResult(intent, 1);
 
                 } else {
-//                    Intent intent = new Intent(AddRecipientActivity.this, AddRecipientActivity.class);
-//                    intent.putExtra("name", nameValue);
-//                    startActivityForResult(intent, 1);
-
 
                     //We must call a backend method here
                     Toast.makeText(AddRecipientActivity.this, "Recipient added Successfully", Toast.LENGTH_SHORT).show();
                     finish();
+                    Intent intent = new Intent(AddRecipientActivity.this, MainActivity.class);
+                    startActivityForResult(intent, 1);
                 }
             }
         });

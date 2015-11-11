@@ -100,6 +100,8 @@ public class ProfileActivity extends AppCompatActivity {
                     //We should call the backend functions here
                     Toast.makeText(ProfileActivity.this, "Profile saved Successfully", Toast.LENGTH_SHORT).show();
                     finish();
+                    Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                    startActivityForResult(intent, 1);
                 }
             }
         });
