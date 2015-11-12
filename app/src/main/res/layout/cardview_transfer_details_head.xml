@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/details_person_name"
+            android:gravity="center_vertical"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/details_person_photo"
             android:layout_toLeftOf="@+id/details_person_amount"

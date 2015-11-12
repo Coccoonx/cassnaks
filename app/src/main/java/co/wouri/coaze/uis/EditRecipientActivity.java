@@ -47,10 +47,10 @@ public class EditRecipientActivity extends AppCompatActivity {
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, name, city, address, email, phone);
 
-        String[] countrie = {"", "Canada", "Cameroon", "China", "USA"};
+        String[] country = {"Canada", "Cameroon", "China", "USA"};
 
         MyArrayAdapter
-                mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, countrie);
+                mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, country);
         mySpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
