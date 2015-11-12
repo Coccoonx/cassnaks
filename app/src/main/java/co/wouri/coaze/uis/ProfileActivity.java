@@ -234,6 +234,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
                 try {
                     JSONObject obj = r.obj;
                     if (obj != null) {
+                        Toast.makeText(ProfileActivity.this, "Account created successfully.", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(this, MainActivity.class));
                     }
                 } catch (Exception e) {
