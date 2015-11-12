@@ -1,55 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.CardView
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="@dimen/margin_image"
-android:id="@+id/card_view_item"
-android:layout_marginBottom="@dimen/margin_extra_extra_short"
-android:layout_marginLeft="@dimen/margin_short"
-android:layout_marginRight="@dimen/margin_short"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view_item"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/margin_image"
+    android:layout_marginBottom="@dimen/margin_extra_extra_short"
+    android:layout_marginLeft="@dimen/margin_short"
+    android:layout_marginRight="@dimen/margin_short"
     android:background="@drawable/corner_border_contact_chooser"
 
     >
     <!--android:background="@drawable/corner_border_contact_chooser"-->
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/margin_standard"
-    android:background="@drawable/corner_border_contact_chooser">
-
-    <com.pkmmte.view.CircularImageView
-        android:id="@+id/details_person_photo"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/barackobama"
-    />
-
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/details_person_name"
-        android:layout_toRightOf="@+id/details_person_photo"
-        android:layout_marginLeft="@dimen/margin_short"
-        android:layout_centerVertical="true"
-        android:textSize="@dimen/margin_standard"
-        android:textColor="#223049"
-        android:text="Ali Connors"
+        android:background="@drawable/corner_border_contact_chooser"
+        android:padding="@dimen/margin_standard">
 
-        />
+        <com.pkmmte.view.CircularImageView
+            android:id="@+id/details_person_photo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/unknown" />
 
-    <ImageView
-    android:layout_width="20dp"
-    android:layout_height="20dp"
-    android:id="@+id/edit_picture"
-    android:layout_below="@+id/person_name"
-    android:layout_centerInParent="true"
-    android:layout_alignParentRight="true"
-    android:src="@drawable/edit"
-    />
+        <TextView
+            android:id="@+id/details_person_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_short"
+            android:layout_toRightOf="@+id/details_person_photo"
+            android:text="Ali Connors"
+            android:textColor="#223049"
+            android:textSize="@dimen/margin_standard"
 
-</RelativeLayout>
+            />
+
+        <ImageView
+            android:id="@+id/edit_picture"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/person_name"
+            android:layout_centerInParent="true"
+            android:src="@drawable/edit" />
+
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

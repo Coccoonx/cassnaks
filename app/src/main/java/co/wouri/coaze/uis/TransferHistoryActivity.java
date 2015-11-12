@@ -1,6 +1,5 @@
 package co.wouri.coaze.uis;
 
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,19 +11,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import co.wouri.coaze.R;
-import co.wouri.coaze.core.models.Person;
+import co.wouri.coaze.core.managers.AccountManager;
+import co.wouri.coaze.core.models.Transfer;
 import co.wouri.coaze.uis.transferhistory.TransferHistoryAdapter;
-import co.wouri.coaze.utils.BitmapUtils;
 import co.wouri.coaze.utils.UIUtils;
 
 public class TransferHistoryActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private List<Person> persons;
+    private List<Transfer> transfers;
+    TransferHistoryAdapter adapter;
 //    private CardView cardView;
 
 
@@ -43,16 +42,22 @@ public class TransferHistoryActivity extends AppCompatActivity {
     }
 
     private void initializeData() {
-        persons = new ArrayList<>();
+        transfers = AccountManager.getTransferts();
 
-        persons.add(new Person("Beyonce Knowles", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.beyonce), 200), 100, "SEND", "18.07.2015"));
-        persons.add(new Person("Barack Obama", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.barackobama), 200), 50, "RECIEVED", "11.05.2015"));
-        persons.add(new Person("Barry Green", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.unknown), 200), 200, "SEND", "12.03.2015"));
+//        persons.add(new Person("Beyonce Knowles", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.beyonce), 200), 100, "SEND", "18.07.2015"));
+//        persons.add(new Person("Barack Obama", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.barackobama), 200), 50, "RECIEVED", "11.05.2015"));
+//        persons.add(new Person("Barry Green", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.unknown), 200), 200, "SEND", "12.03.2015"));
     }
 
     private void initializeAdapter() {
-        TransferHistoryAdapter adapter = new TransferHistoryAdapter(persons, this);
+        adapter = new TransferHistoryAdapter(transfers, this);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 
     private void buildToolBar() {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view_item"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -7,52 +8,83 @@
     android:layout_marginBottom="@dimen/margin_extra_extra_short"
     android:layout_marginLeft="@dimen/margin_extra_short"
     android:layout_marginRight="@dimen/margin_extra_short"
-    android:background="@drawable/selector_transfer_history"
-    >
+    android:background="@drawable/selector_transfer_history">
 
     <RelativeLayout
         android:id="@+id/relative_layout_transfer_history_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/selector_transfer_history"
         android:clickable="true"
-        android:padding="@dimen/margin_standard"
-        android:background="@drawable/selector_transfer_history">
+        android:padding="@dimen/margin_standard">
 
         <ImageView
-            android:id="@+id/person_photo"
             android:layout_width="@dimen/margin_image"
             android:layout_height="@dimen/margin_image"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="@dimen/margin_standard" />
+            android:layout_marginRight="@dimen/margin_standard"
+            android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/person_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.pkmmte.view.CircularImageView
+            android:id="@+id/person_photo"
+
+            android:layout_width="@dimen/margin_image"
+            android:layout_height="@dimen/margin_image"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/person_photo"
-            android:textColor="#223049"
-            android:maxLines="1"
-            android:lines="1"
-            android:layout_toLeftOf="@+id/person_transfert_type"
-            android:textSize="@dimen/margin_standard" />
+            android:layout_marginRight="@dimen/margin_standard"
+            android:src="@drawable/unknown"
 
-        <TextView
-            android:id="@+id/person_amount"
+            app:shadow="false" />
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/person_name"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/person_photo"
-            android:textColor="#4DBA38" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/person_transfert_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/person_name"
-            android:layout_toRightOf="@+id/person_amount"
-            android:textColor="@color/text_color_black_extra_light" />
+            <TextView
+                android:id="@+id/person_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/person_transfert_type"
+                android:layout_toRightOf="@+id/person_photo"
+                android:lines="1"
+                android:maxLines="1"
+                android:textColor="#223049"
+                android:textSize="@dimen/margin_standard" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/person_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/person_name"
+                    android:layout_toRightOf="@+id/person_photo"
+                    android:textColor="#4DBA38"
+
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/person_transfert_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/person_name"
+                    android:layout_toRightOf="@+id/person_amount"
+                    android:textColor="@color/text_color_black_extra_light"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -64,8 +96,8 @@
             android:id="@+id/person_transfert_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:textColor="#719ece" />
 
     </RelativeLayout>

@@ -1,53 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/card_view_item"
     android:layout_marginBottom="@dimen/margin_extra_extra_short"
 
     android:layout_marginLeft="@dimen/margin_extra_short"
     android:layout_marginRight="@dimen/margin_extra_short"
-    android:background="@drawable/layout_background_normal"
-    >
+    android:background="@drawable/layout_background_normal">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_standard"
         android:background="@drawable/layout_background_normal"
-         >
+        android:padding="@dimen/margin_standard">
+
         <ImageView
             android:layout_width="@dimen/margin_image"
             android:layout_height="@dimen/margin_image"
-            android:id="@+id/details_person_photo"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            />
+            android:visibility="gone" />
+
+        <com.pkmmte.view.CircularImageView
+            android:id="@+id/details_person_photo"
+            android:layout_width="@dimen/margin_image"
+            android:layout_height="@dimen/margin_image"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/unknown"
+
+            app:shadow="false" />
 
         <TextView
+            android:id="@+id/details_person_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/details_person_name"
-            android:gravity="center_vertical"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/details_person_photo"
-            android:layout_toLeftOf="@+id/details_person_amount"
             android:layout_marginLeft="@dimen/margin_short"
             android:layout_marginRight="@dimen/margin_short"
-            android:textSize="@dimen/margin_standard"
+            android:layout_toLeftOf="@+id/details_person_amount"
+            android:layout_toRightOf="@+id/details_person_photo"
             android:maxLines="3"
-            android:lines="3"
             android:textColor="#223049"
-            
+            android:textSize="@dimen/margin_standard"
+
 
             />
+
         <TextView
+            android:id="@+id/details_person_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/details_person_amount"
-            android:layout_below="@+id/person_name"
             android:layout_alignParentRight="true"
+            android:layout_below="@+id/person_name"
             android:layout_centerVertical="true"
             android:textColor="#4DBA38"
 

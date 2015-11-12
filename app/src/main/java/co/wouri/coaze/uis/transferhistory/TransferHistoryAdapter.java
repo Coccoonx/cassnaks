@@ -2,7 +2,7 @@ package co.wouri.coaze.uis.transferhistory;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,11 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import co.wouri.coaze.R;
-import co.wouri.coaze.core.models.Person;
+import co.wouri.coaze.core.models.Recipient;
+import co.wouri.coaze.core.models.Transfer;
 import co.wouri.coaze.uis.TransferDetailsActivity;
 import co.wouri.coaze.utils.UIUtils;
 
@@ -23,11 +23,11 @@ import co.wouri.coaze.utils.UIUtils;
  */
 public class TransferHistoryAdapter extends RecyclerView.Adapter<PersonViewHolder> {
 
-    List<Person> persons;
+    List<Transfer> transfers;
     private Context context;
 
-    public TransferHistoryAdapter(List<Person> persons, Context context) {
-        this.persons = persons;
+    public TransferHistoryAdapter(List<Transfer> transfers, Context context) {
+        this.transfers = transfers;
         this.context = context;
     }
 
@@ -53,28 +53,36 @@ public class TransferHistoryAdapter extends RecyclerView.Adapter<PersonViewHolde
 
     @Override
     public void onBindViewHolder(final PersonViewHolder personViewHolder, int i) {
-        personViewHolder.personName.setText(persons.get(i).getName());
-        personViewHolder.personAmount.setText("$" + persons.get(i).getAmount());
-        personViewHolder.personPhoto.setImageBitmap(persons.get(i).getPhotoId());
-        personViewHolder.personTransferDate.setText(" \\ " + persons.get(i).getTransfertDate());
-        personViewHolder.personTransferType.setText(persons.get(i).getTransfertType());
-        final Person person = new Person(persons.get(i).getName(), persons.get(i).getPhotoId(),
-                persons.get(i).getAmount(), persons.get(i).getTransfertType(), " \\" + persons.get(i).getTransfertDate());
+
+        final Transfer transfer = transfers.get(i);
+        final Recipient recipient = transfer.getRecipient();
+
+        personViewHolder.personName.setText(recipient.getName());
+        personViewHolder.personAmount.setText("$" + transfer.getAmount());
+        personViewHolder.personPhoto.setImageResource(transfer.getRecipient().getImage());
+
+
+        personViewHolder.personTransferDate.setText(" \\ " + transfer.getSendDate());
+        personViewHolder.personTransferType.setText(transfer.getTransferType());
+
+//        final Person person = new Person(persons.get(i).getName(), persons.get(i).getPhotoId(),
+//                persons.get(i).getAmount(), persons.get(i).getTransfertType(), " \\" + persons.get(i).getTransfertDate());
 
         personViewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, TransferDetailsActivity.class);
-                intent.putExtra("personName", person.getName());
-                intent.putExtra("personAmount", person.getAmount());
-//                intent.putExtra("personPhoto",person.getPhotoId());
-                intent.putExtra("personTransferDate", person.getTransfertDate());
-                intent.putExtra("personTransferType", person.getTransfertType());
-                //Convert to byte array
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                person.getPhotoId().compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
-                intent.putExtra("personByteArray", byteArray);
+                intent.putExtra("transfer", (Parcelable) transfer);
+//                intent.putExtra("personName", recipient.getName());
+//                intent.putExtra("personAmount", transfer.getAmount());
+////                intent.putExtra("personPhoto",person.getPhotoId());
+//                intent.putExtra("personTransferDate", transfer.getSendDate());
+//                intent.putExtra("personTransferType", transfer.getTransferType());
+//                //Convert to byte array
+//                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+////                person.getPhotoId().compress(Bitmap.CompressFormat.PNG, 100, stream);
+//                byte[] byteArray = stream.toByteArray();
+//                intent.putExtra("personByteArray", byteArray);
                 context.startActivity(intent);
             }
         });
@@ -82,6 +90,6 @@ public class TransferHistoryAdapter extends RecyclerView.Adapter<PersonViewHolde
 
     @Override
     public int getItemCount() {
-        return persons.size();
+        return transfers.size();
     }
 }

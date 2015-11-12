@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ import co.wouri.coaze.utils.UIUtils;
 public class ChooseRecipientActivity extends AppCompatActivity {
 
 
+    public static Recipient recipient;
     private RecyclerView mRecyclerView;
     private ChooseRecipientAdapter mAdapter;
     private Menu menu;
@@ -61,10 +63,13 @@ public class ChooseRecipientActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChooseRecipientActivity.this, ChooseAmountActivity.class);
-                Recipient recipient = new Recipient(R.drawable.beyonce, "Beyonce Knowles");
-                intent.putExtra("recipient", (Parcelable) recipient);
-                startActivity(intent);
+                if (recipient != null) {
+
+                    Intent intent = new Intent(ChooseRecipientActivity.this, ChooseAmountActivity.class);
+                    intent.putExtra("recipient", (Parcelable) recipient);
+                    startActivity(intent);
+                } else
+                    Toast.makeText(ChooseRecipientActivity.this, "You must select a recipient", Toast.LENGTH_SHORT).show();
             }
         });
     }

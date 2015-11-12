@@ -17,11 +17,6 @@ public class AccountManager {
 
     private static Account account = null;
 
-    public static String firstName = "Prisca";
-    public static String lastName = "Nzouckio";
-    public static String address = "30610Yde";
-    public static String location = "30610Yde";
-
 
     private static synchronized Account retrieveAccount() {
 
