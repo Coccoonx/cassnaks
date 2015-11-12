@@ -245,13 +245,13 @@ public class CoazeSettingsUtils {
     }
 
     public static boolean canPlayNotificationSound() {
-        // TODO Implement this method, in order to load the sound the user want to play. Since now, we just return true
+        // TODO Implement this method, in order to load the sound the account want to play. Since now, we just return true
         return true;
     }
 
     public static void registerUser() {
 //        Log.d("safer init", "Job Manager" + CoazeApplication.jobManager);
-//        Log.d("safer init", "Current User account" + AccountManager.getCurrentUserAccount());
+//        Log.d("safer init", "Current Account account" + AccountManager.getCurrentUserAccount());
 //        CoazeApplication.jobManager.addJobInBackground(new PostAccountJob(
 //                AccountManager.getCurrentUserAccount().getCurrentUser()));
     }

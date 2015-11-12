@@ -30,6 +30,7 @@ import co.wouri.coaze.adapters.SpinnerAdapter;
 import co.wouri.coaze.core.managers.AccountManager;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.core.models.Transfer;
+import co.wouri.coaze.core.models.TransferStatus;
 import co.wouri.coaze.utils.UIUtils;
 
 public class ChooseAmountActivity extends AppCompatActivity {
@@ -56,7 +57,7 @@ public class ChooseAmountActivity extends AppCompatActivity {
             CircularImageView imageView = (CircularImageView) findViewById(R.id.details_person_photo);
             TextView textView = (TextView) findViewById(R.id.details_person_name);
             imageView.setImageResource(recipient.getImage());
-            textView.setText(recipient.getName());
+            textView.setText(recipient.getFirstName());
         }
 
         buildToolBar();
@@ -225,16 +226,13 @@ public class ChooseAmountActivity extends AppCompatActivity {
                 if (valAmount > 0) {
                     transfer.setAmount(valAmount);
                     transfer.setSenderCurrency(currencyText1);
-                    transfer.setReceiverAmount(valReceiver);
                     transfer.setReceiverCurrency(currencyText2);
 
                     Date now = new Date();
                     SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy / hh:mmaa");
-                    transfer.setSendDate(sdf.format(now));
-                    transfer.setNotifiedDate("pending");
-                    transfer.setReceivedDate("pending");
                     transfer.setTransferType("SENT");
                     transfer.setReceiverCurrency(currencyText2);
+                    transfer.setStatus(TransferStatus.Pending);
                     // transfer.setSenderCurrency(currency);
                     Intent intent = new Intent(ChooseAmountActivity.this, SuccessActivity.class);
                     AccountManager.addTransfer(transfer);

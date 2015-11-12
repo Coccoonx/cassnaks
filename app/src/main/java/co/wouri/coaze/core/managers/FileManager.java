@@ -9,7 +9,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import co.wouri.coaze.core.models.Account;
+import co.wouri.coaze.core.models.Profile;
 
 
 public class FileManager {
@@ -27,16 +27,16 @@ public class FileManager {
         return fileManager;
     }
 
-    public boolean save(Account account) {
-        return writeData(account);
+    public boolean save(Profile profile) {
+        return writeData(profile);
     }
 
-    public Account restore() {
+    public Profile restore() {
         return restoreData();
     }
 
 
-    private boolean writeData(Account account) {
+    private boolean writeData(Profile profile) {
         if (!outDir.isDirectory()) {
             outDir.mkdir();
         }
@@ -44,7 +44,7 @@ public class FileManager {
         try {
             File outputFile = new File(outDir, USER_FILE);
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(outputFile));
-            oos.writeObject(account);
+            oos.writeObject(profile);
             oos.flush();
             oos.close();
             Log.d("coaze", "After writing to outDir = (" + outDir + ")");
@@ -56,13 +56,13 @@ public class FileManager {
 
     }
 
-    private Account restoreData() {
+    private Profile restoreData() {
         try {
             File intputFile = new File(outDir, USER_FILE);
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(intputFile));
-            Account account = (Account) ois.readObject();
+            Profile profile = (Profile) ois.readObject();
             ois.close();
-            return account;
+            return profile;
         } catch (Exception e) {
             Log.d("coaze", "Problem reading file : " + e.getMessage());
             return null;

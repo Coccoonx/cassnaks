@@ -49,7 +49,7 @@ public class ChooseRecipientActivity extends AppCompatActivity {
         // Set an adapter to this recycler view
 
         AccountManager.getCurrentUserAccount();
-        Log.d(TAG, "User account id" + AccountManager.getCurrentUserAccount().getUser().getUserId());
+        Log.d(TAG, "Account profile id" + AccountManager.getCurrentUserAccount().getAccount().getId());
         Log.d(TAG, "Recipient list: " + AccountManager.getRecipients());
 
         mAdapter = new ChooseRecipientAdapter(this, AccountManager.getRecipients());

@@ -1,18 +1,18 @@
 <resources>
-    <!--<string name="app_name">coarze-app</string>-->
-    <!--<string name="action_settings">Settings</string>-->
+    <!--<string firstName="app_name">coarze-app</string>-->
+    <!--<string firstName="action_settings">Settings</string>-->
     <string name="hello_world">Hello world!</string>
     <!--String value of Main Screen activity-->
-    <!--<string name="texta">Receiver gets with competition:</string>-->
-    <!--<string name="textb">MoneyGram....</string>-->
-    <!--<string name="textc">WesternUnion....</string>-->
-    <!--<string name="yousave">You Save:</string>-->
-    <!--<string name="how_text">HOW?</string>-->
-    <!--<string name="started_text">GET STARTED</string>-->
-    <!--<string name="send_text">SEND</string>-->
-    <!--<string name="chooseamount">CHOOSE AMOUNT</string>-->
-    <!--<string name="texthint">$100.00</string>-->
-    <!--<string name="texthinteuro">€75.00</string>-->
+    <!--<string firstName="texta">Receiver gets with competition:</string>-->
+    <!--<string firstName="textb">MoneyGram....</string>-->
+    <!--<string firstName="textc">WesternUnion....</string>-->
+    <!--<string firstName="yousave">You Save:</string>-->
+    <!--<string firstName="how_text">HOW?</string>-->
+    <!--<string firstName="started_text">GET STARTED</string>-->
+    <!--<string firstName="send_text">SEND</string>-->
+    <!--<string firstName="chooseamount">CHOOSE AMOUNT</string>-->
+    <!--<string firstName="texthint">$100.00</string>-->
+    <!--<string firstName="texthinteuro">€75.00</string>-->
 
     <!--Material draw-->
     <string name="nav_item_attachment">Choose Amount</string>
@@ -22,7 +22,7 @@
     <string name="nav_sub_menu_item01">Sub Menu Item 1</string>
     <string name="nav_sub_menu_item02">Sub Menu Item 2</string>
     <string name="drawer_header_text">Steevensson</string>
-    <!--<string name="second_activity_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur diam id aliquam scelerisque. Donec ultrices lacus vel dignissim pharetra. Vivamus pharetra augue quis rhoncus placerat. Sed ultricies at risus non cursus. Nam rutrum leo nec placerat consectetur. Vestibulum feugiat eleifend diam, nec interdum augue tincidunt sit amet. Praesent feugiat est auctor lacus consectetur, vitae pellentesque dolor laoreet.</string>-->
+    <!--<string firstName="second_activity_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur diam id aliquam scelerisque. Donec ultrices lacus vel dignissim pharetra. Vivamus pharetra augue quis rhoncus placerat. Sed ultricies at risus non cursus. Nam rutrum leo nec placerat consectetur. Vestibulum feugiat eleifend diam, nec interdum augue tincidunt sit amet. Praesent feugiat est auctor lacus consectetur, vitae pellentesque dolor laoreet.</string>-->
     <string name="title_activity_second">SecondActivity</string>
     <string name="title_activity_choose_amount">ChooseAmountActivity</string>
     <string name="title_activity_uiwidget">UIWidget</string>

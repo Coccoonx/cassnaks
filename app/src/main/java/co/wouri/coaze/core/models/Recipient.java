@@ -10,23 +10,36 @@ import lombok.Data;
 
 @Data
 public class Recipient implements Serializable, Parcelable {
-    private String recipientId;
+    private String id;
+    private String accountId;
+    private String firstName;
+    private String lastName;
     private String email;
     private String city;
     private String country;
     private String address;
     private String phoneNumber;
-    private String name;
-    private String accountId;
-    private int image;
+    transient private int image;
+    private String state;
+
+    public Recipient() {
+        id = UUID.randomUUID().toString();
+    }
 
 
     public Recipient(String fName, String adress) {
-        name = fName;
+        this();
+        firstName = fName;
         address = adress;
-        recipientId = UUID.randomUUID().toString();
+    }
+
+    public Recipient(int image, String fName) {
+        this();
+        this.image = image;
+        firstName = fName;
 
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -35,33 +48,13 @@ public class Recipient implements Serializable, Parcelable {
 
         Recipient recipient = (Recipient) o;
 
-        return !(recipientId != null ? !recipientId.equals(recipient.recipientId) : recipient.recipientId != null);
+        return !(id != null ? !id.equals(recipient.id) : recipient.id != null);
 
     }
 
     @Override
     public int hashCode() {
-        return recipientId != null ? recipientId.hashCode() : 0;
-    }
-
-    /* public Recipient(int image, String lName, String adress) {
-        this.image = image;
-        lastName = lName;
-        address = adress;
-        recipientId = UUID.randomUUID().toString();
-
-    }*/
-
-    public Recipient(int image, String fName) {
-        this.image = image;
-        name = fName;
-        recipientId = UUID.randomUUID().toString();
-
-    }
-
-
-    public Recipient() {
-        recipientId = UUID.randomUUID().toString();
+        return id != null ? id.hashCode() : 0;
     }
 
 
@@ -72,27 +65,31 @@ public class Recipient implements Serializable, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.recipientId);
+        dest.writeString(this.id);
+        dest.writeString(this.accountId);
+        dest.writeString(this.firstName);
+        dest.writeString(this.lastName);
         dest.writeString(this.email);
         dest.writeString(this.city);
         dest.writeString(this.country);
         dest.writeString(this.address);
         dest.writeString(this.phoneNumber);
-        dest.writeString(this.name);
-        dest.writeString(this.accountId);
         dest.writeInt(this.image);
+        dest.writeString(this.state);
     }
 
     protected Recipient(Parcel in) {
-        this.recipientId = in.readString();
+        this.id = in.readString();
+        this.accountId = in.readString();
+        this.firstName = in.readString();
+        this.lastName = in.readString();
         this.email = in.readString();
         this.city = in.readString();
         this.country = in.readString();
         this.address = in.readString();
         this.phoneNumber = in.readString();
-        this.name = in.readString();
-        this.accountId = in.readString();
         this.image = in.readInt();
+        this.state = in.readString();
     }
 
     public static final Creator<Recipient> CREATOR = new Creator<Recipient>() {

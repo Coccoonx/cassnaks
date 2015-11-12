@@ -40,7 +40,7 @@ public class SplashScreenActivity extends Activity implements LoadingTaskFinishe
 
     private void completeSplash() {
         startApp();
-        finish(); // Don't forget to finish this Splash Activity so the user can't return to it!
+        finish(); // Don't forget to finish this Splash Activity so the account can't return to it!
     }
 
     private void startApp() {

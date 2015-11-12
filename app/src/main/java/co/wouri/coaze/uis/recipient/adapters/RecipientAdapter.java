@@ -49,14 +49,14 @@ public class RecipientAdapter extends RecyclerView.Adapter<RecipientViewHolder> 
     @Override
     public void onBindViewHolder(RecipientViewHolder holder, final int position) {
         Recipient recipientsItem = recipients.get(position);
-        holder.id = recipientsItem.getRecipientId();
+        holder.id = recipientsItem.getId();
         try {
             // holder.leftImageView.setImageBitmap(getRoundedCornerBitmap(settingsItem.leftIcon, 320));
             holder.leftImageView.setImageResource(recipientsItem.getImage());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        holder.title.setText(recipientsItem.getName());
+        holder.title.setText(recipientsItem.getFirstName());
         ((ImageView) holder.rightViewDelete).setImageResource(R.drawable.ic_trashbin);
         ((ImageView) holder.rightViewEdite).setImageResource(R.drawable.ic_edit);
         ((ImageView) holder.rightViewDelete).setColorFilter(Color.argb(255, 29, 181, 245));

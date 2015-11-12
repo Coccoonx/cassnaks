@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import co.wouri.coaze.R;
 import co.wouri.coaze.core.managers.AccountManager;
-import co.wouri.coaze.core.models.Account;
+import co.wouri.coaze.core.models.Profile;
 import co.wouri.coaze.uis.recipient.adapters.RecipientAdapter;
 import co.wouri.coaze.utils.UIUtils;
 
@@ -23,7 +23,7 @@ public class RecipientActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private Button addButton;
-    Account account = AccountManager.getCurrentUserAccount();
+    Profile profile = AccountManager.getCurrentUserAccount();
     private RecipientAdapter mAdapter;
 
     @Override
@@ -38,7 +38,7 @@ public class RecipientActivity extends AppCompatActivity {
         addButton = (Button) findViewById(R.id.Button_add);
         addButton.setVisibility(View.VISIBLE);
         // Set an adapter to this recycler view
-        mAdapter = new RecipientAdapter(this, account.getRecipients());
+        mAdapter = new RecipientAdapter(this, profile.getRecipients());
         mRecyclerView.setAdapter(mAdapter);
 
         // Set the behaviour of this recycler view
