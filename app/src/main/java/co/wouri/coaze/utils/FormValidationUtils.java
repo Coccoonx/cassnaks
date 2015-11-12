@@ -3,7 +3,6 @@ package co.wouri.coaze.utils;
 import android.content.Context;
 import android.widget.Toast;
 
-import java.lang.reflect.Type;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +12,7 @@ import java.util.regex.Pattern;
 public class FormValidationUtils {
     public static boolean checkName(Context context, String name){
         if(name==null || name.split(" ").length==0 || name.length()<=2){
-            Toast.makeText(context, "Invalid name, the name must at least have 3 characters", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Invalid firstName, the firstName must at least have 3 characters", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

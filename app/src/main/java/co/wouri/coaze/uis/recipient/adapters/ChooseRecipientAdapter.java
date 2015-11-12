@@ -79,7 +79,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
 
         final int itemPosition = position;
         RecipientItem settingsRecipients = recipientItems.get(position);
-        //holder.id = settingsRecipients.getRecipientId();
+        //holder.id = settingsRecipients.getId();
         try {
             holder.leftImageView.setImageResource(settingsRecipients.leftIcon);
         } catch (ClassCastException e) {
@@ -119,7 +119,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         List<RecipientItem> list = new ArrayList<>();
 
         for (Recipient recipient : recipients) {
-            RecipientItem recipientItem = new RecipientItem(recipient.getImage(), recipient.getName());
+            RecipientItem recipientItem = new RecipientItem(recipient.getImage(), recipient.getFirstName());
             list.add(recipientItem);
         }
         return list;

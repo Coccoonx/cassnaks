@@ -54,7 +54,7 @@ public class SuccessActivity extends AppCompatActivity {
 
             if (transfer != null) {
                 amount.setText(transfer.getSenderCurrency() + transfer.getAmount());
-                recipientName.setText(transfer.getRecipient().getName());
+                recipientName.setText(transfer.getRecipient().getFirstName());
             }
 
 

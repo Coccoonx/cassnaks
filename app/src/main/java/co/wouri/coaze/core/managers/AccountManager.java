@@ -5,7 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.wouri.coaze.core.models.Account;
+import co.wouri.coaze.core.models.Profile;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.core.models.Transfer;
 import co.wouri.coaze.storage.CoazeSettingsUtils;
@@ -15,40 +15,40 @@ public class AccountManager {
 
     private static FileManager fileManager = FileManager.getInstance();
 
-    private static Account account = null;
+    private static Profile profile = null;
 
 
-    private static synchronized Account retrieveAccount() {
+    private static synchronized Profile retrieveAccount() {
 
-        account = fileManager.restore();
-        return account;
+        profile = fileManager.restore();
+        return profile;
     }
 
-    public static Account saveAccount(Account account) {
-        boolean isOk = fileManager.save(account);
+    public static Profile saveAccount(Profile profile) {
+        boolean isOk = fileManager.save(profile);
         if (isOk) {
             CoazeSettingsUtils.setAccountAlreadyConfigured(true);
             Log.d("coaze", "saveAccount completed");
-            return account;
+            return profile;
         } else {
             return null;
         }
     }
 
-    public static synchronized Account saveAccount() {
-        return account = saveAccount(account);
+    public static synchronized Profile saveAccount() {
+        return profile = saveAccount(profile);
     }
 
-    public static Account getCurrentUserAccount() {
-        if (account == null) {
-            account = AccountManager.retrieveAccount();
-            if (account == null) {
+    public static Profile getCurrentUserAccount() {
+        if (profile == null) {
+            profile = AccountManager.retrieveAccount();
+            if (profile == null) {
                 //KeeperApplication.initUserAccount();
-                account = new Account();
+                profile = new Profile();
             }
-            return account;
+            return profile;
         } else {
-            return account;
+            return profile;
         }
     }
 
@@ -57,21 +57,21 @@ public class AccountManager {
     }
 
 
-    // Managing Account
+    // Managing Profile
 
     public static List<Recipient> getRecipients() {
-        return account.getRecipients();
+        return profile.getRecipients();
     }
 
     public static List<Transfer> getTransferts() {
         List list = new ArrayList();
-        return account.getTransfers();
+        return profile.getTransfers();
     }
 
     public static String addRecipient(Recipient recipient) {
-        if (account.getRecipients().add(recipient)) {
+        if (profile.getRecipients().add(recipient)) {
             saveAccount();
-            return recipient.getRecipientId();
+            return recipient.getId();
         } else
             return null;
 
@@ -98,9 +98,9 @@ public class AccountManager {
 
 
     public static String addTransfer(Transfer transfer) {
-        if (account.getTransfers().add(transfer)) {
+        if (profile.getTransfers().add(transfer)) {
             saveAccount();
-            return transfer.getTransferId();
+            return transfer.getId();
         } else
             return null;
     }
@@ -108,7 +108,7 @@ public class AccountManager {
     public static void deleteRecipient(Recipient recipient) {
         List<Recipient> recipients = getRecipients();
         recipients.remove(recipient);
-        account.setRecipients(recipients);
+        profile.setRecipients(recipients);
         saveAccount();
     }
 }

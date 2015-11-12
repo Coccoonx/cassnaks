@@ -103,7 +103,7 @@ public class AddRecipientActivity extends AppCompatActivity {
 
                 } else {
                     Recipient recipient = new Recipient();
-                    recipient.setName(nameValue);
+                    recipient.setFirstName(nameValue);
                     recipient.setEmail(emailValue);
                     recipient.setPhoneNumber(phoneValue);
                     recipient.setCountry(countryValue);
@@ -118,14 +118,14 @@ public class AddRecipientActivity extends AppCompatActivity {
             }
         });
 //        Intent intent1 = getIntent();
-//        name = (EditText) findViewById(R.id.name_add_recipient);
+//        firstName = (EditText) findViewById(R.id.name_add_recipient);
 //        city = (EditText) findViewById(R.id.city_add_recipient);
 //        address = (EditText) findViewById(R.id.address_add_recipient);
 //        email = (EditText) findViewById(R.id.email_add_recipient);
 //        phone = (EditText) findViewById(R.id.phone_add_recipient);
 //
 //        if (intent1 != null) {
-//            name.setText(intent1.getStringExtra("name"));
+//            firstName.setText(intent1.getStringExtra("firstName"));
 //            city.setText(intent1.getStringExtra("city"));
 //            address.setText(intent1.getStringExtra("address"));
 //            email.setText(intent1.getStringExtra("email"));

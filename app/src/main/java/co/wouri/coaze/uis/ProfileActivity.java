@@ -17,9 +17,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import co.wouri.coaze.R;
 import co.wouri.coaze.utils.UIUtils;
 
@@ -87,7 +84,7 @@ public class ProfileActivity extends AppCompatActivity {
                         || !checkCountry(ProfileActivity.this, countryValue)
                         ) {
                     Intent intent = new Intent(ProfileActivity.this, ProfileActivity.class);
-                    intent.putExtra("name", nameValue);
+                    intent.putExtra("firstName", nameValue);
                     intent.putExtra("email", emailValue);
                     intent.putExtra("phone", phoneValue);
                     intent.putExtra("city", cityValue);
@@ -95,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
                     startActivityForResult(intent, 1);
                 } else {
 //                    Intent intent = new Intent(ProfileActivity.this, AddRecipientActivity.class);
-//                    intent.putExtra("name", nameValue);
+//                    intent.putExtra("firstName", nameValue);
 //                    startActivityForResult(intent, 1);
                     //We should call the backend functions here
                     Toast.makeText(ProfileActivity.this, "Profile saved Successfully", Toast.LENGTH_SHORT).show();
@@ -112,7 +109,7 @@ public class ProfileActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.email_edit_recipient);
         phone = (EditText) findViewById(R.id.phone_edit_recipient);
         if (intent1 != null) {
-            name.setText(intent1.getStringExtra("name"));
+            name.setText(intent1.getStringExtra("firstName"));
             city.setText(intent1.getStringExtra("city"));
             address.setText(intent1.getStringExtra("address"));
             email.setText(intent1.getStringExtra("email"));
