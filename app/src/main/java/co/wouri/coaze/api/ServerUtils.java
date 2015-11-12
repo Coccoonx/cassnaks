@@ -2,6 +2,7 @@ package co.wouri.coaze.api;
 
 import android.content.Context;
 import android.os.StrictMode;
+import android.util.Base64;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -15,10 +16,11 @@ import co.wouri.coaze.api.netflow.HttpFactory;
 import co.wouri.coaze.api.netflow.HttpResponse;
 import co.wouri.coaze.api.netflow.NetworkError;
 import co.wouri.coaze.api.netflow.ResponseHandler;
-import co.wouri.coaze.api.netflow.Web;
+import co.wouri.coaze.api.netflow.net.Web;
 import co.wouri.coaze.core.models.Account;
 import co.wouri.coaze.core.models.Document;
 import co.wouri.coaze.core.models.Reference;
+import co.wouri.coaze.storage.CoazeSettingsUtils;
 
 /**
  * Created by lyonnel on 03/11/15.
@@ -99,6 +101,149 @@ public class ServerUtils {
             Log.d(TAG, "Error while sending feedback " + Log.getStackTraceString(e));
         }
         return account[0];
+    }
+
+
+    public static Account createAccount(Context context,
+                                        Account accountIncoming) {
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        final Account[] account = {null};
+        try {
+            Http http = HttpFactory.create(context);
+            http.post(Web.getUpdateAccountUrl())
+                    .data(accountIncoming)
+                    .header("Authorization", Base64.encodeToString("acme:acmesecret1".getBytes(), Base64.DEFAULT))
+                    .handler(new ResponseHandler() {
+                                 @Override
+                                 public void success(Object data, HttpResponse response) {
+                                     super.success(data, response);
+                                     Log.d(TAG, "HttpResponse header = " + response.getHeaders());
+
+                                     if (data != null) {
+                                         Log.d(TAG, "Profile correctly retrieve " + data.toString());
+
+                                         try {
+
+                                             JSONObject obj = new JSONObject(data.toString());
+                                             if (obj != null) {
+                                                 account[0] = new Account();
+                                                 account[0].setEmail(obj.getString("email"));
+                                                 account[0].setPhoneNumber(obj.getString("phoneNumber"));
+                                                 account[0].setFirstName(obj.getString("firstName"));
+                                                 account[0].setLastName(obj.getString("lastName"));
+                                                 account[0].setCity(obj.getString("city"));
+                                                 account[0].setState(obj.getString("state"));
+                                                 account[0].setCountry(obj.getString("country"));
+                                                 account[0].setAddress(obj.getString("address"));
+                                                 account[0].setSocialSecurityNumber(obj.getString("socialSecurityNumber"));
+                                             }
+
+
+                                             //responseFlag[0] = true;
+                                         } catch (Exception e) {
+
+                                         }
+                                     }
+                                 }
+
+                                 @Override
+                                 public void error(String message, HttpResponse response) {
+                                     super.error(message, response);
+                                     //responseFlag[0] = false;
+                                     Log.d(TAG, message);
+                                 }
+
+                                 @Override
+                                 public void failure(NetworkError error) {
+                                     super.failure(error);
+                                     //responseFlag[0] = false;
+                                     Log.d(TAG, "Error " + error.name());
+                                 }
+
+                                 @Override
+                                 public void complete() {
+                                     super.complete();
+                                     Log.d(TAG, "Terminated");
+                                 }
+                             }
+
+                    ).
+
+                    send();
+        } catch (RuntimeException e) {
+            Log.d(TAG, "Error while sending feedback " + Log.getStackTraceString(e));
+        }
+        return account[0];
+    }
+
+
+    public static JSONObject login(Context context) {
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        String req = " grant_type = password & password = " + CoazeSettingsUtils.getUserPassword() + " & username = " + CoazeSettingsUtils.getUserEmail();
+
+
+        final JSONObject[] objects = {null};
+        try {
+            Http http = HttpFactory.create(context);
+            http.post(Web.getLoginUrl())
+                    .header("Authorization", "Basic " + Base64.encodeToString("acme:acmesecret1".getBytes(), Base64.DEFAULT))
+                    .data(req)
+                    .handler(new ResponseHandler() {
+                                 @Override
+                                 public void success(Object data, HttpResponse response) {
+                                     super.success(data, response);
+                                     Log.d(TAG, "HttpResponse header = " + response.getHeaders());
+
+                                     if (data != null) {
+                                         Log.d(TAG, "Profile correctly retrieve " + data.toString());
+
+                                         try {
+
+                                             JSONObject obj = new JSONObject(data.toString());
+                                             objects[0] = obj;
+
+
+                                             //responseFlag[0] = true;
+                                         } catch (Exception e) {
+
+                                         }
+                                     }
+                                 }
+
+                                 @Override
+                                 public void error(String message, HttpResponse response) {
+                                     super.error(message, response);
+                                     //responseFlag[0] = false;
+                                     Log.d(TAG, message);
+                                 }
+
+                                 @Override
+                                 public void failure(NetworkError error) {
+                                     super.failure(error);
+                                     //responseFlag[0] = false;
+                                     Log.d(TAG, "Error " + error.name());
+                                 }
+
+                                 @Override
+                                 public void complete() {
+                                     super.complete();
+                                     Log.d(TAG, "Terminated");
+                                 }
+                             }
+
+                    ).
+
+                    send();
+        } catch (RuntimeException e) {
+            Log.d(TAG, "Error while sending feedback " + Log.getStackTraceString(e));
+        }
+        return objects[0];
     }
 //
 //    public static List<Reference> getAllReferences(Context context, String tokenType, String token, String uId) {

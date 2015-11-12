@@ -3,7 +3,6 @@ package co.wouri.coaze.core.models;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import lombok.Data;
 
@@ -46,8 +45,5 @@ public class Account implements Serializable {
     private String preferedTargetCurrency;
 
 
-    public Account() {
-        id = UUID.randomUUID().toString();
-    }
 
 }

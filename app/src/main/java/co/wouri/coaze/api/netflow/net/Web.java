@@ -1,13 +1,18 @@
-package co.wouri.coaze.api.netflow;
+package co.wouri.coaze.api.netflow.net;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Base64;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
+import co.wouri.coaze.CoazeApplication;
 import co.wouri.coaze.core.models.Reference;
 
 
@@ -61,7 +66,7 @@ public class Web {
         return "http://" + IP + ":" + LOGIN_PORT + "/loan/";
     }
 
-//    /**
+    //    /**
 //     * This method is responsible for performing and post based request on
 //     * background thread. Once it receive data from server sends response back
 //     * on response listener, along with request id
@@ -72,21 +77,21 @@ public class Web {
 //     *             server
 //     * @param rid  request ID
 //     */
-//    public static void requestAsynData(final Request r) {
-//        Runnable rn = new Runnable() {
-//            public void run() {
-//                if (!Web.isNetworkAvailable(CoazeApplication.getInstance()
-//                        .getApplicationContext())) {
-//                    r.r.noNetwork();
-//                    return;
-//                }
-//                r.r.onResponse(getResponse(r), r.rid);
-//
-//            }
-//        };
-//
-//        new Thread(rn).start();
-//    }
+    public static void requestAsynData(final Request r) {
+        Runnable rn = new Runnable() {
+            public void run() {
+                if (!Web.isNetworkAvailable(CoazeApplication.getInstance()
+                        .getApplicationContext())) {
+                    r.r.noNetwork();
+                    return;
+                }
+                r.r.onResponse(getResponse(r), r.rid);
+
+            }
+        };
+
+        new Thread(rn).start();
+    }
 
     /**
      * Method to check network connection is available or not.......
@@ -101,61 +106,62 @@ public class Web {
                 .getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-//
-//    public static Response getResponse(Request r) {
-//        Response response = null;
-//        HttpURLConnection con = null;
-//        try {
-//            con = (HttpURLConnection) new URL(r.url).openConnection();
-//            if (r.auth)
-//                con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//            else
-//                con.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-//            if (r.data != null)
-//                con.setRequestProperty("Content-Length", "" + r.data.length());
-//            if (r.auth)
-//                con.setRequestProperty("Authorization", "Basic " + Base64.encodeToString("acme:acmesecret1".getBytes(), Base64.DEFAULT));
-//
-//            if (r.token != null) {
-//                con.setRequestProperty("X-AUTH-TOKEN", r.token);
-//                //con.setRequestProperty("Authorization", "Client-ID " + r.userid);
-//                //con.setRequestProperty("Authorization", r.tokenType + " " + r.userid);
-//                //con.setRequestProperty("Authorization", r.tokenType + " " + r.token);
-//            }
-//            con.setRequestMethod(r.method);
-//            // con.setDoInput(true);
-//            con.connect();
-//            if (r.data != null) {
-//                OutputStream out = con.getOutputStream();
-//                out.write(r.data.getBytes());
-//                out.flush();
-//                out.close();
-//            }
-//            int status = 200;// con.getResponseCode();
-//            if (status == 200) {
-//                InputStream in = con.getInputStream();
-//                String resp = getString(in);
-//                if (resp == null || resp.equals("")) {
-//
-//                    response = new Response("", false);
-//                } else {
-//
-//                    response = new Response(resp, false);
-//                }
-//            }
-//        } catch (Exception e) {
-//            response = new Response("Error", true);
-//        } finally {
-//            try {
-//                con.disconnect();
-//
-//            } catch (Exception e2) {
-//                // TODO: handle exception
-//            }
-//        }
-//
-//        return response;
-//    }
+
+    //
+    public static Response getResponse(Request r) {
+        Response response = null;
+        HttpURLConnection con = null;
+        try {
+            con = (HttpURLConnection) new URL(r.url).openConnection();
+            if (r.auth)
+                con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            else
+                con.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+            if (r.data != null)
+                con.setRequestProperty("Content-Length", "" + r.data.length());
+            if (r.auth)
+                con.setRequestProperty("Authorization", "Basic " + Base64.encodeToString("acme:acmesecret1".getBytes(), Base64.DEFAULT));
+
+            if (r.token != null) {
+                con.setRequestProperty("X-AUTH-TOKEN", r.token);
+                //con.setRequestProperty("Authorization", "Client-ID " + r.userid);
+                //con.setRequestProperty("Authorization", r.tokenType + " " + r.userid);
+                //con.setRequestProperty("Authorization", r.tokenType + " " + r.token);
+            }
+            con.setRequestMethod(r.method);
+            // con.setDoInput(true);
+            con.connect();
+            if (r.data != null) {
+                OutputStream out = con.getOutputStream();
+                out.write(r.data.getBytes());
+                out.flush();
+                out.close();
+            }
+            int status = 200;// con.getResponseCode();
+            if (status == 200) {
+                InputStream in = con.getInputStream();
+                String resp = getString(in);
+                if (resp == null || resp.equals("")) {
+
+                    response = new Response("", false);
+                } else {
+
+                    response = new Response(resp, false);
+                }
+            }
+        } catch (Exception e) {
+            response = new Response("Error", true);
+        } finally {
+            try {
+                con.disconnect();
+
+            } catch (Exception e2) {
+                // TODO: handle exception
+            }
+        }
+
+        return response;
+    }
 
     /**
      * Read complete fetched data from server into string

@@ -1,7 +1,6 @@
 package co.wouri.coaze.storage;
 
 import android.location.Location;
-import android.location.LocationManager;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -17,104 +16,50 @@ import co.wouri.coaze.CoazeApplication;
  */
 public class CoazeSettingsUtils {
     public static final String NOTIFICATIONS = "NOTIFICATIONS";
-    public static final String USER_RADIUS = "USER_RADIUS";
-    public static final String ANONYMOUS = "ANONYMOUS";
     public static final String APP_ALREADY_CONFIGURED = "APP_ALREADY_CONFIGURED";
     public static final String ACCOUNT_ALREADY_CONFIGURED = "ACCOUNT_ALREADY_CONFIGURED";
     public static final String PREFERED_NOTIFICATION_TYPES = "PREFERED_NOTIFICATION_TYPES";
-    public static final String LOCATION_TECHNIQUE = "LOCATION_TECHNIQUE";
     public static final String NOTIFICATION_FOR_CONNECTIVITY = "NOTIFICATION_FOR_CONNECTIVITY";
-    public static final String FAKE_LOCATION = "FAKE_LOCATION";
 
-    public static final String USER_LOGGED_TO_FACEBOOK = "USER_LOGGED_TO_FACEBOOK";
-    public static final String USER_LOGGED_TO_TWITTER = "USER_LOGGED_TO_TWITTER";
-    public static final String USER_LOGGED_TO_GOOGLE_PLUS = "USER_LOGGED_TO_GOOGLE_PLUS";
-    public static final String SHARE_ON_SOCIAL_MEDIA = "SHARE_ON_SOCIAL_MEDIA";
 
     public static final String PLAY_NOTIFICATIONS = "notifications_play";
     public static final String NOTIFICATION_SOUND = "notification_sound";
     public static final String NOTIFICATION_VIBRATE = "notification_vibrate";
     public static final String EDIT_PROFILE = "edit_profile";
 
-    public static final String SHOW_MY_LAST_SEEN = "show_my_last_seen";
     private static final String USER_ID = "USER_ID";
-    private static final String USER_GCM_ID = "USER_GCM_ID";
-    private static final String USER_FAKE_LATITUDE = "USER_FAKE_LATITUDE";
-    private static final String USER_FAKE_LONGITUDE = "USER_FAKE_LONGITUDE";
-    private static final String USER_FIRST_OPENING = "USER_FIRST_OPENING";
+    private static final String USER_EMAIL = "USER_EMAIL";
 
 
-    public static boolean getFakePositionStatus() {
-        boolean notificationEnabled;
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        notificationEnabled = storageInterface.load(FAKE_LOCATION, false);
-        return notificationEnabled;
-    }
+    private static final String ACCESS_TOKEN = "ACCESS_TOKEN";
+    private static final String TOKEN_TYPE = "TOKEN_TYPE";
+    private static final String EXPIRE_IN = "EXPIRE_IN";
+    private static final String USER_FIRST_LOGIN = "USER_FIRST_LOGIN";
+    public static final String USER_LOGGED = "USER_LOGGED";
+    public static final String USER_PASSWORD = "PASSWORD";
 
-    public static void setFakePositionStatus(boolean value) {
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        storageInterface.save(FAKE_LOCATION, value);
-    }
 
     public static void setNotificationsValue(boolean value) {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
         storageInterface.save(NOTIFICATIONS, value);
     }
 
-    public static void setAnonymous(boolean value) {
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        storageInterface.save(ANONYMOUS, value);
-    }
-
-    public static boolean getAnonymous() {
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        return storageInterface.load(ANONYMOUS, false);
-    }
-
-
-//    public static void setUserRadius(int value) {
-//        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-//        storageInterface.save(USER_RADIUS, value);
-//    }
-//
-//    public static int getUserRadius() {
-//        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-//        return storageInterface.load(USER_RADIUS, Constants.USER_RADIUS_2000M);
-//    }
-
-    private static void setUserFakeLatitude(float value) {
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        storageInterface.save(USER_FAKE_LATITUDE, value);
-    }
-
-    private static float getUserFakeLatitude() {
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        return storageInterface.load(USER_FAKE_LATITUDE, 0.0f);
-    }
-
-    private static void setUserFakeLongitude(float value) {
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        storageInterface.save(USER_FAKE_LONGITUDE, value);
-    }
-
-    private static float getUserFakeLongitude() {
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        return storageInterface.load(USER_FAKE_LONGITUDE, 0.0f);
-    }
-
-    public static void setUserFakeAddress(String value) {
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        storageInterface.save(USER_FAKE_LONGITUDE, value);
-    }
-
-    public static String getUserFakeAddress() {
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        return storageInterface.load(USER_FAKE_LONGITUDE, "");
-    }
 
     public static boolean getNotificationsValue() {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
         return storageInterface.load(NOTIFICATIONS, true);
+    }
+
+
+    public static void setUserPassword(String value) {
+        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
+        storageInterface.save(USER_PASSWORD, value);
+    }
+
+
+    public static String getUserPassword() {
+        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
+        return storageInterface.load(USER_PASSWORD, "");
     }
 
     public static String getUserUid() {
@@ -133,16 +78,6 @@ public class CoazeSettingsUtils {
         storageInterface.save(USER_ID, value);
     }
 
-    public static String getUserGCMId() {
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        String userUID = storageInterface.load(USER_GCM_ID, "");
-        return userUID;
-    }
-
-    public static void setUserGCMId(String regId) {
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        storageInterface.save(USER_GCM_ID, regId);
-    }
 
     public static boolean getAppAlreadyConfigured() {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
@@ -162,16 +97,6 @@ public class CoazeSettingsUtils {
     public static boolean getAccountAlreadyConfigured() {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
         return storageInterface.load(ACCOUNT_ALREADY_CONFIGURED, false);
-    }
-
-    public static void setLocationTechnique(String provider) {
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        storageInterface.save(LOCATION_TECHNIQUE, provider);
-    }
-
-    public static String getLocationTechnique() {
-        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        return storageInterface.load(LOCATION_TECHNIQUE, LocationManager.NETWORK_PROVIDER);
     }
 
 
@@ -272,76 +197,76 @@ public class CoazeSettingsUtils {
         return location;
     }
 
-    public static void saveLastUserLocation(Location location) {
+
+    public static void setUserLogged(boolean b) {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        storageInterface.save("userlat", (float) location.getLatitude());
-        storageInterface.save("userlong", (float) location.getLongitude());
-        Log.d("Save Location:", location.toString());
+        storageInterface.save(USER_LOGGED, b);
     }
 
-    public static void saveFakeUserLocation(Location location) {
-        setUserFakeLatitude((float) location.getLatitude());
-        setUserFakeLongitude((float) location.getLongitude());
-        Log.d("Save Fake Location:", location.toString());
-    }
-
-    public static Location loadFakeUserLocation() {
-        Location location = new Location("FakeLocation");
-        location.setLatitude(getUserFakeLatitude());
-        location.setLongitude(getUserFakeLongitude());
-        Log.d("Loading Fake Location:", location.toString());
-        return location;
-    }
-
-
-    public static void setFacebookLogged(boolean b) {
+    public static boolean getUserLogged() {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        storageInterface.save(USER_LOGGED_TO_FACEBOOK, b);
+        return storageInterface.load(USER_LOGGED, false);
     }
 
-    public static boolean getFacebookLogged() {
+    public static void setUserFirstLogin(long b) {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        return storageInterface.load(USER_LOGGED_TO_FACEBOOK, false);
+        storageInterface.save(USER_FIRST_LOGIN, b);
     }
 
-    public static void setTwitterkLogged(boolean b) {
+    public static Float getUserFirstLogin() {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        storageInterface.save(USER_LOGGED_TO_TWITTER, b);
+        return storageInterface.load(USER_FIRST_LOGIN, System.currentTimeMillis());
     }
 
-    public static boolean getTwitterLogged() {
+    public static void setExpireIn(int b) {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        return storageInterface.load(USER_LOGGED_TO_TWITTER, false);
+        storageInterface.save(EXPIRE_IN, b);
     }
 
-    public static void setGooglePlusLogged(boolean b) {
+    public static int getExpireIn() {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        storageInterface.save(USER_LOGGED_TO_GOOGLE_PLUS, b);
+        return storageInterface.load(EXPIRE_IN, 0);
     }
 
-    public static boolean getGooglePlusLogged() {
+    public static void setTokenType(String b) {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        return storageInterface.load(USER_LOGGED_TO_GOOGLE_PLUS, false);
+        storageInterface.save(TOKEN_TYPE, b);
     }
 
-    public static boolean shareOnSocialMedia() {
+    public String getTokenType() {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        return storageInterface.load(SHARE_ON_SOCIAL_MEDIA, false);
+        return storageInterface.load(TOKEN_TYPE, "");
     }
 
-    public static void shareOnSocialMedia(boolean b) {
+    public static void setAccessToken(String b) {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        storageInterface.save(SHARE_ON_SOCIAL_MEDIA, false);
+        storageInterface.save(ACCESS_TOKEN, b);
+    }
+
+    public static String getAccessToken() {
+        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
+        return storageInterface.load(ACCESS_TOKEN, "");
+    }
+
+
+    public static void setUserEmail(String b) {
+        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
+        storageInterface.save(USER_EMAIL, b);
+    }
+
+    public static String getUserEmail() {
+        PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
+        return storageInterface.load(USER_EMAIL, "");
     }
 
 
     public static Long firstOpening() {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        return storageInterface.load(USER_FIRST_OPENING, (Long) new Date().getTime());
+        return storageInterface.load(USER_FIRST_LOGIN, (Long) new Date().getTime());
     }
 
     public static void firstOpening(long l) {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
-        storageInterface.save(USER_FIRST_OPENING, l);
+        storageInterface.save(USER_FIRST_LOGIN, l);
     }
 }
