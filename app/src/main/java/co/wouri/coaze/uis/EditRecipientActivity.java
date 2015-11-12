@@ -1,6 +1,7 @@
 package co.wouri.coaze.uis;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,9 +16,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import static co.wouri.coaze.utils.FormValidationUtils.checkAddress;
+import static co.wouri.coaze.utils.FormValidationUtils.checkCity;
+import static co.wouri.coaze.utils.FormValidationUtils.checkCountry;
+import static co.wouri.coaze.utils.FormValidationUtils.checkEmail;
+import static co.wouri.coaze.utils.FormValidationUtils.checkName;
+import static co.wouri.coaze.utils.FormValidationUtils.checkPhone;
 import co.wouri.coaze.R;
-import co.wouri.coaze.core.managers.AccountManager;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.utils.UIUtils;
 
@@ -31,7 +37,7 @@ public class EditRecipientActivity extends AppCompatActivity {
     EditText name, email, phone, city, address;
     MyArrayAdapter mySpinnerArrayAdapter;
     Recipient recipient;
-    String[] country = {"", "Canada", "Cameroon", "China", "USA"};
+    String[] country = {"Canada", "Cameroon", "China", "USA"};
 
 
     @Override
@@ -75,20 +81,36 @@ public class EditRecipientActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //Intent intent = new Intent(EditRecipientActivity.this, ChooseAmountActivity.class);
-                recipient.setAddress(address.getText().toString());
-                recipient.setEmail(email.getText().toString());
-                recipient.setPhoneNumber(phone.getText().toString());
-                recipient.setFirstName(name.getText().toString());
-                recipient.setLastName(name.getText().toString());
-                recipient.setCity(city.getText().toString());
-                recipient.setCountry(countries.getSelectedItem().toString());
-                Log.d(TAG, "the recipient " + recipient);
-                AccountManager.updateRecipient(recipient);
-                finish();
-                // intent.putExtra("recipient",(Parcelable)recipient);
-                //startActivity(intent);
+                String nameValue = name.getText().toString();
+                String emailValue = email.getText().toString();
+                String phoneValue = phone.getText().toString();
+                String countryValue = countries.getSelectedItem().toString();
+                String cityValue = city.getText().toString();
+                String addressValue = address.getText().toString();
+                if (!checkName(EditRecipientActivity.this, nameValue)
+                        || !checkEmail(EditRecipientActivity.this, emailValue)
+                        || !checkPhone(EditRecipientActivity.this, phoneValue)
+                        || !checkCity(EditRecipientActivity.this, cityValue)
+                        || !checkAddress(EditRecipientActivity.this, addressValue)
+                        || !checkCountry(EditRecipientActivity.this, countryValue)
+                        ) {
+                    Intent intent = new Intent(EditRecipientActivity.this, EditRecipientActivity.class);
+                    intent.putExtra("name", nameValue);
+                    intent.putExtra("email", emailValue);
+                    intent.putExtra("phone", phoneValue);
+                    intent.putExtra("city", cityValue);
+                    intent.putExtra("address", addressValue);
+                    startActivityForResult(intent, 1);
+                } else {
+//                    Intent intent = new Intent(ProfileActivity.this, AddRecipientActivity.class);
+//                    intent.putExtra("name", nameValue);
+//                    startActivityForResult(intent, 1);
+                    //We should call the backend functions here
+                    Toast.makeText(EditRecipientActivity.this, "Recipient saved Successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                    Intent intent = new Intent(EditRecipientActivity.this, MainActivity.class);
+                    startActivityForResult(intent, 1);
+                }
             }
         });
 
