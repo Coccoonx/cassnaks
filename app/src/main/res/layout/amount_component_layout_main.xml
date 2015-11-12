@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-
+    android:weightSum="100"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="185dp"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/corner_border_amount"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="35">
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,16 +57,14 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/corner_border_component"
-        android:gravity="right"
-        >
+        android:layout_weight="65">
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:drawSelectorOnTop="true"
             android:spinnerMode = "dropdown"
-            android:popupBackground="@drawable/corner_border_component"
-            android:gravity="left"/>
+            android:popupBackground="@drawable/corner_border_component" />
 
 
     </LinearLayout>

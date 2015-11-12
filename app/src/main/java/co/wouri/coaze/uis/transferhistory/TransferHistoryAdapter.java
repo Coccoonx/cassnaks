@@ -59,7 +59,7 @@ public class TransferHistoryAdapter extends RecyclerView.Adapter<PersonViewHolde
         final Recipient recipient = transfer.getRecipient();
 
         personViewHolder.personName.setText(recipient.getFirstName());
-        personViewHolder.personAmount.setText("$" + transfer.getAmount());
+        personViewHolder.personAmount.setText(transfer.getSenderCurrency() + transfer.getAmount());
         personViewHolder.personPhoto.setImageResource(transfer.getRecipient().getImage());
 
         SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy / hh:mmaa");

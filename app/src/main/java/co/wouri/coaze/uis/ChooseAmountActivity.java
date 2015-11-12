@@ -219,7 +219,6 @@ public class ChooseAmountActivity extends AppCompatActivity {
             String amount = amount1.getText().toString();
             String currencyText1 = currency1.getText().toString();
             String currencyText2 = currency2.getText().toString();
-            String amountCurrency = amount + " " + currencyText1;
             if (amount != null) {
                 double valAmount = Double.parseDouble(amount1.getText().toString());
                 double valReceiver = Double.parseDouble(amount2.getText().toString());
@@ -227,13 +226,9 @@ public class ChooseAmountActivity extends AppCompatActivity {
                     transfer.setAmount(valAmount);
                     transfer.setSenderCurrency(currencyText1);
                     transfer.setReceiverCurrency(currencyText2);
-
-                    Date now = new Date();
-                    SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy / hh:mmaa");
+                    transfer.setRecieverAmount(valReceiver);
                     transfer.setTransferType("SENT");
-                    transfer.setReceiverCurrency(currencyText2);
                     transfer.setStatus(TransferStatus.Pending);
-                    // transfer.setSenderCurrency(currency);
                     Intent intent = new Intent(ChooseAmountActivity.this, SuccessActivity.class);
                     AccountManager.addTransfer(transfer);
                     intent.putExtra("transfer", (Parcelable) transfer);

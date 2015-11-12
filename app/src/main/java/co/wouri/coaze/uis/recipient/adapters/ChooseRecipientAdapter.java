@@ -3,6 +3,7 @@ package co.wouri.coaze.uis.recipient.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -125,6 +126,12 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         return list;
 
 
+    }
+
+    public void updateItems(){
+        recipientItems.clear();
+        recipientItems.addAll(initList(recipients));
+        notifyDataSetChanged();
     }
 
    /* private List<RecipientItem> initRecipientList() {

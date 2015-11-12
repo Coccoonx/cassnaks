@@ -26,6 +26,8 @@ public class Transfer implements Serializable, Parcelable {
     private
     @NotNull
     Double amount;
+
+    private Double recieverAmount;
     private
     @NotEmpty
     String senderCurrency;
@@ -45,11 +47,12 @@ public class Transfer implements Serializable, Parcelable {
 
     }
 
-    public Transfer(Recipient recipient, String senderCurrency, String receiverCurrency) {
+    public Transfer(Recipient recipient, String senderCurrency, String receiverCurrency, Double recieverAmount) {
         this();
         this.recipient = recipient;
         this.senderCurrency = senderCurrency;
         this.receiverCurrency = receiverCurrency;
+        this.recieverAmount = recieverAmount;
 
     }
 
@@ -65,6 +68,7 @@ public class Transfer implements Serializable, Parcelable {
         dest.writeString(this.transferType);
         dest.writeString(this.accountId);
         dest.writeValue(this.amount);
+        dest.writeValue(this.recieverAmount);
         dest.writeString(this.senderCurrency);
         dest.writeString(this.receiverCurrency);
         dest.writeLong(creationDate != null ? creationDate.getTime() : -1);
@@ -78,6 +82,7 @@ public class Transfer implements Serializable, Parcelable {
         this.transferType = in.readString();
         this.accountId = in.readString();
         this.amount = (Double) in.readValue(Double.class.getClassLoader());
+        this.recieverAmount = (Double) in.readValue(Double.class.getClassLoader());
         this.senderCurrency = in.readString();
         this.receiverCurrency = in.readString();
         long tmpCreationDate = in.readLong();

@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:weightSum="100">
 
     <LinearLayout
-        android:layout_width="185dp"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/corner_border_amount"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="35">
 
         <TextView
             android:layout_width="wrap_content"
@@ -52,11 +53,13 @@
 
     </LinearLayout>
 
+    <!--android:background="@drawable/corner_border_component"-->
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/corner_border_component"
         android:gravity="right"
+        android:layout_weight="65"
         >
         <Spinner
             android:id="@+id/spinner"
@@ -66,7 +69,25 @@
             android:spinnerMode = "dropdown"
             android:popupBackground="@drawable/corner_border_component"
             android:gravity="left"/>
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/arrow"-->
+        <!--android:gravity="right"/>-->
+        <!-- -->
 
 
     </LinearLayout>
+
+    <!--<Spinner-->
+        <!--android:id="@+id/spinner"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:gravity="right"-->
+        <!--android:popupBackground="@drawable/corner_border_component"-->
+        <!--android:scrollIndicators="right"-->
+        <!--android:background="@drawable/corner_border_component"-->
+    <!--/>-->
+
+
 </LinearLayout>

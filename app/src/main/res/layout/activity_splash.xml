@@ -32,16 +32,13 @@
         android:textColor="#696969"
         android:textSize="24sp" />
 
-    <!--<ProgressBar-->
-        <!--android:id="@+id/activity_splash_progress_bar"-->
-        <!--style="?android:attr/progressBarStyleHorizontal"-->
-        <!--android:layout_width="270dp"-->
-        <!--android:layout_height="10dp"-->
-        <!--android:layout_marginTop="44dp" />-->
+
     <ProgressBar
         android:id="@+id/activity_splash_progress_bar"
         style="@style/CustomProgressBar"
-        android:layout_width="270dp"
+        android:layout_width="fill_parent"
+        android:layout_marginLeft="@dimen/margin_standard"
+        android:layout_marginRight="@dimen/margin_standard"
         android:layout_height="3dp"
         android:layout_marginTop="44dp" />
 </LinearLayout>

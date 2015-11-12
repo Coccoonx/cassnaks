@@ -67,7 +67,7 @@ public class TransferDetailsActivity extends AppCompatActivity {
         TextView endTitleView = (TextView) endCardView.findViewById(R.id.details_title);
         TextView endAmountView = (TextView) endCardView.findViewById(R.id.details_amount_recieved);
         endTitleView.setText("Amount Received:");
-        endAmountView.setText(transfer.getSenderCurrency() + " " + transfer.getAmount());
+        endAmountView.setText(transfer.getReceiverCurrency() + " " + transfer.getRecieverAmount());
 
         // set Font
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, endAmountView, endTitleView, titleView3,
