@@ -3,6 +3,7 @@ package co.wouri.coaze.uis;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -25,7 +26,10 @@ public class EditRecipientActivity extends AppCompatActivity {
     Toolbar toolbar;
     Button addButton;
     EditText name, email, phone, city, address;
+    MyArrayAdapter mySpinnerArrayAdapter;
     Recipient recipient;
+    String[] country = {"", "Canada", "Cameroon", "China", "USA"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class EditRecipientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_recipient);
 
         buildToolBar();
+        initUI();
 
 
         name = (EditText) findViewById(R.id.name_edit_recipient);
@@ -46,57 +51,45 @@ public class EditRecipientActivity extends AppCompatActivity {
         countries = (Spinner) findViewById(R.id.countries);
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, name, city, address, email, phone);
-
-        String[] country = {"Canada", "Cameroon", "China", "USA"};
-
-        MyArrayAdapter
-                mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, country);
+        mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, country);
         mySpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
         countries.setAdapter(mySpinnerArrayAdapter);
         addButton = (Button) findViewById(R.id.button_edit_recipient);
 
+
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
                 Intent intent = new Intent(EditRecipientActivity.this, ChooseAmountActivity.class);
-//                intent.putExtra("name", name.getText().toString());
-
-                startActivity(intent);
+                recipient.getName();
+                recipient.getEmail();
+                recipient.getPhoneNumber();
+                recipient.getAddress();
+                recipient.getCity();
+                intent.putExtra("recipient",(Parcelable)recipient);
+                        startActivity(intent);
             }
         });
 
-        Intent intent = getIntent();
 
-        name = (EditText) findViewById(R.id.name_edit_recipient);
-        city = (EditText) findViewById(R.id.city_edit_recipient);
-        address = (EditText) findViewById(R.id.address_edit_recipient);
-        email = (EditText) findViewById(R.id.email_edit_recipient);
-        phone = (EditText) findViewById(R.id.phone_edit_recipient);
-//        country=(EditText) findViewById(R.id.country_add_recipient);
 
-        if (intent != null) {
-            name.setText(intent.getStringExtra("name"));
-            city.setText(intent.getStringExtra("city"));
-            address.setText(intent.getStringExtra("address"));
-            email.setText(intent.getStringExtra("email"));
-            phone.setText(intent.getStringExtra("phone"));
-//            country.setText(intent.getStringExtra("country"));
-        }
+    }
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            recipient = bundle.getParcelable("recipient");
-            name.setText(recipient.getName());
-            city.setText(recipient.getCity());
-            address.setText(recipient.getAddress());
-            email.setText(recipient.getEmail());
-            phone.setText(recipient.getPhoneNumber());
-        }
+   private void initUI(){
 
+       // Bundle bundle = getIntent().getExtras();
+
+//        recipient = bundle.getParcelable("recipient");
+        name.setText(recipient.getName());
+        city.setText(recipient.getCity());
+        address.setText(recipient.getAddress());
+        email.setText(recipient.getEmail());
+        phone.setText(recipient.getPhoneNumber());
+       countries.setSelection(mySpinnerArrayAdapter.getPosition(recipient.getCountry()));
     }
 
 

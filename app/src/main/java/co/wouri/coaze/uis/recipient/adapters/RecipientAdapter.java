@@ -62,6 +62,7 @@ public class RecipientAdapter extends RecyclerView.Adapter<RecipientViewHolder> 
         ((ImageView) holder.rightViewDelete).setColorFilter(Color.argb(255, 29, 181, 245));
         ((ImageView) holder.rightViewEdite).setColorFilter(Color.argb(255, 29, 181, 245));
 
+        holder.recipient = recipients.get(position);
         holder.rightViewDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

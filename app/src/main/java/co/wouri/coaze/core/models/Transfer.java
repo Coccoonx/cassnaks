@@ -15,7 +15,8 @@ public class Transfer implements Serializable, Parcelable {
     private double amount;
     private String senderCurrency;
     private String receiverCurrency;
-    private Double receiverAmount;
+    private double receiverAmount;
+    private double senderAmount;
     private String sendDate;
     private String notifiedDate;
     private String receivedDate;
@@ -47,9 +48,10 @@ public class Transfer implements Serializable, Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.transferId);
         dest.writeDouble(this.amount);
-        dest.writeString(this.senderCurrency);
         dest.writeString(this.receiverCurrency);
-        dest.writeValue(this.receiverAmount);
+        dest.writeDouble(this.receiverAmount);
+        dest.writeString(this.senderCurrency);
+        dest.writeDouble(this.senderAmount);
         dest.writeString(this.sendDate);
         dest.writeString(this.notifiedDate);
         dest.writeString(this.receivedDate);
@@ -61,9 +63,10 @@ public class Transfer implements Serializable, Parcelable {
     protected Transfer(Parcel in) {
         this.transferId = in.readString();
         this.amount = in.readDouble();
-        this.senderCurrency = in.readString();
         this.receiverCurrency = in.readString();
-        this.receiverAmount = (Double) in.readValue(Double.class.getClassLoader());
+        this.receiverAmount = in.readDouble();
+        this.senderCurrency = in.readString();
+        this.senderAmount = in.readDouble();
         this.sendDate = in.readString();
         this.notifiedDate = in.readString();
         this.receivedDate = in.readString();

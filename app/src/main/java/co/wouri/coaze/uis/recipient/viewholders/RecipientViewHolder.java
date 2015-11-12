@@ -2,6 +2,7 @@ package co.wouri.coaze.uis.recipient.viewholders;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import co.wouri.coaze.R;
+import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.uis.EditRecipientActivity;
 import co.wouri.coaze.uis.recipient.adapters.RecipientAdapter;
 
@@ -25,6 +27,7 @@ public class RecipientViewHolder extends RecyclerView.ViewHolder {
     public TextView title;
     public View rightView;
     public View rightViewDelete;
+    public Recipient recipient;
     public View rightViewEdite;
     public Boolean isSelected = false;
 
@@ -42,7 +45,10 @@ public class RecipientViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "edit button activated", Toast.LENGTH_SHORT).show();
-                context.startActivity(new Intent(context, EditRecipientActivity.class));
+                Intent intent = new Intent(context, EditRecipientActivity.class);
+                 intent.putExtra("recipient", (Parcelable)recipient);
+
+                context.startActivity(intent);
                 // View parent = (View)v.getParent();
             }
         });
