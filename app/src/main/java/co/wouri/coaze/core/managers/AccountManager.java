@@ -77,14 +77,13 @@ public class AccountManager {
 
     }
 
-    public  static  void  updateRecipient(Recipient recipient){
+    public static void updateRecipient(Recipient recipient) {
 
-        for (Recipient recipients : account.getRecipients())
-        {
-            if (recipients.getRecipientId().equals(recipient.getRecipientId())){
+        for (Recipient recipients : profile.getRecipients()) {
+            if (recipients.getId().equals(recipient.getId())) {
                 recipients.setAddress(recipient.getAddress());
                 recipients.setCountry(recipient.getCountry());
-                recipients.setName(recipient.getName());
+                recipients.setFirstName(recipient.getFirstName());
                 recipients.setCity(recipient.getCity());
                 recipients.setEmail(recipient.getEmail());
                 recipients.setPhoneNumber(recipient.getPhoneNumber());

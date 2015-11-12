@@ -1,9 +1,7 @@
 package co.wouri.coaze.uis;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,10 +22,9 @@ import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.utils.UIUtils;
 
 
-
 public class EditRecipientActivity extends AppCompatActivity {
 
-    public  static final String TAG = " edit recipient";
+    public static final String TAG = " edit recipient";
     Spinner countries;
     Toolbar toolbar;
     Button addButton;
@@ -37,7 +34,6 @@ public class EditRecipientActivity extends AppCompatActivity {
     String[] country = {"", "Canada", "Cameroon", "China", "USA"};
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +41,6 @@ public class EditRecipientActivity extends AppCompatActivity {
 
         //initUI();
         buildToolBar();
-
 
 
         name = (EditText) findViewById(R.id.name_edit_recipient);
@@ -69,7 +64,7 @@ public class EditRecipientActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         recipient = bundle.getParcelable("recipient");
-        name.setText(recipient.getName());
+        name.setText(recipient.getFirstName() + " " + recipient.getLastName());
         city.setText(recipient.getCity());
         address.setText(recipient.getAddress());
         email.setText(recipient.getEmail());
@@ -85,21 +80,20 @@ public class EditRecipientActivity extends AppCompatActivity {
                 recipient.setAddress(address.getText().toString());
                 recipient.setEmail(email.getText().toString());
                 recipient.setPhoneNumber(phone.getText().toString());
-                recipient.setName(name.getText().toString());
+                recipient.setFirstName(name.getText().toString());
+                recipient.setLastName(name.getText().toString());
                 recipient.setCity(city.getText().toString());
                 recipient.setCountry(countries.getSelectedItem().toString());
                 Log.d(TAG, "the recipient " + recipient);
                 AccountManager.updateRecipient(recipient);
                 finish();
-               // intent.putExtra("recipient",(Parcelable)recipient);
-                        //startActivity(intent);
+                // intent.putExtra("recipient",(Parcelable)recipient);
+                //startActivity(intent);
             }
         });
 
 
-
     }
-
 
 
 //   private void initUI(){
@@ -113,7 +107,6 @@ public class EditRecipientActivity extends AppCompatActivity {
 //       phone.setText(recipient.getPhoneNumber());
 //       countries.setSelection(mySpinnerArrayAdapter.getPosition(recipient.getCountry()));
 //    }
-
 
 
     private void buildToolBar() {
