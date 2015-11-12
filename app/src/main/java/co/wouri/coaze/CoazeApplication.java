@@ -9,10 +9,12 @@ import co.wouri.coaze.utils.UIUtils;
 
 public class CoazeApplication extends MultiDexApplication {
     private static PreferencesStorage preferencesStorageInterface;
+    private static CoazeApplication instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         CoazeApplication.preferencesStorageInterface = new PreferencesStorage(this);
         UIUtils.initCustomTypefaces(this);
         initAccount();
@@ -27,5 +29,11 @@ public class CoazeApplication extends MultiDexApplication {
     void initAccount() {
         AccountManager.getCurrentUserAccount();
         AccountManager.saveAccount();
+    }
+
+    public static synchronized CoazeApplication getInstance() {
+        if (instance != null)
+            return instance;
+        return null;
     }
 }

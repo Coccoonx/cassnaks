@@ -43,7 +43,6 @@ public class AccountManager {
         if (profile == null) {
             profile = AccountManager.retrieveAccount();
             if (profile == null) {
-                //KeeperApplication.initUserAccount();
                 profile = new Profile();
             }
             return profile;
