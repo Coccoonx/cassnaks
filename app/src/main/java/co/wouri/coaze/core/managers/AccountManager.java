@@ -77,6 +77,25 @@ public class AccountManager {
 
     }
 
+    public  static  void  updateRecipient(Recipient recipient){
+
+        for (Recipient recipients : account.getRecipients())
+        {
+            if (recipients.getRecipientId().equals(recipient.getRecipientId())){
+                recipients.setAddress(recipient.getAddress());
+                recipients.setCountry(recipient.getCountry());
+                recipients.setName(recipient.getName());
+                recipients.setCity(recipient.getCity());
+                recipients.setEmail(recipient.getEmail());
+                recipients.setPhoneNumber(recipient.getPhoneNumber());
+                saveAccount();
+                return;
+            }
+
+        }
+
+    }
+
 
     public static String addTransfer(Transfer transfer) {
         if (account.getTransfers().add(transfer)) {
