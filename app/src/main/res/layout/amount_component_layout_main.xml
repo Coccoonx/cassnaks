@@ -36,7 +36,7 @@
                 android:textColor="@color/colorPrimarylight"
                 android:textSize="@dimen/text_size" />
 
-            <EditText
+            <TextView
                 android:layout_toRightOf="@+id/currency"
                 android:id="@+id/amount"
                 android:layout_width="wrap_content"

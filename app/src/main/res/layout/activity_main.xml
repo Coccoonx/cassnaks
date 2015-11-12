@@ -18,59 +18,101 @@
             layout="@layout/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="center_horizontal" />
+            />
 
-        <!-- main screen image-->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/margin_short"
+            android:layout_marginRight="@dimen/margin_short"
+             >
+            <include
+                android:id="@+id/amount_component_layout_1"
+                layout="@layout/amount_component_layout_main"
+                android:layout_marginTop="@dimen/margin_extra_big"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="top|center_vertical"/>
 
+            <include
+                android:layout_centerInParent="true"
+                android:id="@+id/amount_component_layout_2"
+                layout="@layout/amount_component_layout_2"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@+id/amount_component_layout_1"/>
 
-            <ImageView
-                android:id="@+id/mainscreenid"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginBottom="0dp"
-                android:src="@drawable/mainscreen"
-                android:visibility="visible" />
-
-            <!--Third component:description of operation-->
-            <LinearLayout
-                android:layout_width="fill_parent"
+                android:id="@+id/transfer_text"
+                android:text="Reciever gets with competition:"
+                android:layout_marginTop="50dp"
+                android:layout_below="@+id/amount_component_layout_2"
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/margin_standard"
+                android:textColor="@color/text_color_black_light"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/money_gram"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="-20dp"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:text="MoneyGram.........."
+                android:layout_marginTop="@dimen/margin_short"
+                android:layout_below="@+id/transfer_text"
+                android:layout_centerInParent="true"
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/money_gram_amount"
+                android:layout_marginTop="@dimen/margin_short"
+                android:layout_toRightOf="@+id/money_gram"
+                android:layout_below="@+id/transfer_text"
+                android:text="€55"
+                android:textColor="@color/text_color_red" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/western_union"
+                android:layout_height="wrap_content"
+                android:text="WesterUnion.........."
+                android:layout_marginTop="@dimen/margin_short"
+                android:layout_below="@+id/money_gram"
+                android:layout_centerInParent="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/western_union_amount"
+                android:layout_marginTop="@dimen/margin_short"
+                android:layout_toRightOf="@+id/money_gram"
+                android:layout_below="@+id/money_gram_amount"
+                android:text="€57"
+                android:textColor="@color/text_color_red" />
 
-                <ImageView
-                    android:id="@+id/textmsgid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/textmsg"
-                    android:visibility="visible" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/save_text"
+                android:text="You save: "
+                android:layout_marginTop="@dimen/margin_extra_big"
+                android:layout_below="@+id/western_union"
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/margin_standard"
+                android:textColor="@color/text_color_black_light"
+                />
 
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <!--component:get started and how button-->
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="0dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_extra_big"
+                android:id="@+id/save_amount"
+                android:layout_toRightOf="@+id/save_text"
+                android:layout_below="@+id/western_union_amount"
+                android:textSize="@dimen/margin_standard"
+                android:text="$30"
+                android:textColor="@color/button_color_green" />
 
             <Button
                 android:id="@+id/howButtonId"
@@ -81,29 +123,89 @@
                 android:width="150dp"
                 android:height="52dp"
                 android:background="@drawable/corner_border_blue"
-                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/margin_big"
                 android:onClick="performHow"
                 android:padding="12dp"
                 android:text="@string/how_text"
                 android:textColor="@color/coazeblue"
                 android:textSize="@dimen/text_size"
-                />
-
+            />
             <Button
                 android:id="@+id/getStartedId"
+                android:layout_toRightOf="@+id/howButtonId"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/corner_border_green"
-                android:gravity="center"
+                android:layout_alignParentBottom="true"
                 android:onClick="performStart"
+                android:layout_marginBottom="@dimen/margin_big"
                 android:padding="15dp"
                 android:text="@string/started_text"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"
-               />
+            />
 
-        </LinearLayout>
+        </RelativeLayout>
+
+
+
+        <!--&lt;!&ndash; main screen image&ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="vertical">-->
+
+
+            <!--<ImageView-->
+                <!--android:id="@+id/mainscreenid"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginBottom="0dp"-->
+                <!--android:src="@drawable/mainscreen"-->
+                <!--android:visibility="visible" />-->
+
+            <!--&lt;!&ndash;Third component:description of operation&ndash;&gt;-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:layout_marginTop="-20dp"-->
+                <!--android:gravity="center"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/textmsgid"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:src="@drawable/textmsg"-->
+                    <!--android:visibility="visible" />-->
+
+            <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
+
+        <!--&lt;!&ndash;component:get started and how button&ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:padding="0dp">-->
+
+
+
+        <!--</LinearLayout>-->
 
     </LinearLayout>
 

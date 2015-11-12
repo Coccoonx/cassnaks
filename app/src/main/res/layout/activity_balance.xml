@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <LinearLayout
         android:id="@+id/frame_container"
@@ -15,7 +14,6 @@
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:paddingTop="?attr/actionBarSize">
-
 
         <TextView
             android:id="@+id/balanceLabel"
@@ -39,43 +37,25 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:paddingBottom="15dp"
-        android:weightSum="100">
-
-        <!--<Button-->
-            <!--android:id="@+id/addFund"-->
-            <!--android:layout_width="150dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="#4dba38"-->
-            <!--android:text="@string/add"-->
-            <!--android:textColor="#f2f5f7" />-->
-
-        <Button
-            android:id="@+id/addFund"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_standard"
-            android:background="@drawable/corner_border_green"
-            android:text="@string/add"
-            android:gravity="center"
-            android:padding="@dimen/margin_standard"
-            android:textColor="#fff" />
-
-    </LinearLayout>
-
     <include
         android:id="@+id/toolbar"
         layout="@layout/custom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentTop="true"/>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/addFund"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_standard"
+        android:background="@drawable/corner_border_green"
+        android:text="@string/add"
+        android:gravity="center"
+        android:padding="@dimen/margin_standard"
+        android:textColor="#fff" />
+
+</RelativeLayout>

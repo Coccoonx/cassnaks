@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/activity_splash_title_line_two"
-        android:textColor="#2f4752"
+        android:textColor="#696969"
         android:textSize="24sp" />
 
     <!--<ProgressBar-->

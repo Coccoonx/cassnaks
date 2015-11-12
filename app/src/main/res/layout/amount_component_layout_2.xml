@@ -42,7 +42,8 @@
             android:textColor="@color/colorPrimarylight"
             android:textSize="25dp"
             android:background="#00000000"
-            android:paddingLeft="10dp"
+            android:layout_marginLeft="@dimen/margin_extra_short"
+
             />
         </RelativeLayout>
 
@@ -61,13 +62,6 @@
             android:spinnerMode = "dropdown"
             android:popupBackground="@drawable/corner_border_component_2"
             android:gravity="left" />
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@drawable/arrow"-->
-            <!--android:gravity="right"/>-->
-        <!-- -->
-
 
     </LinearLayout>
 

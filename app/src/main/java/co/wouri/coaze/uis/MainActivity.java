@@ -7,20 +7,35 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import co.wouri.coaze.R;
+import co.wouri.coaze.adapters.ItemData;
+import co.wouri.coaze.adapters.SpinnerAdapter;
 import co.wouri.coaze.utils.UIUtils;
 
 public class MainActivity extends AppCompatActivity {
+
+    LinearLayout amountComponentLayout1, amountComponentLayout2;
+    TextView currency1, currency2, amount2;
+    TextView amount1;
+    int USD = 0;
+    int EUR = 1;
+    Spinner sp1, sp2;
 
     Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
@@ -32,7 +47,99 @@ public class MainActivity extends AppCompatActivity {
 
         initUI();
 
+        ArrayList<ItemData> list = new ArrayList<>();
+        list.add(new ItemData("USD", R.drawable.usa));
+        list.add(new ItemData("EUR", R.drawable.eur));
 
+        sp1 = (Spinner) findViewById(R.id.spinner);
+        SpinnerAdapter adapter = new SpinnerAdapter(this, R.layout.spinner_layout, R.id.txt, list);
+        sp1.setAdapter(adapter);
+
+        sp2 = (Spinner) findViewById(R.id.spinner2);
+        //SpinnerAdapter adapter2=new SpinnerAdapter(this,R.layout.spinner_layout,R.id.txt,list);
+        sp2.setAdapter(adapter);
+        sp2.setSelection(sp1.getSelectedItemPosition() + 1);
+        amountComponentLayout1 = (LinearLayout) findViewById(R.id.amount_component_layout_1);
+        currency1 = (TextView) amountComponentLayout1.findViewById(R.id.currency);
+        amountComponentLayout2 = (LinearLayout) findViewById(R.id.amount_component_layout_2);
+        currency2 = (TextView) amountComponentLayout2.findViewById(R.id.currency);
+        amount1 = (TextView) amountComponentLayout1.findViewById(R.id.amount);
+        amount2 = (TextView) amountComponentLayout2.findViewById(R.id.amount);
+        setAllCurencies();
+        setAmount();
+        sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                setOneCurrency(position, currency1);
+                setAmount();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                setAllCurencies();
+                setAmount();
+            }
+        });
+        sp2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                setOneCurrency(position, currency2);
+                setAmount();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                setAllCurencies();
+                setAmount();
+            }
+        });
+
+    }
+
+    private void setAmount() {
+        Double dollars, euros;
+        if (sp1.getSelectedItemPosition() == sp2.getSelectedItemPosition()) {
+            amount2.setText(amount1.getText());
+        } else if (sp1.getSelectedItemPosition() == USD) { // ie sp2.getSelectedItemPosition() == EUR
+            try {
+                dollars = new Double(amount1.getText().toString());
+            } catch (Exception e) {
+                dollars = new Double(0);
+            }
+            euros = 0.93 * dollars;
+            amount2.setText(euros + "");
+        } else {
+            try {
+                euros = new Double(amount1.getText().toString());
+            } catch (Exception e) {
+                euros = new Double(0);
+            }
+            dollars = 1.07 * euros;
+            amount2.setText(dollars + "");
+        }
+    }
+
+    private void setOneCurrency(int position, TextView currency) {
+        if (position == USD) {
+            currency.setText("$");
+        } else if (position == EUR) {
+            currency.setText("€");
+        }
+    }
+
+    private void setAllCurencies() {
+
+        if (sp1.getSelectedItemPosition() == USD) {
+            currency1.setText("$");
+        } else {
+            currency1.setText("€");
+        }
+
+        if (sp2.getSelectedItemPosition() == USD) {
+            currency2.setText("$");
+        } else {
+            currency2.setText("€");
+        }
     }
 
     @Override

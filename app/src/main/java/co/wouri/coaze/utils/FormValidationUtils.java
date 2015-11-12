@@ -42,7 +42,9 @@ public class FormValidationUtils {
         return true;
     }
     public static boolean checkPhone(Context context,String phone){
-        Pattern pattern= Pattern.compile("(^\\+[0-9]{3}( [0-9]{2})+)|([0-9]+)");
+        String simpleRegex = "(^\\+[0-9]{3}([0-9])+)|([0-9]+)";
+        String northAmericaPhoneNumber ="\\D*([2-9]\\d{2})(\\D*)([2-9]\\d{2})(\\D*)(\\d{4})\\D*";
+        Pattern pattern= Pattern.compile(northAmericaPhoneNumber+"|"+simpleRegex);
         Matcher matcher = pattern.matcher(phone);
         if(!matcher.matches()){
             Toast.makeText(context, "Invalid Phone number", Toast.LENGTH_SHORT).show();
