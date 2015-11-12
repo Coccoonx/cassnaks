@@ -47,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
     Spinner countries;
     Toolbar toolbar;
     Button addButton;
-    EditText name;
+    EditText lastname;
     EditText email;
     EditText phone;
     EditText city;
@@ -67,8 +67,8 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         buildToolBar();
 
 
-        name = (EditText) findViewById(R.id.name_edit_recipient);
-        firstName = (EditText) findViewById(R.id.name_edit_recipient);
+        lastname = (EditText) findViewById(R.id.lastname_edit_recipient);
+        firstName = (EditText) findViewById(R.id.firstname_edit_recipient);
 
         city = (EditText) findViewById(R.id.city_edit_recipient);
         state = (EditText) findViewById(R.id.state_edit_recipient);
@@ -81,7 +81,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         password = (EditText) findViewById(R.id.password_edit_recipient);
         countries = (Spinner) findViewById(R.id.countries);
 
-        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, name, city, address, email, phone);
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, firstName, lastname, city, address, email, phone);
 
         String[] countrie = {"Canada", "Cameroon", "China", "USA"};
 
@@ -96,7 +96,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nameValue = name.getText().toString();
+                String nameValue = lastname.getText().toString();
                 String firstNameValue = firstName.getText().toString();
                 String emailValue = email.getText().toString();
                 String phoneValue = phone.getText().toString();
@@ -107,6 +107,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
                 String ssn = socialSecurityNumber.getText().toString();
                 String passwor = password.getText().toString();
                 if (!checkName(ProfileActivity.this, nameValue)
+                        || !checkName(ProfileActivity.this, nameValue)
                         || !checkName(ProfileActivity.this, firstNameValue)
                         || !checkEmail(ProfileActivity.this, emailValue)
                         || !checkPhone(ProfileActivity.this, phoneValue)
@@ -312,6 +313,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
                 CoazeSettingsUtils.setUserUid(account.getId());
                 CoazeSettingsUtils.setUserEmail(account.getEmail());
                 AccountManager.getCurrentUserAccount().setAccount(account);
+                AccountManager.saveAccount();
 
 //                new Login().execute();
 

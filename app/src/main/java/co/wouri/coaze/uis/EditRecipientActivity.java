@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,15 +16,17 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import co.wouri.coaze.R;
+import co.wouri.coaze.core.models.Recipient;
+import co.wouri.coaze.utils.UIUtils;
+
 import static co.wouri.coaze.utils.FormValidationUtils.checkAddress;
 import static co.wouri.coaze.utils.FormValidationUtils.checkCity;
 import static co.wouri.coaze.utils.FormValidationUtils.checkCountry;
 import static co.wouri.coaze.utils.FormValidationUtils.checkEmail;
 import static co.wouri.coaze.utils.FormValidationUtils.checkName;
 import static co.wouri.coaze.utils.FormValidationUtils.checkPhone;
-import co.wouri.coaze.R;
-import co.wouri.coaze.core.models.Recipient;
-import co.wouri.coaze.utils.UIUtils;
 
 
 public class EditRecipientActivity extends AppCompatActivity {
@@ -95,7 +96,7 @@ public class EditRecipientActivity extends AppCompatActivity {
                         || !checkCountry(EditRecipientActivity.this, countryValue)
                         ) {
                     Intent intent = new Intent(EditRecipientActivity.this, EditRecipientActivity.class);
-                    intent.putExtra("name", nameValue);
+                    intent.putExtra("lastname", nameValue);
                     intent.putExtra("email", emailValue);
                     intent.putExtra("phone", phoneValue);
                     intent.putExtra("city", cityValue);
@@ -103,7 +104,7 @@ public class EditRecipientActivity extends AppCompatActivity {
                     startActivityForResult(intent, 1);
                 } else {
 //                    Intent intent = new Intent(ProfileActivity.this, AddRecipientActivity.class);
-//                    intent.putExtra("name", nameValue);
+//                    intent.putExtra("lastname", nameValue);
 //                    startActivityForResult(intent, 1);
                     //We should call the backend functions here
                     Toast.makeText(EditRecipientActivity.this, "Recipient saved Successfully", Toast.LENGTH_SHORT).show();
@@ -122,7 +123,7 @@ public class EditRecipientActivity extends AppCompatActivity {
 //
 //       Bundle bundle = getIntent().getExtras();
 //       recipient = bundle.getParcelable("recipient");
-//       name.setText(recipient.getName());
+//       lastname.setText(recipient.getName());
 //       city.setText(recipient.getCity());
 //       address.setText(recipient.getAddress());
 //       email.setText(recipient.getEmail());

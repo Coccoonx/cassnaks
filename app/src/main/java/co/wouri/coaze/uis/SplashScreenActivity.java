@@ -7,6 +7,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import co.wouri.coaze.R;
+import co.wouri.coaze.storage.CoazeSettingsUtils;
 import co.wouri.coaze.utils.LoadingTask.LoadingTaskFinishedListener;
 import co.wouri.coaze.utils.UIUtils;
 
@@ -43,7 +44,13 @@ public class SplashScreenActivity extends Activity implements LoadingTaskFinishe
     }
 
     private void startApp() {
-        Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+        Intent intent;
+        if (CoazeSettingsUtils.getUserLogged()) {
+            intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+
+        } else
+            intent = new Intent(SplashScreenActivity.this, ProfileActivity.class);
+
         startActivity(intent);
     }
 }

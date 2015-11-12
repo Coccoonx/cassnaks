@@ -1,13 +1,10 @@
 package co.wouri.coaze.uis;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -15,7 +12,6 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -26,6 +22,8 @@ import java.util.ArrayList;
 import co.wouri.coaze.R;
 import co.wouri.coaze.adapters.ItemData;
 import co.wouri.coaze.adapters.SpinnerAdapter;
+import co.wouri.coaze.core.managers.AccountManager;
+import co.wouri.coaze.core.models.Profile;
 import co.wouri.coaze.utils.UIUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,12 +38,16 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
 
+    Profile profile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        profile = AccountManager.getCurrentUserAccount();
 
         initUI();
+
 
         ArrayList<ItemData> list = new ArrayList<>();
         list.add(new ItemData("USD", R.drawable.usa));
@@ -223,6 +225,10 @@ public class MainActivity extends AppCompatActivity {
         TextView username = (TextView) navigationView.findViewById(R.id.username);
         TextView userEmail = (TextView) navigationView.findViewById(R.id.useremail);
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
+
+        username.setText(profile.getAccount().getName() + " " + profile.getAccount().getName());
+        userEmail.setText(profile.getAccount().getEmail());
+        userBalance.setText("" + profile.getAccount().getBalance());
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, userBalance, userEmail, username);
 

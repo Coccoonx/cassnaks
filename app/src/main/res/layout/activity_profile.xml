@@ -48,7 +48,27 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/name_edit_recipient"
+                        android:id="@+id/firstname_edit_recipient"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
+                        android:ems="5"
+                        android:hint="Name"
+                        android:paddingLeft="6dp"
+                        android:paddingRight="6dp"
+                        android:singleLine="true"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/lastname_edit_recipient"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
