@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -90,9 +89,9 @@ public class AddRecipientActivity extends AppCompatActivity {
                 String countryValue = countries.getSelectedItem().toString();
                 String cityValue = city.getText().toString();
                 String addressValue = address.getText().toString();
-                if(countries.getSelectedItemPosition() == 0){
+                if (countries.getSelectedItemPosition() == 0) {
                     Toast.makeText(AddRecipientActivity.this, "Choose a country !", Toast.LENGTH_SHORT).show();
-                }else if (!checkName(AddRecipientActivity.this, nameValue)
+                } else if (!checkName(AddRecipientActivity.this, nameValue)
                         || !checkEmail(AddRecipientActivity.this, emailValue)
                         || !checkPhone(AddRecipientActivity.this, phoneValue)
                         || !checkCity(AddRecipientActivity.this, cityValue)
@@ -102,7 +101,7 @@ public class AddRecipientActivity extends AppCompatActivity {
                         ) {
 
 
-                }else{
+                } else {
                     Recipient recipient = new Recipient();
                     recipient.setName(nameValue);
                     recipient.setEmail(emailValue);
