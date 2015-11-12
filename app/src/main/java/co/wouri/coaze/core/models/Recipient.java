@@ -13,14 +13,11 @@ public class Recipient implements Serializable, Parcelable {
     private String recipientId;
     private String email;
     private String city;
-    private String state;
     private String country;
     private String address;
     private String phoneNumber;
     private String name;
     private String accountId;
-    private byte[] userPicture;
-    private String currency;
     private int image;
 
 
@@ -67,6 +64,7 @@ public class Recipient implements Serializable, Parcelable {
         recipientId = UUID.randomUUID().toString();
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -77,14 +75,11 @@ public class Recipient implements Serializable, Parcelable {
         dest.writeString(this.recipientId);
         dest.writeString(this.email);
         dest.writeString(this.city);
-        dest.writeString(this.state);
         dest.writeString(this.country);
         dest.writeString(this.address);
         dest.writeString(this.phoneNumber);
         dest.writeString(this.name);
         dest.writeString(this.accountId);
-        dest.writeByteArray(this.userPicture);
-        dest.writeString(this.currency);
         dest.writeInt(this.image);
     }
 
@@ -92,18 +87,15 @@ public class Recipient implements Serializable, Parcelable {
         this.recipientId = in.readString();
         this.email = in.readString();
         this.city = in.readString();
-        this.state = in.readString();
         this.country = in.readString();
         this.address = in.readString();
         this.phoneNumber = in.readString();
         this.name = in.readString();
         this.accountId = in.readString();
-        this.userPicture = in.createByteArray();
-        this.currency = in.readString();
         this.image = in.readInt();
     }
 
-    public static final Parcelable.Creator<Recipient> CREATOR = new Parcelable.Creator<Recipient>() {
+    public static final Creator<Recipient> CREATOR = new Creator<Recipient>() {
         public Recipient createFromParcel(Parcel source) {
             return new Recipient(source);
         }

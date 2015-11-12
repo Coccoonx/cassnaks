@@ -7,6 +7,7 @@ import android.os.Parcelable;
 /**
  * Created by edwidge on 05/11/15.
  */
+
 public class Person implements Parcelable {
     private String name;
     private Bitmap photoId;
