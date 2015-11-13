@@ -29,7 +29,7 @@
              >
             <include
                 android:id="@+id/amount_component_layout_1"
-                layout="@layout/amount_component_layout_1"
+                layout="@layout/amount_component_layout_main"
                 android:layout_marginTop="@dimen/margin_extra_big"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
