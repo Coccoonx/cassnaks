@@ -26,15 +26,17 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
     public RelativeLayout mRelativeLayout;
     public Recipient recipient;
     public static final String TAG="ChooseRecipientView";
+    public View itemView;
 
 
-    public ChooseRecipientViewHolder(final Context context, View view, int viewType) {
+    public ChooseRecipientViewHolder(final Context context, View view) {
         super(view);
         this.context = context;
         this.leftImageView = (ImageView) view.findViewById(R.id.leftIcon);
         this.title = (TextView) view.findViewById(R.id.title);
         this.rightView = view.findViewById(R.id.rightIconCheck);
         this.mRelativeLayout = (RelativeLayout) view.findViewById(R.id.rootLayout);
+        itemView = view;
 
     }
 }

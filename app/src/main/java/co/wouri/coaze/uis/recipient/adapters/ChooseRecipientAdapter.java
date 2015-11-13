@@ -94,7 +94,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
 
         holder.recipient = recipients.get(position);
 
-        holder.getItemView().setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
