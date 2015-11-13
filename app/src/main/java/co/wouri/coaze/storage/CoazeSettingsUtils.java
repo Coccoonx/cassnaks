@@ -233,7 +233,7 @@ public class CoazeSettingsUtils {
         storageInterface.save(TOKEN_TYPE, b);
     }
 
-    public String getTokenType() {
+    public static String getTokenType() {
         PreferencesStorage storageInterface = CoazeApplication.getPreferencesStorageInterface();
         return storageInterface.load(TOKEN_TYPE, "");
     }

@@ -232,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 intent.putExtra("profile", (Parcelable) profile.getAccount());
+                intent.putExtra("isUpdate", true);
                 startActivity(intent);
             }
         });

@@ -57,6 +57,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
     private EditText state;
     private EditText password;
     private ProgressDialog progressDialog;
+    boolean isUpdate;
 
     MyArrayAdapter
             mySpinnerArrayAdapter;
@@ -94,14 +95,13 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         countries.setAdapter(mySpinnerArrayAdapter);
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, firstName, lastname, city, address, email, phone);
+        addButton = (Button) findViewById(R.id.button_edit_recipient);
 
 
         if (getIntent().getExtras() != null) {
             updateUi();
         }
 
-
-        addButton = (Button) findViewById(R.id.button_edit_recipient);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,7 +173,11 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
                     progressDialog.setCancelable(true);
                     progressDialog.setMessage("Retrieving data...");
                     progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    new CreateAccount().execute(account);
+
+                    if (!isUpdate)
+                        new CreateAccount().execute(account);
+                    else
+                        new UpdateAccount().execute(account);
 //                    Web.requestAsynData(new Request(Web.getCreateAccountUrl(), false, null, "POST", obj.toString(), this, REQUEST_CREATE_ACCOUNT));
 //                    }
 
@@ -185,6 +189,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
 
     private void updateUi() {
         Account account = getIntent().getParcelableExtra("profile");
+        isUpdate = getIntent().getBooleanExtra("isUpdate", false);
 
         lastname.setText(account.getLastName());
         firstName.setText(account.getFirstName());
@@ -199,6 +204,10 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         socialSecurityNumber.setText(account.getSocialSecurityNumber());
         password.setEnabled(false);
         countries.setSelection(mySpinnerArrayAdapter.getPosition(account.getCountry()));
+
+        if (isUpdate) {
+            addButton.setText("Update");
+        }
 
     }
 
@@ -353,6 +362,36 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
                 loginRequest();
             } else
                 Toast.makeText(ProfileActivity.this, "An error occurred while creating your account", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private class UpdateAccount extends AsyncTask<Account, Void, Account> {
+
+
+        @Override
+        protected Account doInBackground(Account... params) {
+//            progressDialog.show();
+
+            Account account = ServerUtils.updateAccount(ProfileActivity.this, params[0]);
+            return account;
+        }
+
+
+        @Override
+        protected void onPostExecute(Account account) {
+            super.onPostExecute(account);
+//            progressDialog.cancel();
+            if (account != null) {
+
+                ProfileManager.getCurrentUserAccount().setAccount(account);
+                ProfileManager.saveAccount();
+
+//                new Login().execute();
+                Toast.makeText(ProfileActivity.this, "Profile updated successfully.", Toast.LENGTH_LONG).show();
+                finish();
+            } else {
+                Toast.makeText(ProfileActivity.this, "An error occurred while creating your account", Toast.LENGTH_LONG).show();
+            }
         }
     }
 

@@ -104,6 +104,86 @@ public class ServerUtils {
     }
 
 
+    public static Account updateAccount(Context context, Account account) {
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        final Account[] accounts = {null};
+
+        String tokenType = CoazeSettingsUtils.getTokenType();
+        String token = CoazeSettingsUtils.getAccessToken();
+        String uId = CoazeSettingsUtils.getUserUid();
+        try {
+            Http http = HttpFactory.create(context);
+            http.put(Web.getUpdateAccountUrl())
+                    .header("Authorization", tokenType + " " + uId)
+                    .header("Authorization", tokenType + " " + token)
+                    .data(account)
+                    .handler(new ResponseHandler() {
+                                 @Override
+                                 public void success(Object data, HttpResponse response) {
+                                     super.success(data, response);
+                                     Log.d(TAG, "HttpResponse header = " + response.getHeaders());
+
+                                     if (data != null) {
+                                         Log.d(TAG, "Account correctly retrieve " + data.toString());
+                                         try {
+
+                                             JSONObject obj = new JSONObject(data.toString());
+                                             Account account1;
+
+                                             if (obj != null) {
+                                                 account1 = new Account();
+                                                 account1.setId(obj.getString("id"));
+                                                 account1.setCity(obj.getString("city"));
+                                                 account1.setEmail(obj.getString("email"));
+                                                 account1.setFirstName(obj.getString("firstName"));
+                                                 account1.setLastName(obj.getString("lastName"));
+                                                 account1.setPhoneNumber(obj.getString("phoneNumber"));
+                                                 account1.setSocialSecurityNumber(obj.getString("socialSecurityNumber"));
+                                                 account1.setState(obj.getString("state"));
+                                                 account1.setCountry(obj.getString("country"));
+                                                 accounts[0] = account1;
+                                             }
+                                             //responseFlag[0] = true;
+                                         } catch (Exception e) {
+
+                                         }
+                                     }
+                                 }
+
+                                 @Override
+                                 public void error(String message, HttpResponse response) {
+                                     super.error(message, response);
+                                     //responseFlag[0] = false;
+                                     Log.d(TAG, message);
+                                 }
+
+                                 @Override
+                                 public void failure(NetworkError error) {
+                                     super.failure(error);
+                                     //responseFlag[0] = false;
+                                     Log.d(TAG, "Error " + error.name());
+                                 }
+
+                                 @Override
+                                 public void complete() {
+                                     super.complete();
+                                     Log.d(TAG, "Terminated");
+                                 }
+                             }
+
+                    ).
+
+                    send();
+        } catch (RuntimeException e) {
+            Log.d(TAG, "Error while sending feedback " + Log.getStackTraceString(e));
+        }
+        return accounts[0];
+    }
+
+
     public static Account createAccount(Context context,
                                         Account accountIncoming) {
 
