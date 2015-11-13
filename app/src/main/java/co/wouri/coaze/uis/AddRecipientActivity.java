@@ -115,6 +115,7 @@ public class AddRecipientActivity extends AppCompatActivity {
                     recipient.setCountry(countryValue);
                     recipient.setCity(cityValue);
                     recipient.setAddress(addressValue);
+                    recipient.setImage(R.drawable.user_profile);
                     ProfileManager.addRecipient(recipient);
 
                     //We must call a backend method here

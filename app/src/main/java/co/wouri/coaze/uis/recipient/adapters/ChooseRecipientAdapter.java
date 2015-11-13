@@ -15,6 +15,7 @@ import java.util.List;
 
 import co.wouri.coaze.R;
 import co.wouri.coaze.core.models.Recipient;
+import co.wouri.coaze.uis.ChooseRecipientActivity;
 import co.wouri.coaze.uis.recipient.viewholders.ChooseRecipientViewHolder;
 
 /**
@@ -32,6 +33,8 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
     public static final int USER_7 = 6;
     public static final int USER_8 = 7;
 
+    public int selectedItem = -1;
+
     Context context;
     List<RecipientItem> recipientItems;
     List<Recipient> recipients;
@@ -46,7 +49,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
     @Override
     public ChooseRecipientViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_setting_items, null);
-        ChooseRecipientViewHolder cv = new ChooseRecipientViewHolder(this.context, v, viewType);
+        ChooseRecipientViewHolder cv = new ChooseRecipientViewHolder(this.context, v);
         return cv;
     }
 
@@ -76,10 +79,9 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
     }
 
     @Override
-    public void onBindViewHolder(final ChooseRecipientViewHolder holder, int position) {
-
-        final int itemPosition = position;
+    public void onBindViewHolder(final ChooseRecipientViewHolder holder, final int position) {
         RecipientItem settingsRecipients = recipientItems.get(position);
+        settingsRecipients.holder = holder;
         //holder.id = settingsRecipients.getId();
         try {
             holder.leftImageView.setImageResource(settingsRecipients.leftIcon);
@@ -92,10 +94,48 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
 
         holder.recipient = recipients.get(position);
 
+        holder.getItemView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (selectedItem < 0) {
+                    selectedItem = position;
+                    holder.isSelected = true;
+                    holder.mRelativeLayout.setBackgroundColor(context.getResources().getColor(R.color.color_seleted_item));
+                    holder.rightView.setVisibility(View.VISIBLE);
+                    ChooseRecipientActivity.recipient = holder.recipient;
+                    Log.d("coaze", "selected item :" + selectedItem);
+                } else if (holder.isSelected) {
+                    selectedItem = -1;
+                    holder.isSelected = false;
+                    holder.mRelativeLayout.setBackgroundColor(context.getResources().getColor(R.color.color_background));
+                    holder.rightView.setVisibility(View.INVISIBLE);
+                    ChooseRecipientActivity.recipient = null;
+                    Log.d("coaze", "selected item :" + selectedItem);
+                } else {
+                    if(getItem(selectedItem).holder!=null){
+                        getItem(selectedItem).holder.isSelected = false;
+                        getItem(selectedItem).holder.mRelativeLayout.setBackgroundColor(context.getResources().getColor(R.color.color_background));
+                        getItem(selectedItem). holder.rightView.setVisibility(View.INVISIBLE);
+                        selectedItem = position;
+                        holder.isSelected = true;
+                        holder.mRelativeLayout.setBackgroundColor(context.getResources().getColor(R.color.color_seleted_item));
+                        holder.rightView.setVisibility(View.VISIBLE);
+                        ChooseRecipientActivity.recipient = holder.recipient;
+                        Log.d("coaze", "selected item :" + selectedItem);
+                    }else{
+                        Log.d("coaze","not possible");
+                    }
+                }
+            }
+        });
+
 
     }
 
-
+    public RecipientItem getItem(int position){
+        return recipientItems.get(position);
+    }
     @Override
     public int getItemCount() {
         return recipientItems.size();
@@ -105,7 +145,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
     public static class RecipientItem {
         public int leftIcon;
         public String title;
-        boolean isSelected;
+        public ChooseRecipientViewHolder holder = null;
 
         public RecipientItem(int leftIcon, String title) {
 
@@ -128,112 +168,10 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
 
     }
 
-    public void updateItems(){
+    public void updateItems() {
         recipientItems.clear();
         recipientItems.addAll(initList(recipients));
         notifyDataSetChanged();
     }
-
-   /* private List<RecipientItem> initRecipientList() {
-        ArrayList<RecipientItem> recipientItemList =new ArrayList<>();
-        return null;
-    }
-
-
-    private List<SettingsItem> initSettingsList() {
-
-        ArrayList<SettingsItem> settingsItemsArrayList = new ArrayList<>();
-
-        // The data
-        int[] ids = {
-                USER_1,
-                USER_2,
-                USER_3,
-                USER_4,
-                USER_5,
-                USER_6,
-                USER_7,
-                USER_8
-        };
-
-        int[] leftIcons = {
-                R.drawable.friend2,
-                R.drawable.friend4,
-                R.drawable.thumb1,
-                R.drawable.friend4,
-                R.drawable.thumb3,
-                R.drawable.friend2,
-                R.drawable.thumb3,
-                R.drawable.friend2,
-
-        };
-        String[] titles = {
-                "Aaron Bennett",
-                "Abbey Christensen",
-                "Ali connors",
-                "Alex Nelson",
-                "Anthony Stevens",
-                "Barry Green",
-                "B.B. King",
-                "Brutta Holt"
-
-        };
-
-        Bitmap[] bitmaps = converterDrawableToBitmap(leftIcons);
-
-        boolean[] isSwitchItem = {
-                false,
-                false,
-                false,
-        };
-
-        // Construct the list data
-        for (int i = 0; i < titles.length; i++) {
-            settingsItemsArrayList.add(new SettingsItem(ids[i], bitmaps[i], titles[i]));
-        }
-        // return the list
-        return settingsItemsArrayList;
-    }
-
-    private Bitmap[] converterDrawableToBitmap(int[] leftIcons) {
-        Bitmap[] bitmaps = new Bitmap[leftIcons.length];
-        for (int i = 0; i < leftIcons.length; i++) {
-            Bitmap output = BitmapFactory.decodeResource(context.getResources(), leftIcons[i]);
-            bitmaps[i] = output;
-        }
-        return bitmaps;
-    }
-
-
-
-    public static class  RecipientItem{
-        public int id;
-        public Bitmap leftIcon;
-        public String title;
-        public RecipientItem(int id, Bitmap leftIcon, String title) {
-            this.id = id;
-            this.leftIcon = leftIcon;
-            this.title = title;
-
-
-        }
-    }
-
-    public static class SettingsItem {
-        public int id;
-        //public int leftIcon;
-        public Bitmap leftIcon;
-        public String title;
-        // public  Bitmap bitmap;
-
-        public SettingsItem(int id, Bitmap leftIcon, String title) {
-            this.id = id;
-            this.leftIcon = leftIcon;
-            this.title = title;
-
-
-        }
-    }
-*/
 
 }

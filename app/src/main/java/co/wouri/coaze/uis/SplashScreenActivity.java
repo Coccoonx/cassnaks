@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import co.wouri.coaze.R;
 import co.wouri.coaze.storage.CoazeSettingsUtils;
+import co.wouri.coaze.utils.LoadingTask;
 import co.wouri.coaze.utils.LoadingTask.LoadingTaskFinishedListener;
 import co.wouri.coaze.utils.UIUtils;
 
@@ -28,7 +29,7 @@ public class SplashScreenActivity extends Activity implements LoadingTaskFinishe
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan);
 
         // Start your loading
-//        new LoadingTask(progressBar, this).execute("www.google.co.uk"); // Pass in whatever you need a url is just an example we don't use it in this tutorial
+        new LoadingTask(progressBar, this).execute("www.google.co.uk"); // Pass in whatever you need a url is just an example we don't use it in this tutorial
         completeSplash();
     }
 
@@ -45,11 +46,11 @@ public class SplashScreenActivity extends Activity implements LoadingTaskFinishe
 
     private void startApp() {
         Intent intent;
-        if (CoazeSettingsUtils.getUserLogged()) {
+//        if (CoazeSettingsUtils.getUserLogged()) {
             intent = new Intent(SplashScreenActivity.this, MainActivity.class);
 
-        } else
-            intent = new Intent(SplashScreenActivity.this, ProfileActivity.class);
+//        } else
+//            intent = new Intent(SplashScreenActivity.this, ProfileActivity.class);
 
         startActivity(intent);
     }
