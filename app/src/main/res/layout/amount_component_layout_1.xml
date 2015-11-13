@@ -10,7 +10,7 @@
         android:layout_height="fill_parent"
         android:background="@drawable/corner_border_amount"
         android:orientation="vertical"
-        android:layout_weight="35">
+        android:layout_weight="40">
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
         android:layout_height="fill_parent"
         android:background="@drawable/corner_border_component"
         android:gravity="right"
-        android:layout_weight="65"
+        android:layout_weight="60"
         >
         <Spinner
             android:id="@+id/spinner"

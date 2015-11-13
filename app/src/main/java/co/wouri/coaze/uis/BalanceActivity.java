@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import co.wouri.coaze.R;
+import co.wouri.coaze.core.managers.ProfileManager;
 import co.wouri.coaze.utils.UIUtils;
 
 
@@ -34,7 +35,7 @@ public class BalanceActivity extends AppCompatActivity {
         addFundButton = (Button) findViewById(R.id.addFund);
         balance = (TextView) findViewById(R.id.balanceLabel);
         amount = (TextView) findViewById(R.id.amountValue);
-
+        amount.setText("$"+ProfileManager.getCurrentUserAccount().getAccount().getBalance());
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, balance, addFundButton, amount);
 
 
