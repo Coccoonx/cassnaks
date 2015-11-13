@@ -11,7 +11,7 @@ import co.wouri.coaze.core.models.Transfer;
 import co.wouri.coaze.storage.CoazeSettingsUtils;
 
 
-public class ProfileManager {
+public class AccountManager {
 
     private static FileManager fileManager = FileManager.getInstance();
 
@@ -41,7 +41,7 @@ public class ProfileManager {
 
     public static Profile getCurrentUserAccount() {
         if (profile == null) {
-            profile = ProfileManager.retrieveAccount();
+            profile = AccountManager.retrieveAccount();
             if (profile == null) {
                 profile = new Profile();
             }
@@ -91,6 +91,21 @@ public class ProfileManager {
             }
 
         }
+
+    }
+
+    public static void updateTransfer(Transfer transfer){
+        for (Transfer transfer1:profile.getTransfers()){
+
+            if (transfer1.getId().equals(transfer.getId())){
+                transfer1.setSenderCurrency(transfer.getSenderCurrency());
+                transfer1.setAmount(transfer.getAmount());
+                transfer1.setRecipient(transfer.getRecipient());
+                transfer1.setCreationDate(transfer.getCreationDate());
+
+            }
+        }
+
 
     }
 
