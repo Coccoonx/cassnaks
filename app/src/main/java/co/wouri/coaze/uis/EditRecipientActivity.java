@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,18 +16,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import co.wouri.coaze.R;
+import co.wouri.coaze.core.managers.ProfileManager;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.utils.UIUtils;
 
-import static co.wouri.coaze.utils.FormValidationUtils.checkAddress;
-import static co.wouri.coaze.utils.FormValidationUtils.checkCity;
-import static co.wouri.coaze.utils.FormValidationUtils.checkCountry;
-import static co.wouri.coaze.utils.FormValidationUtils.checkEmail;
-import static co.wouri.coaze.utils.FormValidationUtils.checkName;
-import static co.wouri.coaze.utils.FormValidationUtils.checkPhone;
+
 
 
 public class EditRecipientActivity extends AppCompatActivity {
@@ -79,57 +75,26 @@ public class EditRecipientActivity extends AppCompatActivity {
         countries.setSelection(mySpinnerArrayAdapter.getPosition(recipient.getCountry()));
 
 
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nameValue = name.getText().toString();
-                String emailValue = email.getText().toString();
-                String phoneValue = phone.getText().toString();
-                String countryValue = countries.getSelectedItem().toString();
-                String cityValue = city.getText().toString();
-                String addressValue = address.getText().toString();
-                if (!checkName(EditRecipientActivity.this, nameValue)
-                        || !checkEmail(EditRecipientActivity.this, emailValue)
-                        || !checkPhone(EditRecipientActivity.this, phoneValue)
-                        || !checkCity(EditRecipientActivity.this, cityValue)
-                        || !checkAddress(EditRecipientActivity.this, addressValue)
-                        || !checkCountry(EditRecipientActivity.this, countryValue)
-                        ) {
-                    Intent intent = new Intent(EditRecipientActivity.this, EditRecipientActivity.class);
-                    intent.putExtra("lastname", nameValue);
-                    intent.putExtra("email", emailValue);
-                    intent.putExtra("phone", phoneValue);
-                    intent.putExtra("city", cityValue);
-                    intent.putExtra("address", addressValue);
-                    startActivityForResult(intent, 1);
-                } else {
-//                    Intent intent = new Intent(ProfileActivity.this, AddRecipientActivity.class);
-//                    intent.putExtra("lastname", nameValue);
-//                    startActivityForResult(intent, 1);
-                    //We should call the backend functions here
-                    Toast.makeText(EditRecipientActivity.this, "Recipient saved Successfully", Toast.LENGTH_SHORT).show();
-                    finish();
-                    Intent intent = new Intent(EditRecipientActivity.this, MainActivity.class);
-                    startActivityForResult(intent, 1);
-                }
+
+                recipient.setAddress(address.getText().toString());
+                recipient.setEmail(email.getText().toString());
+                recipient.setPhoneNumber(phone.getText().toString());
+                recipient.setFirstName(name.getText().toString());
+                recipient.setCity(city.getText().toString());
+                recipient.setCountry(countries.getSelectedItem().toString());
+                Log.d(TAG, "the recipient " + recipient);
+                ProfileManager.updateRecipient(recipient);
+                finish();
             }
         });
-
 
     }
 
 
-//   private void initUI(){
-//
-//       Bundle bundle = getIntent().getExtras();
-//       recipient = bundle.getParcelable("recipient");
-//       lastname.setText(recipient.getName());
-//       city.setText(recipient.getCity());
-//       address.setText(recipient.getAddress());
-//       email.setText(recipient.getEmail());
-//       phone.setText(recipient.getPhoneNumber());
-//       countries.setSelection(mySpinnerArrayAdapter.getPosition(recipient.getCountry()));
-//    }
 
 
     private void buildToolBar() {
