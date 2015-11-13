@@ -260,11 +260,14 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
             if (check(r, rid)) {
 //                {"access_token":"f10e6ac1-47c8-466b-b465-3f0431458f8f","token_type":"bearer","refresh_token":"e4ff8824-9aa8-49be-ab42-b75415e3b35c","expires_in":43200,"scope":"openid"}
                 Log.d(TAG, "REQUEST_CREATE_LOGIN no error_ Obj:" + r.obj);
+               // Toast.makeText(ProfileActivity.this, "Account created successfully.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(ProfileActivity.this,MainActivity.class);
+                intent.putExtra("account",true);
+                startActivity(intent);
                 try {
                     JSONObject obj = r.obj;
                     if (obj != null) {
-                        Toast.makeText(ProfileActivity.this, "Account created successfully.", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(this, MainActivity.class));
+
                     }
                 } catch (Exception e) {
                     // TODO: handle exception

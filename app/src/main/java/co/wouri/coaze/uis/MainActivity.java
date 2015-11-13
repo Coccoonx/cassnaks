@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -41,10 +42,20 @@ public class MainActivity extends AppCompatActivity {
 
     Profile profile;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        if (getIntent().getExtras() != null) {
+            boolean b = getIntent().getBooleanExtra("account", false);
+            if (b) {
+                Toast.makeText(MainActivity.this, "Account created successfully.", Toast.LENGTH_SHORT).show();
+            }
+        }
+
         profile = ProfileManager.getCurrentUserAccount();
 
         initUI();
