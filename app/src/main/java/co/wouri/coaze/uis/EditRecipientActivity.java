@@ -23,15 +23,13 @@ import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.utils.UIUtils;
 
 
-
-
 public class EditRecipientActivity extends AppCompatActivity {
 
     public static final String TAG = " edit recipient";
     Spinner countries;
     Toolbar toolbar;
     Button addButton;
-    EditText name, email, phone, city, address;
+    EditText firstName, lastName, email, phone, city, address;
     MyArrayAdapter mySpinnerArrayAdapter;
     Recipient recipient;
     String[] country = {"Canada", "Cameroon", "China", "USA"};
@@ -46,7 +44,8 @@ public class EditRecipientActivity extends AppCompatActivity {
         buildToolBar();
 
 
-        name = (EditText) findViewById(R.id.name_edit_recipient);
+        firstName = (EditText) findViewById(R.id.firstName_edit_recipient);
+        lastName = (EditText) findViewById(R.id.lastName_edit_recipient);
 
         city = (EditText) findViewById(R.id.city_edit_recipient);
         address = (EditText) findViewById(R.id.address_edit_recipient);
@@ -56,7 +55,7 @@ public class EditRecipientActivity extends AppCompatActivity {
         phone = (EditText) findViewById(R.id.phone_edit_recipient);
         countries = (Spinner) findViewById(R.id.countries);
 
-        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, name, city, address, email, phone);
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, firstName, lastName, city, address, email, phone);
         mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, country);
         mySpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -66,16 +65,18 @@ public class EditRecipientActivity extends AppCompatActivity {
 
 
         Bundle bundle = getIntent().getExtras();
-        recipient = bundle.getParcelable("recipient");
-        name.setText(recipient.getFirstName() + " " + recipient.getLastName());
-        city.setText(recipient.getCity());
-        address.setText(recipient.getAddress());
-        email.setText(recipient.getEmail());
-        phone.setText(recipient.getPhoneNumber());
-        countries.setSelection(mySpinnerArrayAdapter.getPosition(recipient.getCountry()));
+        if(bundle!=null) {
+            recipient = bundle.getParcelable("recipient");
+            Log.d(TAG, "reference " + recipient);
+            firstName.setText(recipient.getFirstName());
+            lastName.setText(recipient.getLastName());
+            city.setText(recipient.getCity());
+            address.setText(recipient.getAddress());
+            email.setText(recipient.getEmail());
+            phone.setText(recipient.getPhoneNumber());
+            countries.setSelection(mySpinnerArrayAdapter.getPosition(recipient.getCountry()));
 
-
-
+        }
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +84,8 @@ public class EditRecipientActivity extends AppCompatActivity {
                 recipient.setAddress(address.getText().toString());
                 recipient.setEmail(email.getText().toString());
                 recipient.setPhoneNumber(phone.getText().toString());
-                recipient.setFirstName(name.getText().toString());
+                recipient.setFirstName(firstName.getText().toString());
+                recipient.setLastName(lastName.getText().toString());
                 recipient.setCity(city.getText().toString());
                 recipient.setCountry(countries.getSelectedItem().toString());
                 Log.d(TAG, "the recipient " + recipient);
@@ -93,8 +95,6 @@ public class EditRecipientActivity extends AppCompatActivity {
         });
 
     }
-
-
 
 
     private void buildToolBar() {

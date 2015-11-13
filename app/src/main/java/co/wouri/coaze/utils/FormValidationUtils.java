@@ -10,9 +10,16 @@ import java.util.regex.Pattern;
  * Created by landryfoko on 11/11/15.
  */
 public class FormValidationUtils {
-    public static boolean checkName(Context context, String name){
+    public static boolean checkFirstName(Context context, String name){
         if(name==null || name.split(" ").length==0 || name.length()<=2){
             Toast.makeText(context, "Invalid firstName, the firstName must at least have 3 characters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+    public static boolean checkLastName(Context context, String name){
+        if(name==null || name.split(" ").length==0 || name.length()<=2){
+            Toast.makeText(context, "Invalid LastName, the LastName must at least have 3 characters", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

@@ -25,14 +25,16 @@ import static co.wouri.coaze.utils.FormValidationUtils.checkAddress;
 import static co.wouri.coaze.utils.FormValidationUtils.checkCity;
 import static co.wouri.coaze.utils.FormValidationUtils.checkCountry;
 import static co.wouri.coaze.utils.FormValidationUtils.checkEmail;
-import static co.wouri.coaze.utils.FormValidationUtils.checkName;
+import static co.wouri.coaze.utils.FormValidationUtils.checkFirstName;
+import static co.wouri.coaze.utils.FormValidationUtils.checkLastName;
 import static co.wouri.coaze.utils.FormValidationUtils.checkPhone;
 
 public class AddRecipientActivity extends AppCompatActivity {
     Spinner countries;
     Toolbar toolbar;
     Button addButton;
-    EditText name;
+    EditText firstName;
+    EditText lastName;
     EditText email;
     EditText phone;
     EditText city;
@@ -47,7 +49,8 @@ public class AddRecipientActivity extends AppCompatActivity {
         buildToolBar();
 
 
-        name = (EditText) findViewById(R.id.name_add_recipient);
+        firstName = (EditText) findViewById(R.id.firstName_add_recipient);
+        lastName = (EditText) findViewById(R.id.lastName_add_recipient);
 
         city = (EditText) findViewById(R.id.city_add_recipient);
         address = (EditText) findViewById(R.id.address_add_recipient);
@@ -56,7 +59,7 @@ public class AddRecipientActivity extends AppCompatActivity {
 
         phone = (EditText) findViewById(R.id.phone_add_recipient);
         countries = (Spinner) findViewById(R.id.countries);
-        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, name, city, address, email, phone);
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, firstName, lastName, city, address, email, phone);
 
 
         String[] country = {"Choose Country", "Canada", "Cameroon", "China", "USA"};
@@ -83,7 +86,8 @@ public class AddRecipientActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nameValue = name.getText().toString();
+                String firstNameValue = firstName.getText().toString();
+                String lastNameValue = lastName.getText().toString();
                 String emailValue = email.getText().toString();
                 String phoneValue = phone.getText().toString();
                 String countryValue = countries.getSelectedItem().toString();
@@ -91,7 +95,8 @@ public class AddRecipientActivity extends AppCompatActivity {
                 String addressValue = address.getText().toString();
                 if (countries.getSelectedItemPosition() == 0) {
                     Toast.makeText(AddRecipientActivity.this, "Choose a country !", Toast.LENGTH_SHORT).show();
-                } else if (!checkName(AddRecipientActivity.this, nameValue)
+                } else if (!checkFirstName(AddRecipientActivity.this, firstNameValue)
+                        || !checkLastName(AddRecipientActivity.this, lastNameValue)
                         || !checkEmail(AddRecipientActivity.this, emailValue)
                         || !checkPhone(AddRecipientActivity.this, phoneValue)
                         || !checkCity(AddRecipientActivity.this, cityValue)
@@ -103,7 +108,8 @@ public class AddRecipientActivity extends AppCompatActivity {
 
                 } else {
                     Recipient recipient = new Recipient();
-                    recipient.setFirstName(nameValue);
+                    recipient.setFirstName(firstNameValue);
+                    recipient.setLastName(lastNameValue);
                     recipient.setEmail(emailValue);
                     recipient.setPhoneNumber(phoneValue);
                     recipient.setCountry(countryValue);
@@ -117,20 +123,7 @@ public class AddRecipientActivity extends AppCompatActivity {
                 }
             }
         });
-//        Intent intent1 = getIntent();
-//        firstName = (EditText) findViewById(R.id.name_add_recipient);
-//        city = (EditText) findViewById(R.id.city_add_recipient);
-//        address = (EditText) findViewById(R.id.address_add_recipient);
-//        email = (EditText) findViewById(R.id.email_add_recipient);
-//        phone = (EditText) findViewById(R.id.phone_add_recipient);
-//
-//        if (intent1 != null) {
-//            firstName.setText(intent1.getStringExtra("firstName"));
-//            city.setText(intent1.getStringExtra("city"));
-//            address.setText(intent1.getStringExtra("address"));
-//            email.setText(intent1.getStringExtra("email"));
-//            phone.setText(intent1.getStringExtra("phone"));
-//        }
+
     }
 
     @Override
