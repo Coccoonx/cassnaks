@@ -30,6 +30,7 @@ public class RecipientViewHolder extends RecyclerView.ViewHolder {
     public Recipient recipient;
     public View rightViewEdite;
     public Boolean isSelected = false;
+    public View itemView;
 
 
 
@@ -52,6 +53,7 @@ public class RecipientViewHolder extends RecyclerView.ViewHolder {
                 // View parent = (View)v.getParent();
             }
         });
+        itemView = view;
 
 
         view.setOnClickListener(new View.OnClickListener() {
