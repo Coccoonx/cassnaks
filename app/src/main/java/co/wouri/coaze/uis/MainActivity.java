@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
         TextView userEmail = (TextView) navigationView.findViewById(R.id.useremail);
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
 
-        username.setText(profile.getAccount().getName() + " " + profile.getAccount().getName());
+        username.setText(profile.getAccount().getFirstName() + " " + profile.getAccount().getLastName());
         userEmail.setText(profile.getAccount().getEmail());
         userBalance.setText("" + profile.getAccount().getBalance());
 
