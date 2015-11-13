@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        profile = ProfileManager.getCurrentUserAccount();
 
         initUI();
 
@@ -214,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     void initUI() {
+        profile = ProfileManager.getCurrentUserAccount();
 
         buildToolBar();
         buildDrawer();
@@ -291,6 +291,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void performHow(View v) {
         startActivity(new Intent(MainActivity.this, CostActivity.class));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initUI();
     }
 
     public void performStart(View v) {
