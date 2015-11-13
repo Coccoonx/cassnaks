@@ -35,10 +35,12 @@ public class ChooseAmountActivity extends AppCompatActivity {
 
     LinearLayout amountComponentLayout1, amountComponentLayout2;
     CardView cardView;
-    TextView currency1, currency2, amount2;
+    TextView currency1, currency2, amount2, textView;
     ImageView edit_picture;
     EditText amount1;
     Spinner sp1, sp2;
+    CircularImageView imageView;
+    Bundle extras;
 
     int USD = 0;
     int EUR = 1;
@@ -48,15 +50,6 @@ public class ChooseAmountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_amount);
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            recipient = extras.getParcelable("recipient");
-            CircularImageView imageView = (CircularImageView) findViewById(R.id.details_person_photo);
-            TextView textView = (TextView) findViewById(R.id.details_person_name);
-            imageView.setImageResource(recipient.getImage());
-            textView.setText(recipient.getFirstName());
-        }
 
         buildToolBar();
 
@@ -81,6 +74,15 @@ public class ChooseAmountActivity extends AppCompatActivity {
         amount2 = (TextView) amountComponentLayout2.findViewById(R.id.amount);
         cardView = (CardView) findViewById(R.id.contact_chooser_component);
         edit_picture = (ImageView) cardView.findViewById(R.id.edit_picture);
+        extras = getIntent().getExtras();
+        if (extras != null) {
+            recipient = extras.getParcelable("recipient");
+            imageView = (CircularImageView) cardView.findViewById(R.id.details_person_photo);
+            textView = (TextView) cardView.findViewById(R.id.details_person_name);
+            imageView.setImageResource(recipient.getImage());
+            textView.setText(recipient.getFirstName());
+        }
+
 
 
         setAllCurencies();
@@ -140,6 +142,18 @@ public class ChooseAmountActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (extras != null) {
+            recipient = extras.getParcelable("recipient");
+            imageView.setImageResource(recipient.getImage());
+            textView.setText(recipient.getFirstName());
+
+        }
 
     }
 

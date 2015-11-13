@@ -211,13 +211,13 @@
 
         <Button
             android:id="@+id/costbutton"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/margin_standard"
             android:layout_marginLeft="@dimen/margin_standard"
             android:layout_marginRight="@dimen/margin_standard"
-            android:background="@color/button_color_blue"
+            android:background="@drawable/corner_border_blue"
             android:gravity="center"
             android:text="@string/coaze_done"
             android:textColor="#ffffff" />
