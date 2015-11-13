@@ -83,18 +83,23 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         socialSecurityNumber = (EditText) findViewById(R.id.ssn_edit_recipient);
         password = (EditText) findViewById(R.id.password_edit_recipient);
         countries = (Spinner) findViewById(R.id.countries);
+
+        String[] countrie = {"Canada", "Cameroon", "China", "USA"};
+
+
+        mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, countrie);
+        mySpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
         countries.setAdapter(mySpinnerArrayAdapter);
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, firstName, lastname, city, address, email, phone);
 
-        String[] countrie = {"Canada", "Cameroon", "China", "USA"};
 
         if (getIntent().getExtras() != null) {
             updateUi();
         }
 
-        mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, countrie);
-        mySpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
         addButton = (Button) findViewById(R.id.button_edit_recipient);
