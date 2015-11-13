@@ -2,6 +2,7 @@ package co.wouri.coaze.uis.recipient.viewholders;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,26 +25,56 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
     public boolean isSelected = false;
     public RelativeLayout mRelativeLayout;
     public Recipient recipient;
-    View itemView;
+    public static final String TAG="ChooseRecipientView";
 
 
     // public ChooseRecipientAdapter.SettingsItem settingsItem;
 
 
-    public ChooseRecipientViewHolder(final Context context, View view) {
+    public ChooseRecipientViewHolder(final Context context, View view, int viewType) {
         super(view);
         this.context = context;
         this.leftImageView = (ImageView) view.findViewById(R.id.leftIcon);
         this.title = (TextView) view.findViewById(R.id.title);
         this.rightView = view.findViewById(R.id.rightIconCheck);
         this.mRelativeLayout = (RelativeLayout) view.findViewById(R.id.rootLayout);
-        itemView = view;
-        view.setClickable(true);
 
-    }
+        //view.setClickable(true);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //rightView.setVisibility(View.VISIBLE);
+                // View parent = (View)v.getParent();
+                if (!isSelected) {
+                    Log.d(TAG, "listen the button " + isSelected);
+                    isSelected = true;
 
-    public View getItemView(){
-        return itemView;
+                    RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.rootLayout);
+                    relativeLayout.setBackgroundColor(context.getResources()
+                            .getColor(R.color.color_seleted_item));
+
+                    ChooseRecipientActivity.recipient = recipient;
+                    rightView.setVisibility(View.VISIBLE);
+
+                } else {
+                    Log.d(TAG, "listen the button " + isSelected);
+                    RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.rootLayout);
+                    relativeLayout.setBackgroundColor(context.getResources()
+                            .getColor(R.color.color_background));
+                    rightView.setVisibility(View.INVISIBLE);
+                    ChooseRecipientActivity.recipient = null;
+
+                    isSelected = false;
+                }
+                /*
+
+                 */
+
+
+            }
+        });
+
+
     }
 }
 
