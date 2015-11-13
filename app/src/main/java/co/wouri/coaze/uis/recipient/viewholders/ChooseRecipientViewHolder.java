@@ -2,6 +2,7 @@ package co.wouri.coaze.uis.recipient.viewholders;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,6 +25,7 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
     public boolean isSelected = false;
     public RelativeLayout mRelativeLayout;
     public Recipient recipient;
+    public static final String TAG="ChooseRecipientView";
 
 
     // public ChooseRecipientAdapter.SettingsItem settingsItem;
@@ -37,27 +39,36 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
         this.rightView = view.findViewById(R.id.rightIconCheck);
         this.mRelativeLayout = (RelativeLayout) view.findViewById(R.id.rootLayout);
 
-        view.setClickable(true);
+        //view.setClickable(true);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //rightView.setVisibility(View.VISIBLE);
                 // View parent = (View)v.getParent();
                 if (!isSelected) {
+                    Log.d(TAG, "listen the button " + isSelected);
                     isSelected = true;
+
                     RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.rootLayout);
                     relativeLayout.setBackgroundColor(context.getResources()
                             .getColor(R.color.color_seleted_item));
 
                     ChooseRecipientActivity.recipient = recipient;
                     rightView.setVisibility(View.VISIBLE);
+
                 } else {
-                    isSelected = false;
+                    Log.d(TAG, "listen the button " + isSelected);
                     RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.rootLayout);
                     relativeLayout.setBackgroundColor(context.getResources()
                             .getColor(R.color.color_background));
                     rightView.setVisibility(View.INVISIBLE);
+                    ChooseRecipientActivity.recipient = null;
+
+                    isSelected = false;
                 }
+                /*
+
+                 */
 
 
             }

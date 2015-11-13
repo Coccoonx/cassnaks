@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import co.wouri.coaze.R;
 import co.wouri.coaze.core.managers.ProfileManager;
@@ -90,6 +91,7 @@ public class EditRecipientActivity extends AppCompatActivity {
                 recipient.setCountry(countries.getSelectedItem().toString());
                 Log.d(TAG, "the recipient " + recipient);
                 ProfileManager.updateRecipient(recipient);
+                Toast.makeText(EditRecipientActivity.this,"recipient successfully edited",Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
