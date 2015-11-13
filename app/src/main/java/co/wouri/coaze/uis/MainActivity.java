@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import co.wouri.coaze.R;
 import co.wouri.coaze.adapters.ItemData;
 import co.wouri.coaze.adapters.SpinnerAdapter;
-import co.wouri.coaze.core.managers.AccountManager;
+import co.wouri.coaze.core.managers.ProfileManager;
 import co.wouri.coaze.core.models.Profile;
 import co.wouri.coaze.utils.UIUtils;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        profile = AccountManager.getCurrentUserAccount();
+        profile = ProfileManager.getCurrentUserAccount();
 
         initUI();
 

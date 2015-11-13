@@ -176,9 +176,9 @@ public class CoazeSettingsUtils {
 
     public static void registerUser() {
 //        Log.d("safer init", "Job Manager" + CoazeApplication.jobManager);
-//        Log.d("safer init", "Current Account account" + AccountManager.getCurrentUserAccount());
+//        Log.d("safer init", "Current Account account" + ProfileManager.getCurrentUserAccount());
 //        CoazeApplication.jobManager.addJobInBackground(new PostAccountJob(
-//                AccountManager.getCurrentUserAccount().getCurrentUser()));
+//                ProfileManager.getCurrentUserAccount().getCurrentUser()));
     }
 
 

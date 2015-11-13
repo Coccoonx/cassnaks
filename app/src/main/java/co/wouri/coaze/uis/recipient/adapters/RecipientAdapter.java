@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import java.util.List;
 
 import co.wouri.coaze.R;
-import co.wouri.coaze.core.managers.AccountManager;
+import co.wouri.coaze.core.managers.ProfileManager;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.uis.recipient.viewholders.RecipientViewHolder;
 
@@ -74,7 +74,7 @@ public class RecipientAdapter extends RecyclerView.Adapter<RecipientViewHolder> 
     public void onItemDismiss(int position) {
         if (position != -1 && position < recipients.size()) {
 
-            AccountManager.deleteRecipient(recipients.remove(position));
+            ProfileManager.deleteRecipient(recipients.remove(position));
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, getItemCount());
         }

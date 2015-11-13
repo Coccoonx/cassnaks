@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import co.wouri.coaze.R;
-import co.wouri.coaze.core.managers.AccountManager;
+import co.wouri.coaze.core.managers.ProfileManager;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.utils.UIUtils;
 
@@ -109,7 +109,7 @@ public class AddRecipientActivity extends AppCompatActivity {
                     recipient.setCountry(countryValue);
                     recipient.setCity(cityValue);
                     recipient.setAddress(addressValue);
-                    AccountManager.addRecipient(recipient);
+                    ProfileManager.addRecipient(recipient);
 
                     //We must call a backend method here
                     Toast.makeText(AddRecipientActivity.this, "Recipient added Successfully", Toast.LENGTH_SHORT).show();

@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import co.wouri.coaze.R;
-import co.wouri.coaze.core.managers.AccountManager;
+import co.wouri.coaze.core.managers.ProfileManager;
 import co.wouri.coaze.core.models.Profile;
 import co.wouri.coaze.uis.recipient.adapters.RecipientAdapter;
 import co.wouri.coaze.utils.UIUtils;
@@ -23,7 +23,7 @@ public class RecipientActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private Button addButton;
-    Profile profile = AccountManager.getCurrentUserAccount();
+    Profile profile = ProfileManager.getCurrentUserAccount();
     private RecipientAdapter mAdapter;
 
     @Override

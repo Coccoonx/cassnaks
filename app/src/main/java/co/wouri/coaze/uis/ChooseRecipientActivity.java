@@ -18,7 +18,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import co.wouri.coaze.R;
-import co.wouri.coaze.core.managers.AccountManager;
+import co.wouri.coaze.core.managers.ProfileManager;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.uis.recipient.adapters.ChooseRecipientAdapter;
 import co.wouri.coaze.utils.UIUtils;
@@ -48,12 +48,12 @@ public class ChooseRecipientActivity extends AppCompatActivity {
         nextButton.setVisibility(View.VISIBLE);
         // Set an adapter to this recycler view
 
-        AccountManager.getCurrentUserAccount();
-        Log.d(TAG, "Account profile id" + AccountManager.getCurrentUserAccount().getAccount().getId());
-        Log.d(TAG, "Recipient list: " + AccountManager.getRecipients());
-        Log.d(TAG, "Recipient before add: " + AccountManager.getRecipients().size());
+        ProfileManager.getCurrentUserAccount();
+        Log.d(TAG, "Account profile id" + ProfileManager.getCurrentUserAccount().getAccount().getId());
+        Log.d(TAG, "Recipient list: " + ProfileManager.getRecipients());
+        Log.d(TAG, "Recipient before add: " + ProfileManager.getRecipients().size());
 
-        recipients = AccountManager.getRecipients();
+        recipients = ProfileManager.getRecipients();
 
         mAdapter = new ChooseRecipientAdapter(this, recipients);
 

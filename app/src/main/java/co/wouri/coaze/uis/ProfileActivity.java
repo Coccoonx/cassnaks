@@ -29,7 +29,7 @@ import co.wouri.coaze.api.netflow.net.Request;
 import co.wouri.coaze.api.netflow.net.Response;
 import co.wouri.coaze.api.netflow.net.ResponseListener;
 import co.wouri.coaze.api.netflow.net.Web;
-import co.wouri.coaze.core.managers.AccountManager;
+import co.wouri.coaze.core.managers.ProfileManager;
 import co.wouri.coaze.core.models.Account;
 import co.wouri.coaze.storage.CoazeSettingsUtils;
 import co.wouri.coaze.utils.CoreUtils;
@@ -99,7 +99,6 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         if (getIntent().getExtras() != null) {
             updateUi();
         }
-
 
 
         addButton = (Button) findViewById(R.id.button_edit_recipient);
@@ -343,8 +342,8 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
 
                 CoazeSettingsUtils.setUserUid(account.getId());
                 CoazeSettingsUtils.setUserEmail(account.getEmail());
-                AccountManager.getCurrentUserAccount().setAccount(account);
-                AccountManager.saveAccount();
+                ProfileManager.getCurrentUserAccount().setAccount(account);
+                ProfileManager.saveAccount();
 
 //                new Login().execute();
 

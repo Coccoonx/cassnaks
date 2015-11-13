@@ -20,14 +20,12 @@ import android.widget.Toast;
 
 import com.pkmmte.view.CircularImageView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import co.wouri.coaze.R;
 import co.wouri.coaze.adapters.ItemData;
 import co.wouri.coaze.adapters.SpinnerAdapter;
-import co.wouri.coaze.core.managers.AccountManager;
+import co.wouri.coaze.core.managers.ProfileManager;
 import co.wouri.coaze.core.models.Recipient;
 import co.wouri.coaze.core.models.Transfer;
 import co.wouri.coaze.core.models.TransferStatus;
@@ -230,7 +228,7 @@ public class ChooseAmountActivity extends AppCompatActivity {
                     transfer.setTransferType("SENT");
                     transfer.setStatus(TransferStatus.Pending);
                     Intent intent = new Intent(ChooseAmountActivity.this, SuccessActivity.class);
-                    AccountManager.addTransfer(transfer);
+                    ProfileManager.addTransfer(transfer);
                     intent.putExtra("transfer", (Parcelable) transfer);
                     startActivity(intent);
                 } else

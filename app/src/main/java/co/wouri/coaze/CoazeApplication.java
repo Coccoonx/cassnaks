@@ -2,7 +2,7 @@ package co.wouri.coaze;
 
 import android.support.multidex.MultiDexApplication;
 
-import co.wouri.coaze.core.managers.AccountManager;
+import co.wouri.coaze.core.managers.ProfileManager;
 import co.wouri.coaze.storage.PreferencesStorage;
 import co.wouri.coaze.utils.UIUtils;
 
@@ -27,8 +27,8 @@ public class CoazeApplication extends MultiDexApplication {
     }
 
     void initAccount() {
-        AccountManager.getCurrentUserAccount();
-        AccountManager.saveAccount();
+        ProfileManager.getCurrentUserAccount();
+        ProfileManager.saveAccount();
     }
 
     public static synchronized CoazeApplication getInstance() {

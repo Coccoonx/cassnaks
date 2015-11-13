@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import co.wouri.coaze.R;
-import co.wouri.coaze.core.managers.AccountManager;
+import co.wouri.coaze.core.managers.ProfileManager;
 import co.wouri.coaze.core.models.Transfer;
 import co.wouri.coaze.uis.transferhistory.TransferHistoryAdapter;
 import co.wouri.coaze.utils.UIUtils;
@@ -42,7 +42,7 @@ public class TransferHistoryActivity extends AppCompatActivity {
     }
 
     private void initializeData() {
-        transfers = AccountManager.getTransferts();
+        transfers = ProfileManager.getTransferts();
 
 //        persons.add(new Person("Beyonce Knowles", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.beyonce), 200), 100, "SEND", "18.07.2015"));
 //        persons.add(new Person("Barack Obama", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.barackobama), 200), 50, "RECIEVED", "11.05.2015"));
