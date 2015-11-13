@@ -58,6 +58,9 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
     private EditText password;
     private ProgressDialog progressDialog;
 
+    MyArrayAdapter
+            mySpinnerArrayAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,17 +83,20 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         socialSecurityNumber = (EditText) findViewById(R.id.ssn_edit_recipient);
         password = (EditText) findViewById(R.id.password_edit_recipient);
         countries = (Spinner) findViewById(R.id.countries);
+        countries.setAdapter(mySpinnerArrayAdapter);
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, firstName, lastname, city, address, email, phone);
 
         String[] countrie = {"Canada", "Cameroon", "China", "USA"};
 
-        MyArrayAdapter
-                mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, countrie);
+        if (getIntent().getExtras() != null) {
+            updateUi();
+        }
+
+        mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, countrie);
         mySpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
-        countries.setAdapter(mySpinnerArrayAdapter);
         addButton = (Button) findViewById(R.id.button_edit_recipient);
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +176,25 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
                 }
             }
         });
+
+    }
+
+    private void updateUi() {
+        Account account = getIntent().getParcelableExtra("profile");
+
+        lastname.setText(account.getLastName());
+        firstName.setText(account.getFirstName());
+
+        city.setText(account.getCity());
+        state.setText(account.getState());
+        address.setText(account.getAddress());
+
+        email.setText(account.getEmail());
+
+        phone.setText(account.getPhoneNumber());
+        socialSecurityNumber.setText(account.getSocialSecurityNumber());
+        password.setEnabled(false);
+        countries.setSelection(mySpinnerArrayAdapter.getPosition(account.getCountry()));
 
     }
 
