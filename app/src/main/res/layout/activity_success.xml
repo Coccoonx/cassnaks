@@ -24,7 +24,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginTop="80dp"
             android:text="@string/success"
-            android:textColor="#4dba38"
+            android:textColor="@color/colorAccent"
             android:textSize="40sp" />
 
         <LinearLayout
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="3dp"
                 android:text="@string/amount"
-                android:textColor="#4dba38"
+                android:textColor="@color/colorAccent"
                 android:textSize="20sp" />
 
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name"
-                android:textColor="@color/text_color_black_light"
+                android:textColor="@color/textColorPrimary"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="3dp"
                 android:text="@string/transfers"
-                android:textColor="@color/button_color_blue" />
+                android:textColor="@color/colorAccent" />
 
             <TextView
                 android:id="@+id/details_text3"
@@ -110,7 +110,8 @@
             android:layout_gravity="left|bottom"
             android:layout_marginRight="4dp"
             android:layout_weight="60"
-            android:background="@drawable/corner_border_blue"
+            android:textColor="@color/textColorPrimary"
+            android:background="@drawable/corner_border_blue_transfer"
             android:text="@string/transfer" />
 
         <Button

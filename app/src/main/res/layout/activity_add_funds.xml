@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="co.wouri.coaze.uis.AddFundActivity">
+    android:background="@color/colorPrimaryDark"
+    tools:context="co.wouri.libreexchange.uis.AddFundActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -16,12 +17,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
+        android:textColor="@color/text_color_grey_dark"
         android:layout_marginBottom="@dimen/margin_standard"
         android:layout_marginLeft="@dimen/margin_standard"
         android:layout_marginRight="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_standard"
         android:gravity="center_horizontal"
-
         android:text="Please go to your bank profile and send an interact to:"
         android:textSize="@dimen/margin_standard" />
 

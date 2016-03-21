@@ -31,7 +31,7 @@
 
 
     <!-- integtration-->
-    <string name="app_name">Coaze</string>
+    <string name="app_name">Libre Exchange</string>
 
     <string name="action_settings">Settings</string>
 
@@ -44,7 +44,7 @@
     <string name="nav_item_amount">Choose amount</string>
 
     <!-- Splash screen texts-->
-    <string name="activity_splash_title_line_one">Coaze</string>
+    <string name="activity_splash_title_line_one">Libre Exchange</string>
     <string name="activity_splash_title_line_two">simple money transfer</string>
 
     <!-- About screen texts-->
@@ -52,8 +52,8 @@
 
     <!-- Cost, Rate display screens-->
 
-    <string name="coaze_text1"> Coaze </string>
-    <string name="coaze_text2"> Coaze used the real exchange rate </string>
+    <string name="coaze_text1"> Libre Exchange </string>
+    <string name="coaze_text2"> Libre Exchange used the real exchange rate </string>
     <string name="coaze_text3"> 1GBP = </string>
     <string name="coaze_text4"> 1.4121 EUR</string>
     <string name="coaze_text5"> THE RATE  </string>
@@ -65,7 +65,7 @@
     <string name="coaze_text10"> 1.3626 EUR</string>
     <string name="title_activity_cost"></string>
 
-    <string name="coaze_text22"> Coaze changes as little as possible </string>
+    <string name="coaze_text22"> Libre Exchange changes as little as possible </string>
     <string name="coaze_text44"> 4.98 GBP</string>
     <string name="coaze_text55"> THE COST  </string>
     <string name="coaze_text66">  ............................ </string>

@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:id="@+id/card_view_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/card_view_item"
     android:layout_marginBottom="@dimen/margin_extra_extra_short"
-
     android:layout_marginLeft="@dimen/margin_extra_short"
     android:layout_marginRight="@dimen/margin_extra_short"
-    android:background="@drawable/layout_background_normal"
-    >
+    card_view:cardElevation="0dp"
+    app:cardPreventCornerOverlap="false"
+    android:background="@color/colorPrimaryDark">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_standard"
-        >
+        android:background="@drawable/layout_background_normal"
+        android:padding="@dimen/margin_standard">
 
         <TextView
+            android:id="@+id/details_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/details_title"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/margin_standard"
-            android:textColor="@android:color/black"
-            />
+            android:textColor="@color/textColorPrimary" />
 
         <TextView
+            android:id="@+id/details_amount_recieved"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:id="@+id/details_amount_recieved"
-            android:textSize="@dimen/margin_standard"
-            android:textColor="#4DBA38"/>
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/margin_standard" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

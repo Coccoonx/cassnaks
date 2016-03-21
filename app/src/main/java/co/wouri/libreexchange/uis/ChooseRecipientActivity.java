@@ -1,0 +1,139 @@
+package co.wouri.libreexchange.uis;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
+
+import co.wouri.libreexchange.R;
+import co.wouri.libreexchange.core.managers.ProfileManager;
+import co.wouri.libreexchange.core.models.Recipient;
+import co.wouri.libreexchange.uis.recipient.adapters.ChooseRecipientAdapter;
+import co.wouri.libreexchange.utils.UIUtils;
+
+public class ChooseRecipientActivity extends AppCompatActivity {
+
+
+    public static Recipient recipient;
+    private RecyclerView mRecyclerView;
+    private ChooseRecipientAdapter mAdapter;
+    private Menu menu;
+    private Button nextButton;
+    List<Recipient> recipients;
+    public static final String TAG = "ChooseRecipientActivity";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recipient);
+
+        buildToolBar();
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.settingsRecyclerView);
+
+
+        nextButton = (Button) findViewById(R.id.Button_next);
+        nextButton.setVisibility(View.VISIBLE);
+        // Set an adapter to this recycler view
+
+        ProfileManager.getCurrentUserAccount();
+        Log.d(TAG, "Account profile id" + ProfileManager.getCurrentUserAccount().getAccount().getId());
+        Log.d(TAG, "Recipient list: " + ProfileManager.getRecipients());
+        Log.d(TAG, "Recipient before add: " + ProfileManager.getRecipients().size());
+
+        recipients = ProfileManager.getRecipients();
+
+        mAdapter = new ChooseRecipientAdapter(this, recipients);
+
+        mRecyclerView.setAdapter(mAdapter);
+
+        // Set the behaviour of this recycler view
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (recipient != null) {
+
+                    Intent intent = new Intent(ChooseRecipientActivity.this, ChooseAmountActivity.class);
+                    intent.putExtra("recipient", (Parcelable) recipient);
+                    startActivity(intent);
+                } else
+                    Toast.makeText(ChooseRecipientActivity.this, "You must select a recipient", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter.updateItems();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_add_user_step, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        // if (id == R.id.action_settings) {
+        //  return true;
+        //}
+        return false;
+        //return super.onOptionsItemSelected(item);
+    }
+
+    private void buildToolBar() {
+        View toolbar = findViewById(R.id.toolbar);
+
+        ImageView close = (ImageView) toolbar.findViewById(R.id.leftIcon);
+        TextView title = (TextView) toolbar.findViewById(R.id.title);
+        ImageView option = (ImageView) toolbar.findViewById(R.id.rightIcon);
+
+        title.setText("CHOOSE RECIPIENT");
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, title);
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ChooseRecipientActivity.this, AddRecipientActivity.class));
+            }
+        });
+
+        title.setVisibility(View.VISIBLE);
+        option.setVisibility(View.VISIBLE);
+
+    }
+}

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view_item"
     android:layout_width="match_parent"
@@ -7,7 +6,7 @@
     android:layout_marginBottom="@dimen/margin_extra_extra_short"
     android:layout_marginLeft="@dimen/margin_short"
     android:layout_marginRight="@dimen/margin_short"
-    android:background="@drawable/corner_border_contact_chooser"
+    android:background="@color/colorPrimaryDark"
 
     >
     <!--android:background="@drawable/corner_border_contact_chooser"-->
@@ -33,7 +32,7 @@
             android:layout_marginLeft="@dimen/margin_short"
             android:layout_toRightOf="@+id/details_person_photo"
             android:text="Ali Connors"
-            android:textColor="#223049"
+            android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/margin_standard"
 
             />
@@ -45,6 +44,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/person_name"
             android:layout_centerInParent="true"
+            android:tint="@color/colorAccent"
             android:src="@drawable/edit" />
 
     </RelativeLayout>

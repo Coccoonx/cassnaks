@@ -18,8 +18,8 @@
             <shape>
                 <corners android:radius="30dp"/>
                 <gradient
-                    android:startColor="@color/button_color_blue"
-                    android:endColor="@color/button_color_blue"
+                    android:startColor="@color/colorAccent"
+                    android:endColor="@color/colorAccent"
                     android:angle="45"
                     />
             </shape>

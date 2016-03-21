@@ -19,7 +19,7 @@
             android:paddingLeft="10dp"
             android:layout_marginTop="@dimen/margin_short"
             android:text="You send"
-            android:textColor="@color/coazeblue"
+            android:textColor="@color/text_color_gray_dark_2"
             android:textSize="16dp" />
 
         <RelativeLayout
@@ -58,14 +58,40 @@
         android:layout_height="fill_parent"
         android:background="@drawable/corner_border_component"
         android:layout_weight="60">
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:drawSelectorOnTop="true"
-            android:spinnerMode = "dropdown"
-            android:popupBackground="@drawable/corner_border_component" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="@dimen/margin_standard"
+            android:layout_marginRight="3dp"
+            android:layout_weight="50"
+            android:background="@drawable/spinner_bg_main"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:drawSelectorOnTop="true"
+                android:popupBackground="@drawable/corner_border_component"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:textSize="@dimen/text_size"
+                android:layout_marginLeft="5dp"
+                android:spinnerMode="dropdown" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/arrow_mimap" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 </LinearLayout>

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/card_view_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/margin_extra_extra_short"
     android:layout_marginLeft="@dimen/margin_extra_short"
     android:layout_marginRight="@dimen/margin_extra_short"
-    android:background="@drawable/layout_background_normal">
+    android:background="@drawable/layout_background_normal"
+    app:cardPreventCornerOverlap="false"
+    card_view:cardElevation="0dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -41,7 +44,7 @@
             android:layout_toLeftOf="@+id/details_person_amount"
             android:layout_toRightOf="@+id/details_person_photo"
             android:maxLines="3"
-            android:textColor="#223049"
+            android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/margin_standard"
 
 
@@ -54,7 +57,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/person_name"
             android:layout_centerVertical="true"
-            android:textColor="#4DBA38"
+            android:textColor="@color/colorAccent"
 
             />
 

@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="co.wouri.coaze.uis.TransferDetailsActivity">
+    tools:context="co.wouri.libreexchange.uis.TransferDetailsActivity">
     <item
         android:id="@+id/action_quit"
         android:icon="@drawable/ic_cross_close"

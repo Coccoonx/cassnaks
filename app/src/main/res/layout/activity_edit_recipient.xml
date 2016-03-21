@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="#f2f5f7"
-android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical">
     <include
         android:id="@+id/toolbar"
         layout="@layout/custom_toolbar"
@@ -14,7 +14,6 @@ android:orientation="vertical">
         android:id="@+id/scrollvieweditprofile"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:background="@color/coazebackground"
         android:fillViewport="true"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
@@ -23,7 +22,6 @@ android:orientation="vertical">
             android:id="@+id/frame_container"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:background="@color/color_background"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingLeft="12dp"
@@ -33,7 +31,6 @@ android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_background"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:paddingBottom="12dp"
@@ -42,6 +39,7 @@ android:orientation="vertical">
                 android:layout_weight="99">
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:theme="@style/TextLabel"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -55,12 +53,14 @@ android:orientation="vertical">
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColorHint="@color/text_color_grey_dark"
+                        android:textColor="@color/textColorPrimary"
                         android:textSize="16sp" />
 
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:theme="@style/TextLabel"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -74,13 +74,15 @@ android:orientation="vertical">
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColorHint="@color/text_color_grey_dark"
+                        android:textColor="@color/textColorPrimary"
                         android:textSize="16sp" />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:theme="@style/TextLabel"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -95,13 +97,15 @@ android:orientation="vertical">
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColorHint="@color/text_color_grey_dark"
+                        android:textColor="@color/textColorPrimary"
                         android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
 
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:theme="@style/TextLabel"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -116,27 +120,53 @@ android:orientation="vertical">
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColorHint="@color/text_color_grey_dark"
+                        android:textColor="@color/textColorPrimary"
                         android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_short"
                     android:orientation="horizontal">
-                    <Spinner
-                        android:id="@+id/countries"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="8dp"
-                        android:drawSelectorOnTop="true"
-                        android:textSize="@dimen/text_size" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:layout_marginRight="3dp"
+                        android:layout_weight="50"
+                        android:background="@drawable/spinner_bg"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/countries"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:gravity="center"
+                            android:textSize="@dimen/text_size"
+                            android:layout_marginLeft="5dp"
+                            android:spinnerMode="dropdown" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:src="@drawable/arrows" />
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:theme="@style/TextLabel"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -150,13 +180,15 @@ android:orientation="vertical">
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColorHint="@color/text_color_grey_dark"
+                        android:textColor="@color/textColorPrimary"
                         android:textSize="16sp"
                         />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:theme="@style/TextLabel"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -170,7 +202,8 @@ android:orientation="vertical">
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColorHint="@color/text_color_grey_dark"
+                        android:textColor="@color/textColorPrimary"
                         android:textSize="16sp"
                         />
                 </android.support.design.widget.TextInputLayout>

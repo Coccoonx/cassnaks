@@ -14,7 +14,8 @@
     <color name="coazegreen">#4dba38</color>
     <!--<color firstName="coazeblue">#00a4df</color>-->
     <color name="coazeskyblue">#31b4e4</color>
-    <color name="colorPrimarylight">#223049</color>
+    <!--<color name="colorPrimarylight">#223049</color>-->
+    <color name="colorPrimarylight">#000</color>
     <color name="coazedarkwhite">#efefef</color>
 
     <!-- For material drawer-->
@@ -30,14 +31,15 @@
 
 
     <!-- integration-->
-    <item name="colorPrimary" type="color">#FF192439</item>
+    <item name="colorPrimary" type="color">#FF000000</item>
     <item name="colorPrimary2" type="color">#223049</item>
 
-    <item name="colorPrimaryDark" type="color">#FF223049</item>
+    <item name="colorPrimaryDark" type="color">#FF000000</item>
 
     <item name="colorPrimaryDark2" type="color">#ff577483</item>
 
-    <item name="colorAccent" type="color">#31b4e4</item>
+    <item name="colorAccent" type="color">#e5a612</item>
+    <item name="colorSecondaryBg" type="color">#474747</item>
 
     <item name="CoazeWindowBackground" type="color">#f5f5f5</item>
 
@@ -50,12 +52,12 @@
 
     <item name="colorOpacity" type="color">#3F000000</item>
 
-    <color name="color_background">#f2f5f7</color>
-    <color name="color_seleted_item">#def0ff</color>
+    <color name="color_background">#FF000000</color>
+    <color name="color_seleted_item">#e5a612</color>
 
 
     <!-- Get started and amount screen integration-->
-    <color name="coazebackground">#f2f5f7</color>
+    <color name="coazebackground">#000</color>
     <color name="coazeblue">#00a4df</color>
     <color name="white">#FFFFFF</color>
 
@@ -66,7 +68,7 @@
 
     <!-- Text colors-->
     <color name="text_color_red">#ff0000</color>
-    <color name="text_color_grey_dark">#808faa</color>
+    <color name="text_color_grey_dark">#4e4e4e</color>
     <color name="text_color_black_light">#192439</color>
     <color name="text_color_black_extra_light">#939393</color>
 

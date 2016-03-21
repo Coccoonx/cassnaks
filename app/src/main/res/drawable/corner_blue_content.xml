@@ -19,7 +19,7 @@ android:shape="rectangle" >
 
 <item>
     <shape>
-        <solid android:color="@color/button_color_blue" />
+        <solid android:color="@color/colorAccent" />
         <!-- #fff -->
         <corners android:radius="4dp" />
     </shape>

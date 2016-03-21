@@ -12,21 +12,6 @@
         -->
     </style>
 
-    <!-- Application theme. -->
-    <!--<style firstName="AppTheme" parent="AppBaseTheme">-->
-    <!--&lt;!&ndash; All customizations that are NOT specific to a particular API-level can go here. &ndash;&gt;-->
-    <!--</style>-->
-
-
-    <!-- Material drawer -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
-    </style>
-
-
     <!-- Base application theme. -->
     <!--<style firstName="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
     <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
@@ -58,4 +43,13 @@
         <item name="android:maxHeight">5dp</item>
     </style>
 
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/text_color_grey_dark</item>
+        <item name="android:textSize">16sp</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/text_color_grey_dark</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
 </resources>

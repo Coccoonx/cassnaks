@@ -2,8 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="co.wouri.coaze.uis.TransferDetailsActivity">
+    tools:context="co.wouri.libreexchange.uis.TransferDetailsActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -72,7 +73,7 @@
         android:layout_marginRight="@dimen/margin_big"
         android:layout_marginTop="@dimen/margin_standard"
         android:text="Notes:"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/colorAccent" />
 
     <TextView
         android:id="@+id/transfer_details_notes_content"
@@ -82,6 +83,7 @@
         android:layout_marginLeft="@dimen/margin_big"
         android:layout_marginRight="@dimen/margin_big"
         android:layout_marginTop="@dimen/margin_short"
+        android:textColor="@color/text_color_grey_dark"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur metus ut elementum ullamcorper. "
         android:textSize="@dimen/margin_standard" />
 </RelativeLayout>

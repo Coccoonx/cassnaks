@@ -4,11 +4,11 @@ android:shape="rectangle" >
 
 <item>
     <shape>
-        <solid android:color="@color/colorPrimarylight" />
+        <solid android:color="@color/colorSecondaryBg" />
         <!-- set the shadow color here -->
         <stroke
             android:width="2dp"
-            android:color="@color/colorPrimarylight" />
+            android:color="@color/colorSecondaryBg" />
           <!--   #7000 -->
         <!-- setting the thickness of shadow (positive value will give shadow on that side) -->
         <corners android:bottomRightRadius="4dp"/>

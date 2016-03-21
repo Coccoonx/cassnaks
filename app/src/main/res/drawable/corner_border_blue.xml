@@ -8,7 +8,7 @@
             <!-- set the shadow color here -->
             <stroke
                 android:width="1dp"
-                android:color="@color/coazeblue" />
+                android:color="@color/textColorPrimary" />
             <!--   #7000 -->
             <!-- setting the thickness of shadow (positive value will give shadow on that side) -->
             <corners android:radius="4dp" />

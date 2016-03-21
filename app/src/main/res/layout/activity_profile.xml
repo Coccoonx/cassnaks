@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f2f5f7"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical">
 
     <include
@@ -16,7 +16,6 @@
         android:id="@+id/scrollvieweditprofile"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:background="@color/coazebackground"
         android:fillViewport="true"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
@@ -25,7 +24,6 @@
             android:id="@+id/frame_container"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:background="@color/color_background"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingLeft="12dp"
@@ -36,7 +34,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="99"
-                android:background="@color/color_background"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:paddingBottom="12dp"
@@ -45,7 +42,8 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel">
 
                     <EditText
                         android:id="@+id/firstname_edit_recipient"
@@ -58,14 +56,16 @@
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColor="@color/textColorPrimary"
+                        android:textColorHint="@color/text_color_grey_dark"
                         android:textSize="16sp" />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel">
 
                     <EditText
                         android:id="@+id/lastname_edit_recipient"
@@ -78,14 +78,16 @@
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColor="@color/textColorPrimary"
+                        android:textColorHint="@color/text_color_grey_dark"
                         android:textSize="16sp" />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel">
 
                     <EditText
                         android:id="@+id/email_edit_recipient"
@@ -99,14 +101,16 @@
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColor="@color/textColorPrimary"
+                        android:textColorHint="@color/text_color_grey_dark"
                         android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
 
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel">
 
                     <EditText
                         android:id="@+id/phone_edit_recipient"
@@ -120,7 +124,8 @@
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColor="@color/textColorPrimary"
+                        android:textColorHint="@color/text_color_grey_dark"
                         android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -131,18 +136,42 @@
                     android:orientation="horizontal"
                     android:weightSum="100">
 
-                    <Spinner
-                        android:id="@+id/countries"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
                         android:layout_marginTop="@dimen/margin_standard"
+                        android:layout_marginRight="3dp"
                         android:layout_weight="50"
-                        android:textSize="@dimen/text_size" />
+                        android:background="@drawable/spinner_bg"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/countries"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:gravity="center"
+                            android:textSize="@dimen/text_size"
+                            android:layout_marginLeft="5dp"
+                            android:spinnerMode="dropdown" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:src="@drawable/arrows" />
+
+                    </RelativeLayout>
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="50">
+                        android:layout_weight="50"
+                        android:theme="@style/TextLabel">
 
                         <EditText
                             android:id="@+id/city_edit_recipient"
@@ -156,35 +185,17 @@
                             android:paddingLeft="6dp"
                             android:paddingRight="6dp"
                             android:singleLine="true"
-                            android:textColor="#000"
+                            android:textColor="@color/textColorPrimary"
+                            android:textColorHint="@color/text_color_grey_dark"
                             android:textSize="16sp" />
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
 
-                <!--<android.support.design.widget.TextInputLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<EditText-->
-                <!--android:id="@+id/city_edit_recipient"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="8dp"-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--android:ems="5"-->
-                <!--android:hint="City"-->
-                <!--android:paddingLeft="6dp"-->
-                <!--android:paddingRight="6dp"-->
-                <!--android:singleLine="true"-->
-                <!--android:textColor="#000"-->
-                <!--android:textSize="16sp"-->
-                <!--/>-->
-                <!--</android.support.design.widget.TextInputLayout>-->
-
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel">
 
                     <EditText
                         android:id="@+id/address_edit_recipient"
@@ -197,14 +208,16 @@
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColor="@color/textColorPrimary"
+                        android:textColorHint="@color/text_color_grey_dark"
                         android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
 
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel">
 
                     <EditText
                         android:id="@+id/state_edit_recipient"
@@ -217,13 +230,15 @@
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColor="@color/textColorPrimary"
+                        android:textColorHint="@color/text_color_grey_dark"
                         android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel">
 
                     <EditText
                         android:id="@+id/ssn_edit_recipient"
@@ -237,14 +252,16 @@
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColor="@color/textColorPrimary"
+                        android:textColorHint="@color/text_color_grey_dark"
                         android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
 
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel">
 
                     <EditText
                         android:id="@+id/password_edit_recipient"
@@ -258,7 +275,8 @@
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:singleLine="true"
-                        android:textColor="#000"
+                        android:textColor="@color/colorAccent"
+                        android:textColorHint="@color/text_color_grey_dark"
                         android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>

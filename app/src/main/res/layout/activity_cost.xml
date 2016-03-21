@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary2"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <include
@@ -72,7 +72,7 @@
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="@dimen/margin_short"
                     android:text="@string/coaze_text4"
-                    android:textColor="@color/button_color_green"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp" />
 
             </LinearLayout>
@@ -96,7 +96,7 @@
                 android:layout_marginTop="50dp"
                 android:layout_toLeftOf="@+id/cost_4_line"
                 android:text="@string/coaze_text66"
-                android:textColor="@color/button_color_blue"
+                android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
             <TextView
@@ -135,7 +135,7 @@
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="50dp"
                 android:text="@string/coaze_text66"
-                android:textColor="@color/button_color_blue"
+                android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
         </RelativeLayout>
