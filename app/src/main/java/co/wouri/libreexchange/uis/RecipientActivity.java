@@ -23,7 +23,7 @@ public class RecipientActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private Button addButton;
-    Profile profile = ProfileManager.getCurrentUserAccount();
+    Profile profile = ProfileManager.getCurrentUserProfile();
     private RecipientAdapter mAdapter;
 
     @Override

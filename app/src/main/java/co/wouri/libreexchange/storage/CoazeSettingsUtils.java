@@ -176,9 +176,9 @@ public class CoazeSettingsUtils {
 
     public static void registerUser() {
 //        Log.d("safer init", "Job Manager" + LibreExchangeApplication.jobManager);
-//        Log.d("safer init", "Current Account account" + ProfileManager.getCurrentUserAccount());
+//        Log.d("safer init", "Current Account account" + ProfileManager.getCurrentUserProfile());
 //        LibreExchangeApplication.jobManager.addJobInBackground(new PostAccountJob(
-//                ProfileManager.getCurrentUserAccount().getCurrentUser()));
+//                ProfileManager.getCurrentUserProfile().getCurrentUser()));
     }
 
 

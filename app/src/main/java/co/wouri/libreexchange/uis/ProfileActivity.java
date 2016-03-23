@@ -358,8 +358,8 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
 
                 CoazeSettingsUtils.setUserUid(account.getId());
                 CoazeSettingsUtils.setUserEmail(account.getEmail());
-                ProfileManager.getCurrentUserAccount().setAccount(account);
-                ProfileManager.saveAccount();
+                ProfileManager.getCurrentUserProfile().setAccount(account);
+                ProfileManager.saveProfile();
 
 //                new Login().execute();
 

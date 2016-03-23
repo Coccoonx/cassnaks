@@ -10,10 +10,10 @@
             android:id="@+id/nav_item_balance"
             android:icon="@drawable/ic_wallet"
             android:title="@string/nav_item_balance" />
-        <item
+        <!--<item
             android:id="@+id/nav_item_recipient"
             android:icon="@drawable/ic_user"
-            android:title="@string/nav_item_recipient" />
+            android:title="@string/nav_item_recipient" />-->
     </group>
     <item android:title=" ">
         <menu>

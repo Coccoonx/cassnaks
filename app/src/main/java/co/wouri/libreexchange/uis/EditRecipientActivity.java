@@ -85,7 +85,7 @@ public class EditRecipientActivity extends AppCompatActivity {
             city.setText(recipient.getCity());
             address.setText(recipient.getAddress());
             email.setText(recipient.getEmail());
-            phone.setText(recipient.getPhoneNumber());
+//            phone.setText(recipient.getPhoneNumbers());
             countries.setSelection(mySpinnerArrayAdapter.getPosition(recipient.getCountry()));
 
         }
@@ -95,7 +95,7 @@ public class EditRecipientActivity extends AppCompatActivity {
 
                 recipient.setAddress(address.getText().toString());
                 recipient.setEmail(email.getText().toString());
-                recipient.setPhoneNumber(phone.getText().toString());
+//                recipient.setPhoneNumber(phone.getText().toString());
                 recipient.setFirstName(firstName.getText().toString());
                 recipient.setLastName(lastName.getText().toString());
                 recipient.setCity(city.getText().toString());

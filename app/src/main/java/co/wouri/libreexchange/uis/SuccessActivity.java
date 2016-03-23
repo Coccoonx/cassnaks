@@ -78,7 +78,7 @@ public class SuccessActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SuccessActivity.this, MainActivity.class));
+                startActivity(new Intent(SuccessActivity.this, TransferHistoryActivity.class));
                 finish();
             }
         });

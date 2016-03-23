@@ -64,7 +64,10 @@ public class ChooseAmountActivity extends AppCompatActivity {
         sp2 = (Spinner) findViewById(R.id.spinner2);
         //SpinnerAdapter adapter2=new SpinnerAdapter(this,R.layout.spinner_layout,R.id.txt,list);
         sp2.setAdapter(adapter);
-        sp2.setSelection(sp1.getSelectedItemPosition() + 1);
+//        sp2.setSelection(sp1.getSelectedItemPosition() + 1);
+
+        sp1.setEnabled(false);
+        sp2.setEnabled(false);
 
         amountComponentLayout1 = (LinearLayout) findViewById(R.id.amount_component_layout_1);
         currency1 = (TextView) amountComponentLayout1.findViewById(R.id.currency);
@@ -79,7 +82,7 @@ public class ChooseAmountActivity extends AppCompatActivity {
             recipient = extras.getParcelable("recipient");
             imageView = (CircularImageView) cardView.findViewById(R.id.details_person_photo);
             textView = (TextView) cardView.findViewById(R.id.details_person_name);
-            imageView.setImageResource(recipient.getImage());
+//            imageView.setImageBitmap(recipient.getImageUri());
             textView.setText(recipient.getFirstName());
         }
 
@@ -150,7 +153,7 @@ public class ChooseAmountActivity extends AppCompatActivity {
         super.onResume();
         if (extras != null) {
             recipient = extras.getParcelable("recipient");
-            imageView.setImageResource(recipient.getImage());
+//            imageView.setImageBitmap(recipient.getImageUri());
             textView.setText(recipient.getFirstName());
 
         }

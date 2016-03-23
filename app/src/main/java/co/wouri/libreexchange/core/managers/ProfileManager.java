@@ -2,7 +2,6 @@ package co.wouri.libreexchange.core.managers;
 
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import co.wouri.libreexchange.core.models.Profile;
@@ -18,30 +17,30 @@ public class ProfileManager {
     private static Profile profile = null;
 
 
-    private static synchronized Profile retrieveAccount() {
+    private static synchronized Profile retrieveProfile() {
 
         profile = fileManager.restore();
         return profile;
     }
 
-    public static Profile saveAccount(Profile profile) {
+    public static Profile saveProfile(Profile profile) {
         boolean isOk = fileManager.save(profile);
         if (isOk) {
             CoazeSettingsUtils.setAccountAlreadyConfigured(true);
-            Log.d("coaze", "saveAccount completed");
+            Log.d("coaze", "saveProfile completed");
             return profile;
         } else {
             return null;
         }
     }
 
-    public static synchronized Profile saveAccount() {
-        return profile = saveAccount(profile);
+    public static synchronized Profile saveProfile() {
+        return profile = saveProfile(profile);
     }
 
-    public static Profile getCurrentUserAccount() {
+    public static Profile getCurrentUserProfile() {
         if (profile == null) {
-            profile = ProfileManager.retrieveAccount();
+            profile = retrieveProfile();
             if (profile == null) {
                 profile = new Profile();
             }
@@ -63,13 +62,12 @@ public class ProfileManager {
     }
 
     public static List<Transfer> getTransferts() {
-        List list = new ArrayList();
         return profile.getTransfers();
     }
 
     public static String addRecipient(Recipient recipient) {
         if (profile.getRecipients().add(recipient)) {
-            saveAccount();
+            saveProfile();
             return recipient.getId();
         } else
             return null;
@@ -85,8 +83,8 @@ public class ProfileManager {
                 recipients.setFirstName(recipient.getFirstName());
                 recipients.setCity(recipient.getCity());
                 recipients.setEmail(recipient.getEmail());
-                recipients.setPhoneNumber(recipient.getPhoneNumber());
-                saveAccount();
+                recipients.setPhoneNumbers(recipient.getPhoneNumbers());
+                saveProfile();
                 return;
             }
 
@@ -112,7 +110,7 @@ public class ProfileManager {
 
     public static String addTransfer(Transfer transfer) {
         if (profile.getTransfers().add(transfer)) {
-            saveAccount();
+            saveProfile();
             return transfer.getId();
         } else
             return null;
@@ -122,7 +120,7 @@ public class ProfileManager {
         List<Recipient> recipients = getRecipients();
         recipients.remove(recipient);
         profile.setRecipients(recipients);
-        saveAccount();
+        saveProfile();
     }
 }
 

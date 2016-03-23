@@ -52,7 +52,7 @@ public class RecipientAdapter extends RecyclerView.Adapter<RecipientViewHolder> 
         holder.id = recipientsItem.getId();
         try {
             // holder.leftImageView.setImageBitmap(getRoundedCornerBitmap(settingsItem.leftIcon, 320));
-            holder.leftImageView.setImageResource(recipientsItem.getImage());
+//            holder.leftImageView.setImageBitmap(recipientsItem.getImageUri());
         } catch (Exception e) {
             e.printStackTrace();
         }

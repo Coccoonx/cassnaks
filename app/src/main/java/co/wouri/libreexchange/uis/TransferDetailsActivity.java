@@ -37,7 +37,7 @@ public class TransferDetailsActivity extends AppCompatActivity {
 
         // Image of the recipient
 //        personPhotoView.setImageBitmap(person.getPhotoId());
-        personPhotoView.setImageResource(transfer.getRecipient().getImage());
+//        personPhotoView.setImageBitmap(transfer.getRecipient().getImageUri());
         personNameView.setText(transfer.getRecipient().getFirstName());
         personAmountView.setText(transfer.getSenderCurrency() + " " + transfer.getAmount());
 

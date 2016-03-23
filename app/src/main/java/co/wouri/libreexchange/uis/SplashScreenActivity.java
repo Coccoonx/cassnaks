@@ -28,8 +28,8 @@ public class SplashScreenActivity extends Activity implements LoadingTaskFinishe
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan);
 
         // Start your loading
-        new LoadingTask(progressBar, this).execute("www.google.co.uk"); // Pass in whatever you need a url is just an example we don't use it in this tutorial
-        completeSplash();
+        new LoadingTask(progressBar, this).execute("www.google.com"); // Pass in whatever you need a url is just an example we don't use it in this tutorial
+//        completeSplash();
     }
 
     // This is the callback for when your async task has finished
@@ -46,7 +46,7 @@ public class SplashScreenActivity extends Activity implements LoadingTaskFinishe
     private void startApp() {
         Intent intent;
 //        if (CoazeSettingsUtils.getUserLogged()) {
-            intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+            intent = new Intent(SplashScreenActivity.this, ChooseRecipientActivity.class);
 
 //        } else
 //            intent = new Intent(SplashScreenActivity.this, ProfileActivity.class);

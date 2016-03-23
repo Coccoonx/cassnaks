@@ -57,17 +57,16 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:background="@drawable/corner_border_component_2"
+        android:background="@drawable/corner_border_component"
         android:gravity="right"
         android:layout_weight="60"
         >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_standard"
             android:layout_marginRight="3dp"
             android:layout_weight="50"
-            android:background="@drawable/spinner_bg_main"
+            android:background="@android:color/transparent"
             android:orientation="horizontal">
 
             <Spinner
@@ -88,8 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:visibility="invisible"
                 android:layout_gravity="center"
-                android:tint="@color/colorAccent"
                 android:src="@drawable/arrow_mimap" />
 
         </RelativeLayout>

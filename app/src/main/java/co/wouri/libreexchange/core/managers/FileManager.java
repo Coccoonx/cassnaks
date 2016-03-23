@@ -50,7 +50,7 @@ public class FileManager {
             Log.d("coaze", "After writing to outDir = (" + outDir + ")");
             return true;
         } catch (Exception e) {
-            Log.d("coaze", "Problem while writing : " + e.getMessage());
+            Log.d("coaze", "Problem while writing : " + Log.getStackTraceString(e));
             return false;
         }
 

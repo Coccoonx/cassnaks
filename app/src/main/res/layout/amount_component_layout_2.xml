@@ -10,7 +10,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="40"
-        android:background="@drawable/corner_border_amount">
+        android:paddingTop="@dimen/margin_short"
+        android:background="@drawable/corner_border_amount_2">
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,7 +64,7 @@
             android:layout_marginTop="@dimen/margin_standard"
             android:layout_marginRight="3dp"
             android:layout_weight="50"
-            android:background="@drawable/spinner_bg_main"
+            android:background="@android:color/transparent"
             android:orientation="horizontal">
 
             <Spinner
@@ -85,8 +86,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:visibility="invisible"
                 android:layout_gravity="center"
-                android:tint="@color/colorAccent"
+                android:tint="@color/colorSecondaryBg"
                 android:src="@drawable/arrow_mimap" />
 
         </RelativeLayout>

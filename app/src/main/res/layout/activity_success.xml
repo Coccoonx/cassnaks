@@ -98,10 +98,9 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:paddingBottom="15dp"
-
-        android:weightSum="100">
+        android:paddingBottom="15dp">
 
         <Button
             android:id="@+id/transfers"
@@ -110,17 +109,17 @@
             android:layout_gravity="left|bottom"
             android:layout_marginRight="4dp"
             android:layout_weight="60"
-            android:textColor="@color/textColorPrimary"
             android:background="@drawable/corner_border_blue_transfer"
-            android:text="@string/transfer" />
+            android:text="@string/transfer"
+            android:textColor="@color/textColorPrimary"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/done"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
+            android:layout_gravity="center_horizontal|bottom"
             android:layout_marginLeft="4dp"
-            android:layout_weight="40"
             android:background="@drawable/corner_border_green"
             android:text="@string/done"
             android:textColor="#f2f5f7" />

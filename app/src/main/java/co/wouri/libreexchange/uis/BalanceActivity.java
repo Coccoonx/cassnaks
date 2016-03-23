@@ -35,7 +35,7 @@ public class BalanceActivity extends AppCompatActivity {
         addFundButton = (Button) findViewById(R.id.addFund);
         balance = (TextView) findViewById(R.id.balanceLabel);
         amount = (TextView) findViewById(R.id.amountValue);
-        amount.setText("$"+ProfileManager.getCurrentUserAccount().getAccount().getBalance());
+        amount.setText("$"+ProfileManager.getCurrentUserProfile().getAccount().getBalance());
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, balance, addFundButton, amount);
 
 

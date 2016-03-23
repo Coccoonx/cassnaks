@@ -27,8 +27,8 @@ public class LibreExchangeApplication extends MultiDexApplication {
     }
 
     void initAccount() {
-        ProfileManager.getCurrentUserAccount();
-        ProfileManager.saveAccount();
+        ProfileManager.getCurrentUserProfile();
+        ProfileManager.saveProfile();
     }
 
     public static synchronized LibreExchangeApplication getInstance() {

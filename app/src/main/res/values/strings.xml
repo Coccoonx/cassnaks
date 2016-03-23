@@ -29,6 +29,7 @@
     <string name="title_activity_spinner_adapter">SpinnerAdapter</string>
 
 
+    <string name="alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
 
     <!-- integtration-->
     <string name="app_name">Libre Exchange</string>

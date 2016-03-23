@@ -37,5 +37,7 @@ dependencies {
     compile 'org.hibernate:hibernate-validator:5.2.2.Final'
     provided "org.projectlombok:lombok:1.12.6"
 
+    compile 'com.googlecode.libphonenumber:libphonenumber:6.0'
+
 
 }

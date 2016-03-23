@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     void initUI() {
-        profile = ProfileManager.getCurrentUserAccount();
+        profile = ProfileManager.getCurrentUserProfile();
 
         buildToolBar();
         buildDrawer();
@@ -241,7 +241,8 @@ public class MainActivity extends AppCompatActivity {
         TextView userEmail = (TextView) navigationView.findViewById(R.id.useremail);
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
 
-        username.setText(profile.getAccount().getFirstName() + " " + profile.getAccount().getLastName());
+        String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber()  : profile.getAccount().getFirstName();
+                username.setText(usern);
         userEmail.setText(profile.getAccount().getEmail());
         userBalance.setText("" + profile.getAccount().getBalance());
 
@@ -274,8 +275,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, AboutActivity.class));
                 } else if (menuItem.getItemId() == R.id.nav_item_transfer) {
                     startActivity(new Intent(MainActivity.this, TransferHistoryActivity.class));
-                } else if (menuItem.getItemId() == R.id.nav_item_recipient) {
-                    startActivity(new Intent(MainActivity.this, RecipientActivity.class));
+//                } else if (menuItem.getItemId() == R.id.nav_item_recipient) {
+//                    startActivity(new Intent(MainActivity.this, RecipientActivity.class));
                 } else if (menuItem.getItemId() == R.id.nav_item_balance) {
                     startActivity(new Intent(MainActivity.this, BalanceActivity.class));
                 } else if (menuItem.getItemId() == R.id.feedback_item) {

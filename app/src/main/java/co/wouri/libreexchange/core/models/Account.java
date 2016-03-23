@@ -1,12 +1,18 @@
 package co.wouri.libreexchange.core.models;
 
+import android.accounts.AccountManager;
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.telephony.TelephonyManager;
+import android.util.Patterns;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
+import java.util.regex.Pattern;
 
+import co.wouri.libreexchange.LibreExchangeApplication;
 import lombok.Data;
 
 
@@ -77,6 +83,9 @@ public class Account implements Serializable, Parcelable {
     }
 
     public Account() {
+        email = getUserEmail();
+        phoneNumber = getPhoneNumber();
+
     }
 
     protected Account(Parcel in) {
@@ -111,4 +120,23 @@ public class Account implements Serializable, Parcelable {
             return new Account[size];
         }
     };
+
+    public static String getUserEmail() {
+
+        Pattern emailPattern = Patterns.EMAIL_ADDRESS; // API level 8+
+        android.accounts.Account[] accounts = AccountManager.get(LibreExchangeApplication.getInstance()).getAccounts();
+        String possibleEmail = "";
+        for (android.accounts.Account account : accounts) {
+            if (emailPattern.matcher(account.name).matches()) {
+                possibleEmail = account.name;
+            }
+        }
+        return possibleEmail;
+    }
+
+    public String getUserPhoneNumber() {
+        TelephonyManager tm = (TelephonyManager) LibreExchangeApplication.getInstance().getSystemService(Context.TELEPHONY_SERVICE);
+        String number = tm.getLine1Number();
+        return number;
+    }
 }

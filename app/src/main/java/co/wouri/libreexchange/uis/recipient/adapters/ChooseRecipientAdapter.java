@@ -1,22 +1,34 @@
 package co.wouri.libreexchange.uis.recipient.adapters;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.io.FileDescriptor;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.wouri.libreexchange.BuildConfig;
 import co.wouri.libreexchange.R;
 import co.wouri.libreexchange.core.models.Recipient;
 import co.wouri.libreexchange.uis.ChooseRecipientActivity;
 import co.wouri.libreexchange.uis.recipient.viewholders.ChooseRecipientViewHolder;
+import co.wouri.libreexchange.utils.ImageLoader;
+import co.wouri.libreexchange.utils.Utils;
 
 /**
  * Created by lyonnel on 05/11/15.
@@ -35,15 +47,20 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
 
     public int selectedItem = -1;
 
+
     Context context;
     List<RecipientItem> recipientItems;
     List<Recipient> recipients;
+    ImageLoader mImageLoader;
 
 
-    public ChooseRecipientAdapter(Context context, List<Recipient> recipients) {
+    public ChooseRecipientAdapter(Context context, List<Recipient> recipients, ImageLoader imageLoader) {
         this.context = context;
         this.recipientItems = initList(recipients);
         this.recipients = recipients;
+        mImageLoader = imageLoader;
+
+
     }
 
     @Override
@@ -84,7 +101,8 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         settingsRecipients.holder = holder;
         //holder.id = settingsRecipients.getId();
         try {
-            holder.leftImageView.setImageResource(settingsRecipients.leftIcon);
+            mImageLoader.loadImage(settingsRecipients.leftIcon, holder.leftImageView);
+//            holder.leftImageView.setImageBitmap(settingsRecipients.leftIcon);
         } catch (ClassCastException e) {
             e.printStackTrace();
         }
@@ -115,7 +133,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
                     ChooseRecipientActivity.recipient = null;
                     Log.d("coaze", "selected item :" + selectedItem);
                 } else {
-                    if(getItem(selectedItem).holder!=null){
+                    if (getItem(selectedItem).holder != null) {
                         getItem(selectedItem).holder.isSelected = false;
                         getItem(selectedItem).holder.mRelativeLayout.setBackgroundColor(context.getResources().getColor(R.color.color_background));
                         getItem(selectedItem).holder.title.setTextColor(context.getResources().getColor(R.color.textColorPrimary));
@@ -127,8 +145,8 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
                         holder.rightView.setVisibility(View.VISIBLE);
                         ChooseRecipientActivity.recipient = holder.recipient;
                         Log.d("coaze", "selected item :" + selectedItem);
-                    }else{
-                        Log.d("coaze","not possible");
+                    } else {
+                        Log.d("coaze", "not possible");
                     }
                 }
             }
@@ -137,9 +155,10 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
 
     }
 
-    public RecipientItem getItem(int position){
+    public RecipientItem getItem(int position) {
         return recipientItems.get(position);
     }
+
     @Override
     public int getItemCount() {
         return recipientItems.size();
@@ -147,11 +166,11 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
 
 
     public static class RecipientItem {
-        public int leftIcon;
+        public String leftIcon;
         public String title;
         public ChooseRecipientViewHolder holder = null;
 
-        public RecipientItem(int leftIcon, String title) {
+        public RecipientItem(String leftIcon, String title) {
 
             this.leftIcon = leftIcon;
             this.title = title;
@@ -164,7 +183,11 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         List<RecipientItem> list = new ArrayList<>();
 
         for (Recipient recipient : recipients) {
-            RecipientItem recipientItem = new RecipientItem(recipient.getImage(), recipient.getFirstName());
+//            Bitmap bm = recipient.getImageUri();
+//            if (bm == null) {
+//                 bm = BitmapFactory.decodeResource(context.getResources(), R.drawable.unknown);
+//            }
+            RecipientItem recipientItem = new RecipientItem(recipient.getImageUri(), recipient.getFirstName());
             list.add(recipientItem);
         }
         return list;
@@ -177,5 +200,6 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         recipientItems.addAll(initList(recipients));
         notifyDataSetChanged();
     }
+
 
 }
