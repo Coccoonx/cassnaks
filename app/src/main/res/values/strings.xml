@@ -119,7 +119,8 @@
     <string name="texthint">100.00</string>
     <string name="currency">$</string>
     <string name="texthinteuro">75.00</string>
-
+    <string name="balancelabel">BALANCE</string>
+    <string name="transferlabel">TRANSFER</string>
 
 
 </resources>

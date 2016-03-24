@@ -1,62 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
-        android:id="@+id/frame_container"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingBottom="12dp"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:paddingTop="?attr/actionBarSize">
+        android:background="@color/colorPrimaryDark">
 
-        <TextView
-            android:id="@+id/balanceLabel"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="12dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="?attr/actionBarSize">
+
+            <TextView
+                android:id="@+id/balanceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="80dp"
+                android:text="@string/a_text2"
+                android:textColor="@color/text_color_grey_dark"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/amountValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/balance"
+                android:textColor="@color/colorAccent"
+
+                android:textSize="60sp" />
+
+
+        </LinearLayout>
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/custom_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/addFund"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="80dp"
-            android:text="@string/a_text2"
-            android:textColor="@color/text_color_grey_dark"
-            android:textSize="20sp" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_standard"
+            android:background="@drawable/corner_border_green"
+            android:gravity="center"
+            android:padding="@dimen/margin_standard"
+            android:text="@string/add"
+            android:textColor="#fff" />
 
-        <TextView
-            android:id="@+id/amountValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/balance"
-            android:textColor="@color/colorAccent"
+    </RelativeLayout>
 
-            android:textSize="60sp" />
-
-
-    </LinearLayout>
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/custom_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentTop="true"/>
-
-    <Button
-        android:id="@+id/addFund"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_standard"
-        android:background="@drawable/corner_border_green"
-        android:text="@string/add"
-        android:gravity="center"
-        android:padding="@dimen/margin_standard"
-        android:textColor="#fff" />
-
-</RelativeLayout>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/menu_drawer" />
+</android.support.v4.widget.DrawerLayout>

@@ -14,6 +14,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,12 +23,15 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +47,7 @@ import java.util.Locale;
 import co.wouri.libreexchange.BuildConfig;
 import co.wouri.libreexchange.R;
 import co.wouri.libreexchange.core.managers.ProfileManager;
+import co.wouri.libreexchange.core.models.Profile;
 import co.wouri.libreexchange.core.models.Recipient;
 import co.wouri.libreexchange.uis.recipient.adapters.ChooseRecipientAdapter;
 import co.wouri.libreexchange.utils.ContactsQuery;
@@ -63,6 +69,8 @@ public class ChooseRecipientActivity extends AppCompatActivity implements Loader
     public static ArrayList<Recipient> mPeopleList = new ArrayList();
 
     private ImageLoader mImageLoader; // Handles loading the contact image in a background thread
+    private Profile profile;
+    private DrawerLayout mDrawerLayout;
 
 
     @Override
@@ -77,7 +85,7 @@ public class ChooseRecipientActivity extends AppCompatActivity implements Loader
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipient);
 
-        buildToolBar();
+        initUI();
 
         Locale locale = Locale.getDefault();
         Currency currency = Currency.getInstance(locale);
@@ -96,7 +104,7 @@ public class ChooseRecipientActivity extends AppCompatActivity implements Loader
          *
          * http://developer.android.com/training/displaying-bitmaps/
          */
-        Log.i("params", "image size : "+getListPreferredItemHeight());
+        Log.i("params", "image size : " + getListPreferredItemHeight());
         mImageLoader = new ImageLoader(this, getListPreferredItemHeight()) {
             @Override
             protected Bitmap processBitmap(Object data) {
@@ -196,7 +204,7 @@ public class ChooseRecipientActivity extends AppCompatActivity implements Loader
         //return super.onOptionsItemSelected(item);
     }
 
-    private void buildToolBar() {
+    private void buildToolBars() {
         View toolbar = findViewById(R.id.toolbar);
 
 
@@ -223,6 +231,119 @@ public class ChooseRecipientActivity extends AppCompatActivity implements Loader
             public void onClick(View v) {
                 getLoaderManager().initLoader(ContactsQuery.QUERY_ID, null, ChooseRecipientActivity.this);
 //                startActivity(new Intent(ChooseRecipientActivity.this, AddRecipientActivity.class));
+            }
+        });
+
+
+    }
+
+    void initUI() {
+        profile = ProfileManager.getCurrentUserProfile();
+
+        buildToolBar();
+        buildDrawer();
+
+    }
+
+    private void buildToolBar() {
+        View toolbar = findViewById(R.id.toolbar);
+
+        ImageView menu = (ImageView) toolbar.findViewById(R.id.leftIcon);
+        TextView title = (TextView) toolbar.findViewById(R.id.title);
+        ImageView close = (ImageView) toolbar.findViewById(R.id.rightIcon);
+
+        title.setVisibility(View.VISIBLE);
+        close.setVisibility(View.VISIBLE);
+
+        title.setText("CHOOSE RECIPIENT");
+
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, title);
+
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(Gravity.LEFT);
+
+            }
+        });
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+    }
+
+    void buildDrawer() {
+
+        Locale locale = Locale.getDefault();
+        Currency currency = Currency.getInstance(locale);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+        LinearLayout linearProfile = (LinearLayout) navigationView.findViewById(R.id.linear_profile);
+        linearProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChooseRecipientActivity.this, ProfileActivity.class);
+                intent.putExtra("profile", (Parcelable) profile.getAccount());
+                intent.putExtra("isUpdate", true);
+                startActivity(intent);
+            }
+        });
+
+        TextView username = (TextView) navigationView.findViewById(R.id.username);
+        TextView userEmail = (TextView) navigationView.findViewById(R.id.useremail);
+        TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
+
+        String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber() : profile.getAccount().getFirstName();
+        username.setText(usern);
+        userEmail.setText(profile.getAccount().getEmail());
+        userBalance.setText(currency.getSymbol() + " " + profile.getAccount().getBalance());
+
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, userBalance, userEmail, username);
+
+
+        Menu m = navigationView.getMenu();
+        for (int i = 0; i < m.size(); i++) {
+            MenuItem mi = m.getItem(i);
+
+            //for aapplying a font to subMenu ...
+            SubMenu subMenu = mi.getSubMenu();
+            if (subMenu != null && subMenu.size() > 0) {
+                for (int j = 0; j < subMenu.size(); j++) {
+                    MenuItem subMenuItem = subMenu.getItem(j);
+                    UIUtils.applyFontToMenuItem(UIUtils.Font.MUSEOSANS_500, subMenuItem);
+                }
+            }
+
+            //the method we have create in activity
+            UIUtils.applyFontToMenuItem(UIUtils.Font.MUSEOSANS_500, mi);
+        }
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+//                menuItem.setChecked(true);
+
+                if (menuItem.getItemId() == R.id.about_item) {
+                    startActivity(new Intent(ChooseRecipientActivity.this, AboutActivity.class));
+                } else if (menuItem.getItemId() == R.id.nav_item_transfer) {
+                    startActivity(new Intent(ChooseRecipientActivity.this, TransferHistoryActivity.class));
+//                } else if (menuItem.getItemId() == R.id.nav_item_recipient) {
+//                    startActivity(new Intent(MainActivity.this, RecipientActivity.class));
+                } else if (menuItem.getItemId() == R.id.nav_item_balance) {
+                    startActivity(new Intent(ChooseRecipientActivity.this, BalanceActivity.class));
+                } else if (menuItem.getItemId() == R.id.feedback_item) {
+                } else if (menuItem.getItemId() == R.id.help_item) {
+                }
+                mDrawerLayout.closeDrawers();
+                return true;
             }
         });
 

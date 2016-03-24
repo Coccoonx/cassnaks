@@ -54,6 +54,7 @@
         <activity
             android:name="co.wouri.libreexchange.uis.SuccessActivity"
             android:label="@string/app_name"
+            android:autoRemoveFromRecents="true"
             android:screenOrientation="portrait"></activity>
 
         <activity

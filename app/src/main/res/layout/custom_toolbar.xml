@@ -12,7 +12,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="8dp"
         android:tint="@color/colorAccent"
-        android:src="@drawable/ic_close" />
+        android:src="@drawable/ic_menu" />
 
     <TextView
         android:id="@+id/title"
@@ -32,6 +32,6 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
         android:tint="@color/colorAccent"
-        android:src="@drawable/ic_add_user"
+        android:src="@drawable/ic_close"
         android:visibility="gone" />
 </RelativeLayout>

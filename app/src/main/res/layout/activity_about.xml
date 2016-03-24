@@ -1,27 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/custom_toolbar"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="center_horizontal" />
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/about_text"
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/custom_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/about_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_big"
+            android:layout_marginRight="@dimen/margin_big"
+            android:layout_marginTop="54dp"
+            android:gravity="center"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur metus ut elementum ullamcorper. Vestibulum mi libero, condimentum at ex et, facilisis tempor orci. Quisque volutpat augue in sagittis mollis. Integer sed tincidunt nunc. Nam in posuere dui, et iaculis nibh. Proin sapien nunc, feugiat vel sapien molestie, molestie viverra lorem. Etiam condimentum tempor purus sit amet pulvinar. Aliquam erat volutpat. Sed tincidunt, elit ac convallis mattis, purus diam condimentum felis, eu ultrices lorem odio in leo. Curabitur ultricies tincidunt lorem ut scelerisque. Duis a nibh sed ipsum tempus ultrices id sit amet orci. Proin vel eros non mauris aliquet posuere. Sed euismod finibus nibh, at blandit urna tincidunt sit amet."
+            android:textColor="@color/text_color_grey_dark" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_big"
-        android:layout_marginRight="@dimen/margin_big"
-        android:layout_marginTop="54dp"
-        android:gravity="center"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur metus ut elementum ullamcorper. Vestibulum mi libero, condimentum at ex et, facilisis tempor orci. Quisque volutpat augue in sagittis mollis. Integer sed tincidunt nunc. Nam in posuere dui, et iaculis nibh. Proin sapien nunc, feugiat vel sapien molestie, molestie viverra lorem. Etiam condimentum tempor purus sit amet pulvinar. Aliquam erat volutpat. Sed tincidunt, elit ac convallis mattis, purus diam condimentum felis, eu ultrices lorem odio in leo. Curabitur ultricies tincidunt lorem ut scelerisque. Duis a nibh sed ipsum tempus ultrices id sit amet orci. Proin vel eros non mauris aliquet posuere. Sed euismod finibus nibh, at blandit urna tincidunt sit amet."
-        android:textColor="@color/text_color_grey_dark" />
-
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/menu_drawer" />
+</android.support.v4.widget.DrawerLayout>

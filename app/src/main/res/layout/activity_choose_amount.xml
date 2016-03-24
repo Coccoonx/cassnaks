@@ -1,64 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/coazebackground"
-    android:fillViewport="true"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp">
+        android:background="@color/coazebackground"
+        android:fillViewport="true"
+        android:orientation="vertical">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/custom_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="center_horizontal" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/custom_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_horizontal" />
 
 
-        <include
-            android:id="@+id/contact_chooser_component"
-            layout="@layout/contact_chooser_component"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_below="@+id/toolbar"
-            android:layout_marginBottom="@dimen/margin_standard"
-            android:layout_marginTop="@dimen/margin_big" />
+            <include
+                android:id="@+id/contact_chooser_component"
+                layout="@layout/contact_chooser_component"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@+id/toolbar"
+                android:layout_marginBottom="@dimen/margin_standard"
+                android:layout_marginTop="@dimen/margin_big" />
 
-        <include
-            android:id="@+id/amount_component_layout_1"
-            layout="@layout/amount_component_layout_1"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_below="@+id/contact_chooser_component" />
+            <include
+                android:id="@+id/amount_component_layout_1"
+                layout="@layout/amount_component_layout_1"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@+id/contact_chooser_component" />
 
-        <include
-            android:id="@+id/amount_component_layout_2"
-            layout="@layout/amount_component_layout_2"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_below="@+id/amount_component_layout_1" />
+            <include
+                android:id="@+id/amount_component_layout_2"
+                layout="@layout/amount_component_layout_2"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@+id/amount_component_layout_1" />
 
-        <Button
-            android:id="@+id/send"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/margin_standard"
-            android:background="@drawable/corner_border_green"
-            android:gravity="center"
-            android:onClick="performSend"
-            android:padding="@dimen/margin_standard"
-            android:text="@string/send_text"
-            android:textColor="#fff" />
+            <Button
+                android:id="@+id/send"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/margin_standard"
+                android:background="@drawable/corner_border_green"
+                android:gravity="center"
+                android:onClick="performSend"
+                android:padding="@dimen/margin_standard"
+                android:text="@string/send_text"
+                android:textColor="#fff" />
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-</ScrollView>
+    </ScrollView>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/menu_drawer" />
+</android.support.v4.widget.DrawerLayout>

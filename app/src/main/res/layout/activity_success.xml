@@ -1,136 +1,154 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f2f5f7"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
-        android:id="@+id/frame_container"
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_background"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingBottom="12dp"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:paddingTop="?attr/actionBarSize">
-
-
-        <TextView
-            android:id="@+id/successLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="80dp"
-            android:text="@string/success"
-            android:textColor="@color/colorAccent"
-            android:textSize="40sp" />
+        android:background="#f2f5f7"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_background"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="12dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="?attr/actionBarSize">
+
 
             <TextView
-                android:id="@+id/amountValue"
+                android:id="@+id/successLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:text="@string/amount"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="80dp"
+                android:text="@string/success"
                 android:textColor="@color/colorAccent"
-                android:textSize="20sp" />
+                android:textSize="40sp" />
 
-            <TextView
-                android:id="@+id/was_sent"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:text="@string/msg"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/amountValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/amount"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/was_sent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/msg"
+                    android:textColor="@color/text_color_grey_dark" />
+
+                <TextView
+                    android:id="@+id/recipient_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/details_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/a_text"
                 android:textColor="@color/text_color_grey_dark" />
 
-            <TextView
-                android:id="@+id/recipient_name"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/name"
-                android:textColor="@color/textColorPrimary"
-                android:textSize="20sp" />
-        </LinearLayout>
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/details_text1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/a_text"
-            android:textColor="@color/text_color_grey_dark" />
+                <TextView
+                    android:id="@+id/details_text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/transfers"
+                    android:textColor="@color/colorAccent" />
+
+                <TextView
+                    android:id="@+id/details_text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/history"
+                    android:textColor="@color/text_color_grey_dark" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingBottom="15dp">
 
-            <TextView
-                android:id="@+id/details_text2"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/transfers"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:text="@string/transfers"
-                android:textColor="@color/colorAccent" />
+                android:layout_gravity="left|bottom"
+                android:layout_marginRight="4dp"
+                android:layout_weight="60"
+                android:background="@drawable/corner_border_blue_transfer"
+                android:text="@string/transfer"
+                android:textColor="@color/textColorPrimary"
+                android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/details_text3"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/done"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="@string/history"
-                android:textColor="@color/text_color_grey_dark" />
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/corner_border_green"
+                android:text="@string/done"
+                android:textColor="#f2f5f7" />
 
         </LinearLayout>
 
-    </LinearLayout>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/custom_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center_horizontal" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:paddingBottom="15dp">
+    </FrameLayout>
 
-        <Button
-            android:id="@+id/transfers"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|bottom"
-            android:layout_marginRight="4dp"
-            android:layout_weight="60"
-            android:background="@drawable/corner_border_blue_transfer"
-            android:text="@string/transfer"
-            android:textColor="@color/textColorPrimary"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/done"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginLeft="4dp"
-            android:background="@drawable/corner_border_green"
-            android:text="@string/done"
-            android:textColor="#f2f5f7" />
-
-    </LinearLayout>
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/custom_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="center_horizontal" />
-
-</FrameLayout>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/menu_drawer" />
+</android.support.v4.widget.DrawerLayout>

@@ -3,6 +3,7 @@ package co.wouri.libreexchange.uis;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 
 import java.util.Currency;
 import java.util.List;
@@ -46,11 +48,39 @@ public class TransferHistoryActivity extends AppCompatActivity {
         initUI();
         recyclerView = (RecyclerView) findViewById(R.id.transfer_history_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 //        cardView = (CardView) findViewById(R.id.card_view_item);
 
 //        rv.setHasFixedSize(true);
         initializeData();
         initializeAdapter();
+    }
+
+    private void initializeData() {
+        transfers = ProfileManager.getTransferts();
+//        persons.add(new Person("Beyonce Knowles", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.beyonce), 200), 100, "SEND", "18.07.2015"));
+//        persons.add(new Person("Barack Obama", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.barackobama), 200), 50, "RECIEVED", "11.05.2015"));
+//        persons.add(new Person("Barry Green", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.unknown), 200), 200, "SEND", "12.03.2015"));
+    }
+
+    private void initializeAdapter() {
+        adapter = new TransferHistoryAdapter(transfers, this);
+        recyclerView.setAdapter(adapter);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabSend);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TransferHistoryActivity.this, ChooseRecipientActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 
     void initUI() {
@@ -61,40 +91,20 @@ public class TransferHistoryActivity extends AppCompatActivity {
 
     }
 
-    private void initializeData() {
-        transfers = ProfileManager.getTransferts();
-
-//        persons.add(new Person("Beyonce Knowles", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.beyonce), 200), 100, "SEND", "18.07.2015"));
-//        persons.add(new Person("Barack Obama", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.barackobama), 200), 50, "RECIEVED", "11.05.2015"));
-//        persons.add(new Person("Barry Green", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.unknown), 200), 200, "SEND", "12.03.2015"));
-    }
-
-    private void initializeAdapter() {
-        adapter = new TransferHistoryAdapter(transfers, this);
-        recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        adapter.notifyDataSetChanged();
-    }
-
     private void buildToolBar() {
         View toolbar = findViewById(R.id.toolbar);
 
-        ImageView close = (ImageView) toolbar.findViewById(R.id.leftIcon);
+        ImageView menu = (ImageView) toolbar.findViewById(R.id.leftIcon);
         TextView title = (TextView) toolbar.findViewById(R.id.title);
-        ImageView option = (ImageView) toolbar.findViewById(R.id.rightIcon);
+        ImageView close = (ImageView) toolbar.findViewById(R.id.rightIcon);
 
-        close.setImageResource(R.drawable.ic_menu);
-        option.setVisibility(View.VISIBLE);
-        option.setImageResource(R.drawable.ic_send_black_18dp);
+        title.setVisibility(View.VISIBLE);
+        close.setVisibility(View.VISIBLE);
 
         title.setText("TRANSFER HISTORY");
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, title);
 
-        close.setOnClickListener(new View.OnClickListener() {
+        menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDrawerLayout.openDrawer(Gravity.LEFT);
@@ -102,14 +112,13 @@ public class TransferHistoryActivity extends AppCompatActivity {
             }
         });
 
-        option.setOnClickListener(new View.OnClickListener() {
+        close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TransferHistoryActivity.this, ChooseRecipientActivity.class));
+                finish();
             }
         });
 
-        title.setVisibility(View.VISIBLE);
 
     }
 
@@ -137,10 +146,10 @@ public class TransferHistoryActivity extends AppCompatActivity {
         TextView userEmail = (TextView) navigationView.findViewById(R.id.useremail);
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
 
-        String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber()  : profile.getAccount().getFirstName();
+        String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber() : profile.getAccount().getFirstName();
         username.setText(usern);
         userEmail.setText(profile.getAccount().getEmail());
-        userBalance.setText(currency.getSymbol()+" " + profile.getAccount().getBalance());
+        userBalance.setText(currency.getSymbol() + " " + profile.getAccount().getBalance());
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, userBalance, userEmail, username);
 
