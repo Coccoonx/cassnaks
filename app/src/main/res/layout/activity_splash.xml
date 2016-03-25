@@ -45,7 +45,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/activity_splash_title_line_two"
             android:textColor="@color/textColorPrimary"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
 
         <ProgressBar

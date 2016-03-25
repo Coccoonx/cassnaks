@@ -5,15 +5,15 @@
             android:id="@+id/nav_item_transfer"
             android:checked="true"
             android:icon="@drawable/ic_money_stack"
-            android:title="@string/nav_item_transfer" />
+            android:title="@string/nav_item_transaction" />
         <item
             android:id="@+id/nav_item_balance"
             android:icon="@drawable/ic_wallet"
             android:title="@string/nav_item_balance" />
         <!--<item
             android:id="@+id/nav_item_recipient"
-            android:icon="@drawable/ic_user"
-            android:title="@string/nav_item_recipient" />-->
+            android:icon="@drawable/ic_transactions_history"
+            android:title="@string/nav_item_transaction" />-->
     </group>
     <item android:title=" ">
         <menu>
@@ -26,6 +26,9 @@
             <item
                 android:id="@+id/feedback_item"
                 android:title="Feedback" />
+            <item
+                android:id="@+id/question_item"
+                android:title="@string/question" />
         </menu>
     </item>
 </menu>

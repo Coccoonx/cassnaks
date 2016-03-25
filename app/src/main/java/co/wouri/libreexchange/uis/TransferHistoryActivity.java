@@ -58,9 +58,6 @@ public class TransferHistoryActivity extends AppCompatActivity {
 
     private void initializeData() {
         transfers = ProfileManager.getTransferts();
-//        persons.add(new Person("Beyonce Knowles", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.beyonce), 200), 100, "SEND", "18.07.2015"));
-//        persons.add(new Person("Barack Obama", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.barackobama), 200), 50, "RECIEVED", "11.05.2015"));
-//        persons.add(new Person("Barry Green", BitmapUtils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.unknown), 200), 200, "SEND", "12.03.2015"));
     }
 
     private void initializeAdapter() {
@@ -71,7 +68,7 @@ public class TransferHistoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TransferHistoryActivity.this, ChooseRecipientActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
@@ -177,13 +174,21 @@ public class TransferHistoryActivity extends AppCompatActivity {
 //                menuItem.setChecked(true);
 
                 if (menuItem.getItemId() == R.id.about_item) {
-                    startActivity(new Intent(TransferHistoryActivity.this, AboutActivity.class));
+                    Intent intent = new Intent(TransferHistoryActivity.this, AboutActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    finish();
+//                    startActivity(new Intent(AboutActivity.this, AboutActivity.class));
                 } else if (menuItem.getItemId() == R.id.nav_item_transfer) {
-                    startActivity(new Intent(TransferHistoryActivity.this, TransferHistoryActivity.class));
+                    Intent intent = new Intent(TransferHistoryActivity.this, TransferHistoryActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                    startActivity(intent);
 //                } else if (menuItem.getItemId() == R.id.nav_item_recipient) {
 //                    startActivity(new Intent(MainActivity.this, RecipientActivity.class));
                 } else if (menuItem.getItemId() == R.id.nav_item_balance) {
-                    startActivity(new Intent(TransferHistoryActivity.this, BalanceActivity.class));
+                    Intent intent = new Intent(TransferHistoryActivity.this, BalanceActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
                 } else if (menuItem.getItemId() == R.id.feedback_item) {
                 } else if (menuItem.getItemId() == R.id.help_item) {
                 }

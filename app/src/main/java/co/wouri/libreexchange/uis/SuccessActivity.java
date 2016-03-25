@@ -92,7 +92,7 @@ public class SuccessActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SuccessActivity.this, SplashScreenActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME|Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 finish();
             }
@@ -216,13 +216,21 @@ public class SuccessActivity extends AppCompatActivity {
 //                menuItem.setChecked(true);
 
                 if (menuItem.getItemId() == R.id.about_item) {
-                    startActivity(new Intent(SuccessActivity.this, AboutActivity.class));
+                    Intent intent = new Intent(SuccessActivity.this, AboutActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    finish();
+//                    startActivity(new Intent(AboutActivity.this, AboutActivity.class));
                 } else if (menuItem.getItemId() == R.id.nav_item_transfer) {
-                    startActivity(new Intent(SuccessActivity.this, TransferHistoryActivity.class));
+                    Intent intent = new Intent(SuccessActivity.this, TransferHistoryActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
 //                } else if (menuItem.getItemId() == R.id.nav_item_recipient) {
 //                    startActivity(new Intent(MainActivity.this, RecipientActivity.class));
                 } else if (menuItem.getItemId() == R.id.nav_item_balance) {
-                    startActivity(new Intent(SuccessActivity.this, BalanceActivity.class));
+                    Intent intent = new Intent(SuccessActivity.this, BalanceActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
                 } else if (menuItem.getItemId() == R.id.feedback_item) {
                 } else if (menuItem.getItemId() == R.id.help_item) {
                 }

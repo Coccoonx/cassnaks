@@ -205,13 +205,21 @@ public class TransferDetailsActivity extends AppCompatActivity {
 //                menuItem.setChecked(true);
 
                 if (menuItem.getItemId() == R.id.about_item) {
-                    startActivity(new Intent(TransferDetailsActivity.this, AboutActivity.class));
+                    Intent intent = new Intent(TransferDetailsActivity.this, AboutActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    finish();
+//                    startActivity(new Intent(AboutActivity.this, AboutActivity.class));
                 } else if (menuItem.getItemId() == R.id.nav_item_transfer) {
-                    startActivity(new Intent(TransferDetailsActivity.this, TransferHistoryActivity.class));
+                    Intent intent = new Intent(TransferDetailsActivity.this, TransferHistoryActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
 //                } else if (menuItem.getItemId() == R.id.nav_item_recipient) {
 //                    startActivity(new Intent(MainActivity.this, RecipientActivity.class));
                 } else if (menuItem.getItemId() == R.id.nav_item_balance) {
-                    startActivity(new Intent(TransferDetailsActivity.this, BalanceActivity.class));
+                    Intent intent = new Intent(TransferDetailsActivity.this, BalanceActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
                 } else if (menuItem.getItemId() == R.id.feedback_item) {
                 } else if (menuItem.getItemId() == R.id.help_item) {
                 }
