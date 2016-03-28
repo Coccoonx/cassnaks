@@ -26,6 +26,7 @@ import co.wouri.libreexchange.BuildConfig;
 import co.wouri.libreexchange.R;
 import co.wouri.libreexchange.core.models.Recipient;
 import co.wouri.libreexchange.uis.ChooseRecipientActivity;
+import co.wouri.libreexchange.uis.recipient.fragments.RecipientsListFragment;
 import co.wouri.libreexchange.uis.recipient.viewholders.ChooseRecipientViewHolder;
 import co.wouri.libreexchange.utils.ImageLoader;
 import co.wouri.libreexchange.utils.Utils;
@@ -122,7 +123,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
                     holder.mRelativeLayout.setBackgroundColor(context.getResources().getColor(R.color.color_seleted_item));
                     holder.title.setTextColor(context.getResources().getColor(R.color.color_background));
                     holder.rightView.setVisibility(View.VISIBLE);
-                    ChooseRecipientActivity.recipient = holder.recipient;
+                    RecipientsListFragment.recipient = holder.recipient;
                     Log.d("coaze", "selected item :" + selectedItem);
                 } else if (holder.isSelected) {
                     selectedItem = -1;
@@ -130,7 +131,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
                     holder.mRelativeLayout.setBackgroundColor(context.getResources().getColor(R.color.color_background));
                     holder.title.setTextColor(context.getResources().getColor(R.color.textColorPrimary));
                     holder.rightView.setVisibility(View.INVISIBLE);
-                    ChooseRecipientActivity.recipient = null;
+                    RecipientsListFragment.recipient = null;
                     Log.d("coaze", "selected item :" + selectedItem);
                 } else {
                     if (getItem(selectedItem).holder != null) {
@@ -143,7 +144,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
                         holder.mRelativeLayout.setBackgroundColor(context.getResources().getColor(R.color.color_seleted_item));
                         holder.title.setTextColor(context.getResources().getColor(R.color.color_background));
                         holder.rightView.setVisibility(View.VISIBLE);
-                        ChooseRecipientActivity.recipient = holder.recipient;
+                        RecipientsListFragment.recipient = holder.recipient;
                         Log.d("coaze", "selected item :" + selectedItem);
                     } else {
                         Log.d("coaze", "not possible");

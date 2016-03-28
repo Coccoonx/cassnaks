@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_background"
+        android:background="@color/colorPrimary"
         android:orientation="vertical">
 
         <include
@@ -19,51 +20,23 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="center_horizontal" />
 
-        <FrameLayout
-            android:id="@+id/frame_container"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="?attr/actionBarSize"
-            android:paddingBottom="@dimen/margin_short">
+            android:layout_below="@+id/toolbar"
+            android:background="?attr/colorPrimary"
+            android:elevation="6dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-            <view
-                android:id="@+id/settingsRecyclerView"
-                class="android.support.v7.widget.RecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="@dimen/margin_extra_short"
-                android:scrollbars="vertical" />
-        </FrameLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/tab_layout"/>
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/Button_add"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="152dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="@dimen/margin_standard"
-            android:layout_marginTop="200dp"
-            android:background="@drawable/corner_border_green"
-            android:text="ADD"
-            android:textColor="@color/textColorPrimary"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/Button_next"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="152dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="@dimen/margin_standard"
-            android:layout_marginTop="200dp"
-            android:background="@drawable/corner_border_green"
-            android:text="NEXT"
-            android:textColor="@color/textColorPrimary"
-            android:visibility="gone" />
-    </FrameLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
