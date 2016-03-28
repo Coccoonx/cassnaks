@@ -10,11 +10,17 @@ import android.text.SpannableString;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.OnItemClickListener;
+import com.orhanobut.dialogplus.ViewHolder;
+
 import java.util.Random;
 import co.wouri.libreexchange.R;
 
@@ -179,5 +185,19 @@ public class UIUtils {
         mi.setTitle(mNewTitle);
     }
 
+    public static void showAnswer(Context context) {
+        View infoView = LayoutInflater.from(context).inflate(R.layout.dialog_question, null);
+
+        DialogPlus dialog = DialogPlus.newDialog(context)
+                .setContentHolder(new ViewHolder(infoView))
+                .setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(DialogPlus dialog, Object item, View view, int position) {
+                    }
+                })
+                .setExpanded(false)  // This will enable the expand feature, (similar to android L share dialog)
+                .create();
+        dialog.show();
+    }
 }
 

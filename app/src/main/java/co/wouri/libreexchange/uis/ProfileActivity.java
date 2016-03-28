@@ -340,6 +340,8 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
                     startActivity(intent);
                 } else if (menuItem.getItemId() == R.id.feedback_item) {
                 } else if (menuItem.getItemId() == R.id.help_item) {
+                } else if (menuItem.getItemId() == R.id.question_item) {
+                    UIUtils.showAnswer(ProfileActivity.this);
                 }
                 mDrawerLayout.closeDrawers();
                 return true;

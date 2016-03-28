@@ -281,6 +281,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, BalanceActivity.class));
                 } else if (menuItem.getItemId() == R.id.feedback_item) {
                 } else if (menuItem.getItemId() == R.id.help_item) {
+                } else if (menuItem.getItemId() == R.id.question_item) {
+                    UIUtils.showAnswer(MainActivity.this);
                 }
                 mDrawerLayout.closeDrawers();
                 return true;

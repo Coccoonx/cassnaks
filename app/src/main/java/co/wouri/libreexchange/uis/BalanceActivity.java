@@ -24,10 +24,6 @@ import co.wouri.libreexchange.core.managers.ProfileManager;
 import co.wouri.libreexchange.core.models.Profile;
 import co.wouri.libreexchange.utils.UIUtils;
 
-
-/**
- * Created by wouri on 06/11/15.
- */
 public class BalanceActivity extends AppCompatActivity {
 
 
@@ -196,6 +192,8 @@ public class BalanceActivity extends AppCompatActivity {
 //                    startActivity(intent);
                 } else if (menuItem.getItemId() == R.id.feedback_item) {
                 } else if (menuItem.getItemId() == R.id.help_item) {
+                } else if (menuItem.getItemId() == R.id.question_item) {
+                    UIUtils.showAnswer(BalanceActivity.this);
                 }
                 mDrawerLayout.closeDrawers();
                 return true;

@@ -51,7 +51,6 @@
     <string name="coaze_text8">  Banks set their own exchange rate </string>
     <string name="coaze_text9"> 1GBP = </string>
     <string name="coaze_text10"> 1.3626 EUR</string>
-    <string name="title_activity_cost"></string>
 
     <string name="coaze_text22"> Libre Exchange changes as little as possible </string>
     <string name="coaze_text44"> 4.98 GBP</string>
@@ -60,7 +59,6 @@
     <string name="coaze_text88">  Banks hide their cost in the exchange rate </string>
     <string name="coaze_text100"> 49.47 GBP </string>
 
-    <string name="title_activity_globe"></string>
 
     <string name="coaze_text222"> Save up to 90% with coaze and receive </string>
     <string name="coaze_text444"> 1405.02 EUR </string>
@@ -110,6 +108,7 @@
     <string name="transferlabel">TRANSFER</string>
     <string name="nav_item_transaction">Transactions History</string>
     <string name="question">Why is this app black?</string>
+    <string name="answer">Because \'black\' is Beautiful !!!</string>
 
 
 </resources>

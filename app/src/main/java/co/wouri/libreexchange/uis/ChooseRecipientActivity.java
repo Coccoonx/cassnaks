@@ -341,6 +341,8 @@ public class ChooseRecipientActivity extends AppCompatActivity implements Loader
                     startActivity(new Intent(ChooseRecipientActivity.this, BalanceActivity.class));
                 } else if (menuItem.getItemId() == R.id.feedback_item) {
                 } else if (menuItem.getItemId() == R.id.help_item) {
+                } else if (menuItem.getItemId() == R.id.question_item) {
+                    UIUtils.showAnswer(ChooseRecipientActivity.this);
                 }
                 mDrawerLayout.closeDrawers();
                 return true;

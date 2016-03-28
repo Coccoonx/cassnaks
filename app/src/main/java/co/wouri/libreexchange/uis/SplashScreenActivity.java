@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -18,6 +20,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.DialogPlusBuilder;
+import com.orhanobut.dialogplus.OnDismissListener;
+import com.orhanobut.dialogplus.OnItemClickListener;
+import com.orhanobut.dialogplus.ViewHolder;
 
 import co.wouri.libreexchange.R;
 import co.wouri.libreexchange.core.managers.ProfileManager;
@@ -205,6 +213,8 @@ public class SplashScreenActivity extends Activity implements LoadingTaskFinishe
                     startActivity(intent);
                 } else if (menuItem.getItemId() == R.id.feedback_item) {
                 } else if (menuItem.getItemId() == R.id.help_item) {
+                } else if (menuItem.getItemId() == R.id.question_item) {
+                    UIUtils.showAnswer(SplashScreenActivity.this);
                 }
                 mDrawerLayout.closeDrawers();
                 return true;

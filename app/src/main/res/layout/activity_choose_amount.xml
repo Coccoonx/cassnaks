@@ -52,6 +52,112 @@
                 android:layout_height="80dp"
                 android:layout_below="@+id/amount_component_layout_1" />
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/amount_component_layout_2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/transfer_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_big"
+                    android:gravity="center"
+                    android:text="Receiver gets with competition:"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/margin_standard" />
+
+                <LinearLayout
+                    android:id="@+id/moneygram"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/transfer_text"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/money_gram"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/transfer_text"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/margin_short"
+                        android:text="MoneyGram.........."
+                        android:textColor="@color/textColorPrimary" />
+
+
+                    <TextView
+                        android:id="@+id/money_gram_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/transfer_text"
+                        android:layout_marginTop="@dimen/margin_short"
+                        android:layout_toRightOf="@+id/money_gram"
+                        android:text="€55"
+                        android:textColor="@color/text_color_red" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/werstern"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/moneygram"
+
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/western_union"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/money_gram"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/margin_short"
+                        android:text="WesterUnion.........."
+                        android:textColor="@color/textColorPrimary" />
+
+                    <TextView
+                        android:id="@+id/western_union_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/money_gram_amount"
+                        android:layout_marginTop="@dimen/margin_short"
+                        android:layout_toRightOf="@+id/money_gram"
+                        android:text="€57"
+                        android:textColor="@color/text_color_red" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/werstern"
+                    android:layout_marginTop="@dimen/margin_short"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/save_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/western_union"
+                        android:text="You save: "
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="@dimen/text_size" />
+
+                    <TextView
+                        android:id="@+id/save_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/western_union_amount"
+                        android:layout_toRightOf="@+id/save_text"
+                        android:text="$30"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/margin_standard" />
+                </LinearLayout>
+            </RelativeLayout>
+
             <Button
                 android:id="@+id/send"
                 android:layout_width="150dp"

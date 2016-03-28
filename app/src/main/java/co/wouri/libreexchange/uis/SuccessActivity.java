@@ -62,7 +62,7 @@ public class SuccessActivity extends AppCompatActivity {
         was_sent = (TextView) findViewById(R.id.was_sent);
 
         if (bundle != null) {
-            Transfer transfer = (Transfer) bundle.getParcelable("transfer");
+            Transfer transfer =  bundle.getParcelable("transfer");
             //amount2.getText().toString();
 
             if (transfer != null) {
@@ -233,6 +233,8 @@ public class SuccessActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if (menuItem.getItemId() == R.id.feedback_item) {
                 } else if (menuItem.getItemId() == R.id.help_item) {
+                } else if (menuItem.getItemId() == R.id.question_item) {
+                    UIUtils.showAnswer(SuccessActivity.this);
                 }
                 mDrawerLayout.closeDrawers();
                 return true;
