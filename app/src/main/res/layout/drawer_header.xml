@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:orientation="vertical"
-    android:paddingTop="36dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
@@ -14,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="100"
+        android:layout_marginTop="@dimen/margin_big"
+        android:layout_marginBottom="@dimen/margin_big"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="8dp"
@@ -51,6 +52,7 @@
                 android:id="@+id/useremail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:lines="1"
                 android:text="example@email.address"
                 android:textColor="#000"
@@ -76,6 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="100"
         android:gravity="center_vertical"
+        android:visibility="gone"
         android:orientation="horizontal"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 

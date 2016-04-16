@@ -27,13 +27,14 @@
 
     <!-- Drawer items -->
     <string name="nav_item_transfer">Transfer</string>
+    <string name="nav_item_transaction">Transactions History</string>
     <string name="nav_item_recipient">Recipient</string>
     <string name="nav_item_balance">Balance</string>
     <string name="nav_item_amount">Choose amount</string>
 
     <!-- Splash screen texts-->
     <string name="activity_splash_title_line_one">Libre Exchange</string>
-    <string name="activity_splash_title_line_two">simple money transfer to Africa</string>
+    <string name="activity_splash_title_line_two">Simple money transfer to Africa</string>
 
     <!-- About screen texts-->
     <string name="about_name">ABOUT</string>
@@ -84,7 +85,7 @@
     <string name="msg">was sent to</string>
     <string name="name">Ali Connors</string>
     <string name="a_text">You can see the details in</string>
-    <string name="transfers">transfers</string>
+    <string name="transfers">transaction history.</string>
     <string name="history">history.</string>
     <string name="transfer">TRANSFERS</string>
     <string name="done">DONE</string>
@@ -106,12 +107,12 @@
     <string name="texthinteuro">75.00</string>
     <string name="balancelabel">BALANCE</string>
     <string name="transferlabel">TRANSFER</string>
-    <string name="nav_item_transaction">Transactions History</string>
-    <string name="question">Why is this app black?</string>
+    <string name="question">Why Black?</string>
     <string name="answer">Because \'black\' is Beautiful !!!</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Profile</string>
 
 
 </resources>

@@ -293,7 +293,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
 
         String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber() : profile.getAccount().getFirstName();
-        username.setText(usern);
+        username.setText(getResources().getString(R.string.profile));
         userEmail.setText(profile.getAccount().getEmail());
         userBalance.setText(currency.getSymbol() + " " + profile.getAccount().getBalance());
 
@@ -349,6 +349,14 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            mDrawerLayout.closeDrawers();
+        } else
+            super.onBackPressed();
     }
 
 

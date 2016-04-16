@@ -46,7 +46,7 @@ public class TransferHistoryAdapter extends RecyclerView.Adapter<PersonViewHolde
         TextView personTransferType = (TextView) v.findViewById(R.id.person_transfert_type);
         TextView personTransferDate = (TextView) v.findViewById(R.id.person_transfert_date);
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, personName, personAmount, personTransferDate, personTransferType);
-        Log.d("Coaze", "transfer history Set Font ");
+        Log.d("Coaze", "transaction history Set Font ");
         PersonViewHolder pvh = new PersonViewHolder(v);
         return pvh;
     }

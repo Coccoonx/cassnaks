@@ -98,7 +98,7 @@ public class TransferHistoryActivity extends AppCompatActivity {
         title.setVisibility(View.VISIBLE);
         close.setVisibility(View.VISIBLE);
 
-        title.setText("TRANSFER HISTORY");
+        title.setText("TRANSACTION HISTORY");
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, title);
 
         menu.setOnClickListener(new View.OnClickListener() {
@@ -144,7 +144,7 @@ public class TransferHistoryActivity extends AppCompatActivity {
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
 
         String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber() : profile.getAccount().getFirstName();
-        username.setText(usern);
+        username.setText(getResources().getString(R.string.profile));
         userEmail.setText(profile.getAccount().getEmail());
         userBalance.setText(currency.getSymbol() + " " + profile.getAccount().getBalance());
 
@@ -200,6 +200,14 @@ public class TransferHistoryActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            mDrawerLayout.closeDrawers();
+        } else
+            super.onBackPressed();
     }
 
     @Override

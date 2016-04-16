@@ -11,23 +11,20 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/frame_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:orientation="vertical"
-            android:paddingBottom="12dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:paddingTop="?attr/actionBarSize">
+            android:padding="12dp"
+            >
 
             <TextView
                 android:id="@+id/balanceLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="80dp"
                 android:text="@string/a_text2"
                 android:textColor="@color/text_color_grey_dark"
                 android:textSize="20sp" />
@@ -36,14 +33,11 @@
                 android:id="@+id/amountValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/margin_big"
                 android:text="@string/balance"
                 android:textColor="@color/colorAccent"
-
                 android:textSize="60sp" />
-
-
-        </LinearLayout>
+        </RelativeLayout>
 
         <include
             android:id="@+id/toolbar"

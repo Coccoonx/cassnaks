@@ -42,6 +42,7 @@ public class SuccessActivity extends AppCompatActivity {
     public static String TAG = "SuccessActivity";
     private DrawerLayout mDrawerLayout;
     private Profile profile;
+    private View.OnClickListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,16 @@ public class SuccessActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         Log.d(TAG, "bundle " + bundle);
 
+        listener= new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SuccessActivity.this, TransferHistoryActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                finish();
+            }
+        };
+
         successTV = (TextView) findViewById(R.id.successLabel);
         details1 = (TextView) findViewById(R.id.details_text1);
         details2 = (TextView) findViewById(R.id.details_text2);
@@ -60,6 +71,9 @@ public class SuccessActivity extends AppCompatActivity {
         amount = (TextView) findViewById(R.id.amountValue);
         amount2 = (EditText) findViewById(R.id.amount);
         was_sent = (TextView) findViewById(R.id.was_sent);
+
+        details2.setOnClickListener(listener);
+        details3.setOnClickListener(listener);
 
         if (bundle != null) {
             Transfer transfer =  bundle.getParcelable("transfer");
@@ -186,7 +200,7 @@ public class SuccessActivity extends AppCompatActivity {
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
 
         String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber() : profile.getAccount().getFirstName();
-        username.setText(usern);
+        username.setText(getResources().getString(R.string.profile));
         userEmail.setText(profile.getAccount().getEmail());
         userBalance.setText(currency.getSymbol() + " " + profile.getAccount().getBalance());
 
@@ -242,5 +256,13 @@ public class SuccessActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            mDrawerLayout.closeDrawers();
+        } else
+            super.onBackPressed();
     }
 }

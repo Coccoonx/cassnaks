@@ -67,7 +67,13 @@ public class AboutActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            mDrawerLayout.closeDrawers();
+        } else
+            super.onBackPressed();
+    }
 
     private void buildToolBar() {
         View toolbar = findViewById(R.id.toolbar);
@@ -94,10 +100,6 @@ public class AboutActivity extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AboutActivity.this, SplashScreenActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
                 finish();
             }
         });
@@ -139,7 +141,7 @@ public class AboutActivity extends AppCompatActivity {
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
 
         String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber() : profile.getAccount().getFirstName();
-        username.setText(usern);
+        username.setText(getResources().getString(R.string.profile));
         userEmail.setText(profile.getAccount().getEmail());
         userBalance.setText(currency.getSymbol() + " " + profile.getAccount().getBalance());
 

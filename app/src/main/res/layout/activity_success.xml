@@ -94,8 +94,9 @@
                     android:id="@+id/details_text3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:text="@string/history"
-                    android:textColor="@color/text_color_grey_dark" />
+                    android:textColor="@color/colorAccent" />
 
             </LinearLayout>
 

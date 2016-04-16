@@ -12,49 +12,57 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:id="@+id/add_fund_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:textColor="@color/text_color_grey_dark"
-        android:layout_marginBottom="@dimen/margin_standard"
-        android:layout_marginLeft="@dimen/margin_standard"
-        android:layout_marginRight="@dimen/margin_standard"
-        android:layout_marginTop="@dimen/margin_standard"
-        android:gravity="center_horizontal"
-        android:text="Please go to your bank profile and send an interact to:"
-        android:textSize="@dimen/margin_standard" />
 
-    <include
-        android:id="@+id/cardview_add_funds_body1"
-        layout="@layout/cardview_transfer_details_body"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/add_fund_text"
-        android:layout_marginBottom="@dimen/margin_extra_extra_short"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" />
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
 
-    <include
-        android:id="@+id/cardview_add_funds_body2"
-        layout="@layout/cardview_transfer_details_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cardview_add_funds_body1"
-        android:layout_marginBottom="@dimen/margin_extra_extra_short"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" />
+        <TextView
+            android:id="@+id/add_fund_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color_grey_dark"
+            android:layout_marginBottom="@dimen/margin_standard"
+            android:layout_marginLeft="@dimen/margin_standard"
+            android:layout_marginRight="@dimen/margin_standard"
+            android:layout_marginTop="@dimen/margin_standard"
+            android:gravity="center_horizontal"
+            android:text="Please go to your bank profile and send an interact to:"
+            android:textSize="@dimen/margin_standard" />
 
-    <include
-        android:id="@+id/cardview_add_funds_body3"
-        layout="@layout/cardview_transfer_details_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cardview_add_funds_body2"
-        android:layout_marginBottom="@dimen/margin_extra_extra_short"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" />
+        <include
+            android:id="@+id/cardview_add_funds_body1"
+            layout="@layout/cardview_transfer_details_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_fund_text"
+            android:layout_marginBottom="@dimen/margin_extra_extra_short"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp" />
+
+        <include
+            android:id="@+id/cardview_add_funds_body2"
+            layout="@layout/cardview_transfer_details_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardview_add_funds_body1"
+            android:layout_marginBottom="@dimen/margin_extra_extra_short"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp" />
+
+        <include
+            android:id="@+id/cardview_add_funds_body3"
+            layout="@layout/cardview_transfer_details_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardview_add_funds_body2"
+            android:layout_marginBottom="@dimen/margin_extra_extra_short"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp" />
+    </RelativeLayout>
+
+
 
 
     <Button
