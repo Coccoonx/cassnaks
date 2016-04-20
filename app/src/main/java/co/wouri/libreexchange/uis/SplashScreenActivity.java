@@ -55,7 +55,6 @@ public class SplashScreenActivity extends Activity implements LoadingTaskFinishe
 
         // Start your loading
         new LoadingTask(progressBar, this).execute("www.google.com"); // Pass in whatever you need a url is just an example we don't use it in this tutorial
-//        completeSplash();
     }
 
     private void initComponents() {
@@ -68,8 +67,6 @@ public class SplashScreenActivity extends Activity implements LoadingTaskFinishe
         balance = (Button) findViewById(R.id.balance);
         transfer = (Button) findViewById(R.id.transfer);
 
-//        balance.setAlpha(0.0f);
-//        transfer.setAlpha(0.0f);
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan, balance, transfer);
 

@@ -3,6 +3,8 @@ package co.wouri.libreexchange.core.managers;
 import android.util.Log;
 
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import co.wouri.libreexchange.core.models.Profile;
 import co.wouri.libreexchange.core.models.Recipient;
@@ -61,7 +63,7 @@ public class ProfileManager {
         return profile.getRecipients();
     }
 
-    public static List<Transfer> getTransferts() {
+    public static TreeSet<Transfer> getTransferts() {
         return profile.getTransfers();
     }
 

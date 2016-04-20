@@ -10,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import co.wouri.libreexchange.R;
 import co.wouri.libreexchange.core.models.Recipient;
@@ -19,17 +22,19 @@ import co.wouri.libreexchange.core.models.Transfer;
 import co.wouri.libreexchange.uis.TransferDetailsActivity;
 import co.wouri.libreexchange.utils.UIUtils;
 
-/**
- * Created by edwidge on 05/11/15.
- */
 public class TransferHistoryAdapter extends RecyclerView.Adapter<PersonViewHolder> {
 
-    List<Transfer> transfers;
+    Object[] transfers;
     private Context context;
 
-    public TransferHistoryAdapter(List<Transfer> transfers, Context context) {
-        this.transfers = transfers;
+    public TransferHistoryAdapter(TreeSet<Transfer> transfers, Context context) {
+        this.transfers = changeToTable(transfers);
         this.context = context;
+    }
+
+    private Object[] changeToTable(TreeSet<Transfer> transfers) {
+
+        return transfers.toArray();
     }
 
     @Override
@@ -55,7 +60,7 @@ public class TransferHistoryAdapter extends RecyclerView.Adapter<PersonViewHolde
     @Override
     public void onBindViewHolder(final PersonViewHolder personViewHolder, int i) {
 
-        final Transfer transfer = transfers.get(i);
+        final Transfer transfer = (Transfer)transfers[i];
         final Recipient recipient = transfer.getRecipient();
 
         personViewHolder.personName.setText(recipient.getFirstName());
@@ -82,6 +87,6 @@ public class TransferHistoryAdapter extends RecyclerView.Adapter<PersonViewHolde
 
     @Override
     public int getItemCount() {
-        return transfers.size();
+        return transfers.length;
     }
 }

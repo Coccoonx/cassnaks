@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -14,10 +13,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,24 +39,33 @@ import co.wouri.libreexchange.core.models.Profile;
 import co.wouri.libreexchange.core.models.Recipient;
 import co.wouri.libreexchange.core.models.Transfer;
 import co.wouri.libreexchange.core.models.TransferStatus;
+import co.wouri.libreexchange.utils.LoadingTask;
 import co.wouri.libreexchange.utils.UIUtils;
 
-public class ChooseAmountActivity extends AppCompatActivity {
+public class ChooseAmountActivity extends AppCompatActivity implements LoadingTask.LoadingTaskFinishedListener {
 
     LinearLayout amountComponentLayout1, amountComponentLayout2;
-    CardView cardView;
+    RelativeLayout cardView;
+    RelativeLayout bottomComponents;
     TextView currency1, currency2, amount2, textView;
     ImageView edit_picture;
     EditText amount1;
     Spinner sp1, sp2;
     CircularImageView imageView;
     Bundle extras;
-
+    Intent intent;
     int USD = 0;
     int EUR = 1;
     private Recipient recipient;
     private Profile profile;
     private DrawerLayout mDrawerLayout;
+    private RelativeLayout rlSendingThread;
+    private ProgressBar progressBar;
+    private TextView sendingLabel;
+    private RelativeLayout rlFillAmount;
+    private ImageView menuToolbar;
+    private TextView titleToolbar;
+    private ImageView closeToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,97 +74,6 @@ public class ChooseAmountActivity extends AppCompatActivity {
 
         initUI();
 
-        ArrayList<ItemData> list = new ArrayList<>();
-        list.add(new ItemData("USD", R.drawable.usa));
-        list.add(new ItemData("EUR", R.drawable.eur));
-
-        sp1 = (Spinner) findViewById(R.id.spinner);
-        SpinnerAdapter adapter = new SpinnerAdapter(this, R.layout.spinner_layout, R.id.txt, list);
-        sp1.setAdapter(adapter);
-
-        sp2 = (Spinner) findViewById(R.id.spinner2);
-        //SpinnerAdapter adapter2=new SpinnerAdapter(this,R.layout.spinner_layout,R.id.txt,list);
-        sp2.setAdapter(adapter);
-//        sp2.setSelection(sp1.getSelectedItemPosition() + 1);
-
-        sp1.setEnabled(false);
-        sp2.setEnabled(false);
-
-        amountComponentLayout1 = (LinearLayout) findViewById(R.id.amount_component_layout_1);
-        currency1 = (TextView) amountComponentLayout1.findViewById(R.id.currency);
-        amountComponentLayout2 = (LinearLayout) findViewById(R.id.amount_component_layout_2);
-        currency2 = (TextView) amountComponentLayout2.findViewById(R.id.currency);
-        amount1 = (EditText) amountComponentLayout1.findViewById(R.id.amount);
-        amount2 = (TextView) amountComponentLayout2.findViewById(R.id.amount);
-        cardView = (CardView) findViewById(R.id.contact_chooser_component);
-        edit_picture = (ImageView) cardView.findViewById(R.id.edit_picture);
-        extras = getIntent().getExtras();
-        if (extras != null) {
-            recipient = extras.getParcelable("recipient");
-            imageView = (CircularImageView) cardView.findViewById(R.id.details_person_photo);
-            textView = (TextView) cardView.findViewById(R.id.details_person_name);
-//            imageView.setImageBitmap(recipient.getImageUri());
-            textView.setText(recipient.getFirstName());
-        }
-
-
-        setAllCurencies();
-        setAmount();
-
-        amount1.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                setAmount();
-            }
-        });
-
-        sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                setOneCurrency(position, currency1);
-                setAmount();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                setAllCurencies();
-                setAmount();
-            }
-        });
-        sp2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                setOneCurrency(position, currency2);
-                setAmount();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                setAllCurencies();
-                setAmount();
-            }
-        });
-
-        edit_picture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ChooseAmountActivity.this, EditRecipientActivity.class);
-                //Recipient recipient = new Recipient();
-                intent.putExtra("recipient", (Parcelable) recipient);
-                startActivity(intent);
-
-            }
-        });
 
     }
 
@@ -254,18 +175,17 @@ public class ChooseAmountActivity extends AppCompatActivity {
                 double valAmount = Double.parseDouble(amount1.getText().toString());
                 double valReceiver = Double.parseDouble(amount2.getText().toString());
                 if (valAmount > 0) {
+                    updateUI();
                     transfer.setAmount(valAmount);
                     transfer.setSenderCurrency(currencyText1);
                     transfer.setReceiverCurrency(currencyText2);
                     transfer.setRecieverAmount(valReceiver);
                     transfer.setTransferType("SENT");
                     transfer.setStatus(TransferStatus.Pending);
-                    Intent intent = new Intent(ChooseAmountActivity.this, SuccessActivity.class);
+                    intent = new Intent(ChooseAmountActivity.this, SuccessActivity.class);
                     ProfileManager.addTransfer(transfer);
                     intent.putExtra("transfer", (Parcelable) transfer);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
+
                 } else
                     Toast.makeText(ChooseAmountActivity.this, "Amount value is null", Toast.LENGTH_SHORT).show();
 
@@ -278,58 +198,133 @@ public class ChooseAmountActivity extends AppCompatActivity {
 
     }
 
-    private void buildToolBars() {
-        View toolbar = findViewById(R.id.toolbar);
-
-        ImageView close = (ImageView) toolbar.findViewById(R.id.leftIcon);
-        TextView title = (TextView) toolbar.findViewById(R.id.title);
-        ImageView option = (ImageView) toolbar.findViewById(R.id.rightIcon);
-
-        title.setText("CHOOSE AMOUNT");
-        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, title);
-
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        option.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                startActivity(new Intent(ChooseRecipientActivity.this, AddRecipientActivity.class));
-            }
-        });
-
-        title.setVisibility(View.VISIBLE);
-//        option.setVisibility(View.VISIBLE);
-
-    }
-
     void initUI() {
         profile = ProfileManager.getCurrentUserProfile();
-
         buildToolBar();
         buildDrawer();
 
+        ArrayList<ItemData> list = new ArrayList<>();
+        list.add(new ItemData("USD", R.drawable.usa));
+        list.add(new ItemData("EUR", R.drawable.eur));
+
+        bottomComponents = (RelativeLayout) findViewById(R.id.rlBottomComponents);
+        rlSendingThread = (RelativeLayout) findViewById(R.id.rlSendingThread);
+        rlFillAmount = (RelativeLayout) findViewById(R.id.rlFillAmount);
+        progressBar = (ProgressBar) findViewById(R.id.activity_splash_progress_bar);
+        sendingLabel = (TextView) findViewById(R.id.sendingLabel);
+
+        sp1 = (Spinner) findViewById(R.id.spinner);
+        SpinnerAdapter adapter = new SpinnerAdapter(this, R.layout.spinner_layout, R.id.txt, list);
+        sp1.setAdapter(adapter);
+
+        sp2 = (Spinner) findViewById(R.id.spinner2);
+        //SpinnerAdapter adapter2=new SpinnerAdapter(this,R.layout.spinner_layout,R.id.txt,list);
+        sp2.setAdapter(adapter);
+//        sp2.setSelection(sp1.getSelectedItemPosition() + 1);
+
+        sp1.setEnabled(false);
+        sp2.setEnabled(false);
+
+        amountComponentLayout1 = (LinearLayout) findViewById(R.id.amount_component_layout_1);
+        currency1 = (TextView) amountComponentLayout1.findViewById(R.id.currency);
+        amountComponentLayout2 = (LinearLayout) findViewById(R.id.amount_component_layout_2);
+        currency2 = (TextView) amountComponentLayout2.findViewById(R.id.currency);
+        amount1 = (EditText) amountComponentLayout1.findViewById(R.id.amount);
+        amount2 = (TextView) amountComponentLayout2.findViewById(R.id.amount);
+        cardView = (RelativeLayout) findViewById(R.id.contact_chooser_component);
+        edit_picture = (ImageView) cardView.findViewById(R.id.edit_picture);
+        extras = getIntent().getExtras();
+        if (extras != null) {
+            recipient = extras.getParcelable("recipient");
+            imageView = (CircularImageView) cardView.findViewById(R.id.details_person_photo);
+            textView = (TextView) cardView.findViewById(R.id.details_person_name);
+//            imageView.setImageBitmap(recipient.getImageUri());
+            textView.setText(recipient.getFirstName());
+        }
+
+
+        setAllCurencies();
+        setAmount();
+
+        amount1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                setAmount();
+            }
+        });
+
+        sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                setOneCurrency(position, currency1);
+                setAmount();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                setAllCurencies();
+                setAmount();
+            }
+        });
+        sp2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                setOneCurrency(position, currency2);
+                setAmount();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                setAllCurencies();
+                setAmount();
+            }
+        });
+
+        edit_picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChooseAmountActivity.this, EditRecipientActivity.class);
+                intent.putExtra("recipient", (Parcelable) recipient);
+                startActivity(intent);
+
+            }
+        });
+
+    }
+
+    void updateUI() {
+        rlFillAmount.setVisibility(View.GONE);
+        rlSendingThread.setVisibility(View.VISIBLE);
+        titleToolbar.setText("PROCESSING");
+        runAnimation();
+        new LoadingTask(progressBar, this).execute("www.google.com");
     }
 
     private void buildToolBar() {
         View toolbar = findViewById(R.id.toolbar);
 
-        ImageView menu = (ImageView) toolbar.findViewById(R.id.leftIcon);
-        TextView title = (TextView) toolbar.findViewById(R.id.title);
-        ImageView close = (ImageView) toolbar.findViewById(R.id.rightIcon);
+         menuToolbar = (ImageView) toolbar.findViewById(R.id.leftIcon);
+         titleToolbar = (TextView) toolbar.findViewById(R.id.title);
+         closeToolbar = (ImageView) toolbar.findViewById(R.id.rightIcon);
 
-        title.setVisibility(View.VISIBLE);
-        close.setVisibility(View.VISIBLE);
+        titleToolbar.setVisibility(View.VISIBLE);
+        closeToolbar.setVisibility(View.VISIBLE);
 
-        title.setText("CHOOSE AMOUNT");
+        titleToolbar.setText("CHOOSE AMOUNT");
 
-        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, title);
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, titleToolbar);
 
-        menu.setOnClickListener(new View.OnClickListener() {
+        menuToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDrawerLayout.openDrawer(Gravity.LEFT);
@@ -337,7 +332,7 @@ public class ChooseAmountActivity extends AppCompatActivity {
             }
         });
 
-        close.setOnClickListener(new View.OnClickListener() {
+        closeToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -426,5 +421,17 @@ public class ChooseAmountActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void runAnimation() {
+        Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadeinout);
+        sendingLabel.startAnimation(animationFadeIn);
+    }
+
+
+    @Override
+    public void onTaskFinished() {
+        startActivity(intent);
+        finish();
     }
 }

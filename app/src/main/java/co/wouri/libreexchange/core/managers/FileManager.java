@@ -14,9 +14,9 @@ import co.wouri.libreexchange.core.models.Profile;
 
 public class FileManager {
 
-    private static final String USER_FILE = "CoazeAccount.store";
+    private static final String USER_FILE = "LibreExchange.store";
     private static final File root = Environment.getExternalStorageDirectory();
-    private static final File outDir = new File(root.getAbsolutePath() + File.separator + "Coaze");
+    private static final File outDir = new File(root.getAbsolutePath() + File.separator + "LibreExchange");
 
     private static final FileManager fileManager = new FileManager();
 

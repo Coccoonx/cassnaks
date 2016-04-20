@@ -34,7 +34,7 @@ public class Transfer implements Serializable, Parcelable {
     private
     @NotEmpty
     String receiverCurrency;
-    private Date creationDate = new Date();
+    private Date creationDate ;
     private List<Note> notes = new ArrayList<>();
     private
     @NotNull
@@ -44,6 +44,7 @@ public class Transfer implements Serializable, Parcelable {
 
     public Transfer() {
         id = UUID.randomUUID().toString();
+        creationDate = new Date();
 
     }
 

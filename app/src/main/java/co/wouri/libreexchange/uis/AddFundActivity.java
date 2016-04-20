@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Currency;
@@ -40,17 +41,17 @@ public class AddFundActivity extends AppCompatActivity {
 
 
         TextView addFundText = (TextView) findViewById(R.id.add_fund_text);
-        CardView addFundCard1 = (CardView) findViewById(R.id.cardview_add_funds_body1);
+        RelativeLayout addFundCard1 = (RelativeLayout) findViewById(R.id.cardview_add_funds_body1);
         TextView labelText1 = (TextView) addFundCard1.findViewById(R.id.details_title);
         TextView contentText1 = (TextView) addFundCard1.findViewById(R.id.details_date);
         labelText1.setText("Email:");
         contentText1.setText("addfunds@coaze.com");
-        CardView addFundCard2 = (CardView) findViewById(R.id.cardview_add_funds_body2);
+        RelativeLayout addFundCard2 = (RelativeLayout) findViewById(R.id.cardview_add_funds_body2);
         TextView labelText2 = (TextView) addFundCard2.findViewById(R.id.details_title);
         TextView contentText2 = (TextView) addFundCard2.findViewById(R.id.details_amount_recieved);
         labelText2.setText("Question:");
         contentText2.setText("x136");
-        CardView addFundCard3 = (CardView) findViewById(R.id.cardview_add_funds_body3);
+        RelativeLayout addFundCard3 = (RelativeLayout) findViewById(R.id.cardview_add_funds_body3);
         TextView labelText3 = (TextView) addFundCard3.findViewById(R.id.details_title);
         TextView contentText3 = (TextView) addFundCard3.findViewById(R.id.details_amount_recieved);
         labelText3.setText("Answer:");

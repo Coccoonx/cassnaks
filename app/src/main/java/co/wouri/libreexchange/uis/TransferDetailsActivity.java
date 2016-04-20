@@ -14,6 +14,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -42,7 +43,7 @@ public class TransferDetailsActivity extends AppCompatActivity {
         Transfer transfer = intent.getParcelableExtra("transfer");
 
         // set header
-        CardView headCardView = (CardView) findViewById(R.id.cardview_transfer_details_head);
+        RelativeLayout headCardView = (RelativeLayout) findViewById(R.id.cardview_transfer_details_head);
         ImageView personPhotoView = (ImageView) headCardView.findViewById(R.id.details_person_photo);
         TextView personNameView = (TextView) headCardView.findViewById(R.id.details_person_name);
         TextView personAmountView = (TextView) headCardView.findViewById(R.id.details_person_amount);
@@ -54,7 +55,7 @@ public class TransferDetailsActivity extends AppCompatActivity {
         personAmountView.setText(transfer.getSenderCurrency() + " " + transfer.getAmount());
 
         //set Body
-        CardView bodyCardView1 = (CardView) findViewById(R.id.cardview_transfer_details_body1);
+        RelativeLayout bodyCardView1 = (RelativeLayout) findViewById(R.id.cardview_transfer_details_body1);
         TextView titleView1 = (TextView) bodyCardView1.findViewById(R.id.details_title);
         TextView dateView1 = (TextView) bodyCardView1.findViewById(R.id.details_date);
         SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy / hh:mmaa");
@@ -62,20 +63,20 @@ public class TransferDetailsActivity extends AppCompatActivity {
         titleView1.setText("Send:");
         dateView1.setText(transferDate);
 
-        CardView bodyCardView2 = (CardView) findViewById(R.id.cardview_transfer_details_body2);
+        RelativeLayout bodyCardView2 = (RelativeLayout) findViewById(R.id.cardview_transfer_details_body2);
         TextView titleView2 = (TextView) bodyCardView2.findViewById(R.id.details_title);
         TextView dateView2 = (TextView) bodyCardView2.findViewById(R.id.details_date);
         titleView2.setText("Notified:");
         dateView2.setText(transfer.getStatus().toString());
 
-        CardView bodyCardView3 = (CardView) findViewById(R.id.cardview_transfer_details_body3);
+        RelativeLayout bodyCardView3 = (RelativeLayout) findViewById(R.id.cardview_transfer_details_body3);
         TextView titleView3 = (TextView) bodyCardView3.findViewById(R.id.details_title);
         TextView dateView3 = (TextView) bodyCardView3.findViewById(R.id.details_date);
         titleView3.setText("Received:");
         dateView3.setText("pending");
 
         //set End
-        CardView endCardView = (CardView) findViewById(R.id.cardview_transfer_details_end);
+        RelativeLayout endCardView = (RelativeLayout) findViewById(R.id.cardview_transfer_details_end);
         TextView endTitleView = (TextView) endCardView.findViewById(R.id.details_title);
         TextView endAmountView = (TextView) endCardView.findViewById(R.id.details_amount_recieved);
         endTitleView.setText("Amount Received:");

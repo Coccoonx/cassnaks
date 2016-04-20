@@ -14,41 +14,41 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:layout_weight="80"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_extra_extra_short"
             android:paddingLeft="10dp"
-            android:layout_marginTop="@dimen/margin_short"
-            android:text="You send"
+            android:text="You sent"
             android:textColor="@color/text_color_grey_dark"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_extra_extra_short">
+            android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/currency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/currency"
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/margin_short"
                 android:singleLine="true"
+                android:text="$"
                 android:textColor="@color/colorPrimarylight"
                 android:textSize="@dimen/text_size" />
 
             <EditText
-                android:layout_toRightOf="@+id/currency"
                 android:id="@+id/amount"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/texthint"
-                android:inputType="phone"
+                android:layout_marginLeft="@dimen/margin_extra_short"
+                android:layout_toRightOf="@+id/currency"
+                android:inputType="numberDecimal"
                 android:singleLine="true"
-                android:paddingBottom="@dimen/margin_short"
-                android:textColor="@color/text_color_black_light"
-                android:textSize="25dp" />
+                android:text="@string/texthinteuro"
+                android:textColor="@color/colorPrimarylight"
+                android:textSize="22dp"
 
+                />
         </RelativeLayout>
 
     </LinearLayout>

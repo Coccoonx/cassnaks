@@ -91,7 +91,7 @@
                 android:layout_marginBottom="@dimen/margin_short"
                 android:layout_toRightOf="@+id/balance"
                 android:layout_weight="45"
-                android:background="@drawable/corner_border_green"
+                android:background="@drawable/corner_border_accent"
                 android:onClick="performStart"
                 android:padding="15dp"
                 android:text="@string/transferlabel"

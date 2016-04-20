@@ -21,8 +21,9 @@ import android.widget.TextView;
 
 
 import java.util.Currency;
-import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
 
 import co.wouri.libreexchange.R;
 import co.wouri.libreexchange.core.managers.ProfileManager;
@@ -34,7 +35,7 @@ import co.wouri.libreexchange.utils.UIUtils;
 public class TransferHistoryActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private List<Transfer> transfers;
+    private TreeSet<Transfer> transfers;
     TransferHistoryAdapter adapter;
     private Profile profile;
     private DrawerLayout mDrawerLayout;

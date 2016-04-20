@@ -41,7 +41,7 @@ public class RecipientAdapter extends RecyclerView.Adapter<RecipientViewHolder> 
 
     @Override
     public RecipientViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_setting_items, null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_recipients_item, null);
         RecipientViewHolder cv = new RecipientViewHolder(this.context, v, viewType);
         return cv;
     }

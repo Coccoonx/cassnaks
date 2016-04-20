@@ -14,12 +14,11 @@ import co.wouri.libreexchange.core.models.Recipient;
 public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
 
 
-    //public int id;
     public String id;
     public Context context;
     public ImageView leftImageView;
     public TextView title;
-    public View rightView;
+//    public View rightView;
     public boolean isSelected = false;
     public RelativeLayout mRelativeLayout;
     public Recipient recipient;
@@ -32,7 +31,7 @@ public class ChooseRecipientViewHolder extends RecyclerView.ViewHolder {
         this.context = context;
         this.leftImageView = (ImageView) view.findViewById(R.id.leftIcon);
         this.title = (TextView) view.findViewById(R.id.title);
-        this.rightView = view.findViewById(R.id.rightIconCheck);
+//        this.rightView = view.findViewById(R.id.rightIconCheck);
         this.mRelativeLayout = (RelativeLayout) view.findViewById(R.id.rootLayout);
         itemView = view;
 

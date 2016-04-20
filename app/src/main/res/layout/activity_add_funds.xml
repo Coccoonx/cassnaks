@@ -73,7 +73,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="@dimen/margin_standard"
-        android:background="@drawable/corner_border_green"
+        android:background="@drawable/corner_border_accent"
         android:gravity="center"
         android:padding="@dimen/margin_standard"
         android:textColor="#fff" />

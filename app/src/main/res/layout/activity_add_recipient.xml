@@ -217,7 +217,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_extra_big"
                 android:layout_marginBottom="@dimen/margin_standard"
-                android:background="@drawable/corner_border_green"
+                android:background="@drawable/corner_border_accent"
                 android:text="ADD"
                 android:textColor="#f2f5f7"
                 />

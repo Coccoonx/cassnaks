@@ -29,7 +29,7 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="@dimen/margin_standard"
         android:layout_marginTop="200dp"
-        android:background="@drawable/corner_border_green"
+        android:background="@drawable/corner_border_accent"
         android:text="ADD"
         android:textColor="@color/textColorPrimary"
         android:visibility="gone" />
@@ -42,7 +42,7 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="@dimen/margin_standard"
         android:layout_marginTop="200dp"
-        android:background="@drawable/corner_border_green"
+        android:background="@drawable/corner_border_accent"
         android:text="NEXT"
         android:textColor="@color/textColorPrimary"
         android:visibility="gone" />

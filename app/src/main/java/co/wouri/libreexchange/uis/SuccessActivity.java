@@ -52,6 +52,7 @@ public class SuccessActivity extends AppCompatActivity {
         setContentView(R.layout.activity_success);
         Bundle bundle = getIntent().getExtras();
         Log.d(TAG, "bundle " + bundle);
+        initUI();
 
         listener= new View.OnClickListener() {
             @Override
@@ -86,7 +87,6 @@ public class SuccessActivity extends AppCompatActivity {
 
 
         }
-        buildToolBar();
         done = (Button) findViewById(R.id.done);
         transfer = (Button) findViewById(R.id.transfers);
 
@@ -152,7 +152,7 @@ public class SuccessActivity extends AppCompatActivity {
         ImageView close = (ImageView) toolbar.findViewById(R.id.rightIcon);
 
         title.setVisibility(View.VISIBLE);
-        close.setVisibility(View.VISIBLE);
+        close.setVisibility(View.GONE);
 
         title.setText("");
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, title);

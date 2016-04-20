@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|bottom"
                 android:layout_marginLeft="4dp"
-                android:background="@drawable/corner_border_green"
+                android:background="@drawable/corner_border_accent"
                 android:text="@string/done"
                 android:textColor="#f2f5f7" />
 
