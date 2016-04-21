@@ -144,8 +144,8 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
                 String passwor = password.getText().toString();
                 if (!checkLastName(ProfileActivity.this, lastnameValue)
                         || !checkFirstName(ProfileActivity.this, firstNameValue)
-                        || !checkEmail(ProfileActivity.this, emailValue)
-                        || !checkPhone(ProfileActivity.this, phoneValue)
+                        || !checkEmail( emailValue)
+                        || !checkPhone( phoneValue)
                         || !checkCity(ProfileActivity.this, cityValue)
                         || !checkAddress(ProfileActivity.this, addressValue)
                         || !checkCountry(ProfileActivity.this, countryValue)

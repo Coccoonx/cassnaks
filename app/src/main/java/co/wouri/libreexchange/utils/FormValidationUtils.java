@@ -1,6 +1,7 @@
 package co.wouri.libreexchange.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.regex.Matcher;
@@ -10,6 +11,8 @@ import java.util.regex.Pattern;
  * Created by landryfoko on 11/11/15.
  */
 public class FormValidationUtils {
+    private static final String TAG = "Form Validation";
+
     public static boolean checkFirstName(Context context, String name){
         if(name==null || name.split(" ").length==0 || name.length()<=2){
             Toast.makeText(context, "Invalid firstName, the firstName must at least have 3 characters", Toast.LENGTH_SHORT).show();
@@ -38,22 +41,22 @@ public class FormValidationUtils {
         }
         return true;
     }
-    public static boolean checkEmail(Context context,String email){
+    public static boolean checkEmail(String email){
         Pattern pattern= Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$");
         Matcher matcher = pattern.matcher(email);
         if(!matcher.matches()){
-            Toast.makeText(context, "Invalid email", Toast.LENGTH_SHORT).show();
+            Log.d(TAG,"Invalid email");
             return false;
         }
         return true;
     }
-    public static boolean checkPhone(Context context,String phone){
+    public static boolean checkPhone(String phone){
         String simpleRegex = "(^\\+[0-9]{3}([0-9])+)|([0-9]+)";
         String northAmericaPhoneNumber ="\\D*([2-9]\\d{2})(\\D*)([2-9]\\d{2})(\\D*)(\\d{4})\\D*";
         Pattern pattern= Pattern.compile(northAmericaPhoneNumber+"|"+simpleRegex);
         Matcher matcher = pattern.matcher(phone);
         if(!matcher.matches()){
-            Toast.makeText(context, "Invalid Phone number", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Invalid Phone number");
             return false;
         }
         return true;

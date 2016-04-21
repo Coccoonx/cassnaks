@@ -25,23 +25,28 @@
             android:layout_height="match_parent"
             android:background="@color/color_background"
             android:orientation="vertical">
-            <FrameLayout
-                android:id="@+id/frame_container"
+            <!--<FrameLayout-->
+                <!--android:id="@+id/frame_container"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginBottom="60dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:paddingBottom="@dimen/margin_short">-->
+
+
+            <!--</FrameLayout>-->
+
+            <view
+                android:id="@+id/settingsRecyclerView"
+                class="android.support.v7.widget.RecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="60dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:paddingBottom="@dimen/margin_short">
-
-                <view
-                    android:id="@+id/settingsRecyclerView"
-                    class="android.support.v7.widget.RecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingBottom="@dimen/margin_extra_short"
-                    android:scrollbars="vertical" />
-            </FrameLayout>
+                android:paddingBottom="@dimen/margin_extra_short"
+                android:paddingTop="@dimen/margin_extra_short"
+                android:scrollbars="vertical" />
 
             <Button
                 android:id="@+id/Button_add"

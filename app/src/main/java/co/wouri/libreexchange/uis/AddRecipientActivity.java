@@ -108,8 +108,8 @@ public class AddRecipientActivity extends AppCompatActivity {
                     Toast.makeText(AddRecipientActivity.this, "Choose a country !", Toast.LENGTH_SHORT).show();
                 } else if (!checkFirstName(AddRecipientActivity.this, firstNameValue)
                         || !checkLastName(AddRecipientActivity.this, lastNameValue)
-                        || !checkEmail(AddRecipientActivity.this, emailValue)
-                        || !checkPhone(AddRecipientActivity.this, phoneValue)
+                        || !checkEmail( emailValue)
+                        || !checkPhone( phoneValue)
                         || !checkCity(AddRecipientActivity.this, cityValue)
                         || !checkAddress(AddRecipientActivity.this, addressValue)
                         || !checkCountry(AddRecipientActivity.this, countryValue)

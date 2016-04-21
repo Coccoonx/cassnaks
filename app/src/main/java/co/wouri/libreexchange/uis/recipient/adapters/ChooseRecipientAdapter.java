@@ -1,14 +1,11 @@
 package co.wouri.libreexchange.uis.recipient.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +25,12 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
     List<RecipientItem> recipientItems;
     List<Recipient> recipients;
     ImageLoader mImageLoader;
+    ChooseRecipientCallBack chooseRecipientCallBack;
 
 
-    public ChooseRecipientAdapter(Context context, List<Recipient> recipients, ImageLoader imageLoader) {
+    public ChooseRecipientAdapter(Context context, List<Recipient> recipients, ImageLoader imageLoader, ChooseRecipientCallBack callBack) {
         this.context = context;
+        this.chooseRecipientCallBack = callBack;
         this.recipientItems = initList(recipients);
         this.recipients = recipients;
         mImageLoader = imageLoader;
@@ -67,13 +66,34 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedItem = position;
+                holder.isSelected = true;
+                holder.itemView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            holder.itemView.setSelected(true);
+                            holder.title.setTextColor(context.getResources().getColor(R.color.color_background));
 
-                if (selectedItem < 0) {
+                        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                            holder.title.setTextColor(context.getResources().getColor(R.color.textColorPrimary));
+                            holder.itemView.setSelected(false);
+                        }
+                        return true;
+                    }
+                });
+                ChooseRecipientActivity.recipient = holder.recipient;
+                chooseRecipientCallBack.nextStep();
+
+
+                /*if (selectedItem < 0) {
                     selectedItem = position;
                     holder.isSelected = true;
                     holder.mRelativeLayout.setBackgroundColor(context.getResources().getColor(R.color.color_seleted_item));
                     holder.title.setTextColor(context.getResources().getColor(R.color.color_background));
                     ChooseRecipientActivity.recipient = holder.recipient;
+                    chooseRecipientCallBack.nextStep();
+
                     Log.d("coaze", "selected item : [selectedItem < 0]" + selectedItem);
                 } else if (holder.isSelected) {
                     selectedItem = -1;
@@ -96,7 +116,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
                     } else {
                         Log.d("coaze", "not possible");
                     }
-                }
+                }*/
             }
         });
 
@@ -112,26 +132,15 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         return recipientItems.size();
     }
 
-
-    public static class RecipientItem {
-        public String leftIcon;
-        public String title;
-        public ChooseRecipientViewHolder holder = null;
-
-        public RecipientItem(String leftIcon, String title) {
-
-            this.leftIcon = leftIcon;
-            this.title = title;
-
-        }
-    }
-
     private List<RecipientItem> initList(List<Recipient> recipients) {
 
         List<RecipientItem> list = new ArrayList<>();
 
         for (Recipient recipient : recipients) {
-            RecipientItem recipientItem = new RecipientItem(recipient.getImageUri(), recipient.getFirstName()+" "+recipient.getLastName());
+            String title = recipient.getFirstName();
+            if (recipient.getLastName() != null)
+                title += " " + recipient.getLastName();
+            RecipientItem recipientItem = new RecipientItem(recipient.getImageUri(), title);
             list.add(recipientItem);
         }
         return list;
@@ -145,5 +154,20 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         notifyDataSetChanged();
     }
 
+    public interface ChooseRecipientCallBack {
+        void nextStep();
+    }
 
+    public static class RecipientItem {
+        public String leftIcon;
+        public String title;
+        public ChooseRecipientViewHolder holder = null;
+
+        public RecipientItem(String leftIcon, String title) {
+
+            this.leftIcon = leftIcon;
+            this.title = title;
+
+        }
+    }
 }

@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -167,32 +168,41 @@ public class ChooseAmountActivity extends AppCompatActivity implements LoadingTa
     public void performSend(View view) {
         Transfer transfer = new Transfer();
         if (recipient != null) {
-            transfer.setRecipient(recipient);
-            String amount = amount1.getText().toString();
-            String currencyText1 = currency1.getText().toString();
-            String currencyText2 = currency2.getText().toString();
-            if (amount != null) {
-                double valAmount = Double.parseDouble(amount1.getText().toString());
-                double valReceiver = Double.parseDouble(amount2.getText().toString());
-                if (valAmount > 0) {
-                    updateUI();
-                    transfer.setAmount(valAmount);
-                    transfer.setSenderCurrency(currencyText1);
-                    transfer.setReceiverCurrency(currencyText2);
-                    transfer.setRecieverAmount(valReceiver);
-                    transfer.setTransferType("SENT");
-                    transfer.setStatus(TransferStatus.Pending);
-                    intent = new Intent(ChooseAmountActivity.this, SuccessActivity.class);
-                    ProfileManager.addTransfer(transfer);
-                    intent.putExtra("transfer", (Parcelable) transfer);
+            if (recipient.getFirstName() != null && !recipient.getFirstName().equalsIgnoreCase("")) {
+                if (recipient.getPhoneNumbers() != null) {
+                    if (recipient.getCity() != null) {
+                        if (recipient.getCountry() != null) {
+                            transfer.setRecipient(recipient);
+                            String amount = amount1.getText().toString();
+                            String currencyText1 = currency1.getText().toString();
+                            String currencyText2 = currency2.getText().toString();
+                            if (amount != null) {
+                                double valAmount = Double.parseDouble(amount1.getText().toString());
+                                double valReceiver = Double.parseDouble(amount2.getText().toString());
+                                if (valAmount > 0) {
+                                    updateUI();
+                                    transfer.setAmount(valAmount);
+                                    transfer.setSenderCurrency(currencyText1);
+                                    transfer.setReceiverCurrency(currencyText2);
+                                    transfer.setRecieverAmount(valReceiver);
+                                    transfer.setTransferType("SENT");
+                                    transfer.setStatus(TransferStatus.Pending);
+                                    intent = new Intent(ChooseAmountActivity.this, SuccessActivity.class);
+                                    ProfileManager.addTransfer(transfer);
+                                    intent.putExtra("transfer", (Parcelable) transfer);
 
+                                } else
+                                    Toast.makeText(ChooseAmountActivity.this, "Amount value is incorrect.", Toast.LENGTH_SHORT).show();
+                            } else
+                                Toast.makeText(ChooseAmountActivity.this, "Amount is incorrect.", Toast.LENGTH_SHORT).show();
+                        } else
+                            Toast.makeText(ChooseAmountActivity.this, "Make sure the recipient's country is filled.", Toast.LENGTH_SHORT).show();
+                    } else
+                        Toast.makeText(ChooseAmountActivity.this, "Make sure the recipient's city is filled.", Toast.LENGTH_SHORT).show();
                 } else
-                    Toast.makeText(ChooseAmountActivity.this, "Amount value is null", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(ChooseAmountActivity.this, "Make sure the recipient has at least one valid phone number.", Toast.LENGTH_SHORT).show();
             } else
-                Toast.makeText(ChooseAmountActivity.this, "Amount is null", Toast.LENGTH_SHORT).show();
-
-
+                Toast.makeText(ChooseAmountActivity.this, "Make sure the recipient has at least the first name filled.", Toast.LENGTH_SHORT).show();
         } else
             Toast.makeText(ChooseAmountActivity.this, "Recipient is null", Toast.LENGTH_SHORT).show();
 
@@ -239,7 +249,8 @@ public class ChooseAmountActivity extends AppCompatActivity implements LoadingTa
             imageView = (CircularImageView) cardView.findViewById(R.id.details_person_photo);
             textView = (TextView) cardView.findViewById(R.id.details_person_name);
 //            imageView.setImageBitmap(recipient.getImageUri());
-            textView.setText(recipient.getFirstName());
+            Log.d("Recipient", "Recipient : " + recipient);
+            textView.setText(recipient.getFirstName() + " " + (recipient.getLastName() != null ? recipient.getLastName() : ""));
         }
 
 
@@ -313,9 +324,9 @@ public class ChooseAmountActivity extends AppCompatActivity implements LoadingTa
     private void buildToolBar() {
         View toolbar = findViewById(R.id.toolbar);
 
-         menuToolbar = (ImageView) toolbar.findViewById(R.id.leftIcon);
-         titleToolbar = (TextView) toolbar.findViewById(R.id.title);
-         closeToolbar = (ImageView) toolbar.findViewById(R.id.rightIcon);
+        menuToolbar = (ImageView) toolbar.findViewById(R.id.leftIcon);
+        titleToolbar = (TextView) toolbar.findViewById(R.id.title);
+        closeToolbar = (ImageView) toolbar.findViewById(R.id.rightIcon);
 
         titleToolbar.setVisibility(View.VISIBLE);
         closeToolbar.setVisibility(View.VISIBLE);
