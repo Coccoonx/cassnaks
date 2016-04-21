@@ -61,6 +61,7 @@ public interface ContactsQuery {
             SORT_ORDER,
 
             ContactsContract.Contacts.HAS_PHONE_NUMBER
+
     };
 
     // The query column numbers which map to each value in the projection

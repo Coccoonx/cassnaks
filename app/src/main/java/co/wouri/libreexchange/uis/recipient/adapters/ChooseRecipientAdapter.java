@@ -131,7 +131,7 @@ public class ChooseRecipientAdapter extends RecyclerView.Adapter<ChooseRecipient
         List<RecipientItem> list = new ArrayList<>();
 
         for (Recipient recipient : recipients) {
-            RecipientItem recipientItem = new RecipientItem(recipient.getImageUri(), recipient.getFirstName());
+            RecipientItem recipientItem = new RecipientItem(recipient.getImageUri(), recipient.getFirstName()+" "+recipient.getLastName());
             list.add(recipientItem);
         }
         return list;

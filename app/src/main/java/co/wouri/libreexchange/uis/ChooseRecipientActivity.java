@@ -63,7 +63,7 @@ import co.wouri.libreexchange.utils.ImageLoader;
 import co.wouri.libreexchange.utils.UIUtils;
 import co.wouri.libreexchange.utils.Utils;
 
-public class ChooseRecipientActivity extends AppCompatActivity implements  LoaderManager.LoaderCallbacks<Cursor>  {
+public class ChooseRecipientActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
 
     private RecyclerView mRecyclerView;
@@ -95,7 +95,6 @@ public class ChooseRecipientActivity extends AppCompatActivity implements  Loade
         initUI();
         buildToolBar();
         buildDrawer();
-
 
 
     }
@@ -170,7 +169,7 @@ public class ChooseRecipientActivity extends AppCompatActivity implements  Loade
     }
 
 
-    private void initUI(){
+    private void initUI() {
            /*
          * An ImageLoader object loads and resizes an image in the background and binds it to the
          * QuickContactBadge in each item layout of the ListView. ImageLoader implements memory
@@ -319,7 +318,10 @@ public class ChooseRecipientActivity extends AppCompatActivity implements  Loade
                             .getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
 
             Recipient recipient = new Recipient();
-            recipient.setFirstName(contactName);
+            String [] contactNames = contactName.split(" ");
+            recipient.setFirstName(contactNames[0]);
+            if (contactNames.length > 1 && !contactNames[1].equalsIgnoreCase("null"))
+                recipient.setLastName(contactName.split(" ")[1]);
             recipient.setImageUri(photoUri);
 
             if ((Integer.parseInt(hasPhone) > 0)) {
@@ -468,7 +470,6 @@ public class ChooseRecipientActivity extends AppCompatActivity implements  Loade
     }
 
 
-
     private Bitmap retrieveContactPhoto(String contactID) {
 
         Bitmap photo = null;
@@ -490,7 +491,7 @@ public class ChooseRecipientActivity extends AppCompatActivity implements  Loade
     }
 
 
-    public static Bitmap loadContactPhoto(ContentResolver cr, long  id) {
+    public static Bitmap loadContactPhoto(ContentResolver cr, long id) {
         Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, id);
         InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(cr, uri);
         if (input == null) {
