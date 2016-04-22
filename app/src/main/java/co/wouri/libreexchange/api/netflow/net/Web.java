@@ -33,7 +33,7 @@ public class Web {
     }
 
     public static String getLoginUrl() {
-        return "http://" + IP + ":" + PORT + "/uaa/oauth/token";
+        return "http://" + IP + ":" + PORT + "/uaa/oauth/token/";
     }
 
     public static String getUpdateAccountUrl() {

@@ -130,6 +130,9 @@ public class BalanceActivity extends AppCompatActivity {
 
     void buildDrawer() {
 
+
+
+
         Locale locale = Locale.getDefault();
          currency = Currency.getInstance(locale);
 
