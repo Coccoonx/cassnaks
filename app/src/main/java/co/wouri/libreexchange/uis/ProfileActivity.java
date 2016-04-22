@@ -243,7 +243,9 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         ImageView close = (ImageView) toolbar.findViewById(R.id.rightIcon);
 
         title.setVisibility(View.VISIBLE);
-        close.setVisibility(View.VISIBLE);
+//        close.setVisibility(View.VISIBLE);
+
+        menu.setImageResource(R.drawable.ic_arrow_left);
 
         title.setText("PROFILE");
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, title);
@@ -251,19 +253,19 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDrawerLayout.openDrawer(Gravity.LEFT);
-
-            }
-        });
-
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, SplashScreenActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 finish();
+
             }
         });
+
+//        close.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ProfileActivity.this, SplashScreenActivity.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                finish();
+//            }
+//        });
 
 
     }
@@ -281,7 +283,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         linearProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(ProfileActivity.this, MainProfileActivity.class);
                 intent.putExtra("profile", (Parcelable) profile.getAccount());
                 intent.putExtra("isUpdate", true);
 //                startActivity(intent);

@@ -188,7 +188,7 @@ public class SuccessActivity extends AppCompatActivity {
         linearProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SuccessActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(SuccessActivity.this, MainProfileActivity.class);
                 intent.putExtra("profile", (Parcelable) profile.getAccount());
                 intent.putExtra("isUpdate", true);
                 startActivity(intent);

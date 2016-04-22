@@ -114,6 +114,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Profile</string>
     <string name="sending">Sending ...</string>
+    <string name="id_card">ID Card</string>
+    <string name="bank_card">Bank Card</string>
+    <string name="passport">Passport</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="my_documents">My Documents</string>
+    <string name="nav_item_wallet">Wallets</string>
 
 
 </resources>

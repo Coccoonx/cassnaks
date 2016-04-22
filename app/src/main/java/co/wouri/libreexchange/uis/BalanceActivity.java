@@ -144,7 +144,7 @@ public class BalanceActivity extends AppCompatActivity {
         linearProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BalanceActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(BalanceActivity.this, MainProfileActivity.class);
                 intent.putExtra("profile", (Parcelable) profile.getAccount());
                 intent.putExtra("isUpdate", true);
                 startActivity(intent);
