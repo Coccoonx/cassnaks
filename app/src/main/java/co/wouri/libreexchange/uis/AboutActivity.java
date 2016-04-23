@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Currency;
 import java.util.Locale;
@@ -130,7 +129,7 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AboutActivity.this, MainProfileActivity.class);
-                intent.putExtra("profile", (Parcelable) profile.getAccount());
+                intent.putExtra("profile", (Parcelable) profile.getCustomer());
                 intent.putExtra("isUpdate", true);
                 startActivity(intent);
             }
@@ -140,10 +139,9 @@ public class AboutActivity extends AppCompatActivity {
         TextView userEmail = (TextView) navigationView.findViewById(R.id.useremail);
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
 
-        String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber() : profile.getAccount().getFirstName();
+        String usern = profile.getCustomer().getFirstName() == null ? profile.getCustomer().getPhone() : profile.getCustomer().getFirstName();
         username.setText(getResources().getString(R.string.profile));
-        userEmail.setText(profile.getAccount().getEmail());
-        userBalance.setText(currency.getSymbol() + " " + profile.getAccount().getBalance());
+        userEmail.setText(profile.getCustomer().getEmail());
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, userBalance, userEmail, username);
 

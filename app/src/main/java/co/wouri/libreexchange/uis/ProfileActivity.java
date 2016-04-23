@@ -40,10 +40,9 @@ import co.wouri.libreexchange.api.netflow.net.Response;
 import co.wouri.libreexchange.api.netflow.net.ResponseListener;
 import co.wouri.libreexchange.api.netflow.net.Web;
 import co.wouri.libreexchange.core.managers.ProfileManager;
-import co.wouri.libreexchange.core.models.Account;
+import co.wouri.libreexchange.core.models.Customer;
 import co.wouri.libreexchange.core.models.Profile;
 import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
-import co.wouri.libreexchange.utils.CoreUtils;
 import co.wouri.libreexchange.utils.UIUtils;
 
 import static co.wouri.libreexchange.utils.FormValidationUtils.checkAddress;
@@ -172,25 +171,23 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
 //                        Log.d(TAG, "Error : " + Log.getStackTraceString(e));
 //                    }
 
-                    Account account = new Account();
+                    Customer customer = new Customer();
 
-                    account.setEmail(emailValue);
-                    account.setPhoneNumber(phoneValue);
-                    account.setFirstName(firstNameValue);
-                    account.setLastName(nameValue);
-                    account.setCity(cityValue);
-                    account.setState(stat);
-                    account.setCountry(countryValue);
-                    account.setAddress(addressValue);
-                    account.setSocialSecurityNumber(ssn);
-                    account.setPassword("acmesecret1");
-                    LibreExchangeSettingsUtils.setUserPassword("acmesecret1");
-//                    account.setDeviceId(CoreUtils.getDeviceId());
+                    customer.setEmail(emailValue);
+                    customer.setPhone(phoneValue);
+                    customer.setFirstName(firstNameValue);
+                    customer.setLastName(nameValue);
+                    customer.setCity(cityValue);
+                    customer.setState(stat);
+                    customer.setCountry(countryValue);
+//                    customer.setPassword("acmesecret1");
+//                    LibreExchangeSettingsUtils.setUserPassword("acmesecret1");
+//                    customer.setDeviceId(CoreUtils.getDeviceId());
 //                    showBusy();
 //                    if (isUpdate) {
 //                        Prefs.getInstance().loadPrefs();
 //                        String token = Prefs.getInstance().token;
-//                        Web.requestAsynData(new Request(Web.getUpdateAccountUrl(), true, token, "PUT", obj.toString(), this, REQUEST_UPDATE_ACCOUNT));
+//                        Web.requestAsynData(new Request(Web.getAccountEndpointUrl(), true, token, "PUT", obj.toString(), this, REQUEST_UPDATE_ACCOUNT));
 //
 //                    } else {
                     progressDialog = new ProgressDialog(ProfileActivity.this);
@@ -198,7 +195,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
                     progressDialog.setCancelable(true);
                     progressDialog.setMessage("Retrieving data...");
                     progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    new CreateAccount().execute(account);
+                    new CreateAccount().execute(customer);
 //                    Web.requestAsynData(new Request(Web.getCreateAccountUrl(), false, null, "POST", obj.toString(), this, REQUEST_CREATE_ACCOUNT));
 //                    }
 
@@ -209,21 +206,19 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
     }
 
     private void updateUi() {
-        Account account = getIntent().getParcelableExtra("profile");
+        Customer customer = getIntent().getParcelableExtra("profile");
 
-        lastname.setText(account.getLastName());
-        firstName.setText(account.getFirstName());
+        lastname.setText(customer.getLastName());
+        firstName.setText(customer.getFirstName());
 
-        city.setText(account.getCity());
-        state.setText(account.getState());
-        address.setText(account.getAddress());
+        city.setText(customer.getCity());
+        state.setText(customer.getState());
 
-        email.setText(account.getEmail());
+        email.setText(customer.getEmail());
 
-        phone.setText(account.getPhoneNumber());
-        socialSecurityNumber.setText(account.getSocialSecurityNumber());
+        phone.setText(customer.getPhone());
         password.setEnabled(false);
-        countries.setSelection(mySpinnerArrayAdapter.getPosition(account.getCountry()));
+        countries.setSelection(mySpinnerArrayAdapter.getPosition(customer.getCountry()));
 
     }
 
@@ -243,7 +238,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         ImageView close = (ImageView) toolbar.findViewById(R.id.rightIcon);
 
         title.setVisibility(View.VISIBLE);
-//        close.setVisibility(View.VISIBLE);
+//        menu.setVisibility(View.VISIBLE);
 
         menu.setImageResource(R.drawable.ic_arrow_left);
 
@@ -258,10 +253,10 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
             }
         });
 
-//        close.setOnClickListener(new View.OnClickListener() {
+//        menu.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent intent = new Intent(ProfileActivity.this, SplashScreenActivity.class);
+//                Intent intent = new Intent(ProfileActivity.this, LoginScreenActivity.class);
 //                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 //                finish();
 //            }
@@ -284,7 +279,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, MainProfileActivity.class);
-                intent.putExtra("profile", (Parcelable) profile.getAccount());
+                intent.putExtra("profile", (Parcelable) profile.getCustomer());
                 intent.putExtra("isUpdate", true);
 //                startActivity(intent);
             }
@@ -294,10 +289,9 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         TextView userEmail = (TextView) navigationView.findViewById(R.id.useremail);
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
 
-        String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber() : profile.getAccount().getFirstName();
+        String usern = profile.getCustomer().getFirstName() == null ? profile.getCustomer().getPhone() : profile.getCustomer().getFirstName();
         username.setText(getResources().getString(R.string.profile));
-        userEmail.setText(profile.getAccount().getEmail());
-        userBalance.setText(currency.getSymbol() + " " + profile.getAccount().getBalance());
+        userEmail.setText(profile.getCustomer().getEmail());
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, userBalance, userEmail, username);
 
@@ -391,9 +385,9 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
             if (check(r, rid)) {
 //                {"access_token":"f10e6ac1-47c8-466b-b465-3f0431458f8f","token_type":"bearer","refresh_token":"e4ff8824-9aa8-49be-ab42-b75415e3b35c","expires_in":43200,"scope":"openid"}
                 Log.d(TAG, "REQUEST_CREATE_LOGIN no error_ Obj:" + r.obj);
-               // Toast.makeText(ProfileActivity.this, "Account created successfully.", Toast.LENGTH_LONG).show();
+               // Toast.makeText(ProfileActivity.this, "Customer created successfully.", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(ProfileActivity.this,MainActivity.class);
-                intent.putExtra("account",true);
+                intent.putExtra("customer",true);
                 startActivity(intent);
                 try {
                     JSONObject obj = r.obj;
@@ -456,34 +450,34 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
 
     }
 
-    private class CreateAccount extends AsyncTask<Account, Void, Account> {
+    private class CreateAccount extends AsyncTask<Customer, Void, Customer> {
 
 
         @Override
-        protected Account doInBackground(Account... params) {
+        protected Customer doInBackground(Customer... params) {
 //            progressDialog.show();
 
-            Account account = ServerUtils.createAccount(ProfileActivity.this, params[0]);
-            return account;
+            Customer customer = ServerUtils.createCustomer(ProfileActivity.this, params[0]);
+            return customer;
         }
 
 
         @Override
-        protected void onPostExecute(Account account) {
-            super.onPostExecute(account);
+        protected void onPostExecute(Customer customer) {
+            super.onPostExecute(customer);
 //            progressDialog.cancel();
-            if (account != null) {
+            if (customer != null) {
 
-                LibreExchangeSettingsUtils.setUserUid(account.getId());
-                LibreExchangeSettingsUtils.setUserEmail(account.getEmail());
-                ProfileManager.getCurrentUserProfile().setAccount(account);
+//                LibreExchangeSettingsUtils.setUserUid(customer.getId());
+                LibreExchangeSettingsUtils.setUserEmail(customer.getEmail());
+                ProfileManager.getCurrentUserProfile().setCustomer(customer);
                 ProfileManager.saveProfile();
 
 //                new Login().execute();
 
                 loginRequest();
             } else
-                Toast.makeText(ProfileActivity.this, "An error occurred while creating your account", Toast.LENGTH_LONG).show();
+                Toast.makeText(ProfileActivity.this, "An error occurred while creating your customer", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -533,7 +527,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
 
 
             } else
-                Toast.makeText(ProfileActivity.this, "An error occurred while creating your account", Toast.LENGTH_LONG).show();
+                Toast.makeText(ProfileActivity.this, "An error occurred while creating your customer", Toast.LENGTH_LONG).show();
         }
     }
 

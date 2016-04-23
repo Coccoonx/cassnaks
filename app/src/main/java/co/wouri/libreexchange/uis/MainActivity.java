@@ -1,192 +1,115 @@
 package co.wouri.libreexchange.uis;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import co.wouri.libreexchange.R;
-import co.wouri.libreexchange.adapters.ItemData;
-import co.wouri.libreexchange.adapters.SpinnerAdapter;
 import co.wouri.libreexchange.core.managers.ProfileManager;
 import co.wouri.libreexchange.core.models.Profile;
+import co.wouri.libreexchange.utils.LoadingTask;
+import co.wouri.libreexchange.utils.LoadingTask.LoadingTaskFinishedListener;
 import co.wouri.libreexchange.utils.UIUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity implements LoadingTaskFinishedListener {
 
-    LinearLayout amountComponentLayout1, amountComponentLayout2;
-    TextView currency1, currency2, amount2;
-    TextView amount1;
-    int USD = 0;
-    int EUR = 1;
-    Spinner sp1, sp2;
-
-    Toolbar toolbar;
+    TextView appName;
+    TextView slogan;
+    ProgressBar progressBar;
+    Button balance;
+    Button transfer;
+    private Profile profile;
     private DrawerLayout mDrawerLayout;
-
-    Profile profile;
-
+    ImageView close;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-        if (getIntent().getExtras() != null) {
-            boolean b = getIntent().getBooleanExtra("account", false);
-            if (b) {
-                Toast.makeText(MainActivity.this, "Account created successfully.", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-
+        // Show the activity_splash screen
+        setContentView(R.layout.activity_splash);
         initUI();
 
 
-        ArrayList<ItemData> list = new ArrayList<>();
-        list.add(new ItemData("USD", R.drawable.usa));
-        list.add(new ItemData("EUR", R.drawable.eur));
+        // Start your loading
+        new LoadingTask(progressBar, this).execute("www.google.com"); // Pass in whatever you need a url is just an example we don't use it in this tutorial
+    }
 
-        sp1 = (Spinner) findViewById(R.id.spinner);
-        SpinnerAdapter adapter = new SpinnerAdapter(this, R.layout.spinner_layout, R.id.txt, list);
-        sp1.setAdapter(adapter);
+    private void initComponents() {
+        // Find the progress bar
+        progressBar = (ProgressBar) findViewById(R.id.activity_splash_progress_bar);
 
-        sp2 = (Spinner) findViewById(R.id.spinner2);
-        //SpinnerAdapter adapter2=new SpinnerAdapter(this,R.layout.spinner_layout,R.id.txt,list);
-        sp2.setAdapter(adapter);
-        sp2.setSelection(sp1.getSelectedItemPosition() + 1);
-        amountComponentLayout1 = (LinearLayout) findViewById(R.id.amount_component_layout_1);
-        currency1 = (TextView) amountComponentLayout1.findViewById(R.id.currency);
-        amountComponentLayout2 = (LinearLayout) findViewById(R.id.amount_component_layout_2);
-        currency2 = (TextView) amountComponentLayout2.findViewById(R.id.currency);
-        amount1 = (TextView) amountComponentLayout1.findViewById(R.id.amount);
-        amount2 = (TextView) amountComponentLayout2.findViewById(R.id.amount);
-        setAllCurencies();
-        setAmount();
-        sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        appName = (TextView) findViewById(R.id.appName);
+        slogan = (TextView) findViewById(R.id.appSlogan);
+
+        balance = (Button) findViewById(R.id.balance);
+        transfer = (Button) findViewById(R.id.transfer);
+
+
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan, balance, transfer);
+
+        balance.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                setOneCurrency(position, currency1);
-                setAmount();
-            }
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BalanceActivity.class));
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                setAllCurencies();
-                setAmount();
             }
         });
-        sp2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                setOneCurrency(position, currency2);
-                setAmount();
-            }
 
+        transfer.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                setAllCurencies();
-                setAmount();
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ChooseRecipientActivity.class));
             }
         });
 
     }
 
-    private void setAmount() {
-        Double dollars, euros;
-        if (sp1.getSelectedItemPosition() == sp2.getSelectedItemPosition()) {
-            amount2.setText(amount1.getText());
-        } else if (sp1.getSelectedItemPosition() == USD) { // ie sp2.getSelectedItemPosition() == EUR
-            try {
-                dollars = new Double(amount1.getText().toString());
-            } catch (Exception e) {
-                dollars = new Double(0);
-            }
-            euros = 0.93 * dollars;
-            amount2.setText(euros + "");
-        } else {
-            try {
-                euros = new Double(amount1.getText().toString());
-            } catch (Exception e) {
-                euros = new Double(0);
-            }
-            dollars = 1.07 * euros;
-            amount2.setText(dollars + "");
-        }
-    }
-
-    private void setOneCurrency(int position, TextView currency) {
-        if (position == USD) {
-            currency.setText("$");
-        } else if (position == EUR) {
-            currency.setText("€");
-        }
-    }
-
-    private void setAllCurencies() {
-
-        if (sp1.getSelectedItemPosition() == USD) {
-            currency1.setText("$");
-        } else {
-            currency1.setText("€");
-        }
-
-        if (sp2.getSelectedItemPosition() == USD) {
-            currency2.setText("$");
-        } else {
-            currency2.setText("€");
-        }
-    }
-
+    // This is the callback for when your async task has finished
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void onTaskFinished() {
+        completeSplash();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    private void completeSplash() {
+//        startApp();
+//        finish(); // Don't forget to finish this Splash Activity so the customer can't return to it!
+        runAnimation();
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    private void runAnimation() {
+        Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fadeout);
+        balance.startAnimation(animationFadeIn);
+        transfer.startAnimation(animationFadeIn);
+        close.startAnimation(animationFadeIn);
+        animationFadeIn.setFillAfter(true);
+        progressBar.startAnimation(animationFadeOut);
+        animationFadeOut.setFillAfter(true);
     }
 
 
     private void buildToolBar() {
         View toolbar = findViewById(R.id.toolbar);
 
-        ImageView close = (ImageView) toolbar.findViewById(R.id.leftIcon);
+        close = (ImageView) toolbar.findViewById(R.id.leftIcon);
+        close.setVisibility(View.INVISIBLE);
         TextView title = (TextView) toolbar.findViewById(R.id.title);
         ImageView option = (ImageView) toolbar.findViewById(R.id.rightIcon);
-
-        close.setImageResource(R.drawable.ic_menu);
-        //NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,28 +118,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        title.setText("");
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, title);
 
-
-        option.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                startActivity(new Intent(ChooseRecipientActivity.this, AddRecipientActivity.class));
-            }
-        });
-
-        title.setVisibility(View.VISIBLE);
 //        option.setVisibility(View.VISIBLE);
 
     }
-
 
     void initUI() {
         profile = ProfileManager.getCurrentUserProfile();
 
         buildToolBar();
         buildDrawer();
+        initComponents();
 
     }
 
@@ -231,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MainProfileActivity.class);
-                intent.putExtra("profile", (Parcelable) profile.getAccount());
+                intent.putExtra("profile", (Parcelable) profile.getCustomer());
                 intent.putExtra("isUpdate", true);
                 startActivity(intent);
             }
@@ -241,10 +154,9 @@ public class MainActivity extends AppCompatActivity {
         TextView userEmail = (TextView) navigationView.findViewById(R.id.useremail);
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
 
-        String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber()  : profile.getAccount().getFirstName();
-                username.setText(getResources().getString(R.string.profile));
-        userEmail.setText(profile.getAccount().getEmail());
-        userBalance.setText("" + profile.getAccount().getBalance());
+        String usern = profile.getCustomer().getFirstName() == null ? profile.getCustomer().getPhone() : profile.getCustomer().getFirstName();
+        username.setText(getResources().getString(R.string.profile));
+        userEmail.setText(profile.getCustomer().getEmail());
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, userBalance, userEmail, username);
 
@@ -272,13 +184,21 @@ public class MainActivity extends AppCompatActivity {
 //                menuItem.setChecked(true);
 
                 if (menuItem.getItemId() == R.id.about_item) {
-                    startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                    Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    finish();
+//                    startActivity(new Intent(AboutActivity.this, AboutActivity.class));
                 } else if (menuItem.getItemId() == R.id.nav_item_transfer) {
-                    startActivity(new Intent(MainActivity.this, TransferHistoryActivity.class));
+                    Intent intent = new Intent(MainActivity.this, TransferHistoryActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
 //                } else if (menuItem.getItemId() == R.id.nav_item_recipient) {
 //                    startActivity(new Intent(MainActivity.this, RecipientActivity.class));
                 } else if (menuItem.getItemId() == R.id.nav_item_balance) {
-                    startActivity(new Intent(MainActivity.this, BalanceActivity.class));
+                    Intent intent = new Intent(MainActivity.this, BalanceActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
                 } else if (menuItem.getItemId() == R.id.feedback_item) {
                 } else if (menuItem.getItemId() == R.id.help_item) {
                 } else if (menuItem.getItemId() == R.id.question_item) {
@@ -292,18 +212,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void performHow(View v) {
-        startActivity(new Intent(MainActivity.this, CostActivity.class));
-    }
-
     @Override
-    public void onResume() {
-        super.onResume();
-        initUI();
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            mDrawerLayout.closeDrawers();
+        } else
+            super.onBackPressed();
     }
 
-    public void performStart(View v) {
-        startActivity(new Intent(MainActivity.this, ChooseRecipientActivity.class));
 
+    private void startApp() {
+        Intent intent;
+//        if (LibreExchangeSettingsUtils.getUserLogged()) {
+        intent = new Intent(MainActivity.this, ChooseRecipientActivity.class);
+
+//        } else
+//            intent = new Intent(LoginScreenActivity.this, ProfileActivity.class);
+
+        startActivity(intent);
     }
 }

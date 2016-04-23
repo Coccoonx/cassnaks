@@ -60,7 +60,7 @@ public class MainProfileActivity extends AppCompatActivity {
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainProfileActivity.this, SplashScreenActivity.class);
+                Intent intent = new Intent(MainProfileActivity.this, LoginScreenActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 finish();
             }

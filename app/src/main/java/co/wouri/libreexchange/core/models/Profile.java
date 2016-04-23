@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 public class Profile implements Serializable {
-    private Account account = new Account();
+    private Customer customer = new Customer();
     private TreeSet<Transfer> transfers = new TreeSet<>(new TransferComparator()) ;
     private List<Recipient> recipients = new ArrayList<>();
 

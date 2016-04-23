@@ -16,15 +16,10 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -55,9 +50,6 @@ import co.wouri.libreexchange.core.managers.ProfileManager;
 import co.wouri.libreexchange.core.models.Profile;
 import co.wouri.libreexchange.core.models.Recipient;
 import co.wouri.libreexchange.uis.recipient.adapters.ChooseRecipientAdapter;
-import co.wouri.libreexchange.uis.recipient.adapters.PageAdapter;
-import co.wouri.libreexchange.uis.recipient.fragments.RecentRecipientsListFragment;
-import co.wouri.libreexchange.uis.recipient.fragments.RecipientsListFragment;
 import co.wouri.libreexchange.utils.ContactsQuery;
 import co.wouri.libreexchange.utils.ImageLoader;
 import co.wouri.libreexchange.utils.UIUtils;
@@ -208,7 +200,7 @@ public class ChooseRecipientActivity extends AppCompatActivity implements Loader
         // Set an adapter to this recycler view
 
         ProfileManager.getCurrentUserProfile();
-        Log.d(TAG, "Account profile id " + ProfileManager.getCurrentUserProfile().getAccount().getId());
+        Log.d(TAG, "Customer profile id " + ProfileManager.getCurrentUserProfile().getCustomer().getId());
         Log.d(TAG, "Recipient list: " + ProfileManager.getRecipients());
         Log.d(TAG, "Recipient before add: " + ProfileManager.getRecipients().size());
 
@@ -443,7 +435,7 @@ public class ChooseRecipientActivity extends AppCompatActivity implements Loader
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChooseRecipientActivity.this, MainProfileActivity.class);
-                intent.putExtra("profile", (Parcelable) profile.getAccount());
+                intent.putExtra("profile", (Parcelable) profile.getCustomer());
                 intent.putExtra("isUpdate", true);
                 startActivity(intent);
             }
@@ -453,10 +445,9 @@ public class ChooseRecipientActivity extends AppCompatActivity implements Loader
         TextView userEmail = (TextView) navigationView.findViewById(R.id.useremail);
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
 
-        String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber() : profile.getAccount().getFirstName();
+        String usern = profile.getCustomer().getFirstName() == null ? profile.getCustomer().getPhone() : profile.getCustomer().getFirstName();
         username.setText(getResources().getString(R.string.profile));
-        userEmail.setText(profile.getAccount().getEmail());
-        userBalance.setText(currency.getSymbol() + " " + profile.getAccount().getBalance());
+        userEmail.setText(profile.getCustomer().getEmail());
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, userBalance, userEmail, username);
 
@@ -610,7 +601,7 @@ public class ChooseRecipientActivity extends AppCompatActivity implements Loader
                         + ": " + e.toString());
             }
         } finally {
-            // If an AssetFileDescriptor was returned, try to close it
+            // If an AssetFileDescriptor was returned, try to menu it
             if (afd != null) {
                 try {
                     afd.close();

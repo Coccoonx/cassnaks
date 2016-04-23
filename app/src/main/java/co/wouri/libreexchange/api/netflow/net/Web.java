@@ -21,7 +21,7 @@ public class Web {
     //    public static final String IP = "52.7.32.245";
     public static final String IP = "192.168.1.3";
     public static final String PORT = "9999";
-    public static final String LOGIN_PORT = "9000";
+    public static final String LOGIN_PORT = "8080";
 
 
     private Web() {
@@ -29,15 +29,15 @@ public class Web {
     }
 
     public static String getCreateAccountUrl() {
-        return "http://" + IP + ":" + LOGIN_PORT + "/account/";
+        return "http://" + IP + ":" + LOGIN_PORT + "/customer/";
     }
 
     public static String getLoginUrl() {
         return "http://" + IP + ":" + PORT + "/uaa/oauth/token/";
     }
 
-    public static String getUpdateAccountUrl() {
-        return "http://" + IP + ":" + LOGIN_PORT + "/account/";
+    public static String getAccountEndpointUrl() {
+        return "http://" + IP + ":" + LOGIN_PORT + "/customer/";
     }
 
     public static String getAllReferencesUrl() {

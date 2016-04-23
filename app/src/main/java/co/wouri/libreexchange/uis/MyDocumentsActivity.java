@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import co.wouri.libreexchange.R;
-import co.wouri.libreexchange.uis.account.adapters.MainProfileAdapter;
 import co.wouri.libreexchange.uis.account.adapters.MyDocumentsAdapter;
 import co.wouri.libreexchange.utils.UIUtils;
 
@@ -61,7 +60,7 @@ public class MyDocumentsActivity extends AppCompatActivity {
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyDocumentsActivity.this, SplashScreenActivity.class);
+                Intent intent = new Intent(MyDocumentsActivity.this, LoginScreenActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 finish();
             }

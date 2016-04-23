@@ -171,13 +171,13 @@ public class LibreExchangeSettingsUtils {
     }
 
     public static boolean canPlayNotificationSound() {
-        // TODO Implement this method, in order to load the sound the account want to play. Since now, we just return true
+        // TODO Implement this method, in order to load the sound the customer want to play. Since now, we just return true
         return true;
     }
 
     public static void registerUser() {
 //        Log.d("safer init", "Job Manager" + LibreExchangeApplication.jobManager);
-//        Log.d("safer init", "Current Account account" + ProfileManager.getCurrentUserProfile());
+//        Log.d("safer init", "Current Customer customer" + ProfileManager.getCurrentUserProfile());
 //        LibreExchangeApplication.jobManager.addJobInBackground(new PostAccountJob(
 //                ProfileManager.getCurrentUserProfile().getCurrentUser()));
     }

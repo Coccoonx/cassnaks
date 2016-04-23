@@ -120,6 +120,7 @@
     <string name="personal_information">Personal Information</string>
     <string name="my_documents">My Documents</string>
     <string name="nav_item_wallet">Wallets</string>
+    <string name="driver_license">Driver License</string>
 
 
 </resources>

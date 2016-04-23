@@ -105,7 +105,7 @@ public class SuccessActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SuccessActivity.this, SplashScreenActivity.class);
+                Intent intent = new Intent(SuccessActivity.this, LoginScreenActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 finish();
@@ -189,7 +189,7 @@ public class SuccessActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SuccessActivity.this, MainProfileActivity.class);
-                intent.putExtra("profile", (Parcelable) profile.getAccount());
+                intent.putExtra("profile", (Parcelable) profile.getCustomer());
                 intent.putExtra("isUpdate", true);
                 startActivity(intent);
             }
@@ -199,10 +199,9 @@ public class SuccessActivity extends AppCompatActivity {
         TextView userEmail = (TextView) navigationView.findViewById(R.id.useremail);
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
 
-        String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber() : profile.getAccount().getFirstName();
+        String usern = profile.getCustomer().getFirstName() == null ? profile.getCustomer().getPhone() : profile.getCustomer().getFirstName();
         username.setText(getResources().getString(R.string.profile));
-        userEmail.setText(profile.getAccount().getEmail());
-        userBalance.setText(currency.getSymbol() + " " + profile.getAccount().getBalance());
+        userEmail.setText(profile.getCustomer().getEmail());
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, userBalance, userEmail, username);
 

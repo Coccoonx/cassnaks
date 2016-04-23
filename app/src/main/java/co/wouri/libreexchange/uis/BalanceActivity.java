@@ -44,7 +44,7 @@ public class BalanceActivity extends AppCompatActivity {
         addFundButton = (Button) findViewById(R.id.addFund);
         balance = (TextView) findViewById(R.id.balanceLabel);
         amount = (TextView) findViewById(R.id.amountValue);
-        amount.setText(currency.getSymbol()+" "+ProfileManager.getCurrentUserProfile().getAccount().getBalance());
+//        amount.setText(currency.getSymbol()+" "+ProfileManager.getCurrentUserProfile().getCustomer().getBalance());
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, balance, addFundButton, amount);
 
 
@@ -145,7 +145,7 @@ public class BalanceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BalanceActivity.this, MainProfileActivity.class);
-                intent.putExtra("profile", (Parcelable) profile.getAccount());
+                intent.putExtra("profile", (Parcelable) profile.getCustomer());
                 intent.putExtra("isUpdate", true);
                 startActivity(intent);
             }
@@ -155,10 +155,9 @@ public class BalanceActivity extends AppCompatActivity {
         TextView userEmail = (TextView) navigationView.findViewById(R.id.useremail);
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
 
-        String usern = profile.getAccount().getFirstName() == null ? profile.getAccount().getPhoneNumber() : profile.getAccount().getFirstName();
+        String usern = profile.getCustomer().getFirstName() == null ? profile.getCustomer().getPhone() : profile.getCustomer().getFirstName();
         username.setText(getResources().getString(R.string.profile));
-        userEmail.setText(profile.getAccount().getEmail());
-        userBalance.setText(currency.getSymbol() + " " + profile.getAccount().getBalance());
+        userEmail.setText(profile.getCustomer().getEmail());
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, userBalance, userEmail, username);
 

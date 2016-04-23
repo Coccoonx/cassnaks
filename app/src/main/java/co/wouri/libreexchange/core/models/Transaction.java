@@ -22,13 +22,13 @@ public class Transaction {
 
     private Date createDate=new Date();
 
-    private Customer recipient;
+    private Account recipient;
 
-    private Customer originator;
+    private Account originator;
 
     private Date lastUpdateDate=new Date();
 
-    private Account originatorAccount;
+    private Customer originatorCustomer;
 
-    private Account recipientAccount;
+    private Customer recipientCustomer;
 }

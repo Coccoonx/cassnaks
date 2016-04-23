@@ -8,7 +8,9 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import co.wouri.libreexchange.api.netflow.Http;
@@ -17,9 +19,10 @@ import co.wouri.libreexchange.api.netflow.HttpResponse;
 import co.wouri.libreexchange.api.netflow.NetworkError;
 import co.wouri.libreexchange.api.netflow.ResponseHandler;
 import co.wouri.libreexchange.api.netflow.net.Web;
-import co.wouri.libreexchange.core.models.Account;
+import co.wouri.libreexchange.core.models.Customer;
 import co.wouri.libreexchange.core.models.Document;
 import co.wouri.libreexchange.core.models.Reference;
+import co.wouri.libreexchange.core.models.Status;
 import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
 
 /**
@@ -29,15 +32,15 @@ public class ServerUtils {
 
     private static final String TAG = "coaze server call";
 
-    public static Account getAccount(Context context, String tokenType, String token, String uId) {
+    public static Customer getAccount(Context context, String tokenType, String token, String uId) {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        final Account[] account = {null};
+        final Customer[] customer = {null};
         try {
             Http http = HttpFactory.create(context);
-            http.get(Web.getUpdateAccountUrl())
+            http.get(Web.getAccountEndpointUrl())
                     .header("Authorization", tokenType + " " + uId)
                     .header("Authorization", tokenType + " " + token)
                     .handler(new ResponseHandler() {
@@ -53,16 +56,13 @@ public class ServerUtils {
 
                                              JSONObject obj = new JSONObject(data.toString());
                                              if (obj != null) {
-                                                 account[0] = new Account();
-                                                 account[0].setEmail(obj.getString("email"));
-                                                 account[0].setPhoneNumber(obj.getString("phoneNumber"));
-                                                 account[0].setFirstName(obj.getString("firstName"));
-                                                 account[0].setLastName(obj.getString("lastName"));
-                                                 account[0].setCity(obj.getString("city"));
-                                                 account[0].setState(obj.getString("state"));
-                                                 account[0].setCountry(obj.getString("country"));
-                                                 account[0].setAddress(obj.getString("address"));
-                                                 account[0].setSocialSecurityNumber(obj.getString("socialSecurityNumber"));
+                                                 customer[0] = new Customer();
+                                                 customer[0].setEmail(obj.getString("email"));
+                                                 customer[0].setFirstName(obj.getString("firstName"));
+                                                 customer[0].setLastName(obj.getString("lastName"));
+                                                 customer[0].setCity(obj.getString("city"));
+                                                 customer[0].setState(obj.getString("state"));
+                                                 customer[0].setCountry(obj.getString("country"));
                                              }
 
 
@@ -100,26 +100,26 @@ public class ServerUtils {
         } catch (RuntimeException e) {
             Log.d(TAG, "Error while sending feedback " + Log.getStackTraceString(e));
         }
-        return account[0];
+        return customer[0];
     }
 
 
-    public static Account updateAccount(Context context, Account account) {
+    public static Customer updateAccount(Context context, Customer customer) {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        final Account[] accounts = {null};
+        final Customer[] customers = {null};
 
         String tokenType = LibreExchangeSettingsUtils.getTokenType();
         String token = LibreExchangeSettingsUtils.getAccessToken();
         String uId = LibreExchangeSettingsUtils.getUserUid();
         try {
             Http http = HttpFactory.create(context);
-            http.put(Web.getUpdateAccountUrl())
+            http.put(Web.getAccountEndpointUrl())
                     .header("Authorization", tokenType + " " + uId)
                     .header("Authorization", tokenType + " " + token)
-                    .data(account)
+                    .data(customer)
                     .handler(new ResponseHandler() {
                                  @Override
                                  public void success(Object data, HttpResponse response) {
@@ -127,24 +127,21 @@ public class ServerUtils {
                                      Log.d(TAG, "HttpResponse header = " + response.getHeaders());
 
                                      if (data != null) {
-                                         Log.d(TAG, "Account correctly retrieve " + data.toString());
+                                         Log.d(TAG, "Customer correctly retrieve " + data.toString());
                                          try {
 
                                              JSONObject obj = new JSONObject(data.toString());
-                                             Account account1;
+                                             Customer customer1;
 
                                              if (obj != null) {
-                                                 account1 = new Account();
-                                                 account1.setId(obj.getString("id"));
-                                                 account1.setCity(obj.getString("city"));
-                                                 account1.setEmail(obj.getString("email"));
-                                                 account1.setFirstName(obj.getString("firstName"));
-                                                 account1.setLastName(obj.getString("lastName"));
-                                                 account1.setPhoneNumber(obj.getString("phoneNumber"));
-                                                 account1.setSocialSecurityNumber(obj.getString("socialSecurityNumber"));
-                                                 account1.setState(obj.getString("state"));
-                                                 account1.setCountry(obj.getString("country"));
-                                                 accounts[0] = account1;
+                                                 customer1 = new Customer();
+                                                 customer1.setCity(obj.getString("city"));
+                                                 customer1.setEmail(obj.getString("email"));
+                                                 customer1.setFirstName(obj.getString("firstName"));
+                                                 customer1.setLastName(obj.getString("lastName"));
+                                                 customer1.setState(obj.getString("state"));
+                                                 customer1.setCountry(obj.getString("country"));
+                                                 customers[0] = customer1;
                                              }
                                              //responseFlag[0] = true;
                                          } catch (Exception e) {
@@ -180,22 +177,23 @@ public class ServerUtils {
         } catch (RuntimeException e) {
             Log.d(TAG, "Error while sending feedback " + Log.getStackTraceString(e));
         }
-        return accounts[0];
+        return customers[0];
     }
 
 
-    public static Account createAccount(Context context,
-                                        Account accountIncoming) {
+    public static Customer createCustomer(Context context,
+                                          Customer customerIncoming) {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        final Account[] account = {null};
+        final Customer[] customer = {null};
         try {
             Http http = HttpFactory.create(context);
-            http.post(Web.getUpdateAccountUrl())
-                    .data(accountIncoming)
-                    .header("Authorization", Base64.encodeToString("acme:acmesecret1".getBytes(), Base64.DEFAULT))
+            http.post(Web.getAccountEndpointUrl())
+                    .data(customerIncoming)
+//                    .header("Authorization", Base64.encodeToString("acme:acmesecret1".getBytes(), Base64.DEFAULT))
+//                    .header("ContentType", "application/json")
                     .handler(new ResponseHandler() {
                                  @Override
                                  public void success(Object data, HttpResponse response) {
@@ -209,16 +207,32 @@ public class ServerUtils {
 
                                              JSONObject obj = new JSONObject(data.toString());
                                              if (obj != null) {
-                                                 account[0] = new Account();
-                                                 account[0].setEmail(obj.getString("email"));
-                                                 account[0].setPhoneNumber(obj.getString("phoneNumber"));
-                                                 account[0].setFirstName(obj.getString("firstName"));
-                                                 account[0].setLastName(obj.getString("lastName"));
-                                                 account[0].setCity(obj.getString("city"));
-                                                 account[0].setState(obj.getString("state"));
-                                                 account[0].setCountry(obj.getString("country"));
-                                                 account[0].setAddress(obj.getString("address"));
-                                                 account[0].setSocialSecurityNumber(obj.getString("socialSecurityNumber"));
+                                                 customer[0] = new Customer();
+                                                 Long id = Long.valueOf(obj.getString("id"));
+                                                 customer[0].setId(id);
+                                                 customer[0].setEmail(obj.getString("email"));
+                                                 customer[0].setPhone(obj.getString("phone"));
+                                                 customer[0].setZipCode(obj.getString("zipCode"));
+                                                 customer[0].setPassword(obj.getString("password"));
+
+                                                 DateFormat dateFormat = DateFormat.getDateInstance();
+                                                 String lastUpdateDate = obj.getString("lastUpdateDate");
+                                                 Date lastUpdate = dateFormat.parse(lastUpdateDate);
+                                                 customer[0].setLastUpdateDate(lastUpdate);
+
+                                                 String createDate = obj.getString("createDate");
+                                                 Date createDateD = dateFormat.parse(createDate);
+                                                 customer[0].setCreateDate(createDateD);
+
+                                                 customer[0].setFirstName(obj.getString("firstName"));
+                                                 customer[0].setLastName(obj.getString("lastName"));
+                                                 customer[0].setCity(obj.getString("city"));
+                                                 customer[0].setState(obj.getString("state"));
+                                                 customer[0].setCountry(obj.getString("country"));
+                                                 customer[0].setLanguage(obj.getString("language"));
+                                                 customer[0].setEnabled(Boolean.valueOf(obj.getString("country")));
+                                                 customer[0].setStatus(Status.valueOf(obj.getString("status")));
+
                                              }
 
 
@@ -256,7 +270,7 @@ public class ServerUtils {
         } catch (RuntimeException e) {
             Log.d(TAG, "Error while sending feedback " + Log.getStackTraceString(e));
         }
-        return account[0];
+        return customer[0];
     }
 
 
