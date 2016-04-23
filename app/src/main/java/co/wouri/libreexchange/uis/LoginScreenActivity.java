@@ -86,25 +86,26 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
     }
 
     public void performSubmit(View view) {
-        String emailVal = email.getText().toString().trim();
-        String passwordVal = password.getText().toString();
-        String passwordCVal = passwordConf.getText().toString();
-        if (FormValidationUtils.checkEmail(emailVal)) {
-            if (passwordVal.equals(passwordCVal)) {
-                Customer userCustomer = new Customer();
-                userCustomer.setEmail(emailVal);
-                userCustomer.setPassword(passwordCVal);
-                Customer customer = ServerUtils.createCustomer(this, userCustomer);
-                Log.d(TAG, "Customer created: "+customer);
-                if (customer != null) {
-                    ProfileManager.getCurrentUserProfile().setCustomer(customer);
-                    ProfileManager.saveProfile();
-                    LibreExchangeSettingsUtils.setUserEmail(emailVal);
-                    startApp();
-                }
-            } else
-                Toast.makeText(LoginScreenActivity.this, "Password doesn't match", Toast.LENGTH_SHORT).show();
-        } else
-            Toast.makeText(LoginScreenActivity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
+        startApp();
+//        String emailVal = email.getText().toString().trim();
+//        String passwordVal = password.getText().toString();
+//        String passwordCVal = passwordConf.getText().toString();
+//        if (FormValidationUtils.checkEmail(emailVal)) {
+//            if (passwordVal.equals(passwordCVal)) {
+//                Customer userCustomer = new Customer();
+//                userCustomer.setEmail(emailVal);
+//                userCustomer.setPassword(passwordCVal);
+//                Customer customer = ServerUtils.createCustomer(this, userCustomer);
+//                Log.d(TAG, "Customer created: "+customer);
+//                if (customer != null) {
+//                    ProfileManager.getCurrentUserProfile().setCustomer(customer);
+//                    ProfileManager.saveProfile();
+//                    LibreExchangeSettingsUtils.setUserEmail(emailVal);
+//                    startApp();
+//                }
+//            } else
+//                Toast.makeText(LoginScreenActivity.this, "Password doesn't match", Toast.LENGTH_SHORT).show();
+//        } else
+//            Toast.makeText(LoginScreenActivity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
     }
 }

@@ -38,8 +38,8 @@ public class MyDocumentsAdapter extends RecyclerView.Adapter<MainProfileViewHold
     private ArrayList<ProfileItem> initItems() {
         ArrayList items = new ArrayList();
         items.add(new ProfileItem(R.string.id_card, R.drawable.ic_id_card));
-        items.add(new ProfileItem(R.string.bank_card, R.drawable.ic_bank_cards));
         items.add(new ProfileItem(R.string.driver_license, R.drawable.ic_driver_license));
+        items.add(new ProfileItem(R.string.passport, R.drawable.ic_passport));
         return items;
     }
 

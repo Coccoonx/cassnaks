@@ -2,6 +2,8 @@ package co.wouri.libreexchange.core.models;
 
 import android.accounts.AccountManager;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telephony.TelephonyManager;
 import android.util.Patterns;
 
@@ -14,7 +16,7 @@ import lombok.Data;
 
 
 @Data
-public class Customer implements Serializable {
+public class Customer implements Serializable, Parcelable {
 
     private Long id;
 
@@ -48,6 +50,10 @@ public class Customer implements Serializable {
 
     private Boolean enabled=false;
 
+    public Customer(){
+
+    }
+
     public static String getUserEmail() {
 
         Pattern emailPattern = Patterns.EMAIL_ADDRESS; // API level 8+
@@ -68,4 +74,60 @@ public class Customer implements Serializable {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeParcelable(this.wallet, flags);
+        dest.writeInt(this.status == null ? -1 : this.status.ordinal());
+        dest.writeLong(createDate != null ? createDate.getTime() : -1);
+        dest.writeLong(lastUpdateDate != null ? lastUpdateDate.getTime() : -1);
+        dest.writeString(this.city);
+        dest.writeString(this.firstName);
+        dest.writeString(this.language);
+        dest.writeString(this.lastName);
+        dest.writeString(this.email);
+        dest.writeString(this.phone);
+        dest.writeString(this.state);
+        dest.writeString(this.country);
+        dest.writeString(this.zipCode);
+        dest.writeString(this.password);
+        dest.writeValue(this.enabled);
+    }
+
+    protected Customer(Parcel in) {
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.wallet = in.readParcelable(Wallet.class.getClassLoader());
+        int tmpStatus = in.readInt();
+        this.status = tmpStatus == -1 ? null : Status.values()[tmpStatus];
+        long tmpCreateDate = in.readLong();
+        this.createDate = tmpCreateDate == -1 ? null : new Date(tmpCreateDate);
+        long tmpLastUpdateDate = in.readLong();
+        this.lastUpdateDate = tmpLastUpdateDate == -1 ? null : new Date(tmpLastUpdateDate);
+        this.city = in.readString();
+        this.firstName = in.readString();
+        this.language = in.readString();
+        this.lastName = in.readString();
+        this.email = in.readString();
+        this.phone = in.readString();
+        this.state = in.readString();
+        this.country = in.readString();
+        this.zipCode = in.readString();
+        this.password = in.readString();
+        this.enabled = (Boolean) in.readValue(Boolean.class.getClassLoader());
+    }
+
+    public static final Creator<Customer> CREATOR = new Creator<Customer>() {
+        public Customer createFromParcel(Parcel source) {
+            return new Customer(source);
+        }
+
+        public Customer[] newArray(int size) {
+            return new Customer[size];
+        }
+    };
 }

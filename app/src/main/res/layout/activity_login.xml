@@ -41,7 +41,7 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/signinForm"
+        android:id="@+id/loginForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -55,6 +55,69 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:theme="@style/TextLabel">-->
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/userEmailLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="5"
+            android:hint="Email"
+            android:inputType="textWebEmailAddress"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/text_color_grey_dark"
+            android:textSize="16sp" />
+        <!--</android.support.design.widget.TextInputLayout>-->
+
+        <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:theme="@style/TextLabel">-->
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/userPasswordLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="5"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/text_color_grey_dark"
+            android:textSize="16sp" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/corner_border_accent"
+            android:onClick="performSubmit"
+            android:text="Submit"
+            android:textColor="@color/textColorPrimary" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/signinForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/margin_standard"
+        android:layout_marginLeft="@dimen/margin_very_big"
+        android:layout_marginRight="@dimen/margin_very_big"
+        android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/userEmail"
@@ -127,7 +190,6 @@
             android:onClick="performSubmit"
             android:text="Submit"
             android:textColor="@color/textColorPrimary" />
-
 
     </LinearLayout>
 
