@@ -42,7 +42,7 @@ import co.wouri.libreexchange.api.netflow.net.Web;
 import co.wouri.libreexchange.core.managers.ProfileManager;
 import co.wouri.libreexchange.core.models.Account;
 import co.wouri.libreexchange.core.models.Profile;
-import co.wouri.libreexchange.storage.CoazeSettingsUtils;
+import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
 import co.wouri.libreexchange.utils.CoreUtils;
 import co.wouri.libreexchange.utils.UIUtils;
 
@@ -184,8 +184,8 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
                     account.setAddress(addressValue);
                     account.setSocialSecurityNumber(ssn);
                     account.setPassword("acmesecret1");
-                    CoazeSettingsUtils.setUserPassword("acmesecret1");
-                    account.setDeviceId(CoreUtils.getDeviceId());
+                    LibreExchangeSettingsUtils.setUserPassword("acmesecret1");
+//                    account.setDeviceId(CoreUtils.getDeviceId());
 //                    showBusy();
 //                    if (isUpdate) {
 //                        Prefs.getInstance().loadPrefs();
@@ -416,11 +416,11 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
             if (!r.isError()) {
                 try {
                     JSONObject obj = r.obj;
-                    CoazeSettingsUtils.setAccessToken(obj.getString("access_token"));
-                    CoazeSettingsUtils.setTokenType(obj.getString("token_type"));
-                    CoazeSettingsUtils.setExpireIn(obj.getInt("expires_in"));
-                    CoazeSettingsUtils.setUserFirstLogin(System.currentTimeMillis());
-                    CoazeSettingsUtils.setUserLogged(true);
+                    LibreExchangeSettingsUtils.setAccessToken(obj.getString("access_token"));
+                    LibreExchangeSettingsUtils.setTokenType(obj.getString("token_type"));
+                    LibreExchangeSettingsUtils.setExpireIn(obj.getInt("expires_in"));
+                    LibreExchangeSettingsUtils.setUserFirstLogin(System.currentTimeMillis());
+                    LibreExchangeSettingsUtils.setUserLogged(true);
                     return true;
                 } catch (Exception e) {
                     // TODO: handle exception
@@ -474,8 +474,8 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
 //            progressDialog.cancel();
             if (account != null) {
 
-                CoazeSettingsUtils.setUserUid(account.getId());
-                CoazeSettingsUtils.setUserEmail(account.getEmail());
+                LibreExchangeSettingsUtils.setUserUid(account.getId());
+                LibreExchangeSettingsUtils.setUserEmail(account.getEmail());
                 ProfileManager.getCurrentUserProfile().setAccount(account);
                 ProfileManager.saveProfile();
 
@@ -489,7 +489,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
 
     protected void loginRequest() {
         try {
-            String req = "grant_type=password&password=acmesecret1&username=" + CoazeSettingsUtils.getUserEmail();
+            String req = "grant_type=password&password=acmesecret1&username=" + LibreExchangeSettingsUtils.getUserEmail();
             Web.requestAsynData(new Request(Web.getLoginUrl(), true, null, "POST", req, this, REQUEST_CREATE_LOGIN));
 
         } catch (Exception e) {
@@ -517,11 +517,11 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
             if (account != null) {
 
                 try {
-                    CoazeSettingsUtils.setAccessToken(account.getString("access_token"));
-                    CoazeSettingsUtils.setTokenType(account.getString("token_type"));
-                    CoazeSettingsUtils.setExpireIn(account.getInt("expires_in"));
-                    CoazeSettingsUtils.setUserFirstLogin(System.currentTimeMillis());
-                    CoazeSettingsUtils.setUserLogged(true);
+                    LibreExchangeSettingsUtils.setAccessToken(account.getString("access_token"));
+                    LibreExchangeSettingsUtils.setTokenType(account.getString("token_type"));
+                    LibreExchangeSettingsUtils.setExpireIn(account.getInt("expires_in"));
+                    LibreExchangeSettingsUtils.setUserFirstLogin(System.currentTimeMillis());
+                    LibreExchangeSettingsUtils.setUserLogged(true);
 
                     Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                     intent.putExtra("drawer", true);

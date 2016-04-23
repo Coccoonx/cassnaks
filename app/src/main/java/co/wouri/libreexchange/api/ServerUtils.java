@@ -20,7 +20,7 @@ import co.wouri.libreexchange.api.netflow.net.Web;
 import co.wouri.libreexchange.core.models.Account;
 import co.wouri.libreexchange.core.models.Document;
 import co.wouri.libreexchange.core.models.Reference;
-import co.wouri.libreexchange.storage.CoazeSettingsUtils;
+import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
 
 /**
  * Created by lyonnel on 03/11/15.
@@ -111,9 +111,9 @@ public class ServerUtils {
 
         final Account[] accounts = {null};
 
-        String tokenType = CoazeSettingsUtils.getTokenType();
-        String token = CoazeSettingsUtils.getAccessToken();
-        String uId = CoazeSettingsUtils.getUserUid();
+        String tokenType = LibreExchangeSettingsUtils.getTokenType();
+        String token = LibreExchangeSettingsUtils.getAccessToken();
+        String uId = LibreExchangeSettingsUtils.getUserUid();
         try {
             Http http = HttpFactory.create(context);
             http.put(Web.getUpdateAccountUrl())
@@ -265,7 +265,7 @@ public class ServerUtils {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        String req = " grant_type = password & password = " + CoazeSettingsUtils.getUserPassword() + " & username = " + CoazeSettingsUtils.getUserEmail();
+        String req = " grant_type = password & password = " + LibreExchangeSettingsUtils.getUserPassword() + " & username = " + LibreExchangeSettingsUtils.getUserEmail();
 
 
         final JSONObject[] objects = {null};

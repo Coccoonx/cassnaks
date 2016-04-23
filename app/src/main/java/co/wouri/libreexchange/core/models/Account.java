@@ -23,20 +23,33 @@ public class Account implements Serializable, Parcelable {
     private String address;
     private double balance;
 
+    private Customer customer;
 
-    private String id;
+    private String extension;
+
+    private String username;
     private
     @NotEmpty
-    String deviceId;
+    String password;
+    private String description;
+    private Boolean isDefaultDepositAccount;
+    private Boolean isDefaultWithdrawalAccount;
+    private Boolean acceptsDeposit;
+    private Boolean acceptsWithdraw;
+    private String swift;
+    private String iban;
+    private String bankName;
+
+
+
+    private String id;
     private
     @NotEmpty
     String firstName;
     private
     @NotEmpty
     String lastName;
-    private
-    @NotEmpty
-    String password;
+
     private
     @NotEmpty
     String email;
@@ -66,7 +79,6 @@ public class Account implements Serializable, Parcelable {
         dest.writeString(this.address);
         dest.writeDouble(this.balance);
         dest.writeString(this.id);
-        dest.writeString(this.deviceId);
         dest.writeString(this.firstName);
         dest.writeString(this.lastName);
         dest.writeString(this.password);
@@ -94,7 +106,6 @@ public class Account implements Serializable, Parcelable {
         this.address = in.readString();
         this.balance = in.readDouble();
         this.id = in.readString();
-        this.deviceId = in.readString();
         this.firstName = in.readString();
         this.lastName = in.readString();
         this.password = in.readString();

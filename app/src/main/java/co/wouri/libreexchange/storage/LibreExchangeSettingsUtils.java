@@ -14,7 +14,7 @@ import co.wouri.libreexchange.LibreExchangeApplication;
 /**
  * An utility to get storage values
  */
-public class CoazeSettingsUtils {
+public class LibreExchangeSettingsUtils {
     public static final String NOTIFICATIONS = "NOTIFICATIONS";
     public static final String APP_ALREADY_CONFIGURED = "APP_ALREADY_CONFIGURED";
     public static final String ACCOUNT_ALREADY_CONFIGURED = "ACCOUNT_ALREADY_CONFIGURED";
@@ -35,6 +35,7 @@ public class CoazeSettingsUtils {
     private static final String TOKEN_TYPE = "TOKEN_TYPE";
     private static final String EXPIRE_IN = "EXPIRE_IN";
     private static final String USER_FIRST_LOGIN = "USER_FIRST_LOGIN";
+    private static final String USER_PIN = "USER_PIN";
     public static final String USER_LOGGED = "USER_LOGGED";
     public static final String USER_PASSWORD = "PASSWORD";
 
@@ -153,20 +154,20 @@ public class CoazeSettingsUtils {
     public static boolean canDisplayNotifications() {
         boolean notificationEnabled;
         PreferencesStorage storageInterface = LibreExchangeApplication.getPreferencesStorageInterface();
-        notificationEnabled = storageInterface.load(CoazeSettingsUtils.PLAY_NOTIFICATIONS, true);
+        notificationEnabled = storageInterface.load(LibreExchangeSettingsUtils.PLAY_NOTIFICATIONS, true);
         return notificationEnabled;
     }
 
     public static boolean canVibrate() {
         boolean notificationEnabled;
         PreferencesStorage storageInterface = LibreExchangeApplication.getPreferencesStorageInterface();
-        notificationEnabled = storageInterface.load(CoazeSettingsUtils.NOTIFICATION_VIBRATE, true);
+        notificationEnabled = storageInterface.load(LibreExchangeSettingsUtils.NOTIFICATION_VIBRATE, true);
         return notificationEnabled;
     }
 
     public static void canVibrate(boolean value) {
         PreferencesStorage storageInterface = LibreExchangeApplication.getPreferencesStorageInterface();
-        storageInterface.save(CoazeSettingsUtils.NOTIFICATION_VIBRATE, value);
+        storageInterface.save(LibreExchangeSettingsUtils.NOTIFICATION_VIBRATE, value);
     }
 
     public static boolean canPlayNotificationSound() {
@@ -216,6 +217,16 @@ public class CoazeSettingsUtils {
     public static Float getUserFirstLogin() {
         PreferencesStorage storageInterface = LibreExchangeApplication.getPreferencesStorageInterface();
         return storageInterface.load(USER_FIRST_LOGIN, System.currentTimeMillis());
+    }
+
+    public static void setUserPin(String b) {
+        PreferencesStorage storageInterface = LibreExchangeApplication.getPreferencesStorageInterface();
+        storageInterface.save(USER_PIN, b);
+    }
+
+    public static String getUserPin() {
+        PreferencesStorage storageInterface = LibreExchangeApplication.getPreferencesStorageInterface();
+        return storageInterface.load(USER_PIN, "0000");
     }
 
     public static void setExpireIn(int b) {

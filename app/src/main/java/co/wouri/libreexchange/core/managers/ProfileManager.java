@@ -3,13 +3,12 @@ package co.wouri.libreexchange.core.managers;
 import android.util.Log;
 
 import java.util.List;
-import java.util.Set;
 import java.util.TreeSet;
 
 import co.wouri.libreexchange.core.models.Profile;
 import co.wouri.libreexchange.core.models.Recipient;
 import co.wouri.libreexchange.core.models.Transfer;
-import co.wouri.libreexchange.storage.CoazeSettingsUtils;
+import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
 
 
 public class ProfileManager {
@@ -28,7 +27,7 @@ public class ProfileManager {
     public static Profile saveProfile(Profile profile) {
         boolean isOk = fileManager.save(profile);
         if (isOk) {
-            CoazeSettingsUtils.setAccountAlreadyConfigured(true);
+            LibreExchangeSettingsUtils.setAccountAlreadyConfigured(true);
             Log.d("coaze", "saveProfile completed");
             return profile;
         } else {

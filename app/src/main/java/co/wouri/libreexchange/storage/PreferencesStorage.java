@@ -10,7 +10,7 @@ public class PreferencesStorage {
     private SharedPreferences prefs;
 
     public PreferencesStorage(Context ctx) {
-        prefs = ctx.getSharedPreferences(ctx.getPackageName() + "_coaze_settings", Context.MODE_PRIVATE);
+        prefs = ctx.getSharedPreferences(ctx.getPackageName() + "_libreexchange_settings", Context.MODE_PRIVATE);
     }
 
     public void save(String key, Boolean value) {

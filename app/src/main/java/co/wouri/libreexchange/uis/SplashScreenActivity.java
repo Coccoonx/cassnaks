@@ -232,7 +232,7 @@ public class SplashScreenActivity extends Activity implements LoadingTaskFinishe
 
     private void startApp() {
         Intent intent;
-//        if (CoazeSettingsUtils.getUserLogged()) {
+//        if (LibreExchangeSettingsUtils.getUserLogged()) {
         intent = new Intent(SplashScreenActivity.this, ChooseRecipientActivity.class);
 
 //        } else
