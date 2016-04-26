@@ -130,4 +130,5 @@ public class Customer implements Serializable, Parcelable {
             return new Customer[size];
         }
     };
+
 }
