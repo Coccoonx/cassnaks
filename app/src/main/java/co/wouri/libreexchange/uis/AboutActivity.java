@@ -70,8 +70,10 @@ public class AboutActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
             mDrawerLayout.closeDrawers();
-        } else
-            super.onBackPressed();
+        } else {
+            Intent intent = new Intent(AboutActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void buildToolBar() {
@@ -99,7 +101,7 @@ public class AboutActivity extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                AboutActivity.this.onBackPressed();
             }
         });
 

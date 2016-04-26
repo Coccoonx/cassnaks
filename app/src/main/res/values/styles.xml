@@ -62,4 +62,28 @@
         <item name="colorControlNormal">@color/text_color_grey_dark</item>
         <item name="colorControlActivated">@color/colorAccent</item>
     </style>
+
+    <!-- Styles for the keyboard buttons -->
+    <style name="PinButton">
+        <!-- Preferably a selector drawable -->
+        <item name="android:background">@drawable/background_border_pinview</item>
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:textStyle">bold|italic</item>
+        <!-- Styles for Button text color -->
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <!-- Styles for errors and prompt text -->
+    <style name="PinStatus">
+        <!-- This can also be a color selector for pressed and normal states -->
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+
+    <!-- Styles for Pin Entry holes -->
+    <style name="PinEntry">
+        <!-- A selector definitely with a normal and selected state -->
+        <item name="android:src">@color/colorAccent</item>
+    </style>
+
 </resources>
