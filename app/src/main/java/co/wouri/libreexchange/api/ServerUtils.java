@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -187,7 +188,8 @@ public class ServerUtils {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        final Customer[] customer = {null};
+        final Customer[] customer = new Customer[1];
+        customer[0] = new Customer();
         try {
             Http http = HttpFactory.create(context);
             http.post(Web.getAccountEndpointUrl())
@@ -201,44 +203,66 @@ public class ServerUtils {
                                      Log.d(TAG, "HttpResponse header = " + response.getHeaders());
 
                                      if (data != null) {
-                                         Log.d(TAG, "Profile correctly retrieve " + data.toString());
+                                         Log.d(TAG, "Profile correctly retrieved " + data.toString());
 
                                          try {
 
                                              JSONObject obj = new JSONObject(data.toString());
+
                                              if (obj != null) {
-                                                 customer[0] = new Customer();
-                                                 Long id = Long.valueOf(obj.getString("id"));
+                                                 Log.d(TAG, "JSON of customer retrieved " + obj.toString());
+                                                 //{"id":49,"enabled":false,"lastName":"wdffffhhgdd","email":"sgfjdfv","status":"NEW",
+                                                 //"firstName":"sgfjdfv","createDate":1461667974068,"password":"wdffffhhgdd","country":"CA",
+                                                 // "lastUpdateDate":1461667974068}
+                                                 String idString = obj.getString("id");
+                                                 Long id;
+                                                 if (idString.split("\\.0")!=null){
+                                                     id = Long.valueOf(Long.parseLong(idString.split("\\.0")[0]));
+                                                 }else {
+                                                     id = Long.valueOf(obj.getString("id"));
+                                                 }
                                                  customer[0].setId(id);
                                                  customer[0].setEmail(obj.getString("email"));
-                                                 customer[0].setPhone(obj.getString("phone"));
-                                                 customer[0].setZipCode(obj.getString("zipCode"));
-                                                 customer[0].setPassword(obj.getString("password"));
-
+                                                 //customer[0].setPhone(obj.getString("phone"));
+                                                 //customer[0].setZipCode(obj.getString("zipCode"));
+                                                 //customer[0].setPassword(obj.getString("password"));
+                                                 //Converting a double to a Date
                                                  DateFormat dateFormat = DateFormat.getDateInstance();
-                                                 String lastUpdateDate = obj.getString("lastUpdateDate");
-                                                 Date lastUpdate = dateFormat.parse(lastUpdateDate);
-                                                 customer[0].setLastUpdateDate(lastUpdate);
+                                                 Double lastUpdateDouble = (Double)obj.get("lastUpdateDate");
+                                                 double lastUpdate = lastUpdateDouble.doubleValue();
 
-                                                 String createDate = obj.getString("createDate");
-                                                 Date createDateD = dateFormat.parse(createDate);
-                                                 customer[0].setCreateDate(createDateD);
+                                                 long lastUpdateLong = (long) (lastUpdate * 1);
+                                                 Date lastUpdateDate = new Date(lastUpdateLong);
+
+                                                 Log.d(TAG, "lastUpdate Date " + lastUpdateDate);
+                                                 //Date lastUpdate = dateFormat.parse(lastUpdateDate);
+                                                 customer[0].setLastUpdateDate(lastUpdateDate);
+
+
+                                                 Double createDateDouble = (Double)obj.get("lastUpdateDate");
+                                                 double createDate = createDateDouble.doubleValue();
+
+                                                 long createDateLong = (long) (createDate * 1);
+                                                 Date createDateDate = new Date(createDateLong);
+
+                                                 Log.d(TAG, "createDate Date " + createDateDate);
+                                                 //Date lastUpdate = dateFormat.parse(lastUpdateDate);
+                                                 customer[0].setCreateDate(createDateDate);
 
                                                  customer[0].setFirstName(obj.getString("firstName"));
                                                  customer[0].setLastName(obj.getString("lastName"));
-                                                 customer[0].setCity(obj.getString("city"));
-                                                 customer[0].setState(obj.getString("state"));
+//                                                 customer[0].setCity(obj.getString("city"));
+//                                                 customer[0].setState(obj.getString("state"));
                                                  customer[0].setCountry(obj.getString("country"));
-                                                 customer[0].setLanguage(obj.getString("language"));
-                                                 customer[0].setEnabled(Boolean.valueOf(obj.getString("country")));
+//                                                 customer[0].setLanguage(obj.getString("language"));
+                                                 customer[0].setEnabled(Boolean.valueOf(obj.getString("enabled")));
                                                  customer[0].setStatus(Status.valueOf(obj.getString("status")));
-
                                              }
 
 
                                              //responseFlag[0] = true;
                                          } catch (Exception e) {
-
+                                             Log.d(TAG, "Exception encountered " + e.getMessage());
                                          }
                                      }
                                  }
@@ -270,6 +294,8 @@ public class ServerUtils {
         } catch (RuntimeException e) {
             Log.d(TAG, "Error while sending feedback " + Log.getStackTraceString(e));
         }
+        Log.d(TAG, "Customer before exitting the createCustomer " + customer[0].toString());
+
         return customer[0];
     }
 
