@@ -29,7 +29,7 @@ public class Web {
     }
 
     public static String getCreateAccountUrl() {
-        return "http://" + IP + ":" + LOGIN_PORT + "/customer/";
+        return "http://" + IP + ":" + LOGIN_PORT + "/customer";
     }
 
     public static String getLoginUrl() {
@@ -37,7 +37,7 @@ public class Web {
     }
 
     public static String getAccountEndpointUrl() {
-        return "http://" + IP + ":" + LOGIN_PORT + "/customer/";
+        return "http://" + IP + ":" + LOGIN_PORT + "/customer";
     }
 
     public static String getAllReferencesUrl() {

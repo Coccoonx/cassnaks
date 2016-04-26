@@ -35,6 +35,7 @@
     <!-- Splash screen texts-->
     <string name="activity_splash_title_line_one">Libre Exchange</string>
     <string name="activity_splash_title_line_two">Simple money transfer to Africa</string>
+    <string name="activity_register_profile">Please fill in the following form</string>
 
     <!-- About screen texts-->
     <string name="about_name">ABOUT</string>

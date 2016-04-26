@@ -1,30 +1,27 @@
 package co.wouri.libreexchange.uis;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import co.wouri.libreexchange.R;
 import co.wouri.libreexchange.api.ServerUtils;
-
 import co.wouri.libreexchange.core.managers.ProfileManager;
 import co.wouri.libreexchange.core.models.Customer;
 import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
-import co.wouri.libreexchange.utils.FormValidationUtils;
 import co.wouri.libreexchange.utils.LoadingTask.LoadingTaskFinishedListener;
 import co.wouri.libreexchange.utils.UIUtils;
 
-public class LoginScreenActivity extends Activity implements LoadingTaskFinishedListener {
+public class LoginScreenActivityOld extends Activity implements LoadingTaskFinishedListener {
 
     private static final String TAG = "LoginScreenActivity";
     TextView appName;
@@ -32,29 +29,33 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
     ImageView menu;
     EditText email;
     EditText password;
+    EditText passwordConf;
     EditText firstName;
     EditText lastName;
+    EditText phone;
+    EditText city;
+    Spinner country;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Show the activity_splash screen
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
         initUI();
     }
 
     private void initComponents() {
 
-        appName = (TextView) findViewById(R.id.appName);
-        slogan = (TextView) findViewById(R.id.appSlogan);
+        firstName = (EditText) findViewById(R.id.firstname_edit_register);
+        lastName = (EditText) findViewById(R.id.lastname_edit_register);
 
-        email = (EditText) findViewById(R.id.userEmailLogin);
-        password = (EditText) findViewById(R.id.userPasswordLogin);
+        email = (EditText) findViewById(R.id.email_edit_register);
+        password = (EditText) findViewById(R.id.password_edit_register);
+        city = (EditText) findViewById(R.id.city_edit_register);
+        phone = (EditText) findViewById(R.id.phone_edit_register);
+        country = (Spinner) findViewById(R.id.countries_spinner_register);
 
-        firstName = (EditText) findViewById(R.id.userFirstName);
-        lastName = (EditText) findViewById(R.id.userLastName);
-
-        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan, email, password,firstName,lastName);
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, firstName, lastName, email, password, passwordConf,city,phone,country);
 
     }
 
@@ -85,7 +86,7 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
     private void startApp() {
         Intent intent;
 //        if (!LibreExchangeSettingsUtils.getUserEmail().equals("")) {
-        intent = new Intent(LoginScreenActivity.this, MainActivity.class);
+            intent = new Intent(LoginScreenActivityOld.this, MainActivity.class);
 //        } else
 //            intent = new Intent(LoginScreenActivity.this, ProfileActivity.class);
         startActivity(intent);
@@ -95,30 +96,32 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
 //        startApp();
         String emailVal = email.getText().toString().trim();
         String passwordVal = password.getText().toString();
-        String firstName = email.getText().toString().trim();
-        String lastName = password.getText().toString();
-//        String country = this.getResources().getConfiguration().locale.getCountry();
-        String country = "CA";
-//        TelephonyManager tMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-//        String mPhoneNumber = tMgr.getLine1Number();
+        String firstNameVal = firstName.getText().toString();
+        String lastNameVal = lastName.getText().toString();
+        String countryVal = country.getContext().toString();
+        String passwordCVal = passwordConf.getText().toString();
+        String cityVal = city.getText().toString();
+        String phoneVal = phone.getText().toString().trim();
 //        if (FormValidationUtils.checkEmail(emailVal)) {
-//            if (passwordVal.equals(passwordCVal)) {
-        Customer userCustomer = new Customer();
-        userCustomer.setEmail(emailVal);
-                userCustomer.setPassword(passwordVal);
-        userCustomer.setCountry(country);
-        userCustomer.setFirstName(firstName);
-        userCustomer.setLastName(lastName);
+            if (passwordVal.equals(passwordCVal)) {
+                Customer userCustomer = new Customer();
+                userCustomer.setEmail(emailVal);
+                userCustomer.setPassword(passwordCVal);
+                userCustomer.setCountry(countryVal);
+                userCustomer.setFirstName(firstNameVal);
+                userCustomer.setLastName(lastNameVal);
+                userCustomer.setCity(cityVal);
+                userCustomer.setPhone(phoneVal);
                 Customer customer = ServerUtils.createCustomer(this, userCustomer);
                 Log.d(TAG, "Customer created: "+customer);
                 if (customer != null) {
                     ProfileManager.getCurrentUserProfile().setCustomer(customer);
-                    ProfileManager.saveProfile();
-                    LibreExchangeSettingsUtils.setUserEmail(emailVal);
+                   ProfileManager.saveProfile();
+                   LibreExchangeSettingsUtils.setUserEmail(emailVal);
                     startApp();
                 }
-//            } else
-//                Toast.makeText(LoginScreenActivity.this, "Password doesn't match", Toast.LENGTH_SHORT).show();
+            } else
+                Toast.makeText(LoginScreenActivityOld.this, "Password doesn't match", Toast.LENGTH_SHORT).show();
 //        } else
 //            Toast.makeText(LoginScreenActivity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
     }
