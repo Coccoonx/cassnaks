@@ -85,65 +85,60 @@
         android:layout_below="@+id/libreExchangeHead"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="visible"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/margin_standard"
         android:layout_marginLeft="@dimen/margin_big"
         android:layout_marginRight="@dimen/margin_big"/>
 
-
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/loginForm"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/libreExchangeHead"
         android:visibility="gone"
-        android:layout_marginBottom="@dimen/margin_standard"
         android:layout_marginLeft="@dimen/margin_very_big"
         android:layout_marginRight="@dimen/margin_very_big"
         android:orientation="vertical">
 
-
-
-
-        <!--<android.support.design.widget.TextInputLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:theme="@style/TextLabel">-->
-
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/userFirstName"
+            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:ems="5"
             android:hint="First Name"
-            android:inputType="textWebEmailAddress"
+            android:visibility="invisible"
+            android:inputType="text"
             android:paddingLeft="6dp"
             android:paddingRight="6dp"
             android:singleLine="true"
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/white"
             android:textColorHint="@color/text_color_grey_dark"
             android:textSize="16sp" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/userLastName"
+            android:layout_below="@+id/userFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:ems="5"
             android:hint="Last Name"
-            android:inputType="textWebEmailAddress"
+            android:visibility="gone"
+            android:inputType="text"
             android:paddingLeft="6dp"
             android:paddingRight="6dp"
             android:singleLine="true"
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/white"
             android:textColorHint="@color/text_color_grey_dark"
             android:textSize="16sp" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/userEmailLogin"
+            android:layout_below="@+id/userLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -154,7 +149,7 @@
             android:paddingLeft="6dp"
             android:paddingRight="6dp"
             android:singleLine="true"
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/white"
             android:textColorHint="@color/text_color_grey_dark"
             android:textSize="16sp" />
         <!--</android.support.design.widget.TextInputLayout>-->
@@ -166,6 +161,7 @@
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/userPasswordLogin"
+            android:layout_below="@+id/userEmailLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -176,108 +172,23 @@
             android:paddingLeft="6dp"
             android:paddingRight="6dp"
             android:singleLine="true"
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/white"
             android:textColorHint="@color/text_color_grey_dark"
             android:textSize="16sp" />
 
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
+            android:layout_alignBottom="@+id/userPasswordLogin"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/corner_border_accent"
             android:onClick="performSubmit"
             android:text="Submit"
             android:textColor="@color/textColorPrimary" />
 
 
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/signinForm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone"
-        android:layout_marginBottom="@dimen/margin_standard"
-        android:layout_marginLeft="@dimen/margin_very_big"
-        android:layout_marginRight="@dimen/margin_very_big"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/userEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="5"
-            android:hint="Email"
-            android:inputType="textWebEmailAddress"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
-            android:singleLine="true"
-            android:textColor="@color/colorAccent"
-            android:textColorHint="@color/text_color_grey_dark"
-            android:textSize="16sp" />
-        <!--</android.support.design.widget.TextInputLayout>-->
-
-        <!--<android.support.design.widget.TextInputLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:theme="@style/TextLabel">-->
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/userPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="5"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
-            android:singleLine="true"
-            android:textColor="@color/colorAccent"
-            android:textColorHint="@color/text_color_grey_dark"
-            android:textSize="16sp" />
-        <!--</android.support.design.widget.TextInputLayout>-->
-
-        <!--<android.support.design.widget.TextInputLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:theme="@style/TextLabel">-->
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/userPasswordConfirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="5"
-            android:hint="Confirm Password"
-            android:inputType="textPassword"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
-            android:singleLine="true"
-            android:textColor="@color/colorAccent"
-            android:textColorHint="@color/text_color_grey_dark"
-
-            android:textSize="16sp" />
-        <!--</android.support.design.widget.TextInputLayout>-->
-
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/corner_border_accent"
-            android:onClick="performSubmit"
-            android:text="Submit"
-            android:textColor="@color/textColorPrimary" />
-
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>
