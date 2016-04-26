@@ -99,7 +99,7 @@ public class AboutActivity extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                AboutActivity.this.onBackPressed();
             }
         });
 
