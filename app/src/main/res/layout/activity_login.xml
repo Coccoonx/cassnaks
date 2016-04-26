@@ -8,14 +8,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/libreExchangeHead"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/appLogo"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="80dp"
             android:background="@drawable/coaze_logo" />
 
         <TextView
@@ -26,29 +26,82 @@
             android:layout_centerInParent="true"
             android:text="@string/activity_splash_title_line_one"
             android:textColor="@color/colorAccent"
-            android:textSize="45sp" />
+            android:textSize="35sp" />
 
-        <TextView
-            android:id="@+id/appSlogan"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/loginChoices"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/appName"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_standard"
-            android:text="@string/activity_splash_title_line_two"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="20sp" />
+
+            >
+            <TextView
+                android:id="@+id/cantLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_slim"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:text="Can't Log In? "
+                android:textColor="@color/textColorPrimary"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/loginEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/appName"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:text="Log in with email "
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/signUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/appName"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:text="or Sign up"
+                android:textColor="@color/text_color_grey_dark"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <!--<TextView-->
+            <!--android:id="@+id/appSlogan"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/appName"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="@dimen/margin_standard"-->
+            <!--android:text="Can't Log In? Login with email or Signup"-->
+            <!--android:textColor="@color/textColorPrimary"-->
+            <!--android:textSize="20sp" />-->
+
     </RelativeLayout>
+    <com.kbeanie.pinscreenlibrary.views.PinView
+        android:id="@+id/pinView"
+        android:layout_below="@+id/libreExchangeHead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_standard"
+        android:layout_marginLeft="@dimen/margin_big"
+        android:layout_marginRight="@dimen/margin_big"/>
+
 
     <LinearLayout
         android:id="@+id/loginForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:visibility="gone"
         android:layout_marginBottom="@dimen/margin_standard"
         android:layout_marginLeft="@dimen/margin_very_big"
         android:layout_marginRight="@dimen/margin_very_big"
         android:orientation="vertical">
+
+
 
 
         <!--<android.support.design.widget.TextInputLayout-->

@@ -9,8 +9,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.kbeanie.pinscreenlibrary.views.PinEntryAuthenticationListener;
+import com.kbeanie.pinscreenlibrary.views.PinEntrySetupListener;
+import com.kbeanie.pinscreenlibrary.views.PinView;
 
 import co.wouri.libreexchange.R;
 import co.wouri.libreexchange.api.ServerUtils;
@@ -21,7 +26,7 @@ import co.wouri.libreexchange.utils.FormValidationUtils;
 import co.wouri.libreexchange.utils.LoadingTask.LoadingTaskFinishedListener;
 import co.wouri.libreexchange.utils.UIUtils;
 
-public class LoginScreenActivity extends Activity implements LoadingTaskFinishedListener {
+public class LoginScreenActivity extends Activity implements LoadingTaskFinishedListener, PinEntryAuthenticationListener {
 
     private static final String TAG = "LoginScreenActivity";
     TextView appName;
@@ -30,6 +35,10 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
     EditText email;
     EditText password;
     EditText passwordConf;
+    PinView pinView;
+    TextView loginWithEmailOrPin;
+    TextView signUp;
+    LinearLayout loginForm;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +57,41 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
         password = (EditText) findViewById(R.id.userPassword);
         passwordConf = (EditText) findViewById(R.id.userPasswordConfirm);
 
+        pinView = (PinView) findViewById(R.id.pinView);
+        loginWithEmailOrPin = (TextView) findViewById(R.id.loginEmail);
+        signUp = (TextView) findViewById(R.id.signUp);
+
+        loginForm = (LinearLayout) findViewById(R.id.loginForm);
+
+        pinView.setModeAuthenticate(this);
+
+        loginWithEmailOrPin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(loginWithEmailOrPin.getText().equals("Log in with email ")){
+                    loginWithEmailOrPin.setText("Log in with pin ");
+                    pinView.setVisibility(View.GONE);
+                    loginForm.setVisibility(View.VISIBLE);
+                }else{
+                    loginWithEmailOrPin.setText("Log in with email ");
+                    pinView.setVisibility(View.VISIBLE);
+                    loginForm.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan, email, password, passwordConf);
+
+    }
+
+    @Override
+    public void onPinCorrect() {
+        finish();
+    }
+
+    @Override
+    public void onPinWrong() {
 
     }
 
