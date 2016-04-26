@@ -160,13 +160,7 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
         loginForm.setVisibility(View.GONE);
         pinView.setVisibility(View.VISIBLE);
         if(inSignUpForm) {
-            pinView.setModeSetup(this);
-        }else{
-            // Test if Customer exists in the database and then logged in
-            startApp();
-        }
-
-//        String emailVal = email.getText().toString().trim();
+            //        String emailVal = email.getText().toString().trim();
 //        String passwordVal = password.getText().toString();
 //        String firstName = email.getText().toString().trim();
 //        String lastName = password.getText().toString();
@@ -183,7 +177,14 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
 //            ProfileManager.getCurrentUserProfile().setCustomer(customer);
 //            ProfileManager.saveProfile();
 //            LibreExchangeSettingsUtils.setUserEmail(emailVal);
-//            startApp();
+//            pinView.setModeSetup(this);
 //        }
+            pinView.setModeSetup(this);
+        }else{
+            // Test if Customer exists in the database and then logged in
+            startApp();
+        }
+
+
     }
 }

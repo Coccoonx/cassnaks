@@ -217,7 +217,7 @@ public class MainActivity extends Activity implements LoadingTaskFinishedListene
         if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
             mDrawerLayout.closeDrawers();
         } else
-            super.onBackPressed();
+            finish();
     }
 
 
