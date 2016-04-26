@@ -17,12 +17,16 @@ import android.widget.Toast;
 import co.wouri.libreexchange.R;
 import co.wouri.libreexchange.api.ServerUtils;
 
+import co.wouri.libreexchange.core.managers.PrefUtils;
 import co.wouri.libreexchange.core.managers.ProfileManager;
 import co.wouri.libreexchange.core.models.Customer;
+import co.wouri.libreexchange.core.models.Profile;
 import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
 import co.wouri.libreexchange.utils.FormValidationUtils;
 import co.wouri.libreexchange.utils.LoadingTask.LoadingTaskFinishedListener;
 import co.wouri.libreexchange.utils.UIUtils;
+
+import static co.wouri.libreexchange.core.managers.PrefUtils.PREFS_LOGIN_PASSWORD_KEY;
 
 public class LoginScreenActivity extends Activity implements LoadingTaskFinishedListener {
 
@@ -97,29 +101,32 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
         String passwordVal = password.getText().toString();
         String firstName = email.getText().toString().trim();
         String lastName = password.getText().toString();
-//        String country = this.getResources().getConfiguration().locale.getCountry();
-        String country = "CA";
-//        TelephonyManager tMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-//        String mPhoneNumber = tMgr.getLine1Number();
-//        if (FormValidationUtils.checkEmail(emailVal)) {
-//            if (passwordVal.equals(passwordCVal)) {
-        Customer userCustomer = new Customer();
-        userCustomer.setEmail(emailVal);
+        String country = this.getResources().getConfiguration().locale.getCountry();
+//        String country = "CA";
+        if (FormValidationUtils.checkEmail(emailVal)) {
+                Customer userCustomer = new Customer();
+                userCustomer.setEmail(emailVal);
                 userCustomer.setPassword(passwordVal);
-        userCustomer.setCountry(country);
-        userCustomer.setFirstName(firstName);
-        userCustomer.setLastName(lastName);
+                userCustomer.setCountry(country);
+                userCustomer.setFirstName(firstName);
+                userCustomer.setLastName(lastName);
+                userCustomer.setEnabled(true);
                 Customer customer = ServerUtils.createCustomer(this, userCustomer);
+                //credentials on successful login case
+                PrefUtils.saveToPrefs(LoginScreenActivity.this, PrefUtils.PREFS_LOGIN_USERNAME_KEY, userCustomer.getEmail());
+                PrefUtils.saveToPrefs(LoginScreenActivity.this, PrefUtils.PREFS_LOGIN_PASSWORD_KEY, userCustomer.getPassword());
+
+               // To retrieve values back
+
                 Log.d(TAG, "Customer created: "+customer);
                 if (customer != null) {
                     ProfileManager.getCurrentUserProfile().setCustomer(customer);
-                    ProfileManager.saveProfile();
+                    Profile profile=ProfileManager.saveProfile();
+                    Log.d(TAG, "Profile saved = " + profile);
                     LibreExchangeSettingsUtils.setUserEmail(emailVal);
                     startApp();
                 }
-//            } else
-//                Toast.makeText(LoginScreenActivity.this, "Password doesn't match", Toast.LENGTH_SHORT).show();
-//        } else
-//            Toast.makeText(LoginScreenActivity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(LoginScreenActivity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
     }
 }

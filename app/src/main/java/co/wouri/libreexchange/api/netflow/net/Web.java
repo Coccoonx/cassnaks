@@ -37,8 +37,8 @@ public class Web {
     }
 
     public static String getAccountEndpointUrl() {
-        //return "http://" + IP + ":" + LOGIN_PORT + "/customer";
-        return "https://blooming-fjord-21079.herokuapp.com"+ "/customer";
+        return "http://" + IP + ":" + LOGIN_PORT + "/customer";
+       // return "https://blooming-fjord-21079.herokuapp.com"+ "/customer";
     }
 
     public static String getAllReferencesUrl() {

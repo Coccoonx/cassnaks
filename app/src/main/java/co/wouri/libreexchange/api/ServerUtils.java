@@ -20,11 +20,15 @@ import co.wouri.libreexchange.api.netflow.HttpResponse;
 import co.wouri.libreexchange.api.netflow.NetworkError;
 import co.wouri.libreexchange.api.netflow.ResponseHandler;
 import co.wouri.libreexchange.api.netflow.net.Web;
+import co.wouri.libreexchange.core.managers.PrefUtils;
+import co.wouri.libreexchange.core.managers.ProfileManager;
 import co.wouri.libreexchange.core.models.Customer;
 import co.wouri.libreexchange.core.models.Document;
 import co.wouri.libreexchange.core.models.Reference;
 import co.wouri.libreexchange.core.models.Status;
 import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
+
+import static co.wouri.libreexchange.core.managers.PrefUtils.PREFS_LOGIN_PASSWORD_KEY;
 
 /**
  * Created by lyonnel on 03/11/15.
@@ -33,7 +37,8 @@ public class ServerUtils {
 
     private static final String TAG = "coaze server call";
 
-    public static Customer getAccount(Context context, String tokenType, String token, String uId) {
+
+    public static Customer getCustomer(Context context, String tokenType, String token, String uId) {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -105,21 +110,31 @@ public class ServerUtils {
     }
 
 
-    public static Customer updateAccount(Context context, Customer customer) {
+    public static Customer updateCustomer(Context context, Customer customer) {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        final Customer[] customers = {null};
-
+//        final Customer[] customers = {null};
+//
         String tokenType = LibreExchangeSettingsUtils.getTokenType();
         String token = LibreExchangeSettingsUtils.getAccessToken();
         String uId = LibreExchangeSettingsUtils.getUserUid();
+
+        final String loggedInUserName = PrefUtils.getFromPrefs(context, PrefUtils.PREFS_LOGIN_USERNAME_KEY, "noUserName");
+        final String loggedInUserPassword = PrefUtils.getFromPrefs(context, PREFS_LOGIN_PASSWORD_KEY, "noPassword");
+        Log.d(TAG, "loggedInUserName = " + loggedInUserName);
+        Log.d(TAG, "loggedInUserPassword = " + loggedInUserPassword);
+
+//        final String email = ProfileManager.getCurrentUserProfile().getCustomer().getEmail();
+//        String password = ProfileManager.getCurrentUserProfile().getCustomer().getPassword();
+        final Customer[] customers = new Customer[1];
+        customers[0] = new Customer();
         try {
             Http http = HttpFactory.create(context);
             http.put(Web.getAccountEndpointUrl())
-                    .header("Authorization", tokenType + " " + uId)
-                    .header("Authorization", tokenType + " " + token)
+                    .header("Authorization", "Basic " +
+                            Base64.encodeToString((loggedInUserName + ":" + loggedInUserPassword).getBytes(), Base64.NO_WRAP))
                     .data(customer)
                     .handler(new ResponseHandler() {
                                  @Override
@@ -128,7 +143,7 @@ public class ServerUtils {
                                      Log.d(TAG, "HttpResponse header = " + response.getHeaders());
 
                                      if (data != null) {
-                                         Log.d(TAG, "Customer correctly retrieve " + data.toString());
+                                         Log.d(TAG, "Customer correctly retrieve for update " + data.toString());
                                          try {
 
                                              JSONObject obj = new JSONObject(data.toString());
@@ -137,7 +152,7 @@ public class ServerUtils {
                                              if (obj != null) {
                                                  customer1 = new Customer();
                                                  customer1.setCity(obj.getString("city"));
-                                                 customer1.setEmail(obj.getString("email"));
+                                                 customer1.setEmail(loggedInUserName);
                                                  customer1.setFirstName(obj.getString("firstName"));
                                                  customer1.setLastName(obj.getString("lastName"));
                                                  customer1.setState(obj.getString("state"));
@@ -208,12 +223,9 @@ public class ServerUtils {
                                          try {
 
                                              JSONObject obj = new JSONObject(data.toString());
+                                             Log.d(TAG, "JSON of customer retrieved " + obj.toString());
 
                                              if (obj != null) {
-                                                 Log.d(TAG, "JSON of customer retrieved " + obj.toString());
-                                                 //{"id":49,"enabled":false,"lastName":"wdffffhhgdd","email":"sgfjdfv","status":"NEW",
-                                                 //"firstName":"sgfjdfv","createDate":1461667974068,"password":"wdffffhhgdd","country":"CA",
-                                                 // "lastUpdateDate":1461667974068}
                                                  String idString = obj.getString("id");
                                                  Long id;
                                                  if (idString.split("\\.0")!=null){
@@ -225,7 +237,7 @@ public class ServerUtils {
                                                  customer[0].setEmail(obj.getString("email"));
                                                  //customer[0].setPhone(obj.getString("phone"));
                                                  //customer[0].setZipCode(obj.getString("zipCode"));
-                                                 //customer[0].setPassword(obj.getString("password"));
+                                                 customer[0].setPassword(obj.getString("password"));
                                                  //Converting a double to a Date
                                                  DateFormat dateFormat = DateFormat.getDateInstance();
                                                  Double lastUpdateDouble = (Double)obj.get("lastUpdateDate");

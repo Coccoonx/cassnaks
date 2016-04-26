@@ -59,14 +59,13 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
     Toolbar toolbar;
     Button addButton;
     EditText lastname;
-    EditText email;
     EditText phone;
     EditText city;
     EditText address;
     EditText socialSecurityNumber;
     private EditText firstName;
     private EditText state;
-    private EditText password;
+    //private EditText password;
     private ProgressDialog progressDialog;
 
     MyArrayAdapter
@@ -90,14 +89,12 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         state = (EditText) findViewById(R.id.state_edit_recipient);
         address = (EditText) findViewById(R.id.address_edit_recipient);
 
-        email = (EditText) findViewById(R.id.email_edit_recipient);
 
         phone = (EditText) findViewById(R.id.phone_edit_recipient);
         socialSecurityNumber = (EditText) findViewById(R.id.ssn_edit_recipient);
-        password = (EditText) findViewById(R.id.password_edit_recipient);
         countries = (Spinner) findViewById(R.id.countries);
 
-        String[] countrie = {"Canada", "Cameroon", "China", "USA"};
+        String[] countrie = {"CA", "CAM", "CH", "US"};
 
 
         mySpinnerArrayAdapter = new MyArrayAdapter(this, R.layout.custom_spinner_countries, countrie);
@@ -117,7 +114,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
 
         countries.setAdapter(mySpinnerArrayAdapter);
 
-        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, firstName, lastname, city, address, email, phone);
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, firstName, lastname, city, address, phone);
 
 
         if (getIntent().getExtras() != null) {
@@ -125,30 +122,29 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         }
 
 
-        addButton = (Button) findViewById(R.id.button_edit_recipient);
+        addButton = (Button) findViewById(R.id.button_edit_profile);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "Save have been clicked " );
                 String nameValue = lastname.getText().toString();
                 String firstNameValue = firstName.getText().toString();
                 String lastnameValue = lastname.getText().toString();
-                String emailValue = email.getText().toString();
                 String phoneValue = phone.getText().toString();
                 String countryValue = countries.getSelectedItem().toString();
                 String cityValue = city.getText().toString();
                 String stat = state.getText().toString();
                 String addressValue = address.getText().toString();
                 String ssn = socialSecurityNumber.getText().toString();
-                String passwor = password.getText().toString();
                 if (!checkLastName(ProfileActivity.this, lastnameValue)
                         || !checkFirstName(ProfileActivity.this, firstNameValue)
-                        || !checkEmail( emailValue)
                         || !checkPhone( phoneValue)
                         || !checkCity(ProfileActivity.this, cityValue)
                         || !checkAddress(ProfileActivity.this, addressValue)
                         || !checkCountry(ProfileActivity.this, countryValue)
                         ) {
+                    Log.d(TAG, "lastnameValue " +lastnameValue);
 
                 } else {
                     //We should call the backend functions here
@@ -173,7 +169,6 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
 
                     Customer customer = new Customer();
 
-                    customer.setEmail(emailValue);
                     customer.setPhone(phoneValue);
                     customer.setFirstName(firstNameValue);
                     customer.setLastName(nameValue);
@@ -195,7 +190,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
                     progressDialog.setCancelable(true);
                     progressDialog.setMessage("Retrieving data...");
                     progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    new CreateAccount().execute(customer);
+                    new UpdateCustomer().execute(customer);
 //                    Web.requestAsynData(new Request(Web.getCreateAccountUrl(), false, null, "POST", obj.toString(), this, REQUEST_CREATE_ACCOUNT));
 //                    }
 
@@ -214,10 +209,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
         city.setText(customer.getCity());
         state.setText(customer.getState());
 
-        email.setText(customer.getEmail());
-
         phone.setText(customer.getPhone());
-        password.setEnabled(false);
         countries.setSelection(mySpinnerArrayAdapter.getPosition(customer.getCountry()));
 
     }
@@ -450,14 +442,14 @@ public class ProfileActivity extends AppCompatActivity implements ResponseListen
 
     }
 
-    private class CreateAccount extends AsyncTask<Customer, Void, Customer> {
+    private class UpdateCustomer extends AsyncTask<Customer, Void, Customer> {
 
 
         @Override
         protected Customer doInBackground(Customer... params) {
 //            progressDialog.show();
 
-            Customer customer = ServerUtils.createCustomer(ProfileActivity.this, params[0]);
+            Customer customer = ServerUtils.updateCustomer(ProfileActivity.this, params[0]);
             return customer;
         }
 

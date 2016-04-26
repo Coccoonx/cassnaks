@@ -91,28 +91,6 @@
 
                     </android.support.design.widget.TextInputLayout>
 
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/TextLabel">
-
-                        <EditText
-                            android:id="@+id/email_edit_recipient"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginTop="8dp"
-                            android:ems="5"
-                            android:hint="Email"
-                            android:inputType="textWebEmailAddress"
-                            android:paddingLeft="6dp"
-                            android:paddingRight="6dp"
-                            android:singleLine="true"
-                            android:textColor="@color/textColorPrimary"
-                            android:textColorHint="@color/text_color_grey_dark"
-                            android:textSize="16sp" />
-                    </android.support.design.widget.TextInputLayout>
-
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -265,31 +243,10 @@
                     </android.support.design.widget.TextInputLayout>
 
 
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/TextLabel">
-
-                        <EditText
-                            android:id="@+id/password_edit_recipient"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginTop="8dp"
-                            android:ems="5"
-                            android:hint="Password"
-                            android:inputType="textPassword"
-                            android:paddingLeft="6dp"
-                            android:paddingRight="6dp"
-                            android:singleLine="true"
-                            android:textColor="@color/colorAccent"
-                            android:textColorHint="@color/text_color_grey_dark"
-                            android:textSize="16sp" />
-                    </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/button_edit_recipient"
+                    android:id="@+id/button_edit_profile"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
