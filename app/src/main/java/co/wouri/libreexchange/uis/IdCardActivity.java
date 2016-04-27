@@ -40,7 +40,6 @@ import co.wouri.libreexchange.utils.UIUtils;
 public class IdCardActivity extends AppCompatActivity {
 
     int REQUEST_CAMERA = 0;
-    Button btnSelect;
     ImageView ivImage;
     private Profile profile;
     private DrawerLayout mDrawerLayout;
@@ -49,33 +48,17 @@ public class IdCardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_id_card);
+        initUI();
         ivImage = (ImageView) findViewById(R.id.ivImage);
         ivImage.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                takePicture();
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, REQUEST_CAMERA);
             }
         });
-        initUI();
-    }
 
-    private void takePicture() {
-        final CharSequence[] items = { "Take Photo", "Cancel" };
-        AlertDialog.Builder builder = new AlertDialog.Builder(IdCardActivity.this);
-        builder.setTitle("Add Picture");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (items[item].equals("Take Photo")) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, REQUEST_CAMERA);
-                } else if (items[item].equals("Cancel")) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
     }
 
     @Override
@@ -109,33 +92,6 @@ public class IdCardActivity extends AppCompatActivity {
         ivImage.setImageBitmap(thumbnail);
     }
 
-    @SuppressWarnings("deprecation")
-    private void onSelectFromGalleryResult(Intent data) {
-        Uri selectedImageUri = data.getData();
-        String[] projection = { MediaStore.MediaColumns.DATA };
-        Cursor cursor = managedQuery(selectedImageUri, projection, null, null,
-                null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-        cursor.moveToFirst();
-
-        String selectedImagePath = cursor.getString(column_index);
-
-        Bitmap bm;
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(selectedImagePath, options);
-        final int REQUIRED_SIZE = 200;
-        int scale = 1;
-        while (options.outWidth / scale / 2 >= REQUIRED_SIZE
-                && options.outHeight / scale / 2 >= REQUIRED_SIZE)
-            scale *= 2;
-        options.inSampleSize = scale;
-        options.inJustDecodeBounds = false;
-        bm = BitmapFactory.decodeFile(selectedImagePath, options);
-
-        ivImage.setImageBitmap(bm);
-    }
-
     @Override
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
@@ -160,7 +116,7 @@ public class IdCardActivity extends AppCompatActivity {
         title.setVisibility(View.VISIBLE);
         close.setVisibility(View.VISIBLE);
 
-        title.setText("BALANCE");
+        title.setText(R.string.id_card);
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, title);
 
         menu.setOnClickListener(new View.OnClickListener() {

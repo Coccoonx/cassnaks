@@ -17,9 +17,12 @@ import co.wouri.libreexchange.core.managers.PrefUtils;
 import co.wouri.libreexchange.core.managers.ProfileManager;
 import co.wouri.libreexchange.core.models.Customer;
 import co.wouri.libreexchange.core.models.Profile;
+import co.wouri.libreexchange.core.models.Wallet;
 import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
 import co.wouri.libreexchange.utils.FormValidationUtils;
 import co.wouri.libreexchange.utils.UIUtils;
+import static co.wouri.libreexchange.core.managers.PrefUtils.PREFS_LOGIN_PASSWORD_KEY;
+
 
 public class LoginScreenActivity extends Activity {
 
@@ -35,7 +38,6 @@ public class LoginScreenActivity extends Activity {
     TextView signUpText;
     TextView forgotPasswordText;
     Button submitButton;
-
     boolean isRegistered = true;
 
 
@@ -110,22 +112,36 @@ public class LoginScreenActivity extends Activity {
                 //credentials on successful login case
                 PrefUtils.saveToPrefs(LoginScreenActivity.this, PrefUtils.PREFS_LOGIN_USERNAME_KEY, userCustomer.getEmail());
                 PrefUtils.saveToPrefs(LoginScreenActivity.this, PrefUtils.PREFS_LOGIN_PASSWORD_KEY, userCustomer.getPassword());
+
                 // To retrieve values back
+                final String loggedInUserName = PrefUtils.getFromPrefs(this, PrefUtils.PREFS_LOGIN_USERNAME_KEY, "noUserName");
+                final String loggedInUserPassword = PrefUtils.getFromPrefs(this, PREFS_LOGIN_PASSWORD_KEY, "noPassword");
+
                 Log.d(TAG, "Customer created: " + customer);
+                Wallet wallet = ServerUtils.getWallet(this, loggedInUserName, loggedInUserPassword);
+                Log.d(TAG, "Wallet created: " + wallet);
+                customer.setWallet(wallet);
+                Log.d(TAG, "Customer with wallet setted : " + customer);
                 if (customer != null) {
                     ProfileManager.getCurrentUserProfile().setCustomer(customer);
                     Profile profile = ProfileManager.saveProfile();
                     Log.d(TAG, "Profile saved = " + profile);
                     LibreExchangeSettingsUtils.setUserEmail(emailVal);
-                    startApp();
                 }
-
             }else {
-                // Test if the user exists in the backend server
-                startApp();
+                // Test if Customer exists in the database and then logged in
+                final String loggedInUserName = PrefUtils.getFromPrefs(this, PrefUtils.PREFS_LOGIN_USERNAME_KEY, "noUserName");
+                final String loggedInUserPassword = PrefUtils.getFromPrefs(this, PREFS_LOGIN_PASSWORD_KEY, "noPassword");
+                Log.d(TAG, "loggedInUserName = " + loggedInUserName);
+                Log.d(TAG, "loggedInUserPassword = " + loggedInUserPassword);
+                if (FormValidationUtils.checkEmail(loggedInUserName)) {
+                    Customer customer = ServerUtils.getCustomer(this,loggedInUserName,loggedInUserPassword);
+                    startApp();
+                }else{
+                    Toast.makeText(LoginScreenActivity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
+                };
             }
         } else
             Toast.makeText(LoginScreenActivity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
-
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,13 +16,29 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import co.wouri.libreexchange.R;
+import co.wouri.libreexchange.api.ServerUtils;
+import co.wouri.libreexchange.core.managers.PrefUtils;
 import co.wouri.libreexchange.core.managers.ProfileManager;
+import co.wouri.libreexchange.core.models.Customer;
 import co.wouri.libreexchange.core.models.Profile;
+import co.wouri.libreexchange.core.models.Wallet;
+import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
+import co.wouri.libreexchange.utils.FormValidationUtils;
+import co.wouri.libreexchange.utils.LoadingTask;
+import co.wouri.libreexchange.utils.LoadingTask.LoadingTaskFinishedListener;
+import co.wouri.libreexchange.utils.UIUtils;
+
+import static co.wouri.libreexchange.core.managers.PrefUtils.PREFS_LOGIN_PASSWORD_KEY;
+
+
 import co.wouri.libreexchange.utils.UIUtils;
 
 public class MainActivity extends Activity{
+
+    private static final String TAG = "MainActivity";
 
     TextView appName;
     TextView slogan;
@@ -61,7 +78,7 @@ public class MainActivity extends Activity{
                 startActivity(new Intent(MainActivity.this, ChooseRecipientActivity.class));
             }
         });
-
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan, balance, transfer);
     }
 
 
