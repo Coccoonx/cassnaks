@@ -1,34 +1,25 @@
 package co.wouri.libreexchange.uis;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import co.wouri.libreexchange.R;
 import co.wouri.libreexchange.api.ServerUtils;
-
 import co.wouri.libreexchange.core.managers.PrefUtils;
 import co.wouri.libreexchange.core.managers.ProfileManager;
 import co.wouri.libreexchange.core.models.Customer;
 import co.wouri.libreexchange.core.models.Profile;
 import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
 import co.wouri.libreexchange.utils.FormValidationUtils;
-import co.wouri.libreexchange.utils.LoadingTask.LoadingTaskFinishedListener;
 import co.wouri.libreexchange.utils.UIUtils;
-
-import static co.wouri.libreexchange.core.managers.PrefUtils.PREFS_LOGIN_PASSWORD_KEY;
 
 public class LoginScreenActivity extends Activity {
 

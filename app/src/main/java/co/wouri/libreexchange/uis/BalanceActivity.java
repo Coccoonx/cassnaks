@@ -87,7 +87,7 @@ public class BalanceActivity extends AppCompatActivity {
         buildDrawer();
     }
 
-    private void buildToolBar() {
+    void buildToolBar() {
         View toolbar = findViewById(R.id.toolbar);
 
         ImageView menu = (ImageView) toolbar.findViewById(R.id.leftIcon);
@@ -119,9 +119,6 @@ public class BalanceActivity extends AppCompatActivity {
     }
 
     void buildDrawer() {
-
-
-
 
         Locale locale = Locale.getDefault();
          currency = Currency.getInstance(locale);
