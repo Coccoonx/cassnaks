@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,11 +40,15 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
     EditText password;
     EditText firstName;
     EditText lastName;
+    RelativeLayout loginChoices ;
+    TextView signUpText;
+    TextView forgotPasswordText;
+    Button submitButton;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Show the activity_splash screen
         setContentView(R.layout.activity_login);
         initUI();
     }
@@ -58,7 +64,25 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
         firstName = (EditText) findViewById(R.id.userFirstName);
         lastName = (EditText) findViewById(R.id.userLastName);
 
-        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan, email, password,firstName,lastName);
+        loginChoices = (RelativeLayout) findViewById(R.id.loginChoices);
+
+        signUpText = (TextView) findViewById(R.id.signUpText);
+        forgotPasswordText = (TextView) findViewById(R.id.forgotPasswordText);
+
+        submitButton = (Button) findViewById(R.id.submitButton);
+
+        signUpText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firstName.setVisibility(View.VISIBLE);
+                lastName.setVisibility(View.VISIBLE);
+                submitButton.setText("SIGN UP");
+                loginChoices.setVisibility(View.GONE);
+
+            }
+        });
+
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan, email, password,firstName,lastName, loginChoices, signUpText, forgotPasswordText);
 
     }
 
@@ -87,11 +111,7 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
     }
 
     private void startApp() {
-        Intent intent;
-//        if (!LibreExchangeSettingsUtils.getUserEmail().equals("")) {
-        intent = new Intent(LoginScreenActivity.this, MainActivity.class);
-//        } else
-//            intent = new Intent(LoginScreenActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(LoginScreenActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
@@ -102,7 +122,6 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
         String firstName = email.getText().toString().trim();
         String lastName = password.getText().toString();
         String country = this.getResources().getConfiguration().locale.getCountry();
-//        String country = "CA";
         if (FormValidationUtils.checkEmail(emailVal)) {
                 Customer userCustomer = new Customer();
                 userCustomer.setEmail(emailVal);
