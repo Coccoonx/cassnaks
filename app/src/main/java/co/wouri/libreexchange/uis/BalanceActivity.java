@@ -47,7 +47,6 @@ public class BalanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_balance);
-
         initUI();
         addFundButton = (Button) findViewById(R.id.addFund);
         balance = (TextView) findViewById(R.id.balanceLabel);
@@ -99,7 +98,7 @@ public class BalanceActivity extends AppCompatActivity {
         buildDrawer();
     }
 
-    private void buildToolBar() {
+    void buildToolBar() {
         View toolbar = findViewById(R.id.toolbar);
 
         ImageView menu = (ImageView) toolbar.findViewById(R.id.leftIcon);

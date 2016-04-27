@@ -120,11 +120,12 @@
     <string name="passport">Passport</string>
     <string name="personal_information">Personal Information</string>
     <string name="my_documents">My Documents</string>
-    <string name="nav_item_wallet">Wallets</string>
+    <string name="nav_item_wallet">Accounts</string>
     <string name="driver_license">Driver License</string>
 
     <string name="text_description">Description</string>
 
     <string name="forgot_password">Forgot your password?</string>
     <string name="sign_up">Sign up on Libre Exchange</string>
+    <string name="select_photo">Select Photo</string>
 </resources>
