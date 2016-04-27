@@ -30,7 +30,7 @@ import co.wouri.libreexchange.utils.UIUtils;
 
 import static co.wouri.libreexchange.core.managers.PrefUtils.PREFS_LOGIN_PASSWORD_KEY;
 
-public class LoginScreenActivity extends Activity implements LoadingTaskFinishedListener {
+public class LoginScreenActivity extends Activity {
 
     private static final String TAG = "LoginScreenActivity";
     TextView appName;
@@ -87,24 +87,6 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
 
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan, email, password,firstName,lastName, loginChoices, signUpText, forgotPasswordText);
 
-    }
-
-    // This is the callback for when your async task has finished
-    @Override
-    public void onTaskFinished() {
-        completeSplash();
-    }
-
-    private void completeSplash() {
-        runAnimation();
-    }
-
-    private void runAnimation() {
-        Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
-        Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fadeout);
-        menu.startAnimation(animationFadeIn);
-        animationFadeIn.setFillAfter(true);
-        animationFadeOut.setFillAfter(true);
     }
 
 

@@ -48,15 +48,6 @@
             android:textSize="20sp" />
 
 
-        <ProgressBar
-            android:id="@+id/activity_splash_progress_bar"
-            style="@style/CustomProgressBar"
-            android:layout_width="fill_parent"
-            android:layout_height="3dp"
-            android:layout_marginLeft="@dimen/margin_standard"
-            android:layout_marginRight="@dimen/margin_standard"
-            android:layout_marginTop="44dp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -79,8 +70,7 @@
                 android:padding="12dp"
                 android:text="@string/balancelabel"
                 android:textColor="@color/textColorPrimary"
-                android:textSize="@dimen/text_size"
-                android:visibility="invisible" />
+                android:textSize="@dimen/text_size"/>
 
             <Button
                 android:id="@+id/transfer"
@@ -96,8 +86,7 @@
                 android:padding="15dp"
                 android:text="@string/transferlabel"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size"
-                android:visibility="invisible" />
+                android:textSize="@dimen/text_size" />
         </LinearLayout>
     </LinearLayout>
 
