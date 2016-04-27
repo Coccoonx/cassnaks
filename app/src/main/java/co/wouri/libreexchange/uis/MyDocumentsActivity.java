@@ -39,6 +39,7 @@ public class MyDocumentsActivity extends AppCompatActivity {
         adapter = new MyDocumentsAdapter(this);
         rv.setAdapter(adapter);
 
+
     }
 
     private void buildToolBar() {

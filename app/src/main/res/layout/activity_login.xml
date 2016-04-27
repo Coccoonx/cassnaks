@@ -29,73 +29,27 @@
             android:textColor="@color/colorAccent"
             android:textSize="35sp" />
 
-        <LinearLayout
-            android:id="@+id/loginChoices"
-            android:layout_width="match_parent"
+
+
+        <TextView
+            android:id="@+id/appSlogan"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/appName"
             android:layout_centerHorizontal="true"
-
-            >
-            <TextView
-                android:id="@+id/cantLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_slim"
-                android:layout_marginTop="@dimen/margin_standard"
-                android:text="Can't Log In? "
-                android:textColor="@color/textColorPrimary"
-                android:textSize="15sp" />
-            <TextView
-                android:id="@+id/loginEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/appName"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/margin_standard"
-                android:text="Log in with email "
-                android:textColor="@color/colorAccent"
-                android:textSize="15sp" />
-            <TextView
-                android:id="@+id/signUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/appName"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/margin_standard"
-                android:text="or Sign up"
-                android:textColor="@color/text_color_grey_dark"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <!--<TextView-->
-            <!--android:id="@+id/appSlogan"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/appName"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:layout_marginTop="@dimen/margin_standard"-->
-            <!--android:text="Can't Log In? Login with email or Signup"-->
-            <!--android:textColor="@color/textColorPrimary"-->
-            <!--android:textSize="20sp" />-->
+            android:layout_marginTop="@dimen/margin_standard"
+            android:text="@string/activity_splash_title_line_two"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="20sp" />
 
     </RelativeLayout>
-    <com.kbeanie.pinscreenlibrary.views.PinView
-        android:id="@+id/pinView"
-        android:layout_below="@+id/libreExchangeHead"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/margin_big"
-        android:layout_marginRight="@dimen/margin_big"/>
+
 
     <RelativeLayout
         android:id="@+id/loginForm"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/libreExchangeHead"
-        android:visibility="gone"
         android:layout_marginLeft="@dimen/margin_very_big"
         android:layout_marginRight="@dimen/margin_very_big"
         android:orientation="vertical">
@@ -155,12 +109,6 @@
             android:textColor="@android:color/white"
             android:textColorHint="@color/text_color_grey_dark"
             android:textSize="16sp" />
-        <!--</android.support.design.widget.TextInputLayout>-->
-
-        <!--<android.support.design.widget.TextInputLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:theme="@style/TextLabel">-->
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/userPasswordLogin"
@@ -181,18 +129,44 @@
             android:textSize="16sp" />
 
         <Button
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
+            android:id="@+id/submitButton"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/userPasswordLogin"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/userPasswordLogin"
             android:layout_centerHorizontal="true"
             android:background="@drawable/corner_border_accent"
             android:onClick="performSubmit"
-            android:text="Submit"
-            android:textColor="@color/textColorPrimary" />
+            android:text="LOG IN"
+            android:textColor="@color/light_gray" />
 
 
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/loginChoices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/forgotPasswordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/forgot_password"
+            android:padding="@dimen/margin_big"
+            android:textColor="@color/textColorPrimary" />
 
+        <TextView
+            android:id="@+id/signUpText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/forgotPasswordText"
+            android:layout_centerHorizontal="true"
+            android:padding="@dimen/margin_big"
+            android:text="@string/sign_up"
+            android:textColor="@color/textColorPrimary" />
+    </RelativeLayout>
 
 </RelativeLayout>

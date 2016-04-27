@@ -1,6 +1,7 @@
 package co.wouri.libreexchange.uis.account.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.wouri.libreexchange.R;
+import co.wouri.libreexchange.uis.IdCardActivity;
+import co.wouri.libreexchange.uis.MyDocumentsActivity;
 import co.wouri.libreexchange.uis.account.viewholders.MainProfileViewHolder;
 import lombok.Data;
 
@@ -50,6 +53,13 @@ public class MyDocumentsAdapter extends RecyclerView.Adapter<MainProfileViewHold
         mainProfileViewHolder.itemText.setText(profileItem.getTitle());
         mainProfileViewHolder.itemIcon.setImageResource(profileItem.getIconResource());
         mainProfileViewHolder.id = i+1;
+        mainProfileViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent( MyDocumentsAdapter.this.context, IdCardActivity.class);
+                MyDocumentsAdapter.this.context.startActivity(intent);
+            }
+        });
 
     }
 

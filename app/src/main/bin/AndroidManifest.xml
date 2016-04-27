@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="co.wouri.libreexchange"
     android:versionCode="2"
-    android:versionName="1.1">
+    android:versionName="1.1"
+    >
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -10,101 +11,120 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+
 
     <application
-        android:name=".LibreExchangeApplication"
+        android:name="co.wouri.libreexchange.LibreExchangeApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/CoazeTheme">
+
         <activity
-            android:name=".uis.ProfileActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".uis.AboutActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".uis.MainProfileActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".uis.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".uis.MyDocumentsActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".uis.CostActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".uis.BalanceActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".uis.AddRecipientActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".uis.SuccessActivity"
-            android:autoRemoveFromRecents="true"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".uis.EditRecipientActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".uis.RecipientActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
-        <activity
-            android:name=".uis.ChooseRecipientActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
-        <activity
-            android:name=".uis.TransferHistoryActivity"
+            android:name="co.wouri.libreexchange.uis.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
+
         <activity
-            android:name=".uis.TransferDetailsActivity"
+            android:name="co.wouri.libreexchange.uis.ProfileActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"></activity>
+
+        <activity
+            android:name="co.wouri.libreexchange.uis.AboutActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="co.wouri.libreexchange.uis.MainProfileActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="co.wouri.libreexchange.uis.MyDocumentsActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="co.wouri.libreexchange.uis.CostActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="co.wouri.libreexchange.uis.BalanceActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="co.wouri.libreexchange.uis.AddRecipientActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"></activity>
+
+        <activity
+            android:name="co.wouri.libreexchange.uis.SuccessActivity"
+            android:label="@string/app_name"
+            android:autoRemoveFromRecents="true"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="co.wouri.libreexchange.uis.EditRecipientActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"></activity>
+
+        <activity
+            android:name="co.wouri.libreexchange.uis.RecipientActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|adjustResize"></activity>
+
+        <activity
+            android:name="co.wouri.libreexchange.uis.ChooseRecipientActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|adjustResize"></activity>
+
+        <activity
+            android:name="co.wouri.libreexchange.uis.TransferHistoryActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name="co.wouri.libreexchange.uis.TransferDetailsActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="co.wouri.libreexchange.uis.TransferHistoryActivity" />
         </activity>
+
         <activity
-            android:name=".uis.AddFundActivity"
+            android:name="co.wouri.libreexchange.uis.AddFundActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:windowSoftInputMode="adjustPan|adjustResize"></activity>
+
         <activity
-            android:name=".uis.LoginScreenActivity"
+            android:name="co.wouri.libreexchange.uis.SplashScreenActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".uis.ChooseAmountActivity"
+            android:name="co.wouri.libreexchange.uis.ChooseAmountActivity"
             android:label="@string/title_activity_choose_amount"
+
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
-        <activity android:name=".uis.IdCardActivity"></activity>
+            android:windowSoftInputMode="adjustPan|adjustResize"></activity>
+
     </application>
 
 </manifest>
