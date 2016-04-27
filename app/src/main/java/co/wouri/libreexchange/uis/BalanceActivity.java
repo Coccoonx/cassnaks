@@ -57,8 +57,6 @@ public class BalanceActivity extends AppCompatActivity {
         Log.d(TAG, "currency.getSymbol() = " + currency.getSymbol());
         amount.setText(currency.getSymbol() + " " + availableBalance);
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, balance, addFundButton, amount);
-
-
         addFundButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,16 +83,11 @@ public class BalanceActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -102,10 +95,8 @@ public class BalanceActivity extends AppCompatActivity {
 
     void initUI() {
         profile = ProfileManager.getCurrentUserProfile();
-
         buildToolBar();
         buildDrawer();
-
     }
 
     private void buildToolBar() {
@@ -165,8 +156,6 @@ public class BalanceActivity extends AppCompatActivity {
         TextView username = (TextView) navigationView.findViewById(R.id.username);
         TextView userEmail = (TextView) navigationView.findViewById(R.id.useremail);
         TextView userBalance = (TextView) navigationView.findViewById(R.id.userbalance);
-
-        String usern = profile.getCustomer().getFirstName() == null ? profile.getCustomer().getPhone() : profile.getCustomer().getFirstName();
         username.setText(getResources().getString(R.string.profile));
         userEmail.setText(profile.getCustomer().getEmail());
 
