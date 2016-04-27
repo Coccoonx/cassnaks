@@ -26,6 +26,7 @@ import co.wouri.libreexchange.core.models.Customer;
 import co.wouri.libreexchange.core.models.Document;
 import co.wouri.libreexchange.core.models.Reference;
 import co.wouri.libreexchange.core.models.Status;
+import co.wouri.libreexchange.core.models.Wallet;
 import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
 
 import static co.wouri.libreexchange.core.managers.PrefUtils.PREFS_LOGIN_PASSWORD_KEY;
@@ -38,17 +39,18 @@ public class ServerUtils {
     private static final String TAG = "coaze server call";
 
 
-    public static Customer getCustomer(Context context, String tokenType, String token, String uId) {
+    public static Customer getCustomer(Context context, String userEmail, String userPassword) {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        Log.d(TAG, "Base64.encodeToString = " + Base64.encodeToString((userEmail + ":" + userPassword).getBytes(), Base64.NO_WRAP));
         final Customer[] customer = {null};
         try {
             Http http = HttpFactory.create(context);
             http.get(Web.getAccountEndpointUrl())
-                    .header("Authorization", tokenType + " " + uId)
-                    .header("Authorization", tokenType + " " + token)
+                    .header("Authorization", "Basic " +
+                            Base64.encodeToString((userEmail + ":" + userPassword).getBytes(), Base64.NO_WRAP))
                     .handler(new ResponseHandler() {
                                  @Override
                                  public void success(Object data, HttpResponse response) {
@@ -74,7 +76,7 @@ public class ServerUtils {
 
                                              //responseFlag[0] = true;
                                          } catch (Exception e) {
-
+                                             Log.d(TAG, "Exception encountered " + e.getMessage());
                                          }
                                      }
                                  }
@@ -110,6 +112,117 @@ public class ServerUtils {
     }
 
 
+    public static Wallet getWallet(Context context, String userEmail, String userPassword) {
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        Log.d(TAG, "Base64.encodeToString = " + Base64.encodeToString((userEmail + ":" + userPassword).getBytes(), Base64.NO_WRAP));
+        final Wallet[] wallet = {null};
+        try {
+            Http http = HttpFactory.create(context);
+            http.get(Web.getWalletEndpointUrl())
+                    .header("Authorization", "Basic " +
+                            Base64.encodeToString((userEmail + ":" + userPassword).getBytes(), Base64.NO_WRAP))
+                    .handler(new ResponseHandler() {
+                                 @Override
+                                 public void success(Object data, HttpResponse response) {
+                                     super.success(data, response);
+                                     Log.d(TAG, "HttpResponse header = " + response.getHeaders());
+
+                                     if (data != null) {
+                                         Log.d(TAG, "Profile correctly retrieve " + data.toString());
+
+                                         try {
+
+                                             JSONObject obj = new JSONObject(data.toString());
+                                             if (obj != null) {
+                                                 String idString = obj.get("id").toString();
+                                                 Log.d(TAG, "Id as a string " + idString);
+                                                 Long id;
+                                                 if (idString.split("\\.0")!=null){
+                                                     id = Long.valueOf(Long.parseLong(idString.split("\\.0")[0]));
+                                                 }else {
+                                                     id = Long.valueOf(obj.getString("id"));
+                                                 }
+                                                 Log.d(TAG, "Id as long " + id);
+                                                 wallet[0] = new Wallet();
+                                                 wallet[0].setId(id);
+
+                                                 //Converting a double to a Date
+//                                                 DateFormat dateFormat = DateFormat.getDateInstance();
+//                                                 String str_date=obj.get("lastUpdateDate").toString();
+//                                                 DateFormat formatter ;
+//                                                 Date date ;
+//                                                 formatter = new SimpleDateFormat("yyyy-MM-dd");
+//                                                 date = formatter.parse(str_date);
+
+//                                                 Log.d(TAG, "Class of lastUpdateDouble " + obj.get("lastUpdateDate").getClass());
+//                                                 Double lastUpdateDouble = (Double)obj.get("lastUpdateDate");
+//                                                 double lastUpdate = lastUpdateDouble.doubleValue();
+//
+//                                                 long lastUpdateLong = (long) (lastUpdate * 1);
+//                                                 Date lastUpdateDate = new Date(lastUpdateLong);
+
+//                                                 Log.d(TAG, "lastUpdate Date " + date);
+                                                 //Date lastUpdate = dateFormat.parse(lastUpdateDate);
+//                                                 wallet[0].setLastUpdateDate(date);
+
+
+//                                                 Double createDateDouble = (Double)obj.get("createDate");
+//                                                 double createDate = createDateDouble.doubleValue();
+//
+//                                                 long createDateLong = (long) (createDate * 1);
+//                                                 Date createDateDate = new Date(createDateLong);
+//
+//                                                 Log.d(TAG, "createDate Date " + createDateDate);
+                                                 //Date lastUpdate = dateFormat.parse(lastUpdateDate);
+//                                                 wallet[0].setCreateDate(createDateDate);
+                                                 wallet[0].setAvailableBalance((Double)obj.get("availableBalance"));
+                                                 wallet[0].setUnavailableBalance((Double) obj.get("unavailableBalance"));
+                                                 wallet[0].setStatus(Status.valueOf(obj.getString("status")));
+//                                                 wallet[0].setCustomer((Customer)obj.get("customer"));
+                                                 wallet[0].setCurrency(obj.getString("currency"));
+                                             }
+
+
+                                             //responseFlag[0] = true;
+                                         } catch (Exception e) {
+                                             Log.d(TAG, "Exception encountered while parsing wallet " + Log.getStackTraceString(e));
+                                         }
+                                     }
+                                 }
+
+                                 @Override
+                                 public void error(String message, HttpResponse response) {
+                                     super.error(message, response);
+                                     //responseFlag[0] = false;
+                                     Log.d(TAG, message);
+                                 }
+
+                                 @Override
+                                 public void failure(NetworkError error) {
+                                     super.failure(error);
+                                     //responseFlag[0] = false;
+                                     Log.d(TAG, "Error " + error.name());
+                                 }
+
+                                 @Override
+                                 public void complete() {
+                                     super.complete();
+                                     Log.d(TAG, "Terminated");
+                                 }
+                             }
+
+                    ).
+
+                    send();
+        } catch (RuntimeException e) {
+            Log.d(TAG, "Error while sending feedback " + Log.getStackTraceString(e));
+        }
+        return wallet[0];
+    }
+
     public static Customer updateCustomer(Context context, Customer customer) {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -126,8 +239,9 @@ public class ServerUtils {
         Log.d(TAG, "loggedInUserName = " + loggedInUserName);
         Log.d(TAG, "loggedInUserPassword = " + loggedInUserPassword);
 
-//        final String email = ProfileManager.getCurrentUserProfile().getCustomer().getEmail();
-//        String password = ProfileManager.getCurrentUserProfile().getCustomer().getPassword();
+        Log.d(TAG, "Base64.encodeToString = " + Base64.encodeToString((loggedInUserName + ":" + loggedInUserPassword).getBytes(), Base64.NO_WRAP));
+        final String email = ProfileManager.getCurrentUserProfile().getCustomer().getEmail();
+        String password = ProfileManager.getCurrentUserProfile().getCustomer().getPassword();
         final Customer[] customers = new Customer[1];
         customers[0] = new Customer();
         try {
@@ -226,7 +340,7 @@ public class ServerUtils {
                                              Log.d(TAG, "JSON of customer retrieved " + obj.toString());
 
                                              if (obj != null) {
-                                                 String idString = obj.getString("id");
+                                                 String idString = obj.get("id").toString();
                                                  Long id;
                                                  if (idString.split("\\.0")!=null){
                                                      id = Long.valueOf(Long.parseLong(idString.split("\\.0")[0]));
@@ -251,7 +365,7 @@ public class ServerUtils {
                                                  customer[0].setLastUpdateDate(lastUpdateDate);
 
 
-                                                 Double createDateDouble = (Double)obj.get("lastUpdateDate");
+                                                 Double createDateDouble = (Double)obj.get("createDate");
                                                  double createDate = createDateDouble.doubleValue();
 
                                                  long createDateLong = (long) (createDate * 1);

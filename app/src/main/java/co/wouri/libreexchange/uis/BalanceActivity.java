@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,17 +16,25 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Currency;
 import java.util.Locale;
 
 import co.wouri.libreexchange.R;
+import co.wouri.libreexchange.api.ServerUtils;
+import co.wouri.libreexchange.core.managers.PrefUtils;
 import co.wouri.libreexchange.core.managers.ProfileManager;
 import co.wouri.libreexchange.core.models.Profile;
+import co.wouri.libreexchange.core.models.Wallet;
+import co.wouri.libreexchange.utils.FormValidationUtils;
 import co.wouri.libreexchange.utils.UIUtils;
+
+import static co.wouri.libreexchange.core.managers.PrefUtils.PREFS_LOGIN_PASSWORD_KEY;
 
 public class BalanceActivity extends AppCompatActivity {
 
+    private static final String TAG = "BalanceActivity";
 
     TextView balance;
     TextView amount;
@@ -40,11 +49,13 @@ public class BalanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_balance);
 
         initUI();
-
         addFundButton = (Button) findViewById(R.id.addFund);
         balance = (TextView) findViewById(R.id.balanceLabel);
-        amount = (TextView) findViewById(R.id.amountValue);
-//        amount.setText(currency.getSymbol()+" "+ProfileManager.getCurrentUserProfile().getCustomer().getBalance());
+//        amount = (TextView) findViewById(R.id.amountValue);
+        Double availableBalance = ProfileManager.getCurrentUserProfile().getCustomer().getWallet().getAvailableBalance();
+        Log.d(TAG, "loggedInUserName = " + availableBalance);
+        Log.d(TAG, "currency.getSymbol() = " + currency.getSymbol());
+        amount.setText(currency.getSymbol() + " " + availableBalance);
         UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, balance, addFundButton, amount);
 
 
@@ -210,6 +221,24 @@ public class BalanceActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    public Double getAvailableBalance() {
+            final String loggedInUserName = PrefUtils.getFromPrefs(this, PrefUtils.PREFS_LOGIN_USERNAME_KEY, "noUserName");
+            final String loggedInUserPassword = PrefUtils.getFromPrefs(this, PREFS_LOGIN_PASSWORD_KEY, "noPassword");
+
+        final String email = ProfileManager.getCurrentUserProfile().getCustomer().getEmail();
+        final String password = ProfileManager.getCurrentUserProfile().getCustomer().getPassword();
+            Log.d(TAG, "loggedInUserName = " + loggedInUserName);
+            Log.d(TAG, "loggedInUserPassword = " + loggedInUserPassword);
+        Wallet wallet = new Wallet();
+            if (FormValidationUtils.checkEmail(email)) {
+               wallet = ServerUtils.getWallet(this, email, password);
+            }else{
+                Toast.makeText(this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
+            }
+        return wallet.getAvailableBalance();
 
     }
 

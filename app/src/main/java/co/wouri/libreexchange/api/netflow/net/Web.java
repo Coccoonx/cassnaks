@@ -41,6 +41,11 @@ public class Web {
        // return "https://blooming-fjord-21079.herokuapp.com"+ "/customer";
     }
 
+    public static String getWalletEndpointUrl() {
+        return "http://" + IP + ":" + LOGIN_PORT + "/customer/wallet";
+    }
+
+
     public static String getAllReferencesUrl() {
         return "http://" + IP + ":" + LOGIN_PORT + "/reference";
     }

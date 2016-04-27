@@ -1,19 +1,22 @@
 package co.wouri.libreexchange.uis;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kbeanie.pinscreenlibrary.views.PinEntryAuthenticationListener;
+import com.kbeanie.pinscreenlibrary.views.PinEntrySetupListener;
+import com.kbeanie.pinscreenlibrary.views.PinView;
 import co.wouri.libreexchange.R;
 import co.wouri.libreexchange.api.ServerUtils;
 
@@ -21,6 +24,7 @@ import co.wouri.libreexchange.core.managers.PrefUtils;
 import co.wouri.libreexchange.core.managers.ProfileManager;
 import co.wouri.libreexchange.core.models.Customer;
 import co.wouri.libreexchange.core.models.Profile;
+import co.wouri.libreexchange.core.models.Wallet;
 import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
 import co.wouri.libreexchange.utils.FormValidationUtils;
 import co.wouri.libreexchange.utils.LoadingTask.LoadingTaskFinishedListener;
@@ -28,7 +32,10 @@ import co.wouri.libreexchange.utils.UIUtils;
 
 import static co.wouri.libreexchange.core.managers.PrefUtils.PREFS_LOGIN_PASSWORD_KEY;
 
-public class LoginScreenActivity extends Activity implements LoadingTaskFinishedListener {
+import co.wouri.libreexchange.utils.LoadingTask.LoadingTaskFinishedListener;
+import co.wouri.libreexchange.utils.UIUtils;
+
+public class LoginScreenActivity extends Activity implements LoadingTaskFinishedListener, PinEntryAuthenticationListener, PinEntrySetupListener {
 
     private static final String TAG = "LoginScreenActivity";
     TextView appName;
@@ -36,8 +43,15 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
     ImageView menu;
     EditText email;
     EditText password;
+    PinView pinView;
+    TextView loginWithEmailOrPin;
+    TextView signUp;
+    RelativeLayout loginForm;
+    LinearLayout loginChoices;
     EditText firstName;
     EditText lastName;
+
+    private boolean inSignUpForm = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,8 +72,76 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
         firstName = (EditText) findViewById(R.id.userFirstName);
         lastName = (EditText) findViewById(R.id.userLastName);
 
-        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan, email, password,firstName,lastName);
+        pinView = (PinView) findViewById(R.id.pinView);
+        loginWithEmailOrPin = (TextView) findViewById(R.id.loginEmail);
+        signUp = (TextView) findViewById(R.id.signUp);
 
+        loginForm = (RelativeLayout) findViewById(R.id.loginForm);
+        loginChoices = (LinearLayout) findViewById(R.id.loginChoices) ;
+
+        pinView.setModeAuthenticate(this);
+
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan, email, password,firstName,lastName);
+        loginWithEmailOrPin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inSignUpForm = false;
+                if(loginWithEmailOrPin.getText().equals("Log in with email ")){
+                    loginWithEmailOrPin.setText("Log in with pin ");
+                    pinView.setVisibility(View.GONE);
+                    loginForm.setVisibility(View.VISIBLE);
+                }else{
+                    loginWithEmailOrPin.setText("Log in with email ");
+                    pinView.setVisibility(View.VISIBLE);
+                    loginForm.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inSignUpForm = true;
+                pinView.setVisibility(View.GONE);
+                loginChoices.setVisibility(View.GONE);
+                loginForm.setVisibility(View.VISIBLE);
+                firstName.setVisibility(View.VISIBLE);
+                lastName.setVisibility(View.VISIBLE);
+            }
+        });
+
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan, email, password);
+
+    }
+
+    @Override
+    public void onPinEntered(String pin) {
+
+    }
+
+    @Override
+    public void onPinConfirmed(String pin) {
+
+    }
+
+    @Override
+    public void onPinMismatch() {
+
+    }
+
+    @Override
+    public void onPinSet(String pin) {
+        startApp();
+    }
+
+    @Override
+    public void onPinCorrect() {
+        startApp();
+    }
+
+    @Override
+    public void onPinWrong() {
     }
 
     // This is the callback for when your async task has finished
@@ -87,23 +169,22 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
     }
 
     private void startApp() {
-        Intent intent;
-//        if (!LibreExchangeSettingsUtils.getUserEmail().equals("")) {
-        intent = new Intent(LoginScreenActivity.this, MainActivity.class);
-//        } else
-//            intent = new Intent(LoginScreenActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(LoginScreenActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
     public void performSubmit(View view) {
-//        startApp();
-        String emailVal = email.getText().toString().trim();
-        String passwordVal = password.getText().toString();
-        String firstName = email.getText().toString().trim();
-        String lastName = password.getText().toString();
-        String country = this.getResources().getConfiguration().locale.getCountry();
+        loginForm.setVisibility(View.GONE);
+        pinView.setVisibility(View.VISIBLE);
+        if(inSignUpForm) {
+            // Sign up stuff
+            String emailVal = email.getText().toString().trim();
+            String passwordVal = password.getText().toString();
+            String firstName = email.getText().toString().trim();
+            String lastName = password.getText().toString();
+            String country = this.getResources().getConfiguration().locale.getCountry();
 //        String country = "CA";
-        if (FormValidationUtils.checkEmail(emailVal)) {
+            if (FormValidationUtils.checkEmail(emailVal)) {
                 Customer userCustomer = new Customer();
                 userCustomer.setEmail(emailVal);
                 userCustomer.setPassword(passwordVal);
@@ -116,17 +197,40 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
                 PrefUtils.saveToPrefs(LoginScreenActivity.this, PrefUtils.PREFS_LOGIN_USERNAME_KEY, userCustomer.getEmail());
                 PrefUtils.saveToPrefs(LoginScreenActivity.this, PrefUtils.PREFS_LOGIN_PASSWORD_KEY, userCustomer.getPassword());
 
-               // To retrieve values back
+                // To retrieve values back
+                final String loggedInUserName = PrefUtils.getFromPrefs(this, PrefUtils.PREFS_LOGIN_USERNAME_KEY, "noUserName");
+                final String loggedInUserPassword = PrefUtils.getFromPrefs(this, PREFS_LOGIN_PASSWORD_KEY, "noPassword");
 
-                Log.d(TAG, "Customer created: "+customer);
+                Log.d(TAG, "Customer created: " + customer);
+                Wallet wallet = ServerUtils.getWallet(this, loggedInUserName, loggedInUserPassword);
+                Log.d(TAG, "Wallet created: " + wallet);
+                customer.setWallet(wallet);
+                Log.d(TAG, "Customer with wallet setted : " + customer);
                 if (customer != null) {
                     ProfileManager.getCurrentUserProfile().setCustomer(customer);
                     Profile profile=ProfileManager.saveProfile();
                     Log.d(TAG, "Profile saved = " + profile);
                     LibreExchangeSettingsUtils.setUserEmail(emailVal);
-                    startApp();
+                    pinView.setModeSetup(this);
                 }
-        } else
-            Toast.makeText(LoginScreenActivity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(LoginScreenActivity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
+                pinView.setModeSetup(this);
+            }
+
+        }else{
+            // Test if Customer exists in the database and then logged in
+            final String loggedInUserName = PrefUtils.getFromPrefs(this, PrefUtils.PREFS_LOGIN_USERNAME_KEY, "noUserName");
+            final String loggedInUserPassword = PrefUtils.getFromPrefs(this, PREFS_LOGIN_PASSWORD_KEY, "noPassword");
+            Log.d(TAG, "loggedInUserName = " + loggedInUserName);
+            Log.d(TAG, "loggedInUserPassword = " + loggedInUserPassword);
+            if (FormValidationUtils.checkEmail(loggedInUserName)) {
+                Customer customer = ServerUtils.getCustomer(this,loggedInUserName,loggedInUserPassword);
+                startApp();
+            }else{
+                Toast.makeText(LoginScreenActivity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 }

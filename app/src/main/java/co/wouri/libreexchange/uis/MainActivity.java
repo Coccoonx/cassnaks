@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,15 +19,26 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import co.wouri.libreexchange.R;
+import co.wouri.libreexchange.api.ServerUtils;
+import co.wouri.libreexchange.core.managers.PrefUtils;
 import co.wouri.libreexchange.core.managers.ProfileManager;
+import co.wouri.libreexchange.core.models.Customer;
 import co.wouri.libreexchange.core.models.Profile;
+import co.wouri.libreexchange.core.models.Wallet;
+import co.wouri.libreexchange.storage.LibreExchangeSettingsUtils;
+import co.wouri.libreexchange.utils.FormValidationUtils;
 import co.wouri.libreexchange.utils.LoadingTask;
 import co.wouri.libreexchange.utils.LoadingTask.LoadingTaskFinishedListener;
 import co.wouri.libreexchange.utils.UIUtils;
 
+import static co.wouri.libreexchange.core.managers.PrefUtils.PREFS_LOGIN_PASSWORD_KEY;
+
 public class MainActivity extends Activity implements LoadingTaskFinishedListener {
+
+    private static final String TAG = "MainActivity";
 
     TextView appName;
     TextView slogan;
@@ -36,6 +48,7 @@ public class MainActivity extends Activity implements LoadingTaskFinishedListene
     private Profile profile;
     private DrawerLayout mDrawerLayout;
     ImageView close;
+    private boolean isBalance = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +78,7 @@ public class MainActivity extends Activity implements LoadingTaskFinishedListene
         balance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isBalance = true;
                 startActivity(new Intent(MainActivity.this, BalanceActivity.class));
 
             }
@@ -76,7 +90,7 @@ public class MainActivity extends Activity implements LoadingTaskFinishedListene
                 startActivity(new Intent(MainActivity.this, ChooseRecipientActivity.class));
             }
         });
-
+        UIUtils.setFont(UIUtils.Font.MUSEOSANS_500, appName, slogan, balance, transfer);
     }
 
     // This is the callback for when your async task has finished
@@ -230,5 +244,23 @@ public class MainActivity extends Activity implements LoadingTaskFinishedListene
 //            intent = new Intent(LoginScreenActivity.this, ProfileActivity.class);
 
         startActivity(intent);
+    }
+
+    public void performSubmit(View view) {
+        if(isBalance) {
+            final String loggedInUserName = PrefUtils.getFromPrefs(this, PrefUtils.PREFS_LOGIN_USERNAME_KEY, "noUserName");
+            final String loggedInUserPassword = PrefUtils.getFromPrefs(this, PREFS_LOGIN_PASSWORD_KEY, "noPassword");
+            Log.d(TAG, "loggedInUserName = " + loggedInUserName);
+            Log.d(TAG, "loggedInUserPassword = " + loggedInUserPassword);
+            if (FormValidationUtils.checkEmail(loggedInUserName)) {
+                Wallet wallet = ServerUtils.getWallet(this, loggedInUserName, loggedInUserPassword);
+                startApp();
+            }else{
+                Toast.makeText(MainActivity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+
+        }
+
     }
 }
