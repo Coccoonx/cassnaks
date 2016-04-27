@@ -45,6 +45,8 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
     TextView forgotPasswordText;
     Button submitButton;
 
+    boolean isRegistered = true;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,7 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
         signUpText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isRegistered = false;
                 firstName.setVisibility(View.VISIBLE);
                 lastName.setVisibility(View.VISIBLE);
                 submitButton.setText("SIGN UP");
@@ -116,13 +119,13 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
     }
 
     public void performSubmit(View view) {
-//        startApp();
         String emailVal = email.getText().toString().trim();
-        String passwordVal = password.getText().toString();
-        String firstName = email.getText().toString().trim();
-        String lastName = password.getText().toString();
-        String country = this.getResources().getConfiguration().locale.getCountry();
         if (FormValidationUtils.checkEmail(emailVal)) {
+            if(!isRegistered) {
+                String passwordVal = password.getText().toString();
+                String firstName = this.firstName.getText().toString().trim();
+                String lastName = password.getText().toString();
+                String country = this.getResources().getConfiguration().locale.getCountry();
                 Customer userCustomer = new Customer();
                 userCustomer.setEmail(emailVal);
                 userCustomer.setPassword(passwordVal);
@@ -134,18 +137,22 @@ public class LoginScreenActivity extends Activity implements LoadingTaskFinished
                 //credentials on successful login case
                 PrefUtils.saveToPrefs(LoginScreenActivity.this, PrefUtils.PREFS_LOGIN_USERNAME_KEY, userCustomer.getEmail());
                 PrefUtils.saveToPrefs(LoginScreenActivity.this, PrefUtils.PREFS_LOGIN_PASSWORD_KEY, userCustomer.getPassword());
-
-               // To retrieve values back
-
-                Log.d(TAG, "Customer created: "+customer);
+                // To retrieve values back
+                Log.d(TAG, "Customer created: " + customer);
                 if (customer != null) {
                     ProfileManager.getCurrentUserProfile().setCustomer(customer);
-                    Profile profile=ProfileManager.saveProfile();
+                    Profile profile = ProfileManager.saveProfile();
                     Log.d(TAG, "Profile saved = " + profile);
                     LibreExchangeSettingsUtils.setUserEmail(emailVal);
                     startApp();
                 }
+
+            }else {
+                // Test if the user exists in the backend server
+                startApp();
+            }
         } else
             Toast.makeText(LoginScreenActivity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
+
     }
 }
