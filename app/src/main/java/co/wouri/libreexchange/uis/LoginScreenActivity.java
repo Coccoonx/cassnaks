@@ -130,6 +130,7 @@ public class LoginScreenActivity extends Activity {
                     Profile profile = ProfileManager.saveProfile();
                     Log.d(TAG, "Profile saved = " + profile);
                     LibreExchangeSettingsUtils.setUserEmail(emailVal);
+                    startApp();
                 }
             }else {
                 // Test if Customer exists in the database and then logged in

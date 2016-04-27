@@ -51,7 +51,7 @@ public class BalanceActivity extends AppCompatActivity {
         initUI();
         addFundButton = (Button) findViewById(R.id.addFund);
         balance = (TextView) findViewById(R.id.balanceLabel);
-//        amount = (TextView) findViewById(R.id.amountValue);
+        amount = (TextView) findViewById(R.id.amountValue);
         Double availableBalance = ProfileManager.getCurrentUserProfile().getCustomer().getWallet().getAvailableBalance();
         Log.d(TAG, "loggedInUserName = " + availableBalance);
         Log.d(TAG, "currency.getSymbol() = " + currency.getSymbol());
@@ -131,10 +131,6 @@ public class BalanceActivity extends AppCompatActivity {
     }
 
     void buildDrawer() {
-
-
-
-
         Locale locale = Locale.getDefault();
          currency = Currency.getInstance(locale);
 
